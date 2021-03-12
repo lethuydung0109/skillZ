@@ -1,15 +1,45 @@
+buildscript {
+	dependencies {
+		classpath 'org.apache.maven:maven-core:3.6.3'
+		classpath 'org.jacoco:jacoco-maven-plugin:0.8.6'
+		classpath 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.7'
+	}
+	repositories {
+		mavenCentral()
+		maven {
+			url 'https://plugins.gradle.org/m2/'
+		}
+	}
+}
+
 plugins {
 	id 'org.springframework.boot' version '2.4.3'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id 'org.asciidoctor.jvm.pdf' version '3.1.0'
+	id 'org.asciidoctor.jvm.gems' version '3.1.0'
 }
+
+apply plugin: 'application'
+apply plugin: 'jacoco'
+apply plugin: 'org.sonarqube'
+apply plugin: VersionPlugin
 
 group = 'miage'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
-repositories {
-	mavenCentral()
+// plugin to get the version of the project
+// from https://stackoverflow.com/questions/13198358/how-to-get-project-version-in-custom-gradle-plugin
+// uses version in build.gradle file
+class VersionPlugin implements Plugin<Project> {
+	 void apply(Project project) {
+		project.task('version') {
+			project.gradle.projectsEvaluated {
+				println "$project.version"
+			}
+		}
+	}
 }
 
 dependencies {
@@ -19,8 +49,83 @@ dependencies {
 	runtimeOnly 'mysql:mysql-connector-java'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+	asciidoctorGems 'rubygems:rouge:3.15.0'
+	compile "org.apache.logging.log4j:log4j-api:2.5"
+	compile "org.apache.logging.log4j:log4j-core:2.5"
+	compile "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.5.0"
 }
 
-//test {
-//	useJUnitPlatform()
-//}
+repositories {
+	jcenter()
+	mavenCentral()
+}
+
+mainClassName = 'miage.skillz.SkillzApplication'
+
+defaultTasks 'run'
+
+jar {
+	manifest {
+		attributes 'Main-Class': mainClassName
+	}
+}
+
+////// TEST
+test {
+	useJUnitPlatform()
+}
+
+///// Jacoco + Sonarqube
+jacoco {
+	toolVersion = '0.8.6'
+	reportsDir = file("${buildDir}/reports/jacoco") // this is the default
+}
+
+jacocoTestReport {
+	reports {
+		xml.enabled = true // coveralls plugin depends on xml format report
+		html.enabled = true
+		html.destination = file("${buildDir}/jacocoHtml")
+	}
+}
+
+sonarqube {
+	properties {
+		//property "sonar.projectName", "PROJECT NAME"
+		//property "sonar.projectKey", "PROJECT KEY"
+		property "sonar.jacoco.reportPaths", "${buildDir}/jacoco/test.exec"
+	}
+}
+
+//
+// DOCUMENTATION (AsciiDoctor + PlantUML)
+//
+// see:
+
+asciidoctorPdf {
+	dependsOn asciidoctorGemsPrepare
+
+	baseDirFollowsSourceFile()
+
+	asciidoctorj {
+		requires 'rouge'
+		modules {
+			diagram.use()
+		}
+		attributes 'build-gradle': file('build.gradle'),
+				'sourcedir': project.sourceSets.main.java.srcDirs[0],
+				'endpoint-url': 'http://example.org',
+				'source-highlighter': 'rouge',
+				'rouge-style': 'github',
+				'rouge-theme': 'github',
+				'imagesdir': './images',
+				'toc': 'left',
+				'toclevels': 2,
+				'icons': 'font',
+				'idprefix': '',
+				'idseparator': '-'
+	}
+}
+
+task asciidoctor(dependsOn: asciidoctorPdf)
+
