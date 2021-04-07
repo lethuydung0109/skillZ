@@ -6,8 +6,8 @@ addons:
   sonarcloud:
     organization: "riad-lazli"
     token:
-      secure: "eO9t45RZpLYeAmvTdYpuUa3aRaUg0MzyscbKQHgOd5hbEgvTszxFn+UCFo3lXsi6mE0e8Uk7u55p4h9RZ1SzT9lrasIC8NjW3sF0n5ddiLecmj2XSJRfjp9q1n/Dy6HRsOyi64gfXYRGskR3bAZddLzk1wWB3bEH/fxAe1giJTFjoniOvk1yORufdfbSJ7XI05rbM0nk6HY8bvuWgorZbmTQLZlQ40Sr4W/s0pTLwhwjj2qBJxsLVlQ+YAi4IpzBHVZyRTas65Xhgt6EQNMSttQpwXym8HeAGjonLz7ASdpmiyaaMaSxO2HN2V4e6VeOFdmxcfV+pWFfGDjTSRW1umL0zGuOOaplQLpq/6VcHLZwLwNlwcAiGLyr99ep+MJy2LV3XYjC8/lJQwIUIKf8AuvJ3KNd/GfzNzP+mnOPLUkEuunULnEtCWAvA8RJkFT/JUHf0CrQjukIL3EKBXHeVOqbHdC5ash3coEaq5CGRBo5aJ1nRxknWYwQO0auflM36MB2/4i/mAaWhrPVWE0YSN6Scv5iOSKyWQnnkafvCRxrlR5Y0nYT8NYn+4tVxcXpR/p/eQD2fPl0j1jHLnTOpO1R2CVP1Eeb/Rmu/LIjUE1gHJyjYwJudbxxPFFMjgkyX+zp/GurK++VmLRegKxb03BJ9P0qiUcFO+wqKPAfgrs="
-#encrypted value of your token
+      secure: "TYQtA9v0i0sDUgvYS9AbACorO6Ojijfrc18s52SMXN0CGXW98SNYRr8zyUtS9dohBnNorMhwtB3+3K7XN1qOoKOEcCdLKAjU4esQsD9cxsrkViu4RkYdFQlbU9rvpBhawbe5g515ymO4LSYomL0nkh3XnTmT3NRb/pNvQTQgOBJwk7IeWMSbF//bk6qEg1FdJQu3HKUgu9VvHCMOoFsynqt+8vd1wOqrsuOIfZrduX5wF5KRkyM6aNJuoZP8CqJ/6b3aOydA6YHkjA4qVyLQQv9CzGoPUuzPo5NxEfxGBpiGFS0cNeL6JLfTJufa1OoGEx+tYCCorzdOo1+ZPKzdBPP0O18BjTBr70uqGfs+TjI1b8unvV8eKjoqSai9zKda/scfauh8sZ+PsVtSC/Env4uabER6sJxP1g96zBhgt4padVFafR0zRibwgo/nsGVSt5KURDNxWASoniPfQSHmwddQ8iZXnzAtsLWF5iCOeQYZc2eax9ZzJ/FgszX4cuz6zcEsLxGCTZmwaJg/rFUMTkn0WDkAf0EvrgRZP3KDmkjfF8nME6c+8oBn0BcncFaUOGlwVQEao8YtNc3xivEueMk+cqvrckivL+PKMVerldu6H64vsnkJf4dGIKOBntuZUpzU+EJOh1dMrjxUquDi+ya/Wb0ofo0FArXxty19v8w="
+
 
 
 sudo: false
@@ -16,7 +16,7 @@ before_install:
   - chmod +x gradlew
 
 script:
-  - "./gradlew check jacocoTestReport coveralls sendCoverageToCodacy"
+  - ./gradlew check jacocoTestReport coveralls sendCoverageToCodacy
   - bash <(curl -s https://codecov.io/bash)
   - ./gradlew sonarqube
 after_success:
