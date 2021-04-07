@@ -13,6 +13,8 @@ addons:
 sudo: false
 before_install:
   - sudo apt-get -y install graphviz
+  - chmod +x gradlew
+
 script:
   - "./gradlew check jacocoTestReport coveralls sendCoverageToCodacy"
   - bash <(curl -s https://codecov.io/bash)
