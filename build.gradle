@@ -100,7 +100,7 @@ jacocoTestReport {
 sonarqube {
 	properties {
 		//property "sonar.projectName", "PROJECT NAME"
-		//property "sonar.projectKey", "PROJECT KEY"
+		property "sonar.projectKey", "riad-lazli_skillZ"
 		property "sonar.jacoco.reportPaths", "${buildDir}/jacoco/test.exec"
 	}
 }
