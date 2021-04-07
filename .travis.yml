@@ -19,8 +19,8 @@ script:
   - bash <(curl -s https://codecov.io/bash)
   - ./gradlew sonarqube
 after_success:
-  - "./gradlew jar"
-  - "./gradlew asciidoctor"
+  - ./gradlew jar
+  - ./gradlew asciidoctor
 before_deploy:
   - export VERSION=`./gradlew -q version`
   - export BINDIR="build/libs"
