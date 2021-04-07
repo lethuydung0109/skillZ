@@ -6,7 +6,7 @@ addons:
   sonarcloud:
     organization: riad-lazli
     token:
-      secure: $SONAR_TOKEN
+      secure: ${SONAR_TOKEN}
 
 sudo: false
 before_install:
