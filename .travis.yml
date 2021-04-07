@@ -1,6 +1,6 @@
-language; java
+language: java
 jdk:
-  - openjdk8
-
+  - openjdk11
+script: ./gradlew clean build
 notifications:
   email: lethuydung0109@gmail.com
