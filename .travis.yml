@@ -1,8 +1,14 @@
 language: java
+node_js:
+  - 10
 addons:
   sonarcloud:
-    organization: skillz
+    organization: "skillz"
+    token:
+      secure: "**************************" # encrypted value of your token
+
 script:
+  - ./gradlew sonarqube
   # other script steps might be done before running the actual analysis
   - sonar-scanner
   - "./gradlew check jacocoTestReport coveralls sendCoverageToCodacy"
