@@ -1,7 +1,6 @@
 language: java
 jdk:
   - openjdk11
-
 addons:
   sonarcloud:
     organization: "miageskillz" # the key of the org you chose at step #3
