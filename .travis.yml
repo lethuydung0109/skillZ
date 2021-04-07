@@ -17,7 +17,7 @@ before_install:
 script:
   - "./gradlew check jacocoTestReport coveralls sendCoverageToCodacy"
   - bash <(curl -s https://codecov.io/bash)
-  - "./gradlew sonarqube"
+  - ./gradlew sonarqube
 after_success:
   - "./gradlew jar"
   - "./gradlew asciidoctor"
