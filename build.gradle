@@ -5,12 +5,6 @@ plugins {
 	id "org.sonarqube" version "3.1.1"
 }
 
-sonarqube {
-	properties {
-		property "sonar.projectKey", "riad-lazli_skillZ"
-	}
-}
-
 group = 'miage'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
@@ -34,6 +28,10 @@ test {
 	useJUnitPlatform()
 }
 
-
+sonarqube {
+	properties {
+		property "sonar.projectKey", "riad-lazli_skillZ"
+	}
+}
 
 
