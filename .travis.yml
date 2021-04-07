@@ -1,6 +1,1 @@
 language: java
-jdk:
-  - openjdk11
-script: ./gradlew clean build
-notifications:
-  email: lethuydung0109@gmail.com
