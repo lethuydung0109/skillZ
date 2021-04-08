@@ -1,13 +1,13 @@
 package miage.skillz.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import miage.skillz.enumeration.Niveau;
-import miage.skillz.validation.CheckQuestion;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 @Entity
@@ -26,10 +26,16 @@ public class Question {
     private String name;
     @Builder.Default
     private Long poids = 0L;
-    private String niveau;
-    //private Map<String,Boolean> reponsesQuestions;
-    //private Set<String> competences;
 
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20)
+    private Niveau niveau;
+    //private Set<String> competences;
+    @Builder.Default
     @ManyToMany(mappedBy = "questionsQuizz",fetch = FetchType.LAZY)
     Set<Quizz> listQuizz = new HashSet<>();
+
+    @Builder.Default
+    @OneToMany(mappedBy="question")
+    private Set<ReponseQuestion> reponsesQuestions = new HashSet<>();;
 }

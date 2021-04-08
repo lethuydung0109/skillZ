@@ -4,7 +4,6 @@ import miage.skillz.entity.Question;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -19,7 +18,8 @@ public class CheckQuestionValidator implements ConstraintValidator<CheckQuestion
         try{
             if(question.getName() == null) throw  new IllegalArgumentException("Un libelle doit être défini");
             if(question.getNiveau() ==null) throw  new IllegalArgumentException("Un Niveau doit être défini");
-           // if(isNullOrEmpty(question.getReponsesQuestions())) throw  new IllegalArgumentException("Une reponse doit être défini");
+            if(isNullOrEmpty(question.getReponsesQuestions())) throw  new IllegalArgumentException("Une reponse doit être défini");
+            // au moins 2 repponses dont une bonne
             //if(isNullOrEmpty(question.getCompetences())) throw  new IllegalArgumentException("Une competence doit être défini");
         }
         catch (IllegalArgumentException e)

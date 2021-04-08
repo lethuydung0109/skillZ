@@ -1,4 +1,4 @@
-package miage.skillz.service;
+package miage.skillz.security.services;
 
 import lombok.extern.slf4j.Slf4j;
 import miage.skillz.entity.Question;

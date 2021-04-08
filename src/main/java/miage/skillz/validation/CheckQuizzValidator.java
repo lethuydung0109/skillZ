@@ -4,14 +4,8 @@ import miage.skillz.entity.Question;
 import miage.skillz.entity.Quizz;
 import miage.skillz.enumeration.Niveau;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.time.LocalTime;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 public class CheckQuizzValidator implements ConstraintValidator<CheckQuizz, Quizz> {
@@ -45,10 +39,10 @@ public class CheckQuizzValidator implements ConstraintValidator<CheckQuizz, Quiz
         return true;
     }
 
-    private boolean quizzQuestionIsValid(Set<Question> questionsQuizz, String quizzNiveau)
+    private boolean quizzQuestionIsValid(Set<Question> questionsQuizz, Niveau quizzNiveau)
     {
         for (Question question : questionsQuizz) {
-            if (question.getNiveau().equals(quizzNiveau)) return false;
+            if (question.getNiveau() ==quizzNiveau) return false;
         }
         return true;
     }

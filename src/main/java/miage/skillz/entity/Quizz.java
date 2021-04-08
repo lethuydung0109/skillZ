@@ -2,10 +2,8 @@ package miage.skillz.entity;
 
 import lombok.*;
 import miage.skillz.enumeration.Niveau;
-import miage.skillz.validation.CheckQuizz;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -26,7 +24,9 @@ public class Quizz {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idQuizz;
     private String name;
-    private String niveau;
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20)
+    private Niveau niveau;
     private String theme;
     private Long pourcentageValidation;
     private LocalTime duree;
@@ -36,6 +36,7 @@ public class Quizz {
             name = "question_quizz",
             joinColumns = @JoinColumn(name = "idQuizz"),
             inverseJoinColumns = @JoinColumn(name = "idQuestion"))
+    @Builder.Default
     private Set<Question> questionsQuizz = new HashSet<>();
 
 }
