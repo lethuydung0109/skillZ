@@ -27,7 +27,7 @@ public class CompetenceController {
         return service.createCompetence(competence);
     }
 
-    // Modifier competence
+    // Modifier competence .. à completer
     @PutMapping("/all")
     @RequestMapping(value = "/updateCompetence", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
     public Competence updateCompetence(@RequestBody Competence comp)
@@ -37,10 +37,10 @@ public class CompetenceController {
 
     // Supprimer competence
     @DeleteMapping("/all")
-    @RequestMapping(value = "/deleteComptence/{comptenceId}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void deleteCompetence(@PathVariable("comptenceId") Long comptenceId)
+    @RequestMapping(value = "/deleteCompetence/{competenceId}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public void deleteCompetence(@PathVariable("competenceId") Long competenceId)
     {
-        service.deleteCompetence(comptenceId);
+        service.deleteCompetence(competenceId);
     }
 
     // Liste des compétences

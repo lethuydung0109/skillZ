@@ -15,7 +15,7 @@ public class CompetenceService {
     CompetenceRepository competenceRepository;
 
 
-    // Créer une compétence avec un id père
+    // Créer une competence avec un id père
     public ResponseEntity<Competence> createCompetence(Competence competence)
     {
         Competence comp = new Competence(competence.getNom_competence(),competence.getId_pere());
@@ -30,13 +30,14 @@ public class CompetenceService {
         return competence;
     }
 
-    // Supprimer comptence
-    public void deleteCompetence(Long comptenceId)
+    // Supprimer competence
+    public void deleteCompetence(Long competenceId)
     {
-        competenceRepository.deleteById(comptenceId);
+     //System.out.println("delete : "+competenceRepository.findById(competenceId).toString());
+        competenceRepository.deleteById(competenceId);
     }
 
-    // Retourne la liste des compétences
+    // Retourne la liste des competences
     public List<Competence> getAllCompetence() {
         return competenceRepository.findAll();
     }
