@@ -1,0 +1,36 @@
+@startuml model
+
+package org.apache.logging.log4j {
+    class Logger
+    class LogManager
+}
+
+package miage.skillz {
+
+    class Competence {
+        - id : Long
+        - id_pere : Long
+        + Competence(Id : Long, id_pere : Long)
+        + getId() : Long
+        + getId_pere() : Long
+        + getNom_competence()
+        + setId(id : Long)
+        + setId_pere(id_pere : Long)
+        + setNom_competence()
+    }
+
+    class Principal {
+        + {static} main(args: String[])
+    }
+
+    Competence "1" --> "n" Question  : Liée
+    Question "n" --> "1" Competence : Liée
+    Admin "1" --> "n" Competence : Crée
+    Badge "1" --> "1" Competence : Concerne
+    Questionnaire "1" --> "1" Competence : Concerne
+
+
+
+}
+
+@enduml

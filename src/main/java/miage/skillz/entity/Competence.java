@@ -13,7 +13,7 @@ public class Competence {
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private long id;
 
-        // Id de la compétence père
+        // Id de la compétence pere
         private long id_pere;
 
         // Nom de la compétence

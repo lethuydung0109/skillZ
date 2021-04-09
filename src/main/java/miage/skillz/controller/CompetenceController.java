@@ -19,8 +19,8 @@ public class CompetenceController {
     private CompetenceService service;
 
     // Créer compétence
-    @PostMapping("/all")
-    @RequestMapping(value = "/createCompetence", method = RequestMethod.POST,consumes = "application/json",produces = "application/json")
+    //@PostMapping("/all")
+    @PostMapping(value = "/createCompetence",consumes = "application/json",produces = "application/json")
     public ResponseEntity<Competence> createCompetence(@RequestBody Competence competence)
     {
        // User currentUser = this.userController.findById(userDetails.getId());

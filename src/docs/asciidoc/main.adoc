@@ -1,0 +1,16 @@
+= Documentation application SkillZ
+Riad LAZLI -
+
+
+== Introduction
+
+L'application SKILLZ consiste est une application web qui permet de valider et suivre les compétences des employés au sein d’une entreprise ou  des étudiants  au sein d’une université.
+
+SkillZ permettra de s’assurer des compétences d’un candidat à  travers la création  de questionnaires personnalisées.
+
+== Installation
+
+== Mise en marche
+
+* test
+
