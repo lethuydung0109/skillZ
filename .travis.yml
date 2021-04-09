@@ -6,7 +6,6 @@ addons:
     organization: "miageskillz" # the key of the org you chose at step #3
     token:
       secure: "D/JdOKq+txG9TLcudAu+z5qBBZuwlC+wyV9DafKkVTMLVhcAK9gI9k2h1azDLabLHb8Bx0oVj1ktTDC0gkfqJhgRWhxh8kKX7N9H3i1nIPesrP2Otge1rsnv22KfpHCEDt0XWW2LhW3uKGvwEDTTM5CqltDbhwC1tOpXk7Cxpl1tI05zE6qbaS0RtU2exiexpYvxjGqoxxZWnUv3tfCBVL/viFfpKe5m1wF5yhzw3V+j5bDDVaZPVvpTcgmsv8SMQbOBkt36aeh6qSiYrHV8IFvKMC/44KWWb4pHdQ5i3z8e0PV/eW/TTyYm6+1G6M5us6YU0xcLonkOd/COdXMyZifpt02CE+pCCF9wYKXCVhXlvqg/3Pkr0pPAxHpFZXRN+q/7wwAdlHk/YINozmmew1P3c1ljncS9qlibOopjorLMk/zOX4bc59c6lIqdKXpvKvFRXes9f7omUmCGI9wuEI6Wwwy8JS9+aa8aBFJVux+UjB8XRRv4z67lmc9pkgxeUhVux/4aRLIFJCiDZnUR8slmEBQKQRiESGQPsJQC+P1k2/b7Y8JkjjqJWP+9yJNTmNuSgIjsf0TWWeaxJzq1dyovil7lhi5qXSYD5/w142TvWKNdPKuI++J5mNwYCJ1npC92X88hXoKp1NCVeBZ356zizlbwqN1Dvb6656lGthU=" # encrypted value of your token
-
 script:
   - ./gradlew clean build
  # - sonar-scanner
