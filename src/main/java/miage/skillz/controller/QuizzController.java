@@ -29,9 +29,8 @@ public class QuizzController {
         return  quizzService.createQuizz(quizz);
     }
 
-    @PutMapping("/all")
-    @RequestMapping(value = "/updateQuizz", method = RequestMethod.PUT,consumes = "application/json",produces = "application/json")
-    public ResponseEntity<Quizz> updateQuizz(@RequestBody @Valid Quizz quizz)
+    @PutMapping(value = "/updateQuizz",consumes = "application/json",produces = "application/json")
+    public ResponseEntity<Quizz> updateQuizz(@RequestBody Quizz quizz)
     {
         return  quizzService.updateQuizz(quizz);
     }

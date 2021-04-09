@@ -1,10 +1,7 @@
 package miage.skillz.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import miage.skillz.enumeration.Niveau;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -12,7 +9,8 @@ import java.util.Set;
 
 @Entity
 @Table(name="question")
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,10 +25,11 @@ public class Question {
     @Builder.Default
     private Long poids = 0L;
 
-    @Enumerated(EnumType.STRING)
-    @Column(length = 20)
-    private Niveau niveau;
+    /*@Enumerated(EnumType.STRING)
+    @Column(length = 20)*/
+    private String niveau;
     //private Set<String> competences;
+    @JsonIgnore
     @Builder.Default
     @ManyToMany(mappedBy = "questionsQuizz",fetch = FetchType.LAZY)
     Set<Quizz> listQuizz = new HashSet<>();

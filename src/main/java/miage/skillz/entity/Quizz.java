@@ -1,8 +1,7 @@
 package miage.skillz.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import miage.skillz.enumeration.Niveau;
-
 import javax.persistence.*;
 import java.time.LocalTime;
 import java.util.HashSet;
@@ -10,7 +9,8 @@ import java.util.Set;
 
 @Entity
 @Table(name="quizz")
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,13 +24,14 @@ public class Quizz {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idQuizz;
     private String name;
-    @Enumerated(EnumType.STRING)
-    @Column(length = 20)
-    private Niveau niveau;
+    /*@Enumerated(EnumType.STRING)
+    @Column(length = 20)*/
+    private String niveau;
     private String theme;
     private Long pourcentageValidation;
-    private LocalTime duree;
+    private String duree;
     //private Set<String> competences;
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "question_quizz",

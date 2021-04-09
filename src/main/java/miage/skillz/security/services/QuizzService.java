@@ -22,7 +22,9 @@ public class QuizzService {
 
     public ResponseEntity<Quizz> createQuizz(Quizz quizz)
     {
-        // vérifier que le niveau de chaque question , correspond au niveau du quizz et que le total des poids est égal à 100%
+        System.out.println("Received quizz : "+quizz.toString());
+        //Set<Question> questions = quizz.getQuestionsQuizz();
+
         return  new ResponseEntity<>(this.quizzRepository.saveAndFlush(quizz), HttpStatus.OK);
     }
 

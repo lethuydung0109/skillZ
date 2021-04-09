@@ -2,7 +2,7 @@ package miage.skillz.validation;
 
 import miage.skillz.entity.Question;
 import miage.skillz.entity.Quizz;
-import miage.skillz.enumeration.Niveau;
+import miage.skillz.enumeration.ENiveau;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -39,10 +39,10 @@ public class CheckQuizzValidator implements ConstraintValidator<CheckQuizz, Quiz
         return true;
     }
 
-    private boolean quizzQuestionIsValid(Set<Question> questionsQuizz, Niveau quizzNiveau)
+    private boolean quizzQuestionIsValid(Set<Question> questionsQuizz, String quizzENiveau)
     {
         for (Question question : questionsQuizz) {
-            if (question.getNiveau() ==quizzNiveau) return false;
+            if (!question.getNiveau().equals(quizzENiveau)) return false;
         }
         return true;
     }

@@ -4,12 +4,15 @@ import lombok.extern.slf4j.Slf4j;
 import miage.skillz.entity.Question;
 import miage.skillz.entity.ReponseQuestion;
 import miage.skillz.repository.QuestionRepository;
+import miage.skillz.repository.ReponseQuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -20,10 +23,28 @@ public class QuestionService {
     @Autowired
     private QuestionRepository questionRepository;
 
+    @Autowired
+    private ReponseQuestionRepository repQuestionRepository;
+
     public ResponseEntity<Question> createQuestion(Question question)
     {
-        log.info("Question {} ", question);
-        return new ResponseEntity<>(this.questionRepository.saveAndFlush(question), HttpStatus.OK);
+        System.out.println("Question received 1 : "+question);
+        Set<ReponseQuestion> reponseQuestions = new HashSet<>(question.getReponsesQuestions());
+        question.setReponsesQuestions(new HashSet<>());
+
+        Question createdQuestion = this.questionRepository.save(question);
+
+        Set<ReponseQuestion> createdRepQuestions = new HashSet<>();
+
+        for (ReponseQuestion rep: reponseQuestions) {
+            rep.setQuestion(createdQuestion);
+            ReponseQuestion newRep = this.repQuestionRepository.save(rep);
+            createdRepQuestions.add(newRep);
+        }
+
+        createdQuestion.setReponsesQuestions(createdRepQuestions);
+
+        return new ResponseEntity<>(this.questionRepository.saveAndFlush(createdQuestion), HttpStatus.OK);
     }
 
     public ResponseEntity<Question> updateQuestion(Question question)
@@ -31,14 +52,14 @@ public class QuestionService {
         return  new ResponseEntity<>(this.questionRepository.saveAndFlush(question), HttpStatus.OK);
     }
 
-    public ResponseEntity<Question> getQuestion(Question question)
+    public Question getQuestion(Long qId)
     {
-        return  new ResponseEntity<>(this.questionRepository.findById(question.getIdQuestion()).orElseThrow(NullPointerException::new), HttpStatus.OK);
+        return this.questionRepository.findById(qId).orElseThrow(NullPointerException::new);
     }
 
-    public Set<Question> getAllQuestions()
+    public List<Question> getAllQuestions()
     {
-        return new HashSet<>(this.questionRepository.findAll());
+        return this.questionRepository.findAll();
     }
 
     public void deleteQuestion(Long qId)

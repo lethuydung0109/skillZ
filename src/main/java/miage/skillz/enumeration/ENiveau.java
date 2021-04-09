@@ -1,5 +1,5 @@
 package miage.skillz.enumeration;
 
-public enum Niveau {
+public enum ENiveau {
     NIVEAU1, NIVEAU2, NIVEAU3, NIVEAU4
 }

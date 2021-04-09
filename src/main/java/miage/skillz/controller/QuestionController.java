@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -19,31 +20,31 @@ public class QuestionController {
     private QuestionService questionService;
 
     @PostMapping(value = "/createQuestion",consumes = "application/json",produces = "application/json")
-    public ResponseEntity<Question> createQuestion(@RequestBody @Valid Question question)
+    public ResponseEntity<Question> createQuestion(@RequestBody Question question)
     {
         return  questionService.createQuestion(question);
     }
 
     @PutMapping(value = "/updateQuestion", consumes = "application/json",produces = "application/json")
-    public ResponseEntity<Question> updateQuestion(@RequestBody @Valid Question question)
+    public ResponseEntity<Question> updateQuestion(@RequestBody Question question)
     {
         return  questionService.updateQuestion(question);
     }
 
-    @GetMapping(value = "/getQuestion", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Question> getQuestion(Question question)
+    @GetMapping(value = "/getQuestion/{qId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Question getQuestion(@PathVariable Long qId)
     {
-        return  questionService.getQuestion(question);
+        return  questionService.getQuestion(qId);
     }
 
     @GetMapping(value = "/allQuestions", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Set<Question> getAllQuestions()
+    public List<Question> getAllQuestions()
     {
         return  questionService.getAllQuestions();
     }
 
     @DeleteMapping(value = "/deleteQuestion/{qId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public void deleteQuestion(Long qId)
+    public void deleteQuestion(@PathVariable Long qId)
     {
         questionService.deleteQuestion(qId);
     }
