@@ -10,7 +10,7 @@ script:
   - ./gradlew clean build
   - sonar-scanner
 notifications:
-  email: lethuydung0109@gmail.com
+  email: clarencegnamblohou@gmail.com
 
 #dist: xenial
 
