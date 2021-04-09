@@ -36,43 +36,37 @@ public class QuizzController {
         return  quizzService.updateQuizz(quizz);
     }
 
-    @GetMapping("/all")
-    @RequestMapping(value = "/getQuizz/{quizzId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/getQuizz/{quizzId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Quizz> getQuizz(@PathVariable Long quizzId)
     {
         return  quizzService.getQuizz(quizzId);
     }
 
-    @GetMapping("/all")
-    @RequestMapping(value = "/allQuizz", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/allQuizz", produces = MediaType.APPLICATION_JSON_VALUE)
     public Set<Quizz> getAllQuizz()
     {
         return  quizzService.getAllQuizz();
     }
 
-    @GetMapping("/all")
-    @RequestMapping(value = "/addQuestionToQuizz/{quizzId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/addQuestionToQuizz/{quizzId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public boolean addQuestionToQuizz(@PathVariable Long quizzId, @RequestBody @Valid Question question)
     {
         return  quizzService.addQuestionToQuizz(quizzId,question);
     }
 
-    @DeleteMapping("/all")
-    @RequestMapping(value = "/deleteQuestionFromQuizz/{quizzId}/{qId}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/deleteQuestionFromQuizz/{quizzId}/{qId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public void deleteQuestionFromQuizz(@PathVariable Long quizzId, @PathVariable Long qId)
     {
         quizzService.deleteQuestionFromQuizz(quizzId, qId);
     }
 
-    @DeleteMapping("/all")
-    @RequestMapping(value = "/deleteQuizzById/{quizzId}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/deleteQuizzById/{quizzId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public void deleteQuizz(@PathVariable Long quizzId)
     {
         quizzService.deleteQuizz(quizzId);
     }
 
-    @DeleteMapping("/all")
-    @RequestMapping(value = "/deleteAllQuizz", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/deleteAllQuizz", produces = MediaType.APPLICATION_JSON_VALUE)
     public void deleteAllQuizz()
     {
         quizzService.deleteAllQuizz();

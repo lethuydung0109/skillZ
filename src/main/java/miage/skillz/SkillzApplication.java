@@ -21,21 +21,18 @@ import static springfox.documentation.schema.AlternateTypeRules.newRule;
 import java.time.LocalTime;
 
 @SpringBootApplication
-@EnableSwagger2
-@ComponentScan(basePackageClasses = {
-		QuizzController.class
-})
+//@EnableSwagger2
 public class SkillzApplication {
 
-	@Autowired
-	private TypeResolver typeResolver;
+	/*@Autowired
+	private TypeResolver typeResolver;*/
 
 	public static void main(String[] args) {
 		SpringApplication.run(SkillzApplication.class, args);
 	}
 
-	@Bean
-	public Docket skillzAPI() {
+	/*@Bean
+	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2)
 				.alternateTypeRules(
 						newRule(typeResolver.resolve(ResponseEntity.class, typeResolver.resolve(RequestEntity.class)),
@@ -47,5 +44,5 @@ public class SkillzApplication {
 				.paths(PathSelectors.any())
 				.build();
 
-	}
+	}*/
 }

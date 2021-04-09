@@ -2,6 +2,7 @@ package miage.skillz.security.services;
 
 import lombok.extern.slf4j.Slf4j;
 import miage.skillz.entity.Question;
+import miage.skillz.entity.ReponseQuestion;
 import miage.skillz.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,6 +49,20 @@ public class QuestionService {
     public void deleteAllQuestions()
     {
         this.questionRepository.deleteAll();
+    }
+
+    public void addResponseToQuestion(Long repId, Long qId) { }
+
+    public void deleteResponseFromQuestion(Long repId, Long qId) { }
+
+    public Set<ReponseQuestion> getAllQuestionResponse(Long qId)
+    {
+        return this.questionRepository.findById(qId).orElseThrow().getReponsesQuestions();
+    }
+
+    public Set<ReponseQuestion> getAllCorrectQuestionResponse(Long qId)
+    {
+            return this.getAllQuestionResponse(qId).stream().filter(ReponseQuestion::getIsCorrect).collect(Collectors.toSet());
     }
 
 }
