@@ -14,6 +14,9 @@ import { BoardConcepteurComponent } from './board-concepteur/board-concepteur.co
 import { BoardParticipantComponent } from './board-participant/board-participant.component';
 
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
+import { CreerCompetenceComponent } from './creer-competence/creer-competence.component';
+import { CreerQuestionComponent } from './creer-competence/creer-question/creer-question.component';
+import { CreerQuizzComponent } from './creer-quizz/creer-quizz.component';
 
 @NgModule({
 declarations: [
@@ -24,7 +27,10 @@ HomeComponent,
 ProfileComponent,
 BoardAdminComponent,
 BoardConcepteurComponent,
-BoardParticipantComponent
+BoardParticipantComponent,
+CreerCompetenceComponent,
+CreerQuestionComponent,
+CreerQuizzComponent
 ],
 imports: [
 BrowserModule,
