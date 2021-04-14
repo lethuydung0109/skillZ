@@ -27,5 +27,10 @@ public class ReponseQuestion {
     @JoinColumn(name="idQuestion")
     private Question question;
 
-
+    public ReponseQuestion(String libelle, Boolean isCorrect, Boolean isSelected, Question question) {
+        this.libelle = libelle;
+        this.isCorrect = isCorrect;
+        this.isSelected = isSelected;
+        this.question = question;
+    }
 }

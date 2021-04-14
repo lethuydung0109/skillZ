@@ -23,7 +23,7 @@ public class Question {
     private Long idQuestion;
     private String name;
     @Builder.Default
-    private Long poids = 0L;
+    private long poids = 0;
 
     /*@Enumerated(EnumType.STRING)
     @Column(length = 20)*/
@@ -32,9 +32,17 @@ public class Question {
     @JsonIgnore
     @Builder.Default
     @ManyToMany(mappedBy = "questionsQuizz",fetch = FetchType.LAZY)
-    Set<Quizz> listQuizz = new HashSet<>();
+    Set<Quiz> listQuiz = new HashSet<>();
 
     @Builder.Default
     @OneToMany(mappedBy="question")
-    private Set<ReponseQuestion> reponsesQuestions = new HashSet<>();;
+    private Set<ReponseQuestion> reponsesQuestions = new HashSet<>();
+
+    public Question(String name, long poids, String niveau, Set<Quiz> listQuiz, Set<ReponseQuestion> reponsesQuestions) {
+        this.name = name;
+        this.poids = poids;
+        this.niveau = niveau;
+        this.listQuiz = listQuiz;
+        this.reponsesQuestions = reponsesQuestions;
+    }
 }

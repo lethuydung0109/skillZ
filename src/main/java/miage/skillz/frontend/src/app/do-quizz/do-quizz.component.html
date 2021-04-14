@@ -1,0 +1,38 @@
+<div class="container-fluid">
+    <br>
+      <h1>Modélisation 1</h1>
+    <br>
+    <div class="col">
+        <div class="row">
+            <div class="col-md-4"> Description </div>
+            <div class="col-md-8"> Une 1ère description </div>
+        </div><br>
+        <div class="row">
+            <div class="col-md-4"> Compétence (s) </div>
+            <div class="col-md-8"> Modelisation, UML </div>
+        </div> <br>
+        <div class="row">
+            <div class="col-md-4"> Niveau </div>
+            <div class="col-md-8"> Niveau 1 </div>
+        </div> <br>
+        <div class="row">
+            <div class="col-md-4"> Duree </div>
+            <div class="col-md-8"> 1h </div>
+        </div>
+    </div>
+    <br>
+
+    <h3> Questions </h3>
+
+    <div *ngFor="let q of questions; let i = index">
+        <h4> {{i+1}}-{{q.name}} </h4> <br>
+        
+        <ul>
+            <li *ngFor="let rep of q.reponses">
+                <mat-checkbox [(ngModel)]="rep.isSelected" (ngModelChange)="isResponseChecked()">{{rep.libelle}} </mat-checkbox>
+            </li>
+        </ul>
+    </div>
+    <button (click)="validQuizResponse()"> Terminer </button>
+
+</div>

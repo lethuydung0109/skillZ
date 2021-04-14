@@ -16,7 +16,7 @@ import java.util.Set;
 @NoArgsConstructor
 @ToString
 //@CheckQuizz
-public class Quizz {
+public class Quiz {
 
     private static final long serialVersionUID = -2054386655979281969L;
 
@@ -40,4 +40,12 @@ public class Quizz {
     @Builder.Default
     private Set<Question> questionsQuizz = new HashSet<>();
 
+    public Quiz(String name, String niveau, String theme, Long pourcentageValidation, String duree, Set<Question> questionsQuizz) {
+        this.name = name;
+        this.niveau = niveau;
+        this.theme = theme;
+        this.pourcentageValidation = pourcentageValidation;
+        this.duree = duree;
+        this.questionsQuizz = questionsQuizz;
+    }
 }

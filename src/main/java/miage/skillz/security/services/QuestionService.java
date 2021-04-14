@@ -42,7 +42,7 @@ public class QuestionService {
             createdRepQuestions.add(newRep);
         }
 
-        createdQuestion.setReponsesQuestions(createdRepQuestions);
+        //createdQuestion.setReponsesQuestions(createdRepQuestions);
 
         return new ResponseEntity<>(this.questionRepository.saveAndFlush(createdQuestion), HttpStatus.OK);
     }
