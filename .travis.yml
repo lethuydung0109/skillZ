@@ -9,9 +9,19 @@ addons:
 
 script:
   - ./gradlew clean build
-  - sonar-scanner
-notifications:
-  email: clarencegnamblohou@gmail.com
+ # - sonar-scanner
+  - ./gradlew :plantUml
+
+
+before_install:
+#- sudo apt-get -y install graphviz
+#Graphiz
+# Mac os Use : brew install graphviz
+#./gradlew :plantUml
+
+
+#notifications:
+#  email: lethuydung0109@gmail.com
 
 #dist: xenial
 

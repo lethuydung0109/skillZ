@@ -1,20 +1,23 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { DoQuizzComponent } from './do-quizz/do-quizz.component';
+import { Routes, RouterModule } from '@angular/router';
+
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
-import { CreateQuizzComponent } from './create-quizz/create-quizz.component';
-import { QuizzComponent } from './quizz/quizz.component';
-import { QuestionsComponent } from './questions/questions.component';
-import { CreateQuestionComponent } from './create-question/create-question.component';
+import { ProfileComponent } from './profile/profile.component';
+import { BoardParticipantComponent } from './board-participant/board-participant.component';
+import { BoardConcepteurComponent } from './board-concepteur/board-concepteur.component';
+import { BoardAdminComponent } from './board-admin/board-admin.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'createQuiz', component: CreateQuizzComponent },
-  { path: 'quizz', component: QuizzComponent },
-  { path: 'doquizz', component: DoQuizzComponent },
-  { path: 'createQuestion', component: CreateQuestionComponent },
-  { path: 'questions', component: QuestionsComponent }
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'profile', component: ProfileComponent },
+  { path: 'participant', component: BoardParticipantComponent },
+  { path: 'concepteur', component: BoardConcepteurComponent },
+  { path: 'admin', component: BoardAdminComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
 @NgModule({

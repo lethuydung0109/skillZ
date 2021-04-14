@@ -1,0 +1,18 @@
+@startuml
+"Admin" as Admin
+Admin --> (Ajouter/Modifier/Supprimer un collaborateur )
+Admin --> (Ajouter/Modifier/Supprimer une competence )
+Admin --> (Visualiser tableau de bord des statistiques utilisateurs et competences )
+
+"Concepteur" as Concepteur
+Concepteur --> (Creer/Modifier/Supprimer une question)
+Concepteur --> (Creer/Modifier/Supprimer un questionnaire de validation d'une competence)
+Concepteur --> (Rechercher collaborateur/ Accéder à ses resultats)
+Concepteur --> (Visualiser un tableau de bord d'évolution des competences)
+
+"Participant" as Participant
+Participant --> (Accès au profil/Modifier les informations)
+Participant --> (Ajouter/Supprimer une competence)
+Participant --> (Passer un questionnaire)
+Participant --> (Recommender un collaborateur)
+@enduml
