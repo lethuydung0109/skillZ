@@ -6,7 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Table(name="reponseQuestion")
+@Table(name="reponsequestion")
 @Getter
 @Setter
 @Builder
@@ -23,7 +23,7 @@ public class ReponseQuestion {
     private Boolean isSelected; // true si le user a sélectionné cette réponse
 
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name="idQuestion")
     private Question question;
 

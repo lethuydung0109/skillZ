@@ -21,28 +21,35 @@ public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idQuestion;
-    private String name;
+    private String theme;
+    private String libelle;
     @Builder.Default
     private long poids = 0;
 
     /*@Enumerated(EnumType.STRING)
     @Column(length = 20)*/
     private String niveau;
-    //private Set<String> competences;
+
+    @Builder.Default
+    @OneToMany(mappedBy="question",cascade = CascadeType.ALL)
+    private Set<ReponseQuestion> reponsesQuestions = new HashSet<>();
+
     @JsonIgnore
     @Builder.Default
-    @ManyToMany(mappedBy = "questionsQuizz",fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "quizQuestions",fetch = FetchType.LAZY)
     Set<Quiz> listQuiz = new HashSet<>();
 
     @Builder.Default
-    @OneToMany(mappedBy="question")
-    private Set<ReponseQuestion> reponsesQuestions = new HashSet<>();
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
+    @JoinTable( name = "question_competences",
+            joinColumns = @JoinColumn(name = "idQuestion"),
+            inverseJoinColumns = @JoinColumn(name = "idCompetence"))
+    private Set<Competence> questionCompetences = new HashSet<>();
 
-    public Question(String name, long poids, String niveau, Set<Quiz> listQuiz, Set<ReponseQuestion> reponsesQuestions) {
-        this.name = name;
+    public Question(String theme, String libelle, long poids, String niveau) {
+        this.theme = theme;
+        this.libelle = libelle;
         this.poids = poids;
         this.niveau = niveau;
-        this.listQuiz = listQuiz;
-        this.reponsesQuestions = reponsesQuestions;
     }
 }

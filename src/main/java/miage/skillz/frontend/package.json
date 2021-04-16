@@ -27,6 +27,7 @@
     "@ngtools/webpack": "^11.2.8",
     "angular-font-awesome": "^3.1.2",
     "bootstrap": "^4.6.0",
+    "ngx-countdown": "^11.0.3",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "webpack": "^4.46.0",

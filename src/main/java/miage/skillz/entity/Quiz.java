@@ -2,13 +2,13 @@ package miage.skillz.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+
 import javax.persistence.*;
-import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name="quizz")
+@Table(name="quiz")
 @Getter
 @Setter
 @Builder
@@ -22,30 +22,35 @@ public class Quiz {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idQuizz;
+    private Long idQuiz;
     private String name;
     /*@Enumerated(EnumType.STRING)
     @Column(length = 20)*/
     private String niveau;
     private String theme;
     private Long pourcentageValidation;
-    private String duree;
-    //private Set<String> competences;
-    @JsonIgnore
-    @ManyToMany
-    @JoinTable(
-            name = "question_quizz",
-            joinColumns = @JoinColumn(name = "idQuizz"),
-            inverseJoinColumns = @JoinColumn(name = "idQuestion"))
-    @Builder.Default
-    private Set<Question> questionsQuizz = new HashSet<>();
+    private long duree;
 
-    public Quiz(String name, String niveau, String theme, Long pourcentageValidation, String duree, Set<Question> questionsQuizz) {
+    @JsonIgnore
+    @Builder.Default
+    @ManyToMany
+    @JoinTable( name = "quiz_questions",
+            joinColumns = @JoinColumn(name = "idQuiz"),
+            inverseJoinColumns = @JoinColumn(name = "idQuestion"))
+    private Set<Question> quizQuestions = new HashSet<>();
+
+    @Builder.Default
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
+    @JoinTable( name = "quiz_competences",
+            joinColumns = @JoinColumn(name = "idQuiz"),
+            inverseJoinColumns = @JoinColumn(name = "idCompetence"))
+    private Set<Competence> quizCompetences = new HashSet<>();
+
+    public Quiz(String name, String niveau, String theme, Long pourcentageValidation, long duree) {
         this.name = name;
         this.niveau = niveau;
         this.theme = theme;
         this.pourcentageValidation = pourcentageValidation;
         this.duree = duree;
-        this.questionsQuizz = questionsQuizz;
     }
 }

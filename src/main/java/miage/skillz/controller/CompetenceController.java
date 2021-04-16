@@ -1,7 +1,7 @@
 package miage.skillz.controller;
 
 import miage.skillz.entity.Competence;
-import miage.skillz.service.CompetenceService;
+import miage.skillz.security.services.CompetenceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

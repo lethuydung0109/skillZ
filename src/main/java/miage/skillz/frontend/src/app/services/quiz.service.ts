@@ -42,9 +42,16 @@ export class QuizService {
     return this.http.get<Array<Quiz>>(routeQuery);
   }
 
-  public addQuestionToQuizz()
+  public getQuizQuestions(quizId : number) : Observable<Array<Question>>
   {
-    
+    const routeQuery=this.url+"/getQuizQuestions/"+quizId;
+    return this.http.get<Array<Question>>(routeQuery);
+  }
+
+  public addQuestionToQuizz(quizId :number, questionId : number) : Observable<boolean>
+  {
+    const routeQuery=this.url+"/addQuestionToQuizz/"+quizId+"/"+questionId;
+    return this.http.get<boolean>(routeQuery);
   }
 
   public deleteQuestionFromQuizz()

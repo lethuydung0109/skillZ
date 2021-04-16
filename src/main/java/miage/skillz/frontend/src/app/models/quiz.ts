@@ -1,4 +1,5 @@
 import { Question } from './question';
+import { Competence } from './competence';
 
 export class Quiz {
 
@@ -7,10 +8,11 @@ export class Quiz {
     niveau: string;
     theme : string;
     pourcentageValidation :  number;
-    duree : string;
+    duree : number;
     questionsQuizz : Array<Question>;
-    competences : Array<string>;
+    quizCompetences : Array<Competence>;
     stringCompetence : string;
+    score : number;
 
     constructor()
     {
@@ -19,9 +21,10 @@ export class Quiz {
         this.niveau='';
         this.theme='';
         this.pourcentageValidation=0;
-        this.duree='';
+        this.duree=0;
         this.questionsQuizz = [];
-        this.competences = [];
+        this.quizCompetences = [];
         this.stringCompetence='';
+        this.score=0;
     }
 }

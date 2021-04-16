@@ -1,24 +1,30 @@
 import { Quiz } from './quiz';
 import { ResponseQuestion } from './response-question';
+import { Competence } from './competence';
 
 export class Question {
 
     idQuestion : number;
-    name : string;
+    theme : string;
+    libelle : string;
     poids :  number ;
     niveau :  string;
-    competences : Array<string>;
+    questionCompetences : Array<Competence>;
     listQuizz : Array<Quiz>;
-    reponses : Array<ResponseQuestion>;
+    reponsesQuestions : Array<ResponseQuestion> = [];
+    stringCompetence : string;
+
 
     constructor()
     {
         this.idQuestion=0;
-        this.name='';
+        this.theme='';
+        this.libelle='';
         this.poids=0;
         this.niveau='';
-        this.competences =[];
+        this.questionCompetences =[];
         this.listQuizz =[];
-        this.reponses =[];
+        this.reponsesQuestions =[];
+        this.stringCompetence='';
     }
 }
