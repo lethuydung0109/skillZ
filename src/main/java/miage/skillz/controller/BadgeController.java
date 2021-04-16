@@ -3,10 +3,7 @@ package miage.skillz.controller;
 import miage.skillz.entity.*;
 import miage.skillz.enumeration.ENiveau;
 import miage.skillz.payload.request.BadgeRequest;
-import miage.skillz.service.BadgeService;
 import miage.skillz.service.CompetenceService;
-import miage.skillz.service.NiveauService;
-import miage.skillz.service.UserService;
 
 
 import org.slf4j.LoggerFactory;

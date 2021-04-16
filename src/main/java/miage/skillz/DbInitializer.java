@@ -8,13 +8,11 @@ import miage.skillz.enumeration.ENiveau;
 import miage.skillz.repository.NiveauRepository;
 import miage.skillz.repository.RoleRepository;
 import miage.skillz.repository.UserRepository;
-import miage.skillz.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.security.AuthProvider;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
