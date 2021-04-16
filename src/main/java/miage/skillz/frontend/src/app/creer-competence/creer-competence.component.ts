@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {Competence} from '../classes/competence';
+import {CompetenceService } from '../services/competence.service';
+import {Router} from '@angular/router';
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-creer-competence',
@@ -7,9 +11,37 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreerCompetenceComponent implements OnInit {
 
-  constructor() { }
+  isSuccessful = false;
+  isFailed = false;
+  errorMessage = '';
+  competence = new Competence();
+  list_competence_pere: Array<Competence> =[];
+
+
+  constructor(private router: Router, private competenceService: CompetenceService) { }
 
   ngOnInit(): void {
+    let listComptence: Array<Competence>=[];
+    this.competenceService.getAllCompetence().subscribe(data => {
+      data.forEach(p => {
+        listComptence.push(p);
+      })
+    });
+    this.list_competence_pere=listComptence;
   }
+
+  onSubmit(): void {}
+
+  createCompetence(): void {
+    this.competenceService.saveCompetence(this.competence).subscribe(data =>
+    {
+      console.log(data);
+  });
+    this.router.navigate(['/liste-competence']);
+
+
+
+  }
+
 
 }

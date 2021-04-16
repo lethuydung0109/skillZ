@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -59,6 +60,24 @@ public class CompetenceService {
         }
         return newList;
     }
+
+    public List<Competence> getTreeCompetences ()
+    {
+        List<Competence> listComp = this.getAllCompetence(); ;
+        HashMap<String, Long> listCompetences = new HashMap<String, Long>();
+
+        for (Competence competence : listComp) {
+            Long IdPere =  competence.getId_pere();
+            if(IdPere == 0){
+                listCompetences.put(competence.getNom_competence(), competence.getId_pere());
+            }
+        }
+
+
+        return listComp;
+    }
+
+
 
 }
 

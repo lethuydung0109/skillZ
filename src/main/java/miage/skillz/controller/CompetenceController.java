@@ -11,7 +11,7 @@ import java.util.*;
 
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping(value = "/api")
 public class CompetenceController {
 
@@ -66,6 +66,8 @@ public class CompetenceController {
     {
         return service.getCompetenceByIdPere(IdPere);
     }
+
+
 
 
 }

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -15,8 +16,14 @@ import { BoardParticipantComponent } from './board-participant/board-participant
 
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { CreerCompetenceComponent } from './creer-competence/creer-competence.component';
-import { CreerQuestionComponent } from './creer-competence/creer-question/creer-question.component';
+import { CreerQuestionComponent } from './creer-question/creer-question.component';
 import { CreerQuizzComponent } from './creer-quizz/creer-quizz.component';
+import { ListeCompetenceComponent } from './liste-competence/liste-competence.component';
+import {MatIconModule} from '@angular/material/icon';
+import {MatTreeModule} from "@angular/material/tree";
+import {MatTableModule} from "@angular/material/table";
+
+
 
 @NgModule({
 declarations: [
@@ -30,14 +37,18 @@ BoardConcepteurComponent,
 BoardParticipantComponent,
 CreerCompetenceComponent,
 CreerQuestionComponent,
-CreerQuizzComponent
+CreerQuizzComponent,
+ListeCompetenceComponent,
 ],
-imports: [
-BrowserModule,
-AppRoutingModule,
-FormsModule,
-HttpClientModule
-],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        HttpClientModule,
+        MatIconModule,
+        MatTreeModule,
+        MatTableModule,
+    ],
 providers: [authInterceptorProviders],
 bootstrap: [AppComponent]
 })

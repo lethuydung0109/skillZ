@@ -15,6 +15,7 @@ import javax.validation.Valid;
 import java.util.Set;
 
 @RestController
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping(value = "/api")
 public class QuizzController {
 
