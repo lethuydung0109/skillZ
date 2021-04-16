@@ -1,7 +1,7 @@
 package miage.skillz.controller;
 
 import miage.skillz.entity.ReponseQuestion;
-import miage.skillz.service.ReponseQuestionService;
+import miage.skillz.security.services.ReponseQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,3 @@
-package miage.skillz.service;
 package miage.skillz.security.services;
 
 import miage.skillz.entity.ReponseQuestion;

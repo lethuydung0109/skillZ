@@ -101,7 +101,7 @@ public class QuizService {
         putQuiz.setQuizQuestions(putQuestions);
 
         putQuestions.forEach(question -> {
-            question.getListQuizz().add(putQuiz);
+            question.getListQuiz().add(putQuiz);
             this.questionRepository.saveAndFlush(question);
         });
 
