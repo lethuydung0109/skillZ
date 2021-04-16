@@ -1,4 +1,4 @@
-package miage.skillz.service;
+package miage.skillz.security.services;
 import miage.skillz.repository.CompetenceRepository;
 import miage.skillz.entity.Competence;
 import org.springframework.beans.factory.annotation.Autowired;
