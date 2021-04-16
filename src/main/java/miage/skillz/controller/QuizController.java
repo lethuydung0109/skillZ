@@ -5,7 +5,7 @@ import io.swagger.annotations.ApiResponse;
 import miage.skillz.entity.Question;
 import miage.skillz.entity.Quiz;
 import miage.skillz.models.QuizImpl;
-import miage.skillz.service.QuizService;
+import miage.skillz.security.services.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

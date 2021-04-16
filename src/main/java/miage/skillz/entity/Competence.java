@@ -1,6 +1,9 @@
 package miage.skillz.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,7 +17,7 @@ import java.util.Set;
 public class Competence {
 
         @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @GeneratedValue(strategy = GenerationType.AUTO)
         private long id;
 
         // Id de la compétence pere
@@ -30,7 +33,13 @@ public class Competence {
 
 
         // Mapping hibernate
-        // à completer ....
+        @JsonIgnore
+        @ManyToMany(mappedBy = "questionCompetences",fetch = FetchType.LAZY)
+        Set<Question> listQuestions = new HashSet<>();
+
+        @JsonIgnore
+        @ManyToMany(mappedBy = "quizCompetences",fetch = FetchType.LAZY)
+        Set<Quiz> listQuiz = new HashSet<>();
 
 
     // Constructeurs     
@@ -85,5 +94,21 @@ public class Competence {
 
     public void setListBadges(Set<Badge> listBadges) {
         this.listBadges = listBadges;
+    }
+
+    public Set<Quiz> getListQuiz() {
+        return listQuiz;
+    }
+
+    public void setListQuiz(Set<Quiz> listQuiz) {
+        this.listQuiz = listQuiz;
+    }
+
+    public Set<Question> getListQuestions() {
+        return listQuestions;
+    }
+
+    public void setListQuestions(Set<Question> listQuestions) {
+        this.listQuestions = listQuestions;
     }
 }

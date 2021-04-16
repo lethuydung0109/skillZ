@@ -3,9 +3,11 @@ package miage.skillz.controller;
 import miage.skillz.entity.*;
 import miage.skillz.enumeration.ENiveau;
 import miage.skillz.payload.request.BadgeRequest;
+import miage.skillz.service.BadgeService;
 import miage.skillz.service.CompetenceService;
 
 
+import miage.skillz.service.NiveauService;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
