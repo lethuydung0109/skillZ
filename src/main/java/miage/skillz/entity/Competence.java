@@ -1,5 +1,7 @@
 package miage.skillz.entity;
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(	name = "competence")
@@ -18,6 +20,11 @@ public class Competence {
 
         // Nom de la compétence
         private String nom_competence;
+
+//        //Badges de la competence
+        @OneToMany( cascade = CascadeType.ALL, mappedBy="competence")
+        Set<Badge> listBadges = new HashSet<Badge>();
+
 
         // Mapping hibernate
         // à completer ....
@@ -67,5 +74,13 @@ public class Competence {
 
     public void setNom_competence(String nom_competence) {
         this.nom_competence = nom_competence;
+    }
+
+    public Set<Badge> getListBadges() {
+        return listBadges;
+    }
+
+    public void setListBadges(Set<Badge> listBadges) {
+        this.listBadges = listBadges;
     }
 }
