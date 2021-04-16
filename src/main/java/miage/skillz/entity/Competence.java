@@ -1,4 +1,6 @@
 package miage.skillz.entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -23,6 +25,7 @@ public class Competence {
 
 //        //Badges de la competence
         @OneToMany( cascade = CascadeType.ALL, mappedBy="competence")
+        @JsonIgnore
         Set<Badge> listBadges = new HashSet<Badge>();
 
 

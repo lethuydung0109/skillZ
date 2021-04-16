@@ -1,5 +1,6 @@
 package miage.skillz.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import miage.skillz.enumeration.ENiveau;
 
 import javax.persistence.*;
@@ -23,6 +24,7 @@ public class Badge {
     private Niveau niveau;
 
     @ManyToMany(mappedBy = "badges")
+    @JsonIgnore
     private Set<User> users = new HashSet<User>();
 
 
