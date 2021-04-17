@@ -15,7 +15,7 @@
           minlength="3"
           maxlength="20"
           #description="ngModel"
-          [(ngModel)]="question.description"
+          [(ngModel)]="question.libelle"
         />
         <div class="alert-danger" *ngIf="description.errors && f.submitted">
           <div *ngIf="description.errors.required">La descirption est obligatoire</div>

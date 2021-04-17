@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-<<<<<<< HEAD
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Question} from "../classes/question";
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { Question } from '../models/question';
@@ -14,40 +12,31 @@ const httpOptions = {
       'Content-Type': 'application/json'
     })
 };
-=======
 
->>>>>>> fa79548f64d633d9bc0ca35adabb63f48c551178
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuestionService {
 
-<<<<<<< HEAD
   public url =environment.api_url;
 
   constructor(private http: HttpClient) { }
 
-  // tslint:disable-next-line:typedef
+
   public saveQuestion(question: Question): Observable<Question> {
 
     return this.http.post<Question>( API_URL + 'createQuestion/', {
-      descirption: question.description,
+      libelle: question.libelle,
       niveau: question.niveau,
     }, httpOptions);
 
   }
 
-  /*
-  public getAllCompetence() : Observable<Competence[]> {
-    return this.http.get<Competence[]>(API_URL  + 'allCompetence',httpOptions);
-  }*/
-=======
-
 
   public createQuestion(question : Question) : Observable<Question>
   {
-    const routeQuery=this.url+"/createQuestionz";
+    const routeQuery=this.url+"/createQuestion";
     console.log("Question", question)
 
     return this.http.post<Question>(routeQuery,Question);
@@ -101,5 +90,5 @@ export class QuestionService {
     const routeQuery=this.url+"/getQuestionPoids/"+qId;
     return this.http.get<number>(routeQuery);
   }
->>>>>>> fa79548f64d633d9bc0ca35adabb63f48c551178
+
 }

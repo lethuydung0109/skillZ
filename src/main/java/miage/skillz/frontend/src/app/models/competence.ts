@@ -6,7 +6,6 @@ export class Competence {
   // tslint:disable-next-line:variable-name
   nom_competence: string;
 
-
   nom_competence_pere: string;
 
   constructor() {

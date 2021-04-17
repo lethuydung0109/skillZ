@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {CompetenceService} from "../services/competence.service";
-import {Competence} from "../classes/competence";
-import {Observable} from "rxjs";
+import {Competence} from "../models/competence";
 
 
 @Component({

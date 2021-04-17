@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Question} from '../classes/question';
 import {QuestionService} from '../services/question.service';
 import {Router} from "@angular/router";
 import {CompetenceService} from "../services/competence.service";
-import {Competence} from "../classes/competence";
+import {Competence} from "../models/competence";
+import {Question} from "../models/question";
 
 
 @Component({

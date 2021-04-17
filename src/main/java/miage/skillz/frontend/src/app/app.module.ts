@@ -26,14 +26,11 @@ import {MatTableModule} from "@angular/material/table";
 
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { QuestionsComponent } from './questions/questions.component';
-import { CreateQuestionComponent } from './create-question/create-question.component';
 import { QuizzComponent } from './quizz/quizz.component';
-import { CreateQuizzComponent } from './create-quizz/create-quizz.component';
 import { DoQuizzComponent } from './do-quizz/do-quizz.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import {ScrollingModule} from '@angular/cdk/scrolling';
@@ -55,11 +52,9 @@ declarations: [
     BoardConcepteurComponent,
     BoardParticipantComponent,
     QuestionsComponent,
-    CreateQuestionComponent,
     QuizzComponent,
-    CreateQuizzComponent,
     DoQuizzComponent,
-    InfoModalComponent
+    InfoModalComponent,
     CreerCompetenceComponent,
     CreerQuestionComponent,
     CreerQuizzComponent,

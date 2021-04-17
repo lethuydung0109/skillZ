@@ -19,16 +19,16 @@ public class CompetenceService {
     // Créer une competence avec un id père
     public ResponseEntity<Competence> createCompetence(Competence competence)
     {
-        Competence comp = new Competence(competence.getNom_competence(),competence.getId_pere());
-        return new ResponseEntity<Competence>(this.competenceRepository.saveAndFlush(comp), HttpStatus.OK);
+        Competence comp = new Competence(competence.getNom_competence(),competence.getIdPere());
+        return new ResponseEntity<>(this.competenceRepository.saveAndFlush(comp), HttpStatus.OK);
     }
 
     // Update competence .. à completer
     public Competence updateCompetence(Competence comp)
     {
         //log.info("Competence à modifier : " + comp);
-        Competence competence = new Competence(comp.getId(), comp.getId_pere(), comp.getNom_competence());
-        return competence;
+        return new Competence(comp.getId(), comp.getIdPere(), comp.getNom_competence());
+
     }
 
     // Supprimer competence
@@ -53,7 +53,7 @@ public class CompetenceService {
         List<Competence> comptences=  this.getAllCompetence();
         List<Competence> newList= new ArrayList<>();
         for (Competence competence : comptences) {
-            Long idComp =  competence.getId_pere();
+            long idComp =  competence.getIdPere();
             if(idComp == IdPere){
                 newList.add(competence);
             }
@@ -63,13 +63,13 @@ public class CompetenceService {
 
     public List<Competence> getTreeCompetences ()
     {
-        List<Competence> listComp = this.getAllCompetence(); ;
-        HashMap<String, Long> listCompetences = new HashMap<String, Long>();
+        List<Competence> listComp = this.getAllCompetence();
+        HashMap<String, Long> listCompetences = new HashMap<>();
 
         for (Competence competence : listComp) {
-            Long IdPere =  competence.getId_pere();
+            long IdPere =  competence.getIdPere();
             if(IdPere == 0){
-                listCompetences.put(competence.getNom_competence(), competence.getId_pere());
+                listCompetences.put(competence.getNom_competence(), competence.getIdPere());
             }
         }
 

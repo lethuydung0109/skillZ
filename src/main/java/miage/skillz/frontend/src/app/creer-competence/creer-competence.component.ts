@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Competence} from '../classes/competence';
+import {Competence} from '../models/competence';
 import {CompetenceService } from '../services/competence.service';
 import {Router} from '@angular/router';
-import {Observable} from "rxjs";
+
 
 @Component({
   selector: 'app-creer-competence',
