@@ -99,7 +99,7 @@
 
 
       <div class="form-group">
-        <label for="seuil">Seuil de validation</label>
+        <label for="seuil">Seuil de validation (%)</label>
         <input
           id="seuil"
           type="number"
@@ -109,7 +109,6 @@
           #seuil="ngModel"
           [(ngModel)]="quizz.seuil"
         />
-        <label>%</label>
 
         <!-- Validation Seuil ...
          <div class="alert-danger" *ngIf="question.errors && f.submitted">
