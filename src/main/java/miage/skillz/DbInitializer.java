@@ -1,8 +1,11 @@
 package miage.skillz;
 
 import miage.skillz.entity.ERole;
+import miage.skillz.entity.Niveau;
 import miage.skillz.entity.Role;
 import miage.skillz.entity.User;
+import miage.skillz.enumeration.ENiveau;
+import miage.skillz.repository.NiveauRepository;
 import miage.skillz.repository.RoleRepository;
 import miage.skillz.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +13,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.security.AuthProvider;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -25,6 +27,8 @@ public class DbInitializer implements CommandLineRunner {
     RoleRepository roleRepository;
     @Autowired
     PasswordEncoder encoder;
+    @Autowired
+    NiveauRepository niveauRepository;
 
 
     @Override
@@ -32,6 +36,7 @@ public class DbInitializer implements CommandLineRunner {
         System.out.println("DB initializes...");
         List<Role> roles = roleRepository.findAll();
         List<User> users = userRepository.findAll();
+        List<Niveau> niveaux = niveauRepository.findAll();
 
 
         if(roles.isEmpty()){
@@ -39,7 +44,15 @@ public class DbInitializer implements CommandLineRunner {
             roleRepository.save(new Role(ERole.ROLE_PARTICIPANT));
             roleRepository.save(new Role(ERole.ROLE_ADMIN));
             System.out.println("--- Roles initialized");
+        }
 
+
+        if(niveaux.isEmpty()){
+            niveauRepository.save(new Niveau(ENiveau.NIVEAU1));
+            niveauRepository.save(new Niveau(ENiveau.NIVEAU2));
+            niveauRepository.save(new Niveau(ENiveau.NIVEAU3));
+            niveauRepository.save(new Niveau(ENiveau.NIVEAU4));
+            System.out.println("--- Niveaux initialized");
         }
 
         if(users.isEmpty()){

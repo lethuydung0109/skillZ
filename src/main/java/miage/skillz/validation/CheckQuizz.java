@@ -10,7 +10,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 
 public @interface CheckQuizz {
-    String message() default "Invalid Quizz";
+    String message() default "Invalid Quiz";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
