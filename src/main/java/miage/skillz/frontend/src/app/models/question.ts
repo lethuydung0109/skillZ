@@ -1,6 +1,7 @@
 import { Quiz } from './quiz';
 import { ResponseQuestion } from './response-question';
-import { Competence } from './competence';
+import {Competence} from "./competence";
+
 
 export class Question {
 
