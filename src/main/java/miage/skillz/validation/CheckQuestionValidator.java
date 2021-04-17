@@ -16,7 +16,7 @@ public class CheckQuestionValidator implements ConstraintValidator<CheckQuestion
         if(null == question) return false; // question ne peut pas être vide
 
         try{
-            if(question.getName() == null) throw  new IllegalArgumentException("Un libelle doit être défini");
+            if(question.getLibelle() == null) throw  new IllegalArgumentException("Un libelle doit être défini");
             if(question.getNiveau() ==null) throw  new IllegalArgumentException("Un Niveau doit être défini");
             if(isNullOrEmpty(question.getReponsesQuestions())) throw  new IllegalArgumentException("Une reponse doit être défini");
             // au moins 2 repponses dont une bonne

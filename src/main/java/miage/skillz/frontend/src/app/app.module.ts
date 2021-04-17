@@ -24,9 +24,42 @@ import {MatTreeModule} from "@angular/material/tree";
 import {MatTableModule} from "@angular/material/table";
 
 
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatInputModule } from '@angular/material/input';
+import { QuestionsComponent } from './questions/questions.component';
+import { CreateQuestionComponent } from './create-question/create-question.component';
+import { QuizzComponent } from './quizz/quizz.component';
+import { CreateQuizzComponent } from './create-quizz/create-quizz.component';
+import { DoQuizzComponent } from './do-quizz/do-quizz.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import {ScrollingModule} from '@angular/cdk/scrolling';
+import { InfoModalComponent } from './info-modal/info-modal.component';
+import { CountdownModule } from 'ngx-countdown';
+import {MatButtonModule} from '@angular/material/button';
+
+
+
 
 @NgModule({
 declarations: [
+    AppComponent,
+    LoginComponent,
+    RegisterComponent,
+    HomeComponent,
+    ProfileComponent,
+    BoardAdminComponent,
+    BoardConcepteurComponent,
+    BoardParticipantComponent,
+    QuestionsComponent,
+    CreateQuestionComponent,
+    QuizzComponent,
+    CreateQuizzComponent,
+    DoQuizzComponent,
+    InfoModalComponent
 AppComponent,
 LoginComponent,
 RegisterComponent,
@@ -49,7 +82,24 @@ ListeCompetenceComponent,
         MatTreeModule,
         MatTableModule,
     ],
+imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCheckboxModule,
+    CountdownModule,
+    ScrollingModule,
+    MatButtonModule
+],
 providers: [authInterceptorProviders],
-bootstrap: [AppComponent]
+bootstrap: [AppComponent],
+schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
