@@ -8,10 +8,12 @@ import { ProfileComponent } from './profile/profile.component';
 import { BoardParticipantComponent } from './board-participant/board-participant.component';
 import { BoardConcepteurComponent } from './board-concepteur/board-concepteur.component';
 import { BoardAdminComponent } from './board-admin/board-admin.component';
-import { CreateQuizzComponent } from './create-quizz/create-quizz.component';
+import {CreerQuestionComponent} from './creer-question/creer-question.component';
+import {CreerQuizzComponent} from './creer-quizz/creer-quizz.component';
+import {CreerCompetenceComponent} from './creer-competence/creer-competence.component';
+import {ListeCompetenceComponent} from './liste-competence/liste-competence.component';
 import { QuizzComponent } from './quizz/quizz.component';
 import { DoQuizzComponent } from './do-quizz/do-quizz.component';
-import { CreateQuestionComponent } from './create-question/create-question.component';
 import { QuestionsComponent } from './questions/questions.component';
 
 const routes: Routes = [
@@ -22,10 +24,12 @@ const routes: Routes = [
   { path: 'participant', component: BoardParticipantComponent },
   { path: 'concepteur', component: BoardConcepteurComponent },
   { path: 'admin', component: BoardAdminComponent },
-  { path: 'createQuiz', component: CreateQuizzComponent },
+  { path: 'creer-competence', component: CreerCompetenceComponent },
+  { path: 'creer-question', component: CreerQuestionComponent },
+  { path: 'creer-quizz', component: CreerQuizzComponent },
+  { path: 'liste-competence', component: ListeCompetenceComponent },
   { path: 'quizz', component: QuizzComponent },
   { path: 'doquizz/:id', component: DoQuizzComponent },
-  { path: 'createQuestion', component: CreateQuestionComponent },
   { path: 'questions', component: QuestionsComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
