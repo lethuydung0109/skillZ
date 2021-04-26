@@ -9,7 +9,7 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./user-details.component.scss']
 })
 export class UserDetailsComponent implements OnInit {
-published? : boolean ;
+
   currentUser: User = {
     username: '',
     email: '',
