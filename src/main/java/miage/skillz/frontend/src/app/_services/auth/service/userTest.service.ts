@@ -7,7 +7,7 @@ const API_URL = 'http://localhost:8081/api/test/';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class UserTestService {
   constructor(private http: HttpClient) { }
 
   getPublicContent(): Observable<any> {

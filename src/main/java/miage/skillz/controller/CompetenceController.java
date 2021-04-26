@@ -1,8 +1,11 @@
 package miage.skillz.controller;
 
 import miage.skillz.entity.Competence;
+import miage.skillz.entity.Role;
+import miage.skillz.entity.User;
 import miage.skillz.service.CompetenceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +20,14 @@ public class CompetenceController {
 
     @Autowired
     private CompetenceService service;
+
+    //Get competence stats
+    @GetMapping(value = "/competenceStats", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getCompetenceStats(){
+        List<Competence> allCompetences = service.getAllCompetence();
+        int nbCompetences = allCompetences.size();
+        return new  ResponseEntity <Integer>(nbCompetences, HttpStatus.OK);
+    }
 
     // Créer compétence
     //@PostMapping("/all")

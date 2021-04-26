@@ -2,6 +2,7 @@ package miage.skillz.controller;
 
 import miage.skillz.entity.*;
 import miage.skillz.enumeration.ENiveau;
+import miage.skillz.payload.reponse.MessageResponse;
 import miage.skillz.payload.request.BadgeRequest;
 import miage.skillz.service.BadgeService;
 import miage.skillz.service.CompetenceService;
@@ -11,6 +12,7 @@ import miage.skillz.service.NiveauService;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 
@@ -40,7 +42,7 @@ public class BadgeController {
 
     //Create Badge
     @PostMapping(value = "/badge")
-    public void createBadge(@Valid @RequestBody BadgeRequest badgeRequest) {
+    public ResponseEntity<?> createBadge(@Valid @RequestBody BadgeRequest badgeRequest) {
         Competence competence = competenceService.getCompetenceById(Long.parseLong(badgeRequest.getCompetenceId()));
         String niveau = badgeRequest.getNiveauName();
         Niveau badgeNiveau  = new Niveau();
@@ -69,6 +71,7 @@ public class BadgeController {
         badge.setCompetence(competence);
         badge.setNiveau(badgeNiveau);
         service.createBadge(badge);
+        return ResponseEntity.ok(new MessageResponse("Badge registered successfully!"));
     }
 
     //Delete Badge

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../_services/auth/service/user.service';
+import { UserTestService } from '../_services/auth/service/userTest.service';
 
 @Component({
   selector: 'app-board-participant',
@@ -9,7 +9,7 @@ import { UserService } from '../_services/auth/service/user.service';
 export class BoardParticipantComponent implements OnInit {
   content?: string;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserTestService) { }
 
   ngOnInit(): void {
     this.userService.getParticipantBoard().subscribe(
