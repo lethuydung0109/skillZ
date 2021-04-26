@@ -1,5 +1,7 @@
 package miage.skillz.entity;
 
+import lombok.*;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -11,6 +13,11 @@ import java.util.Set;
 @Table(name = "users", uniqueConstraints = {
         @UniqueConstraint(columnNames = "username"),
         @UniqueConstraint(columnNames = "email")})
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@ToString
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,6 +47,13 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "badge_id"))
     private Set<Badge> badges = new HashSet<>();
+
+    @Builder.Default
+    @ManyToMany(fetch =  FetchType.EAGER)
+    @JoinTable(name = "user_quiz",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "quiz_id"))
+    private Set<Quiz> quizToDo = new HashSet<>();
 
     public User(){
 

@@ -14,7 +14,7 @@ export class QuestionService {
   constructor(private http : HttpClient) {
   }
 
-  public createQuestionz(question : Question) : Observable<Question>
+  public createQuestion(question : Question) : Observable<Question>
   {
     const routeQuery=this.url+"/createQuestionz";
     console.log("Question", question)
@@ -52,7 +52,7 @@ export class QuestionService {
   {
     const routeQuery=this.url+"/deleteQuestion/"+questionId;
     return this.http.delete(routeQuery);
-    
+
   }
 
   public deleteAllQuestion() : Observable<any> {
@@ -61,7 +61,7 @@ export class QuestionService {
   }
 
   public getQuestionPoids(qId : number) : Observable<number>
-  {     
+  {
     // let score : number = 0;
     // this.getQuestion(qId).subscribe(data => {
     //   console.log("data : ", data)

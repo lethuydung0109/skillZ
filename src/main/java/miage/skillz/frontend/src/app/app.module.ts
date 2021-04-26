@@ -26,10 +26,10 @@ import { QuizzComponent } from './quizz/quizz.component';
 import { CreateQuizzComponent } from './create-quizz/create-quizz.component';
 import { DoQuizzComponent } from './do-quizz/do-quizz.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import {ScrollingModule} from '@angular/cdk/scrolling';
+import { ScrollingModule} from '@angular/cdk/scrolling';
 import { InfoModalComponent } from './info-modal/info-modal.component';
 import { CountdownModule } from 'ngx-countdown';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule} from '@angular/material/button';
 
 
 

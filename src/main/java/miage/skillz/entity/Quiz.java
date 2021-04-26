@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,9 +29,16 @@ public class Quiz {
     /*@Enumerated(EnumType.STRING)
     @Column(length = 20)*/
     private String niveau;
+
+    /*@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="id_niveau")
+    private Niveau niveau;*/
+
     private String theme;
     private Long pourcentageValidation;
     private long duree;
+    @Builder.Default
+    private String dateOfCreation = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
 
     @JsonIgnore
     @Builder.Default
@@ -45,6 +54,11 @@ public class Quiz {
             joinColumns = @JoinColumn(name = "idQuiz"),
             inverseJoinColumns = @JoinColumn(name = "idCompetence"))
     private Set<Competence> quizCompetences = new HashSet<>();
+
+    @Builder.Default
+    @JsonIgnore
+    @ManyToMany(mappedBy = "quizToDo",fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    private Set<User> users = new HashSet<>();
 
     public Quiz(String name, String niveau, String theme, Long pourcentageValidation, long duree) {
         this.name = name;

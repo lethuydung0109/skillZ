@@ -155,4 +155,9 @@ public class UserController {
         }
         return new  ResponseEntity <Set <User> >(listUsers, HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/findById", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public User findById(Long userID) {
+        return service.findById(userID);
+    }
 }

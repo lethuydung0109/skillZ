@@ -4,11 +4,15 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import miage.skillz.entity.Question;
 import miage.skillz.entity.Quiz;
+import miage.skillz.entity.User;
 import miage.skillz.models.QuizImpl;
+import miage.skillz.security.services.UserDetailsImpl;
 import miage.skillz.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,13 +25,18 @@ public class QuizController {
 
     @Autowired
     private QuizService quizService;
+    @Autowired
+    private UserController userController;
 
     @PostMapping(value = "/createQuiz", consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation("Create Quiz")
     @ApiResponse(code=200, message = "Quiz created",response= MultipartFile.class)
     public ResponseEntity<Quiz> createQuiz(@RequestBody QuizImpl quizImpl)
     {
-        return  quizService.createQuiz(quizImpl);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        User currentUser = this.userController.findById(userDetails.getId());
+        return  quizService.createQuiz(quizImpl,currentUser);
     }
 
     @PutMapping(value = "/updateQuiz",consumes = "application/json",produces = "application/json")
@@ -46,6 +55,16 @@ public class QuizController {
     public Set<Quiz> getAllQuiz()
     {
         return  quizService.getAllQuiz();
+    }
+
+    @GetMapping(value = "/user/quizz", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Set<Quiz> getAllQuizByUser()
+    {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        User currentUser = this.userController.findById(userDetails.getId());
+
+        return quizService.getAllQuizByUser(currentUser);
     }
 
     @GetMapping(value = "/getQuizQuestions/{quizId}", produces = MediaType.APPLICATION_JSON_VALUE)
