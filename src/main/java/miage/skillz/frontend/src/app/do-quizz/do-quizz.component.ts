@@ -41,14 +41,14 @@ export class DoQuizzComponent implements OnInit {
   ngOnInit(): void {
 
     this.quizTime=10;
-
-    this.quizService.getQuiz(26).subscribe(data => {
+    console.log("quizId : ", this.quizId);
+    this.quizService.getQuiz(this.quizId).subscribe(data => {
       console.log("quiz data : ", data)
       this.currentQuiz=data;
       this.quizTime=data.duree;
     })
 
-    this.quizService.getQuizQuestions(26).subscribe(data => {
+    this.quizService.getQuizQuestions(this.quizId).subscribe(data => {
         console.log(" data questionsQuiz ", data);
         this.questions=data;
     })
@@ -123,7 +123,7 @@ export class DoQuizzComponent implements OnInit {
   public openValidationModal(message:string) : void {
     const modalRef = this.modalService.open(InfoModalComponent);
     modalRef.componentInstance.message = message;
-    modalRef.componentInstance.url = "/quizz";
+    modalRef.componentInstance.url = "/doquizz/"+this.quizId;
   }
 
 }

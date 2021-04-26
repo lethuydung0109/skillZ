@@ -23,6 +23,8 @@ public class QuizImpl {
     private Set<Long> quizQuestions = new HashSet<>();
     @Builder.Default
     private Set<Long> quizCompetences = new HashSet<>();
+    @Builder.Default
+    private Set<Long> users = new HashSet<>();
 
     public QuizImpl(String name, String niveau, String theme, Long pourcentageValidation, long duree) {
         this.name = name;

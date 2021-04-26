@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import miage.skillz.entity.Competence;
 import miage.skillz.entity.Question;
 import miage.skillz.entity.Quiz;
+import miage.skillz.entity.User;
 import miage.skillz.models.QuizImpl;
 import miage.skillz.repository.CompetenceRepository;
 import miage.skillz.repository.QuestionRepository;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -27,7 +29,7 @@ public class QuizService {
     @Autowired
     private CompetenceRepository competenceRepository;
 
-    public ResponseEntity<Quiz> createQuiz(QuizImpl quizImpl)
+    public ResponseEntity<Quiz> createQuiz(QuizImpl quizImpl,User currentUser)
     {
         System.out.println("Received quiz : "+ quizImpl.toString());
 
@@ -35,6 +37,7 @@ public class QuizService {
                             quizImpl.getPourcentageValidation(), quizImpl.getDuree());
         quiz.setQuizQuestions(new HashSet<>());
         quiz.setQuizCompetences(new HashSet<>());
+        quiz.setUsers(new HashSet<>());
 
         //Association question-quiz
         Set<Question> questions = new HashSet<>();
@@ -54,6 +57,9 @@ public class QuizService {
         createdQuiz.getQuizCompetences().addAll(competences);
 
         System.out.println("created quiz : "+ createdQuiz.toString());
+
+        currentUser.getQuizToDo().add(createdQuiz);
+        createdQuiz.getUsers().add(currentUser);
 
         return  new ResponseEntity<>(this.quizRepository.saveAndFlush(createdQuiz), HttpStatus.OK);
     }
@@ -133,6 +139,11 @@ public class QuizService {
 
     public Set<Quiz> getAllQuiz() {
         return new HashSet<>(this.quizRepository.findAll());
+    }
+
+    public Set<Quiz> getAllQuizByUser(User currentUser) {
+
+        return quizRepository.findAll().stream().filter(quiz -> quiz.getUsers().contains(currentUser)).collect(Collectors.toSet());
     }
 
     public Set<Question> getQuizQuestions(Long quizId) {
