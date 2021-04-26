@@ -75,6 +75,12 @@ public class UserController {
         return new  ResponseEntity <StatsUserResponse >(new StatsUserResponse(nbUtilisateurs, nbParticipants, nbConcepteurs), HttpStatus.OK);
     }
 
+    @GetMapping(value = "/user", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getAllUsers(){
+        List<User> allUsers = service.findAll();
+        return new  ResponseEntity <List <User> >(allUsers, HttpStatus.OK);
+    }
+
     @GetMapping(value = "/user/participant", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getAllParticipants(){
         List<User> allUsers = service.findAll();

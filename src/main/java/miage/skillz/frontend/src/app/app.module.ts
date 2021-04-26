@@ -37,6 +37,9 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
 import { InfoModalComponent } from './info-modal/info-modal.component';
 import { CountdownModule } from 'ngx-countdown';
 import {MatButtonModule} from '@angular/material/button';
+import { CreateUserComponent } from './create-user/create-user.component';
+import { UserListComponent } from './user-list/user-list.component';
+import { UserDetailsComponent } from './user-details/user-details.component';
 
 
 
@@ -58,7 +61,10 @@ declarations: [
     CreerCompetenceComponent,
     CreerQuestionComponent,
     CreerQuizzComponent,
-    ListeCompetenceComponent
+    ListeCompetenceComponent,
+    CreateUserComponent,
+    UserListComponent,
+    UserDetailsComponent
 ],
     imports: [
         BrowserModule,

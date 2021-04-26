@@ -51,7 +51,6 @@ public class BadgeController {
                 badgeNiveau = niveauService.findByName(ENiveau.NIVEAU1)
                         .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
 
-
                 break;
             case "PreIntermediaire":
                 badgeNiveau = niveauService.findByName(ENiveau.NIVEAU2)

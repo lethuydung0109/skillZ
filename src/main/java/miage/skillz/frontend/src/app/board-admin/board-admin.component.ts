@@ -10,7 +10,7 @@ import { UserService } from '../services/user.service';
 })
 export class BoardAdminComponent implements OnInit {
   content?: string;
-  nbUtilisateurs = 0;
+  nbusers = 0;
   nbParticipants = 0;
   nbConcepteurs = 0;
   nbCompetences = 0;
@@ -22,11 +22,11 @@ export class BoardAdminComponent implements OnInit {
     this.userService.getStatsUser().subscribe(
       data => {
         var jsonData = JSON.parse(data);
-        this.nbUtilisateurs = jsonData.nbUtilisateur;
+        this.nbusers = jsonData.nbUtilisateur;
         this.nbParticipants = jsonData.nbParticipants;
         this.nbConcepteurs = jsonData.nbConcepteurs;
         console.log(data);
-        console.log("nbUtilisateur = " +  this.nbUtilisateurs);
+        console.log("nbuser = " +  this.nbusers);
       },
       err => {
         this.content = JSON.parse(err.error).message;
