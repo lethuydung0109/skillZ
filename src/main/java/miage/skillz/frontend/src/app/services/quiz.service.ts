@@ -1,9 +1,17 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Quiz } from '../models/quiz';
 import { Question } from '../models/question';
 import { Observable } from 'rxjs';
+
+const API_URL = 'http://localhost:8081/api/';
+const httpOptions = {
+  headers: new HttpHeaders(
+    {
+      'Content-Type': 'application/json'
+    })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +20,14 @@ export class QuizService {
 
   public url =environment.api_url;
   constructor(private http : HttpClient) {
+  }
+
+  saveQuizz(quizz: Quiz) : Observable<Quiz>{
+
+    return this.http.post<Quiz>( API_URL + 'createQuiz/', {
+      name: quizz.name,
+    }, httpOptions);
+
   }
 
   public createQuizz(quiz : Quiz) : Observable<Quiz>
@@ -56,14 +72,14 @@ export class QuizService {
 
   public deleteQuestionFromQuizz()
   {
-    
+
   }
 
   public deleteQuizz(quizId : number) : Observable<any>
   {
     const routeQuery=this.url+"/deleteQuiz/"+quizId;
     return this.http.delete(routeQuery);
-    
+
   }
 
   public deleteAllQuizz() : Observable<any> {

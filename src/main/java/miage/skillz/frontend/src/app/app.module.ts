@@ -3,6 +3,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -14,16 +15,22 @@ import { BoardConcepteurComponent } from './board-concepteur/board-concepteur.co
 import { BoardParticipantComponent } from './board-participant/board-participant.component';
 
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
+import { CreerCompetenceComponent } from './creer-competence/creer-competence.component';
+import { CreerQuestionComponent } from './creer-question/creer-question.component';
+import { CreerQuizzComponent } from './creer-quizz/creer-quizz.component';
+import { ListeCompetenceComponent } from './liste-competence/liste-competence.component';
+import {MatIconModule} from '@angular/material/icon';
+import {MatTreeModule} from "@angular/material/tree";
+import {MatTableModule} from "@angular/material/table";
+
+
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { QuestionsComponent } from './questions/questions.component';
-import { CreateQuestionComponent } from './create-question/create-question.component';
 import { QuizzComponent } from './quizz/quizz.component';
-import { CreateQuizzComponent } from './create-quizz/create-quizz.component';
 import { DoQuizzComponent } from './do-quizz/do-quizz.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ScrollingModule} from '@angular/cdk/scrolling';
@@ -45,27 +52,31 @@ declarations: [
     BoardConcepteurComponent,
     BoardParticipantComponent,
     QuestionsComponent,
-    CreateQuestionComponent,
     QuizzComponent,
-    CreateQuizzComponent,
     DoQuizzComponent,
-    InfoModalComponent
+    InfoModalComponent,
+    CreerCompetenceComponent,
+    CreerQuestionComponent,
+    CreerQuizzComponent,
+    ListeCompetenceComponent
 ],
-imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatTableModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatCheckboxModule,
-    CountdownModule,
-    ScrollingModule,
-    MatButtonModule
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        HttpClientModule,
+        MatIconModule,
+        MatTreeModule,
+        MatTableModule,
+        BrowserAnimationsModule,
+        MatPaginatorModule,
+        MatSortModule,
+       MatFormFieldModule,
+       MatInputModule,
+       MatCheckboxModule,
+       CountdownModule,
+        ScrollingModule,
+      MatButtonModule
 ],
 providers: [authInterceptorProviders],
 bootstrap: [AppComponent],

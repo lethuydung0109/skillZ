@@ -1,9 +1,18 @@
 import { Injectable } from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Question } from '../models/question';
 import { ResponseQuestion } from '../models/response-question';
+
+const API_URL = 'http://localhost:8081/api/';
+const httpOptions = {
+  headers: new HttpHeaders(
+    {
+      'Content-Type': 'application/json'
+    })
+};
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +20,23 @@ import { ResponseQuestion } from '../models/response-question';
 export class QuestionService {
 
   public url =environment.api_url;
-  constructor(private http : HttpClient) {
+
+  constructor(private http: HttpClient) { }
+
+
+  public saveQuestion(question: Question): Observable<Question> {
+
+    return this.http.post<Question>( API_URL + 'createQuestion/', {
+      libelle: question.libelle,
+      niveau: question.niveau,
+    }, httpOptions);
+
   }
+
 
   public createQuestion(question : Question) : Observable<Question>
   {
-    const routeQuery=this.url+"/createQuestionz";
+    const routeQuery=this.url+"/createQuestion";
     console.log("Question", question)
 
     return this.http.post<Question>(routeQuery,Question);
@@ -70,4 +90,5 @@ export class QuestionService {
     const routeQuery=this.url+"/getQuestionPoids/"+qId;
     return this.http.get<number>(routeQuery);
   }
+
 }
