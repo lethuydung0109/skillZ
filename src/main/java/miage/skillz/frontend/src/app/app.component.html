@@ -2,17 +2,20 @@
   <nav class="navbar navbar-expand navbar-dark bg-dark">
     <a href="#" class="navbar-brand">SkillZ</a>
     <ul class="navbar-nav mr-auto" routerLinkActive="active">
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="!isLoggedIn">
         <a href="/home" class="nav-link" routerLink="home">Home </a>
       </li>
-      <li class="nav-item" *ngIf="showAdminBoard">
-        <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
+      <li class="nav-item" *ngIf="isAdmin">
+        <a href="/admin" class="nav-link"  routerLink="admin">Accueil</a>
+      </li>
+      <li class="nav-item" *ngIf="isAdmin">
+        <a href="/listUser" class="nav-link"  routerLink="users">Utilisateur</a>
       </li>
       <li class="nav-item" *ngIf="showModeratorBoard">
-        <a href="/mod" class="nav-link" routerLink="concepteur">Concepteur Board</a>
+        <a href="/concepteur" class="nav-link" routerLink="concepteur">Accueil</a>
       </li>
       <li class="nav-item">
-        <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="participant">Participant</a>
+        <a href="/participant" class="nav-link" *ngIf="isParticipant" routerLink="participant">Accueil</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLinkActive="active" routerLink="/quizz">Quiz</a>
