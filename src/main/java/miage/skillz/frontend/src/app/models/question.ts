@@ -14,6 +14,11 @@ export class Question {
     listQuizz : Array<Quiz>;
     reponsesQuestions : Array<ResponseQuestion> = [];
     stringCompetence : string;
+    qst: string;
+
+   // à modifier
+    competence: string;
+
 
 
     constructor()
@@ -27,5 +32,9 @@ export class Question {
         this.listQuizz =[];
         this.reponsesQuestions =[];
         this.stringCompetence='';
+        this.qst='';
+
+        // à modifier
+        this.competence='';
     }
 }
