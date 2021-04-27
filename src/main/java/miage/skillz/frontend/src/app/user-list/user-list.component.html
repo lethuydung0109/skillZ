@@ -1,0 +1,63 @@
+<div class="list row">
+    <div class="col-md-8">
+      <div class="input-group mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Rechercher par username"
+          [(ngModel)]="username"
+        />
+        <div class="input-group-append">
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            (click)="searchUsername()"
+          >
+            Rechercher
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h4>Liste d'utilisateurs</h4>
+      <ul class="list-group">
+        <li
+          class="list-group-item"
+          *ngFor="let user of users; let i = index"
+          [class.active]="i == currentIndex"
+          (click)="setActiveUser(user, i)"
+        >
+          {{ user.username }}
+        </li>
+      </ul>
+  
+      <button class="m-3 btn btn-sm btn-danger" (click)="removeAllUsers()">
+        Sumprimer tous
+      </button>
+    </div>
+    <div class="col-md-6">
+      <div *ngIf="currentUser">
+        <h6>Utilisateur</h6>
+        <div>
+          <label><strong>Username:</strong></label> {{ currentUser.username }}
+        </div>
+        <div>
+          <label><strong>Email:</strong></label>
+          {{ currentUser.email }}
+        </div>
+        <div>
+          <label><strong>Role</strong></label>
+          {{ currentUser.email }}
+        </div>
+  
+        <a class="badge badge-warning" routerLink="/users/{{ currentUser.id }}">
+          Modifier
+        </a>
+      </div>
+  
+      <div *ngIf="!currentUser">
+        <br />
+        <p>Choisissez un utilisateur...</p>
+      </div>
+    </div>
+  </div>

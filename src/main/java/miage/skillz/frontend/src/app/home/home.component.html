@@ -1,5 +1,29 @@
 <div class="container">
   <header class="jumbotron">
-    <p>{{ content }}</p>
+
+    <p>{{content}}</p>
+
+    <div class="submit-form">
+      <div *ngIf="isAdmin">
+        <div class="form-group">
+          <label for="title">Content</label>
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            required
+            [(ngModel)]="editContent"
+            name="title"
+          />
+        </div>
+  
+        <button (click)="savePublicContent()" class="btn btn-success">Submit</button>
+      </div>
+  
+      <div *ngIf="submitted">
+        <h4>Content edited!</h4>
+        <!-- <button class="btn btn-success" (click)="newTutorial()">Add</button> -->
+      </div>
+    </div>
   </header>
 </div>

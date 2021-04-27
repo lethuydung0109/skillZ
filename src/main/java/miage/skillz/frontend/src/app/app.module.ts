@@ -33,10 +33,13 @@ import { QuestionsComponent } from './questions/questions.component';
 import { QuizzComponent } from './quizz/quizz.component';
 import { DoQuizzComponent } from './do-quizz/do-quizz.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { ScrollingModule} from '@angular/cdk/scrolling';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 import { InfoModalComponent } from './info-modal/info-modal.component';
 import { CountdownModule } from 'ngx-countdown';
-import { MatButtonModule} from '@angular/material/button';
+import {MatButtonModule} from '@angular/material/button';
+import { CreateUserComponent } from './create-user/create-user.component';
+import { UserListComponent } from './user-list/user-list.component';
+import { UserDetailsComponent } from './user-details/user-details.component';
 
 
 
@@ -58,7 +61,10 @@ declarations: [
     CreerCompetenceComponent,
     CreerQuestionComponent,
     CreerQuizzComponent,
-    ListeCompetenceComponent
+    ListeCompetenceComponent,
+    CreateUserComponent,
+    UserListComponent,
+    UserDetailsComponent
 ],
     imports: [
         BrowserModule,

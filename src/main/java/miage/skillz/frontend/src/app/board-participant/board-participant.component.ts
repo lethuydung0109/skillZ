@@ -1,3 +1,5 @@
+import { Component, OnInit } from '@angular/core';
+import { UserTestService } from '../_services/auth/service/userTest.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../_services/auth/service/user.service';
 import { Quiz } from '../models/quiz';
@@ -15,6 +17,7 @@ import { QuizResult } from '../models/quiz-result';
 export class BoardParticipantComponent implements OnInit {
   content?: string;
 
+  constructor(private userService: UserTestService) { }
   public userResults : Array<QuizResult> =[];
   displayedColumns: string[] = ['nomQuiz','result','score', 'date'];
 
@@ -40,7 +43,7 @@ export class BoardParticipantComponent implements OnInit {
 
     //A remplacer par todoquizz
     /*this.quizService.getAllQuiz().subscribe(data => {
-      data.forEach(q => {  
+      data.forEach(q => {
         this.userResults.push(q);
         console.log("userResults ", this.userResults);
       })
@@ -52,9 +55,9 @@ export class BoardParticipantComponent implements OnInit {
     quizResult.result=true;
     quizResult.score= 80;
     quizResult.date=new Date();
-    
+
     this.userResults.push(quizResult);
-   
+
     this.dataSource = new MatTableDataSource(this.userResults);
     console.log("quiz : ",this.userResults);
 

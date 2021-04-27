@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import {Competence} from '../models/competence';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import { environment } from 'src/environments/environment';
 
-const API_URL = 'http://localhost:8081/api/';
+const API_URL = environment.api_url + '/';
+
 const httpOptions = {
   headers: new HttpHeaders(
     {
@@ -43,5 +45,11 @@ export class CompetenceService {
 
   getCompetenceById(id_pere: number) : Observable<Competence> {
     return this.http.get<Competence>(API_URL  + 'competenceById/'+id_pere,httpOptions);
+
+
+}
+
+  getStatsCompetence(): Observable<any> {
+    return this.http.get(API_URL + 'competenceStats', { responseType: 'text' });
   }
 }

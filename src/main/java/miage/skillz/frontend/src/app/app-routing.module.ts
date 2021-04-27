@@ -15,6 +15,11 @@ import {ListeCompetenceComponent} from './liste-competence/liste-competence.comp
 import { QuizzComponent } from './quizz/quizz.component';
 import { DoQuizzComponent } from './do-quizz/do-quizz.component';
 import { QuestionsComponent } from './questions/questions.component';
+import { UserListComponent } from './user-list/user-list.component';
+import { CreateUserComponent } from './create-user/create-user.component';
+import { UserDetailsComponent } from './user-details/user-details.component';
+
+
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -31,6 +36,9 @@ const routes: Routes = [
   { path: 'quizz', component: QuizzComponent },
   { path: 'doquizz/:id', component: DoQuizzComponent },
   { path: 'questions', component: QuestionsComponent },
+  { path: 'users', component: UserListComponent },
+  { path: 'createUser', component: CreateUserComponent },
+  { path: 'user/:id', component: UserDetailsComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
