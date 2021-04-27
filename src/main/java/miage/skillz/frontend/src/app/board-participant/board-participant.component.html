@@ -12,34 +12,25 @@
     <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource"  matSort>
 
-            <ng-container matColumnDef="num">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> N° </th>
-                <td mat-cell *matCellDef="let row; let i = index;"><a [routerLink]="['/doquizz/', row.idQuiz]"> {{i+1}} </a></td>
+            <ng-container matColumnDef="nomQuiz">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom Quiz</th>
+                <td mat-cell *matCellDef="let row"> {{row.nomQuiz}}   </td>
             </ng-container>
 
-            <ng-container matColumnDef="theme">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Theme </th>
-                <td mat-cell *matCellDef="let row"> {{row.theme}}</td>
+            <ng-container matColumnDef="result">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Resultat </th>
+                <td mat-cell *matCellDef="let row"
+                [ngClass]="{'success' : row.result ==true, 'failed' : row.result== false }"> {{row.result}} </td>
             </ng-container>
 
-            <ng-container matColumnDef="nom">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom </th>
-                <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+            <ng-container matColumnDef="score">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Score </th>
+              <td mat-cell *matCellDef="let row"> {{row.score}} </td>
             </ng-container>
 
-            <ng-container matColumnDef="niveau">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Niveau </th>
-                <td mat-cell *matCellDef="let row"> {{row.niveau}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="competence">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Competence(s) </th>
-                <td mat-cell *matCellDef="let row"> {{row.stringCompetence}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="duree">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Duree </th>
-                <td mat-cell *matCellDef="let row"> {{row.duree}} </td>
+            <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+                <td mat-cell *matCellDef="let row"> {{row.date}} </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

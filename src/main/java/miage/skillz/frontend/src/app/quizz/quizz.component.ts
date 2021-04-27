@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Competence } from '../models/competence';
+import { TokenStorageService } from '../_services/auth/service/token-storage.service';
 
 @Component({
   selector: 'app-quizz',
@@ -16,6 +17,10 @@ import { Competence } from '../models/competence';
 export class QuizzComponent implements OnInit,AfterViewInit  {
 
   public listQuiz : Array<Quiz> =[];
+  private roles: string[] = [];
+  isLoggedIn = false;
+  showModeratorBoard = false;
+
   displayedColumns: string[] = ['num','theme','nom', 'niveau', 'competence','duree'];
 
   dataSource!: MatTableDataSource<Quiz>;
@@ -23,11 +28,20 @@ export class QuizzComponent implements OnInit,AfterViewInit  {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private actRoute: ActivatedRoute, private quizService : QuizService, private http : HttpClient, private router : Router) {
+  constructor(private quizService : QuizService,private tokenStorageService: TokenStorageService) {
     this.dataSource = new MatTableDataSource(this.listQuiz);
-   }
+  }
 
   ngOnInit(): void {
+
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+
+    if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
+      this.showModeratorBoard = this.roles.includes('ROLE_CONCEPTEUR');
+    }
+
     let listQuiz : Array<Quiz> =[];
     this.quizService.getAllQuiz().subscribe(data => {
       data.forEach(q => {  
@@ -37,11 +51,10 @@ export class QuizzComponent implements OnInit,AfterViewInit  {
       })
       this.dataSource = new MatTableDataSource(this.listQuiz);
     });
+
     this.listQuiz=listQuiz;
     console.log("quiz : ",this.listQuiz);
-
     console.log("datasource : ", this.dataSource.data);
-
   }
 
   ngAfterViewInit() {

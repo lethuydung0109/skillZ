@@ -21,7 +21,7 @@ export class DoQuizzComponent implements OnInit {
   quizId : number;
   currentQuiz :  Quiz;
   questions : Array<Question> =[];
-  selectedResponse : Array<ResponseQuestion>=[];
+  correctResponsesSelected : Array<ResponseQuestion>=[];
   isStart : boolean;
   userResponse: Map<number,Array<ResponseQuestion>> =new Map();
   quizScore : number;
@@ -61,7 +61,7 @@ export class DoQuizzComponent implements OnInit {
 
   isResponseChecked(response : ResponseQuestion, qId : number)
   {
-    //console.log("response ",response," qId : ", qId);
+    //création de la liste des réponses sélectionnées par le user pour chaque question
     if(response.isSelected)
     {
       if(this.userResponse.has(qId)) this.userResponse.get(qId)?.push(response)    
@@ -73,39 +73,40 @@ export class DoQuizzComponent implements OnInit {
 
   validQuizResponse(){
     
-    //Pour chaque question du quiz
-    for (let entry of this.userResponse.entries()) {
-      //console.log(" row : ",entry[0], entry[1]);   
-    
+   
+    let tab : Array<any> =[];
+    let poidsTotal:number=0;
+    //Pour chaque question 
+    for (let entry of this.userResponse.entries()) {    
       //Vérifier que les questions sélectionnées sont les bonnes réponses
-      this.questionService.getQuestionCorrectResponse(entry[0]).subscribe(data =>
-      {       
-        entry[1].forEach(selectedResponse  => {
-          data.forEach( correctResponse =>
-          {
-            if(selectedResponse.idReponse == correctResponse.idReponse) 
-            {
-              this.selectedResponse.push(selectedResponse); 
+      this.questionService.getQuestionCorrectResponse(entry[0]).subscribe(data => {   // on récupère la liste des réponses correctes de la question           
+        entry[1].forEach(selectedResponse  => { // on parcourt la liste des réponses sélectionnées pour la question
+          data.forEach( correctResponse => { // on parcourt la liste des réponses correctes de la question
+            if(selectedResponse.idReponse == correctResponse.idReponse)  {
+              //tab.push(selectedResponse);
+              this.correctResponsesSelected.push(selectedResponse); 
             }
           })
         });
         
-        //console.log("valid reponses",this.selectedResponse)
-        // //Calculer le score du quiz
-        if(this.selectedResponse.length !=0) {
-          let poidsTotal=0;
+        //this.correctResponsesSelected=tab; // liste des réponses sélectionnées et correctes pour la question
+        //console.log(" this.correctResponsesSelected ", this.correctResponsesSelected)
+       
+        //Calculer le score du user pour le quiz
+        if(this.correctResponsesSelected.length == data.length) {
           this.questionService.getQuestionPoids(entry[0]).subscribe(poids => {            
-            poidsTotal=poidsTotal+poids;     
-            console.log("poids : ", poidsTotal)          
-          });   
-          this.saveScore(poidsTotal);                  
-        }
+            poidsTotal+=poids;     
+            console.log("qS : ", poidsTotal);           
+          });           
+          //this.saveScore(poidsTotal);                  
+        }   
+        this.quizScore=poidsTotal;      
       });      
     }
 
-    if(this.quizScore>=this.currentQuiz.pourcentageValidation) 
-      this.openValidationModal("Félicitaions !Vous avez réussi le test avec un score de : "+this.quizScore);
-    else this.openValidationModal("Dommage ! Vous avez raté le test. Votre score est de "+this.quizScore);
+    if(this.quizScore >= this.currentQuiz.pourcentageValidation) 
+      this.openValidationModal("Félicitaions !Vous avez réussi le test avec un score de : "+poidsTotal);
+    else this.openValidationModal("Dommage ! Vous avez raté le test. Votre score est de "+poidsTotal);
   }
 
   endQuiz(e: CountdownEvent) {
@@ -123,7 +124,7 @@ export class DoQuizzComponent implements OnInit {
   public openValidationModal(message:string) : void {
     const modalRef = this.modalService.open(InfoModalComponent);
     modalRef.componentInstance.message = message;
-    modalRef.componentInstance.url = "/doquizz/"+this.quizId;
+    modalRef.componentInstance.url = "/user";
   }
 
 }
