@@ -5,7 +5,7 @@ import { Quiz } from '../models/quiz';
 import { Question } from '../models/question';
 import { Observable } from 'rxjs';
 
-const API_URL = 'http://localhost:8081/api/';
+const API_URL = environment.api_url + '/';
 const httpOptions = {
   headers: new HttpHeaders(
     {

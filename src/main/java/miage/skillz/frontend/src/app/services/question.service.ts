@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { Question } from '../models/question';
 import { ResponseQuestion } from '../models/response-question';
 
-const API_URL = 'http://localhost:8081/api/';
+const API_URL = environment.api_url +'/';
 const httpOptions = {
   headers: new HttpHeaders(
     {
