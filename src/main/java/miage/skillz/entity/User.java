@@ -1,5 +1,6 @@
 package miage.skillz.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -48,20 +49,28 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "badge_id"))
     private Set<Badge> badges = new HashSet<>();
 
-    @Builder.Default
-    @ManyToMany(fetch =  FetchType.EAGER)
-    @JoinTable(name = "user_quiz",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "quiz_id"))
-    private Set<Quiz> quizToDo = new HashSet<>();
+//    @Builder.Default
+//    @OneToMany(fetch =  FetchType.EAGER)
+//    @JoinTable(name = "user_quiz",
+//            joinColumns = @JoinColumn(name = "user_id"),
+//            inverseJoinColumns = @JoinColumn(name = "quiz_id"))
+//    private Set<Quiz> myCreatedQuiz = new HashSet<>();
+
+    @JsonIgnore
+    @OneToMany( cascade = CascadeType.ALL, mappedBy = "user")
+    Set<Quiz> myCreatedQuiz = new HashSet<>();
+
+    @JsonIgnore
+    @OneToMany( cascade = CascadeType.ALL, mappedBy = "user")
+    Set<Question> myCreatedQuestion = new HashSet<>();
 
     //List of recommendations for others
     @OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="writer")
-    Set<Recommendation> recommendationsForOthers = new HashSet<Recommendation>();
+    Set<Recommendation> recommendationsForOthers = new HashSet<>();
 
     //List of recommendations written by orthers
     @OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="receiver")
-    Set<Recommendation> recommendationsByOthers = new HashSet<Recommendation>();
+    Set<Recommendation> recommendationsByOthers = new HashSet<>();
 
     public User(){
 

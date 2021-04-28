@@ -15,16 +15,16 @@
             <div class="col-md-8"> {{currentQuiz.name}} </div>
         </div>
         <div class="row">
-            <div class="col-md-4"> Compétence (s) </div>
-            <div class="col-md-8"> Modelisation, UML </div>
+            <div class="col-md-4"> Compétence </div>
+            <div class="col-md-8"> {{currentQuiz.quizCompetence.nom_competence}}</div>
         </div>
         <div class="row">
             <div class="col-md-4"> Niveau </div>
-            <div class="col-md-8"> {{currentQuiz.niveau}} </div>
+            <div class="col-md-8"> {{currentQuiz.niveauName}} </div>
         </div>
         <div class="row">
             <div class="col-md-4"> Pourcentage de validation </div>
-            <div class="col-md-8"> {{currentQuiz.pourcentageValidation}} </div>
+            <div class="col-md-8"> {{currentQuiz.seuilValidation}} </div>
         </div>
         <div class="row">
             <div class="col-md-4"> Duree </div>
@@ -48,6 +48,6 @@
                 </li>
             </ul>
         </div>
-        <button mat-raised-button (click)="validQuizResponse()"> Terminer </button>
+        <button mat-raised-button (click)="endQuizBeforeEndTime(chrono)"> Terminer </button>
     </ng-container>
 </div>

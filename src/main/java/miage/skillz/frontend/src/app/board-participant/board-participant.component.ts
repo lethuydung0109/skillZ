@@ -1,13 +1,9 @@
-import { Component, OnInit } from '@angular/core';
 import { UserTestService } from '../_services/auth/service/userTest.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UserService } from '../_services/auth/service/user.service';
-import { Quiz } from '../models/quiz';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { QuizService } from '../services/quiz.service';
-import { QuizResult } from '../models/quiz-result';
 
 @Component({
   selector: 'app-board-participant',
@@ -17,16 +13,16 @@ import { QuizResult } from '../models/quiz-result';
 export class BoardParticipantComponent implements OnInit {
   content?: string;
 
-  constructor(private userService: UserTestService) { }
-  public userResults : Array<QuizResult> =[];
+ 
+  public userResults : Array<any> =[];
   displayedColumns: string[] = ['nomQuiz','result','score', 'date'];
 
-  dataSource!: MatTableDataSource<QuizResult>;
+  dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private userService: UserService,private quizService : QuizService) {
+  constructor(private userService: UserTestService,private quizService : QuizService) {
     this.dataSource = new MatTableDataSource(this.userResults);
 
   }
@@ -41,7 +37,7 @@ export class BoardParticipantComponent implements OnInit {
       }
     );
 
-    //A remplacer par todoquizz
+    //A remplacer par todoquiz
     /*this.quizService.getAllQuiz().subscribe(data => {
       data.forEach(q => {
         this.userResults.push(q);
@@ -50,16 +46,12 @@ export class BoardParticipantComponent implements OnInit {
       this.dataSource = new MatTableDataSource(this.userResults);
     });*/
 
-    let quizResult : QuizResult = new QuizResult();
-    quizResult.nomQuiz="Les bases en Java";
-    quizResult.result=true;
-    quizResult.score= 80;
-    quizResult.date=new Date();
+  
 
-    this.userResults.push(quizResult);
+    //this.userResults.push(quizResult);
 
-    this.dataSource = new MatTableDataSource(this.userResults);
-    console.log("quiz : ",this.userResults);
+    //this.dataSource = new MatTableDataSource(this.userResults);
+    //console.log("quiz : ",this.userResults);
 
   }
 

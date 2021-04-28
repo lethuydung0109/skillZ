@@ -64,7 +64,7 @@ public class QuizController {
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         User currentUser = this.userController.findById(userDetails.getId());
 
-        return quizService.getAllQuizByUser(currentUser);
+        return quizService.getAllQuizByUser(currentUser.getId());
     }
 
     @GetMapping(value = "/getQuizQuestions/{quizId}", produces = MediaType.APPLICATION_JSON_VALUE)

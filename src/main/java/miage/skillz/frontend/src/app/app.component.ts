@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
   isLoggedIn = false;
   isAdmin = false;
   isParticipant = false;
-  showModeratorBoard = false;
+  isConcepteur = false;
   username?: string;
 
   constructor(private tokenStorageService: TokenStorageService) { }
@@ -22,10 +22,11 @@ export class AppComponent implements OnInit {
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
+      console.log(user)
 
       this.isAdmin = this.roles.includes('ROLE_ADMIN');
       this.isParticipant = this.roles.includes('ROLE_PARTICIPANT');
-      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+      this.isConcepteur = this.roles.includes('ROLE_CONCEPTEUR');
 
       this.username = user.username;
     }

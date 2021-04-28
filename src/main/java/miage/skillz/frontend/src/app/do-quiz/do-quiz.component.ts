@@ -12,11 +12,11 @@ import { CountdownComponent, CountdownEvent } from 'ngx-countdown';
 
 
 @Component({
-  selector: 'app-do-quizz',
-  templateUrl: './do-quizz.component.html',
-  styleUrls: ['./do-quizz.component.scss']
+  selector: 'app-do-quiz',
+  templateUrl: './do-quiz.component.html',
+  styleUrls: ['./do-quiz.component.scss']
 })
-export class DoQuizzComponent implements OnInit {
+export class DoQuizComponent implements OnInit {
 
   quizId : number;
   currentQuiz :  Quiz;
@@ -45,6 +45,8 @@ export class DoQuizzComponent implements OnInit {
     this.quizService.getQuiz(this.quizId).subscribe(data => {
       console.log("quiz data : ", data)
       this.currentQuiz=data;
+      this.currentQuiz.niveauName=this.toStringNiveau(data.niveau);
+        console.log(" niveauName :", this.currentQuiz.niveauName);   
       this.quizTime=data.duree;
     })
 
@@ -104,7 +106,7 @@ export class DoQuizzComponent implements OnInit {
       });      
     }
 
-    if(this.quizScore >= this.currentQuiz.pourcentageValidation) 
+    if(this.quizScore >= this.currentQuiz.seuilValidation) 
       this.openValidationModal("Félicitaions !Vous avez réussi le test avec un score de : "+poidsTotal);
     else this.openValidationModal("Dommage ! Vous avez raté le test. Votre score est de "+poidsTotal);
   }
@@ -115,6 +117,16 @@ export class DoQuizzComponent implements OnInit {
       this.validQuizResponse();
     }
   }
+
+  endQuizBeforeEndTime(c: CountdownComponent) {
+      console.log(c)
+      this.isStart=false;
+      c.stop;
+      this.validQuizResponse();
+     
+  }
+
+
   
   saveScore(score : number)  {
     this.quizScore=score;
@@ -124,7 +136,23 @@ export class DoQuizzComponent implements OnInit {
   public openValidationModal(message:string) : void {
     const modalRef = this.modalService.open(InfoModalComponent);
     modalRef.componentInstance.message = message;
-    modalRef.componentInstance.url = "/user";
+    modalRef.componentInstance.url = "/participant";
+  }
+
+  toStringNiveau(niveau : number) : string
+  {
+    switch (niveau) {
+      case 1:
+        return "Debutant"
+      case 2:
+        return "PreIntermediaire"
+      case 3:
+        return "Intermediaire"
+      case 4:
+        return "Avance"
+      default:
+        return "Debutant"
+    }
   }
 
 }

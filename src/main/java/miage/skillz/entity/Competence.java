@@ -1,9 +1,7 @@
 package miage.skillz.entity;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -12,6 +10,7 @@ import java.util.Set;
 
 @Data
 @Builder
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -43,7 +42,7 @@ public class Competence {
         Set<Question> listQuestions = new HashSet<>();
 
         @JsonIgnore
-        @ManyToMany(mappedBy = "quizCompetences",fetch = FetchType.LAZY)
+        @OneToMany( cascade = CascadeType.ALL, mappedBy = "quizCompetence")
         Set<Quiz> listQuiz = new HashSet<>();
 
 

@@ -6,16 +6,16 @@ import {Quiz} from "../models/quiz";
 import {QuizService} from "../services/quiz.service";
 
 @Component({
-  selector: 'app-creer-quizz',
-  templateUrl: './creer-quizz.component.html',
-  styleUrls: ['./creer-quizz.component.scss']
+  selector: 'app-creer-quiz',
+  templateUrl: './creer-quiz.component.html',
+  styleUrls: ['./creer-quiz.component.scss']
 })
-export class CreerQuizzComponent implements OnInit {
+export class CreerQuizComponent implements OnInit {
 
   isSuccessful = false;
   isFailed = false;
   errorMessage = '';
-  quizz = new Quiz();
+  quiz = new Quiz();
   list_competence: Array<Competence> =[];
 
   constructor(private router: Router, private quizService: QuizService,private competenceService : CompetenceService) { }
@@ -35,8 +35,8 @@ export class CreerQuizzComponent implements OnInit {
   onSubmit(): void {}
 
 
-  createQuizz() : void {
-    this.quizService.saveQuizz(this.quizz).subscribe(data => {
+  createQuiz() : void {
+    this.quizService.saveQuiz(this.quiz).subscribe(data => {
       console.log(data);
     });
 

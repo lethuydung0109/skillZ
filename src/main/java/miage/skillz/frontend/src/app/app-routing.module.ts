@@ -8,16 +8,17 @@ import { ProfileComponent } from './profile/profile.component';
 import { BoardParticipantComponent } from './board-participant/board-participant.component';
 import { BoardConcepteurComponent } from './board-concepteur/board-concepteur.component';
 import { BoardAdminComponent } from './board-admin/board-admin.component';
-import {CreerQuestionComponent} from './creer-question/creer-question.component';
-import {CreerQuizzComponent} from './creer-quizz/creer-quizz.component';
-import {CreerCompetenceComponent} from './creer-competence/creer-competence.component';
-import {ListeCompetenceComponent} from './liste-competence/liste-competence.component';
-import { QuizzComponent } from './quizz/quizz.component';
-import { DoQuizzComponent } from './do-quizz/do-quizz.component';
+import { CreerQuestionComponent } from './creer-question/creer-question.component';
+import { CreerQuizComponent } from './creer-quiz/creer-quiz.component';
+import { CreerCompetenceComponent } from './creer-competence/creer-competence.component';
+import { ListeCompetenceComponent } from './liste-competence/liste-competence.component';
+import { ListQuizComponent } from './list-quiz/list-quiz.component';
+import { DoQuizComponent } from './do-quiz/do-quiz.component';
 import { QuestionsComponent } from './questions/questions.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
+import { UserQuestionAndQuiZComponent } from './user-question-and-quiz/user-question-and-quiz.component';
 
 
 
@@ -31,14 +32,15 @@ const routes: Routes = [
   { path: 'admin', component: BoardAdminComponent },
   { path: 'creer-competence', component: CreerCompetenceComponent },
   { path: 'creer-question', component: CreerQuestionComponent },
-  { path: 'creer-quizz', component: CreerQuizzComponent },
+  { path: 'creer-quiz', component: CreerQuizComponent },
   { path: 'liste-competence', component: ListeCompetenceComponent },
-  { path: 'quizz', component: QuizzComponent },
-  { path: 'doquizz/:id', component: DoQuizzComponent },
-  { path: 'questions', component: QuestionsComponent },
+  { path: 'listQuiz', component: ListQuizComponent },
+  { path: 'doquiz/:id', component: DoQuizComponent },
+  { path: 'listQuestions', component: QuestionsComponent },
   { path: 'users', component: UserListComponent },
   { path: 'createUser', component: CreateUserComponent },
   { path: 'user/:id', component: UserDetailsComponent },
+  { path: 'userQuestionsAndQuiz', component: UserQuestionAndQuiZComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

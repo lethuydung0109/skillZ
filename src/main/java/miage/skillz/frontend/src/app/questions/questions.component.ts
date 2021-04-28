@@ -4,8 +4,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { QuestionService } from '../services/question.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { Competence } from '../models/competence';
 
 @Component({
@@ -23,7 +21,7 @@ export class QuestionsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private actRoute: ActivatedRoute, private questionService : QuestionService, private http : HttpClient, private router : Router) {
+  constructor(private questionService : QuestionService) {
     this.dataSource = new MatTableDataSource(this.listQuestions);}
 
     ngOnInit(): void {
@@ -32,6 +30,8 @@ export class QuestionsComponent implements OnInit {
         data.forEach(q => {     
           q.stringCompetence=this.quizCompetenceToString(q.questionCompetences);
           console.log(" stringCompetence :", q.stringCompetence);  
+          q.niveauName=this.toStringNiveau(q.niveau);
+          console.log(" niveauName :", q.niveauName);   
           listQ.push(q);
         })
         this.dataSource = new MatTableDataSource(this.listQuestions);
@@ -66,4 +66,19 @@ export class QuestionsComponent implements OnInit {
       return stringArray;
     }
 
+    toStringNiveau(niveau : number) : string
+  {
+    switch (niveau) {
+      case 1:
+        return "Debutant"
+      case 2:
+        return "PreIntermediaire"
+      case 3:
+        return "Intermediaire"
+      case 4:
+        return "Avance"
+      default:
+        return "Debutant"
+    }
+  }
 }

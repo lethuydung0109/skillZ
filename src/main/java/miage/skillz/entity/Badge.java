@@ -1,15 +1,19 @@
 package miage.skillz.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import miage.skillz.enumeration.ENiveau;
+import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "badges")
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@ToString
 public class Badge {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,11 +29,12 @@ public class Badge {
 
     @ManyToMany(mappedBy = "badges")
     @JsonIgnore
-    private Set<User> users = new HashSet<User>();
+    private Set<User> users = new HashSet<>();
 
+    private String dateValiation;
 
     //Date validation
-    private Long dateValiation;
+    //private Long dateValiation;
 
     public Badge() {
     }
