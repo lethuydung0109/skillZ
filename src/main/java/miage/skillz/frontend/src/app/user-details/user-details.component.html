@@ -21,12 +21,12 @@
 E           [(ngModel)]="currentUser.email"
 E           name="email"
 E         />
-        </div>  
+        </div>
       </form>
       <button class="badge badge-danger mr-2" (click)="deleteUser()">
         Suprimmer
       </button>
-  
+
       <button
         type="submit"
         class="badge badge-success mb-2"
@@ -36,7 +36,7 @@ E         />
       </button>
       <p>{{ message }}</p>
     </div>
-  
+
     <div *ngIf="!currentUser.id">
       <br />
       <p>Cannot access this User...</p>
