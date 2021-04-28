@@ -9,7 +9,10 @@
         <a href="/admin" class="nav-link"  routerLink="admin">Accueil</a>
       </li>
       <li class="nav-item" *ngIf="isAdmin">
-        <a href="/listUser" class="nav-link"  routerLink="users">Utilisateur</a>
+        <a href="/listUser" class="nav-link"  routerLink="users">Utilisateurs</a>
+      </li>
+      <li class="nav-item" *ngIf="isAdmin">
+        <a href="/listCompetence" class="nav-link"  routerLink="liste-competence">Compétences</a>
       </li>
       <li class="nav-item" *ngIf="showModeratorBoard">
         <a href="/concepteur" class="nav-link" routerLink="concepteur">Accueil</a>

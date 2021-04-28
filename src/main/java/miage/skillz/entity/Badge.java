@@ -29,7 +29,7 @@ public class Badge {
 
 
     //Date validation
-    private Long dateValiation;
+    private String dateValiation;
 
     public Badge() {
     }
@@ -64,6 +64,14 @@ public class Badge {
 
     public void setUsers(Set<User> users) {
         this.users = users;
+    }
+
+    public String getDateValiation() {
+        return dateValiation;
+    }
+
+    public void setDateValiation(String dateValiation) {
+        this.dateValiation = dateValiation;
     }
 }
 

@@ -13,9 +13,11 @@ export class UserDetailsComponent implements OnInit {
   currentUser: User = {
     username: '',
     email: '',
-    role: ''
+    role: '',
+    password: '',
   };
   message = '';
+
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
@@ -37,24 +39,6 @@ export class UserDetailsComponent implements OnInit {
           console.log(error);
         });
   }
-
-  updatePublished(): void {
-    const data = {
-      email: this.currentUser.email,
-      role: this.currentUser.role
-    };
-
-    this.userService.update(this.currentUser.id, data)
-      .subscribe(
-        response => {
-          console.log(response);
-          this.message = response.message;
-        },
-        error => {
-          console.log(error);
-        });
-  }
-
   updateUser(): void {
     this.userService.update(this.currentUser.id, this.currentUser)
       .subscribe(

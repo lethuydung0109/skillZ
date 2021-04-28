@@ -217,6 +217,12 @@ public class UserController {
         return new  ResponseEntity <Set <Recommendation> >(recommendations, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/user/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getUserById(@PathVariable ("userId") Long userId ){
+        User user = service.findById(userId);
+        return new  ResponseEntity <User> (user, HttpStatus.OK);
+    }
+
 //    @DeleteMapping(value = "/user/recommendation/{recommendationId}", produces = MediaType.APPLICATION_JSON_VALUE)
 //    public ResponseEntity<?> deleteRecommendation(@PathVariable ("recommendationId") Long recommendationId){
 //        Recommendation recommendation = recommendationService.findRecommendationById(recommendationId);

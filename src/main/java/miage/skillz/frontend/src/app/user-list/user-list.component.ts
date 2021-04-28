@@ -1,4 +1,6 @@
+import { ViewChild } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { User } from '../models/user.model';
 import { UserService } from '../services/user.service';
 
@@ -12,6 +14,8 @@ export class UserListComponent implements OnInit {
   currentUser?: User;
   currentIndex = -1;
   username = '';
+
+ 
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
@@ -21,9 +25,13 @@ export class UserListComponent implements OnInit {
   retrieveUsers(): void {
     this.userService.getAll()
       .subscribe(
-        data => {
-          this.users = data;
-          console.log(data);
+        users  => {
+          // users.forEach(function(user){
+          //   const parsedUser = JSON.parse(user);
+          // })
+          this.users = users;
+          console.log(users);
+          console.log(users[0].role);
         },
         error => {
           console.log(error);

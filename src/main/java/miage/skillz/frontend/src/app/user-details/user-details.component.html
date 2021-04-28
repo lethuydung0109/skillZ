@@ -21,31 +21,10 @@
 E           [(ngModel)]="currentUser.email"
 E           name="email"
 E         />
-        </div>
-  
-        <!-- <div class="form-group">
-          <label><strong>Status:</strong></label>
-          {{ currentUser.published ? "Published" : "Pending" }}
-        </div> -->
+        </div>  
       </form>
-  
-      <button
-        class="badge badge-primary mr-2"
-        *ngIf="currentUser.published"
-        (click)="updatePublished(false)"
-      >
-        UnPublish
-      </button>
-      <button
-        *ngIf="!currentUser.published"
-        class="badge badge-primary mr-2"
-        (click)="updatePublished(true)"
-      >
-        Publish
-      </button>
-  
       <button class="badge badge-danger mr-2" (click)="deleteUser()">
-        Delete
+        Suprimmer
       </button>
   
       <button

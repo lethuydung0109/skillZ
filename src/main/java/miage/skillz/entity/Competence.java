@@ -66,4 +66,13 @@ public class Competence {
         this.idPere = IdPere;
         this.nom_competence = nom_competence;
     }
+
+
+    public Set<Badge> getListBadges() {
+        return listBadges;
+    }
+
+    public void setListBadges(Set<Badge> listBadges) {
+        this.listBadges = listBadges;
+    }
 }

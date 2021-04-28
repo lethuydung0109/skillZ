@@ -38,7 +38,7 @@ const routes: Routes = [
   { path: 'questions', component: QuestionsComponent },
   { path: 'users', component: UserListComponent },
   { path: 'createUser', component: CreateUserComponent },
-  { path: 'user/:id', component: UserDetailsComponent },
+  { path: 'users/:id', component: UserDetailsComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

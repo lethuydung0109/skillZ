@@ -1,9 +1,14 @@
 package miage.skillz.payload.reponse;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class StatsUserResponse {
     int nbUtilisateur;
     int nbParticipants;
     int nbConcepteurs;
+
+    private String dateValiation = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
 
     public StatsUserResponse() {
     }
@@ -36,5 +41,13 @@ public class StatsUserResponse {
 
     public void setNbConcepteurs(int nbConcepteurs) {
         this.nbConcepteurs = nbConcepteurs;
+    }
+
+    public String getDateValiation() {
+        return dateValiation;
+    }
+
+    public void setDateValiation(String dateValiation) {
+        this.dateValiation = dateValiation;
     }
 }

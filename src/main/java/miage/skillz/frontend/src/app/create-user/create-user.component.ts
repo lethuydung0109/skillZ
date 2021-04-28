@@ -11,9 +11,12 @@ export class CreateUserComponent implements OnInit {
   user: User = {
     username: '',
     email: '',
-    role: ''
+    role: '',
+    password: ''
   };
   submitted = false;
+  
+
 
   constructor(private userService: UserService) { }
 
