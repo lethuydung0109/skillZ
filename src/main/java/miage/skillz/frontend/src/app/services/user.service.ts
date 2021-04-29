@@ -44,7 +44,7 @@ export class UserService {
   }
 
   findByUsername(username: any): Observable<User[]> {
-    return this.http.get<User[]>(`${API_URL}?username=${username}`);
+    return this.http.get<User[]>(API_URL + '/name/' + username);
   }
 }
 
