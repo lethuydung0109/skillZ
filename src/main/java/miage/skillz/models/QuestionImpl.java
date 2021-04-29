@@ -19,7 +19,7 @@ public class QuestionImpl {
     private String libelle;
     @Builder.Default
     private long poids = 0;
-    private String niveau;
+    private Long idNiveau;
     @Builder.Default
     private Set<Long> questionCompetences = new HashSet<>();
     @Builder.Default

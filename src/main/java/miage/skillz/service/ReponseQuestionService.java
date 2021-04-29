@@ -1,4 +1,4 @@
-package miage.skillz.security.services;
+package miage.skillz.service;
 
 import miage.skillz.entity.ReponseQuestion;
 import miage.skillz.repository.ReponseQuestionRepository;

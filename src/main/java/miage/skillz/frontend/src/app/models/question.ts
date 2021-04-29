@@ -9,9 +9,10 @@ export class Question {
     theme : string;
     libelle : string;
     poids :  number ;
-    niveau :  string;
+    niveau !:  number;
+    niveauName!: string;
     questionCompetences : Array<Competence>;
-    listQuizz : Array<Quiz>;
+    listQuiz : Array<Quiz>;
     reponsesQuestions : Array<ResponseQuestion> = [];
     stringCompetence : string;
     qst: string;
@@ -27,9 +28,8 @@ export class Question {
         this.theme='';
         this.libelle='';
         this.poids=0;
-        this.niveau='';
         this.questionCompetences =[];
-        this.listQuizz =[];
+        this.listQuiz =[];
         this.reponsesQuestions =[];
         this.stringCompetence='';
         this.qst='';

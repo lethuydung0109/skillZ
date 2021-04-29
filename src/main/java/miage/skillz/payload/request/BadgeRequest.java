@@ -1,6 +1,8 @@
 package miage.skillz.payload.request;
 
 import javax.validation.constraints.NotBlank;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class BadgeRequest {
 
@@ -9,6 +11,8 @@ public class BadgeRequest {
 
     @NotBlank
     private String niveauName;
+
+    private String dateValiation = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
 
     public String getCompetenceId() {
         return competenceId;

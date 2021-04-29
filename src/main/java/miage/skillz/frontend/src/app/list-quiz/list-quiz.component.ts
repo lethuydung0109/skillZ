@@ -7,41 +7,57 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Competence } from '../models/competence';
+import { TokenStorageService } from '../_services/auth/service/token-storage.service';
 
 @Component({
-  selector: 'app-quizz',
-  templateUrl: './quizz.component.html',
-  styleUrls: ['./quizz.component.scss']
+  selector: 'app-list-quiz',
+  templateUrl: './list-quiz.component.html',
+  styleUrls: ['./list-quiz.component.scss']
 })
-export class QuizzComponent implements OnInit,AfterViewInit  {
+export class ListQuizComponent implements OnInit,AfterViewInit  {
 
   public listQuiz : Array<Quiz> =[];
-  displayedColumns: string[] = ['num','theme','nom', 'niveau', 'competence','duree'];
+  private roles: string[] = [];
+  isLoggedIn = false;
+  isConcepteur = false;
+  isParticipant=false;
+
+  displayedColumns: string[] = ['num','theme','name', 'niveauName', 'competence','duree'];
 
   dataSource!: MatTableDataSource<Quiz>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private actRoute: ActivatedRoute, private quizService : QuizService, private http : HttpClient, private router : Router) {
+  constructor(private quizService : QuizService,private tokenStorageService: TokenStorageService) {
     this.dataSource = new MatTableDataSource(this.listQuiz);
-   }
+  }
 
   ngOnInit(): void {
+
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+
+    if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
+      this.isConcepteur = this.roles.includes('ROLE_CONCEPTEUR');
+      this.isParticipant=this.roles.includes('ROLE_PARTICIPANT');
+      console.log("concepteur : ", this.isConcepteur);
+    }
+
     let listQuiz : Array<Quiz> =[];
     this.quizService.getAllQuiz().subscribe(data => {
       data.forEach(q => {  
-        q.stringCompetence=this.quizCompetenceToString(q.quizCompetences);
-        console.log(" stringCompetence :", q.stringCompetence);    
+        q.niveauName=this.toStringNiveau(q.niveau);
+        console.log(" niveauName :", q.niveauName);    
         listQuiz.push(q);
       })
       this.dataSource = new MatTableDataSource(this.listQuiz);
     });
+
     this.listQuiz=listQuiz;
     console.log("quiz : ",this.listQuiz);
-
     console.log("datasource : ", this.dataSource.data);
-
   }
 
   ngAfterViewInit() {
@@ -65,6 +81,22 @@ export class QuizzComponent implements OnInit,AfterViewInit  {
       stringArray+=c.nom_competence+",";
     })
     return stringArray;
+  }
+
+  toStringNiveau(niveau : number) : string
+  {
+    switch (niveau) {
+      case 1:
+        return "Debutant"
+      case 2:
+        return "PreIntermediaire"
+      case 3:
+        return "Intermediaire"
+      case 4:
+        return "Avance"
+      default:
+        return "Debutant"
+    }
   }
 
 }
