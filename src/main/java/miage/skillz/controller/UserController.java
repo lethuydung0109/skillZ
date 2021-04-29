@@ -2,8 +2,10 @@ package miage.skillz.controller;
 
 import miage.skillz.entity.*;
 import miage.skillz.payload.reponse.MessageResponse;
+import miage.skillz.payload.reponse.StatsUserResponse;
 import miage.skillz.payload.request.SignupRequest;
 import miage.skillz.service.CompetenceService;
+import miage.skillz.service.RecommendationService;
 import miage.skillz.service.RoleService;
 import miage.skillz.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +33,53 @@ public class UserController {
 
     @Autowired
     private CompetenceService competenceService;
+
+    @Autowired
+    private RecommendationService recommendationService;
+
     @Autowired
     PasswordEncoder encoder;
+
+    @GetMapping(value = "/user/stats", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getStats(){
+
+        //Number of users
+        List<User> allUsers = service.findAll();
+        int nbUtilisateurs = allUsers.size();
+
+        //Number of participants
+        ArrayList<User> participantsResponse = new ArrayList<User>();
+        for(User user : allUsers){
+            for(Role role : user.getRoles()){
+                if(role.getName().toString() == ("ROLE_PARTICIPANT")){
+                    // usersResponse[allUsers.get()] = new List<User>();
+                    participantsResponse.add(user) ;
+                }
+            }
+        }
+        int nbParticipants = participantsResponse.size();
+
+        //Number of concepteurs
+        ArrayList<User> concepteursResponse = new ArrayList<User>();
+        for(User user : allUsers){
+            for(Role role : user.getRoles()){
+                if(role.getName().toString() == ("ROLE_CONCEPTEUR")){
+                    // usersResponse[allUsers.get()] = new List<User>();
+                    concepteursResponse.add(user) ;
+                }
+            }
+        }
+        int nbConcepteurs = concepteursResponse.size();
+
+
+        return new  ResponseEntity <StatsUserResponse >(new StatsUserResponse(nbUtilisateurs, nbParticipants, nbConcepteurs), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/user", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getAllUsers(){
+        List<User> allUsers = service.findAll();
+        return new  ResponseEntity <List <User> >(allUsers, HttpStatus.OK);
+    }
 
     @GetMapping(value = "/user/participant", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getAllParticipants(){
@@ -45,7 +92,6 @@ public class UserController {
                     participantsResponse.add(user) ;
                 }
             }
-
         }
         return new  ResponseEntity <List <User> >(participantsResponse, HttpStatus.OK);
     }
@@ -62,7 +108,6 @@ public class UserController {
                     concepteursResponse.add(user) ;
                 }
             }
-
         }
         return new  ResponseEntity <List <User> >(concepteursResponse, HttpStatus.OK);
     }
@@ -154,5 +199,40 @@ public class UserController {
             listUsers.addAll(badge.getUsers());
         }
         return new  ResponseEntity <Set <User> >(listUsers, HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/user/recommendation/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> writeRecommendation(@RequestBody Badge badge, @PathVariable ("userId") Long userId ){
+        User user = service.findById(userId);
+        Set<Badge> badges = user.getBadges();
+        badges.add(badge);
+        user.setBadges(badges);
+        return ResponseEntity.ok(new MessageResponse("Badge added successfully!"));
+    }
+
+    @GetMapping(value = "/user/{userId}/recommendation", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getAllRecommendations(@PathVariable ("userId") Long userId ){
+        User user = service.findById(userId);
+        Set<Recommendation> recommendations = user.getRecommendationsByOthers();
+        return new  ResponseEntity <Set <Recommendation> >(recommendations, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/user/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getUserById(@PathVariable ("userId") Long userId ){
+        User user = service.findById(userId);
+        return new  ResponseEntity <User> (user, HttpStatus.OK);
+    }
+
+//    @DeleteMapping(value = "/user/recommendation/{recommendationId}", produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<?> deleteRecommendation(@PathVariable ("recommendationId") Long recommendationId){
+//        Recommendation recommendation = recommendationService.findRecommendationById(recommendationId);
+//        Set<Recommendation> recommendations =
+//        return ResponseEntity.ok(new MessageResponse("User deleted successfully!"));
+//    }
+
+
+    @RequestMapping(value = "/findById", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public User findById(Long userID) {
+        return service.findById(userID);
     }
 }

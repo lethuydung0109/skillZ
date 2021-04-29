@@ -1,13 +1,9 @@
 <div class="container-fluid">
+    <br><br>
   <div class="row">
     <h1>Liste des questions</h1>
   </div> <br>
-  <div class="row">
-    <div class="col-md-6">
-      <button class="btn btn-default"><a class="nav-link" routerLinkActive="active" routerLink="/createQuestion">Nouvelle question </a></button>
-    </div>
-  </div> <br>
-
+  
   <div class="content-table">
     <mat-form-field>
         <mat-label>Filter</mat-label>
@@ -34,7 +30,7 @@
 
             <ng-container matColumnDef="niveau">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Niveau </th>
-                <td mat-cell *matCellDef="let row"> {{row.niveau}} </td>
+                <td mat-cell *matCellDef="let row"> {{row.niveauName}} </td>
             </ng-container>
 
             <ng-container matColumnDef="competence">

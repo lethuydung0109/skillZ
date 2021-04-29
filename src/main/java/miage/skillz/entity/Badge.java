@@ -1,21 +1,25 @@
 package miage.skillz.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import miage.skillz.enumeration.ENiveau;
+import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "badges")
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@ToString
 public class Badge {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_competence")
     private Competence competence;
 
@@ -25,11 +29,9 @@ public class Badge {
 
     @ManyToMany(mappedBy = "badges")
     @JsonIgnore
-    private Set<User> users = new HashSet<User>();
+    private Set<User> users = new HashSet<>();
 
-
-    //Date validation
-    private Long dateValiation;
+    private String dateValiation;
 
     public Badge() {
     }
@@ -64,6 +66,14 @@ public class Badge {
 
     public void setUsers(Set<User> users) {
         this.users = users;
+    }
+
+    public String getDateValiation() {
+        return dateValiation;
+    }
+
+    public void setDateValiation(String dateValiation) {
+        this.dateValiation = dateValiation;
     }
 }
 

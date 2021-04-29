@@ -1,9 +1,15 @@
 package miage.skillz.entity;
 
+import lombok.*;
 import miage.skillz.enumeration.ENiveau;
 
 import javax.persistence.*;
 @Entity
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@ToString
 public class Niveau {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,9 +19,7 @@ public class Niveau {
     @Column(length = 20)
     private ENiveau niveau;
 
-    public Niveau() {
-
-    }
+    public Niveau() { }
 
     public Niveau(ENiveau niveau) {
         this.niveau = niveau;

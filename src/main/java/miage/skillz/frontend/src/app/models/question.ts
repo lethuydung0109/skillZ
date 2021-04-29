@@ -1,6 +1,7 @@
 import { Quiz } from './quiz';
 import { ResponseQuestion } from './response-question';
-import { Competence } from './competence';
+import {Competence} from "./competence";
+
 
 export class Question {
 
@@ -11,6 +12,12 @@ export class Question {
     poids :  number ;
     qst: string;
     reponsesQuestions : Array<ResponseQuestion> = [];
+    /*
+    poids :  number ;
+    niveau !:  number;
+    niveauName!: string;
+    */
+     */
     questionCompetences : Array<Competence>;
 
     listQuizz : Array<Quiz>;
@@ -25,9 +32,9 @@ export class Question {
         this.theme='';
         this.libelle='';
         this.poids=0;
-        this.niveau='';
+        this.niveau=0;
         this.questionCompetences =[];
-        this.listQuizz =[];
+        this.listQuiz =[];
         this.reponsesQuestions =[];
         this.stringCompetence='';
         this.qst='';

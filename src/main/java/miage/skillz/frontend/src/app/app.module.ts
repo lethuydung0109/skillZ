@@ -17,11 +17,11 @@ import { BoardParticipantComponent } from './board-participant/board-participant
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { CreerCompetenceComponent } from './creer-competence/creer-competence.component';
 import { CreerQuestionComponent } from './creer-question/creer-question.component';
-import { CreerQuizzComponent } from './creer-quizz/creer-quizz.component';
+import { CreerQuizComponent } from './creer-quiz/creer-quiz.component';
 import { ListeCompetenceComponent } from './liste-competence/liste-competence.component';
-import {MatIconModule} from '@angular/material/icon';
-import {MatTreeModule} from "@angular/material/tree";
-import {MatTableModule} from "@angular/material/table";
+import { MatIconModule } from '@angular/material/icon';
+import { MatTreeModule } from "@angular/material/tree";
+import { MatTableModule } from "@angular/material/table";
 
 
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -30,8 +30,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { QuestionsComponent } from './questions/questions.component';
-import { QuizzComponent } from './quizz/quizz.component';
-import { DoQuizzComponent } from './do-quizz/do-quizz.component';
+import { ListQuizComponent } from './list-quiz/list-quiz.component';
+import { DoQuizComponent } from './do-quiz/do-quiz.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { InfoModalComponent } from './info-modal/info-modal.component';
@@ -39,29 +39,39 @@ import { CountdownModule } from 'ngx-countdown';
 import {MatButtonModule} from '@angular/material/button';
 import {MatListModule} from "@angular/material/list";
 import {MatSelectModule} from "@angular/material/select";
+import { CreateUserComponent } from './create-user/create-user.component';
+import { UserListComponent } from './user-list/user-list.component';
+import { UserDetailsComponent } from './user-details/user-details.component';
+import { UserQuestionAndQuiZComponent } from './user-question-and-quiz/user-question-and-quiz.component';
+import { MatTabsModule} from '@angular/material/tabs';
+
 
 
 
 
 @NgModule({
-declarations: [
-    AppComponent,
-    LoginComponent,
-    RegisterComponent,
-    HomeComponent,
-    ProfileComponent,
-    BoardAdminComponent,
-    BoardConcepteurComponent,
-    BoardParticipantComponent,
-    QuestionsComponent,
-    QuizzComponent,
-    DoQuizzComponent,
-    InfoModalComponent,
-    CreerCompetenceComponent,
-    CreerQuestionComponent,
-    CreerQuizzComponent,
-    ListeCompetenceComponent
-],
+    declarations: [
+        AppComponent,
+        LoginComponent,
+        RegisterComponent,
+        HomeComponent,
+        ProfileComponent,
+        BoardAdminComponent,
+        BoardConcepteurComponent,
+        BoardParticipantComponent,
+        QuestionsComponent,
+        ListQuizComponent,
+        DoQuizComponent,
+        InfoModalComponent,
+        CreerCompetenceComponent,
+        CreerQuestionComponent,
+        CreerQuizComponent,
+        ListeCompetenceComponent,
+        CreateUserComponent,
+        UserListComponent,
+        UserDetailsComponent,
+        UserQuestionAndQuiZComponent
+    ],
     imports: [
         BrowserModule,
         AppRoutingModule,
@@ -70,6 +80,7 @@ declarations: [
         MatIconModule,
         MatTreeModule,
         MatTableModule,
+        MatSortModule,
         BrowserAnimationsModule,
         MatPaginatorModule,
         MatSortModule,
@@ -82,7 +93,8 @@ declarations: [
         MatListModule,
         MatSelectModule,
         ReactiveFormsModule
-    ],
+        MatTabsModule
+],
 providers: [authInterceptorProviders],
 bootstrap: [AppComponent],
 schemas: [CUSTOM_ELEMENTS_SCHEMA]

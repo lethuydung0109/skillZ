@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { Question } from '../models/question';
 import { ResponseQuestion } from '../models/response-question';
 
-const API_URL = 'http://localhost:8081/api/';
+const API_URL = environment.api_url +'/';
 const httpOptions = {
   headers: new HttpHeaders(
     {
@@ -48,6 +48,12 @@ export class QuestionService {
   public getAllQuestions() : Observable<Array<Question>>
   {
     const routeQuery=this.url+"/allQuestions";
+    return this.http.get<Array<Question>>(routeQuery);
+  }
+
+  public getAllQuestionsByUser() : Observable<Array<Question>>
+  {
+    const routeQuery=this.url+"/user/questions";
     return this.http.get<Array<Question>>(routeQuery);
   }
 
