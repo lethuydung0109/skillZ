@@ -5,18 +5,17 @@ import { Competence } from './competence';
 export class Question {
 
     idQuestion : number;
-    theme : string;
     libelle : string;
-    poids :  number ;
+    theme : string;
     niveau :  string;
-    questionCompetences : Array<Competence>;
-    listQuizz : Array<Quiz>;
-    reponsesQuestions : Array<ResponseQuestion> = [];
-    stringCompetence : string;
+    poids :  number ;
     qst: string;
+    reponsesQuestions : Array<ResponseQuestion> = [];
+    questionCompetences : Array<Competence>;
 
-   // à modifier
-    competence: string;
+    listQuizz : Array<Quiz>;
+
+    stringCompetence : string;
 
 
 
@@ -33,7 +32,5 @@ export class Question {
         this.stringCompetence='';
         this.qst='';
 
-        // à modifier
-        this.competence='';
     }
 }

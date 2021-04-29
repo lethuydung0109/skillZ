@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 
@@ -37,6 +37,8 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
 import { InfoModalComponent } from './info-modal/info-modal.component';
 import { CountdownModule } from 'ngx-countdown';
 import {MatButtonModule} from '@angular/material/button';
+import {MatListModule} from "@angular/material/list";
+import {MatSelectModule} from "@angular/material/select";
 
 
 
@@ -71,13 +73,16 @@ declarations: [
         BrowserAnimationsModule,
         MatPaginatorModule,
         MatSortModule,
-       MatFormFieldModule,
-       MatInputModule,
-       MatCheckboxModule,
-       CountdownModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatCheckboxModule,
+        CountdownModule,
         ScrollingModule,
-      MatButtonModule
-],
+        MatButtonModule,
+        MatListModule,
+        MatSelectModule,
+        ReactiveFormsModule
+    ],
 providers: [authInterceptorProviders],
 bootstrap: [AppComponent],
 schemas: [CUSTOM_ELEMENTS_SCHEMA]

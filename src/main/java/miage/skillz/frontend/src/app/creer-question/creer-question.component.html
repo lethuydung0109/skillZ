@@ -1,26 +1,27 @@
-<div class="col-md-12">
-  <div class="card card-container">
-    <h2> Ajouter une question </h2>
+<div class="col-md-12" style="padding-top:40px;">
+  <div class="card card-container" >
+
+    <h2> Créer une question </h2>
     <form  name="form" (ngSubmit)="f.form.valid && onSubmit()"
            #f="ngForm"
            novalidate>
       <div class="form-group">
-        <label for="description">Description</label>
+        <label for="libelle">Question *</label>
         <input
-          id="description"
+          id="libelle"
           type="text"
           class="form-control"
-          name="description"
+          name="libelle"
           required
           minlength="3"
-          maxlength="20"
-          #description="ngModel"
+          maxlength="50"
+          #libelle="ngModel"
           [(ngModel)]="question.libelle"
         />
-        <div class="alert-danger" *ngIf="description.errors && f.submitted">
-          <div *ngIf="description.errors.required">La descirption est obligatoire</div>
-          <div *ngIf="description.errors.minlength">Description doit contenir au moins 3 caracteres </div>
-          <div *ngIf="description.errors.maxlength">Description doit contenir au plus 20 caracteres </div>
+        <div class="alert-danger" *ngIf="libelle.errors && f.submitted">
+          <div *ngIf="libelle.errors.required">Le libelle est obligatoire</div>
+          <div *ngIf="libelle.errors.minlength">Libelle doit contenir au moins 3 caracteres </div>
+          <div *ngIf="libelle.errors.maxlength">Libelle doit contenir au plus 50 caracteres </div>
         </div>
       </div>
 
@@ -37,33 +38,36 @@
         </select>
 
         <div class="alert-danger" *ngIf="theme.errors && f.submitted">
-          <div *ngIf="theme.errors.required">Competence pere is required</div>
+          <div *ngIf="theme.errors.required">Theme est obligatoire</div>
         </div>
       </div>
 
       <div class="form-group">
-        <label for="competence">Competence</label>
-        <select
+        <label for="competence">Competence * </label>
+        <button mat-raised-button color="primary" routerLink="/creer-competence" >Ajouter une competence</button>
+
+        <mat-select
           id="competence"
           class="form-control"
           name="competence"
+          required
+          multiple
           #competence="ngModel"
-          [(ngModel)]="question.competence"
+          [(ngModel)]="question.questionCompetences"
         >
           <option value=""> Choisir une competence</option>
-          <option *ngFor="let competence of list_competence"  [ngValue]="competence.id"> {{competence.nom_competence}}</option>
-        </select>
+          <mat-option *ngFor="let competence of list_competence"  [value]="competence.id"> {{competence.nom_competence}}</mat-option>
+        </mat-select>
 
         <div class="alert-danger" *ngIf="competence.errors && f.submitted">
           <div *ngIf="competence.errors.required">Competence is required</div>
         </div>
-        <div class="form-group">
-          <button routerLink="/creer-competence" class="btnStatsAdd">Ajouter une competence</button>
-        </div>
+
       </div>
 
+
       <div class="form-group">
-        <label for="niveau">Niveau</label>
+        <label for="niveau">Niveau *</label>
         <select
           id="niveau"
           class="form-control"
@@ -85,6 +89,7 @@
         </div>
       </div>
 
+      <!--
       <div class="form-group">
           <label for="question">Question</label>
           <input
@@ -92,6 +97,7 @@
             type="text"
             class="form-control"
             name="question"
+            required
             minlength="3"
             #qst="ngModel"
             [(ngModel)]="question.qst"
@@ -101,21 +107,64 @@
             <div *ngIf="qst.errors.minlength">Question doit contenir au moins 3 caracteres </div>
           </div>
       </div>
+      -->
+
+      <div>
+        <label for="reponses">Réponse(s)</label>
+        <button mat-raised-button color="accent" (click)= "toggleDisplay()" >Ajouter une option</button>
+
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th scope="col">Réponse</th>
+            <th scope="col">Correct</th>
+          </tr>
+          </thead>
+          <tbody *ngFor="let reponse of list_reponses" >
+          <tr>
+            <td> {{reponse.libelle}} </td>
+            <td> {{reponse.isCorrect}} </td>
+
+            <td><button (click)="deleteReponse(reponse)"  mat-fab color="warn"><mat-icon>delete</mat-icon></button></td>
+
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div *ngIf='isShow' class="form-inline">
+        <label for="reponses">Réponse</label>
+        <input
+          id="reponses"
+          type="text"
+          class="form-control"
+          name="question"
+          required
+          #reponse="ngModel"
+          [(ngModel)]="question.reponsesQuestions"
+        />
+        <div class="alert-danger" *ngIf="reponse.errors && f.submitted">
+          <div *ngIf="reponse.errors.required">La réponse est obligatoire</div>
+        </div>
+        <mat-checkbox #correct >Réponse correcte</mat-checkbox>
+        <button (click)="ajouterRepQst(reponse.value,correct)" class="btn btn-success" [disabled]="!reponse.valid">Ajouter</button>
+      </div>
 
       <div class="form-group">
-        <button (click)= "createQuestion()" type="submit" class="btn btn-success">Ajouter</button>
+        <button type="submit" class="btn btn-success" [disabled]="!f.valid">Créer</button>
       </div>
 
       <div class="alert alert-warning" *ngIf="f.submitted && isFailed">
-        Creation de competence echouee!<br />{{ errorMessage }}
+        Creation de question echouee!<br />{{ errorMessage }}
       </div>
 
       <div class="alert alert-success" *ngIf="isSuccessful">
-        Creation de competence reussie
+        Creation de question reussie
       </div>
 
     </form>
+    </div>
 
-
-  </div>
 </div>
+
+

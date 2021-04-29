@@ -16,7 +16,7 @@ import java.util.*;
 public class CompetenceController {
 
     @Autowired
-    private CompetenceService service;
+    private CompetenceService competenceService;
 
     // Créer compétence
     //@PostMapping("/all")
@@ -24,7 +24,7 @@ public class CompetenceController {
     public ResponseEntity<Competence> createCompetence(@RequestBody Competence competence)
     {
        // User currentUser = this.userController.findById(userDetails.getId());
-        return service.createCompetence(competence);
+        return competenceService.createCompetence(competence);
     }
 
     // Modifier competence .. à completer
@@ -32,7 +32,7 @@ public class CompetenceController {
     @RequestMapping(value = "/updateCompetence", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
     public Competence updateCompetence(@RequestBody Competence comp)
     {
-        return service.updateCompetence(comp);
+        return competenceService.updateCompetence(comp);
     }
 
     // Supprimer competence
@@ -40,7 +40,7 @@ public class CompetenceController {
     @RequestMapping(value = "/deleteCompetence/{competenceId}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public void deleteCompetence(@PathVariable("competenceId") Long competenceId)
     {
-        service.deleteCompetence(competenceId);
+        competenceService.deleteCompetence(competenceId);
     }
 
     // Liste des compétences
@@ -48,7 +48,7 @@ public class CompetenceController {
     @RequestMapping(value = "/allCompetence", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Competence> getAllCompetence()
     {
-        return service.getAllCompetence();
+        return competenceService.getAllCompetence();
     }
 
     // Compétence by ID
@@ -56,7 +56,7 @@ public class CompetenceController {
     @RequestMapping(value = "/competenceById/{comptenceId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Competence getCompetenceById(@PathVariable("comptenceId") Long comptenceId)
     {
-        return service.getCompetenceById(comptenceId);
+        return competenceService.getCompetenceById(comptenceId);
     }
 
     // Compétence by Id Père
@@ -64,7 +64,7 @@ public class CompetenceController {
     @RequestMapping(value = "/getCompetenceByIdPere/{IdPere}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Competence>   getCompetenceIdPere(@PathVariable("IdPere") Long IdPere)
     {
-        return service.getCompetenceByIdPere(IdPere);
+        return competenceService.getCompetenceByIdPere(IdPere);
     }
 
 

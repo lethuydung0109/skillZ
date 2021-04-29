@@ -16,9 +16,6 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Table(	name = "competence")
-// Mapping hibernate
-// à completer ....
-// ...
 public class Competence {
 
         @Id
@@ -31,7 +28,7 @@ public class Competence {
         // Nom de la compétence
         private String nom_competence;
 
-//        //Badges de la competence
+        //Badges de la competence
         @OneToMany( cascade = CascadeType.ALL, mappedBy="competence")
         @JsonIgnore
         Set<Badge> listBadges = new HashSet<>();

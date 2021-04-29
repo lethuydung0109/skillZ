@@ -26,21 +26,10 @@ export class QuestionService {
 
   public saveQuestion(question: Question): Observable<Question> {
 
-    return this.http.post<Question>( API_URL + 'createQuestion/', {
-      libelle: question.libelle,
-      niveau: question.niveau,
-    }, httpOptions);
+    return this.http.post<Question>( API_URL + 'createQuestion/',question , httpOptions);
 
   }
 
-
-  public createQuestion(question : Question) : Observable<Question>
-  {
-    const routeQuery=this.url+"/createQuestion";
-    console.log("Question", question)
-
-    return this.http.post<Question>(routeQuery,Question);
-  }
 
   public updateQuestion(question : Question) : Observable<Question>
   {
@@ -91,4 +80,9 @@ export class QuestionService {
     return this.http.get<number>(routeQuery);
   }
 
+  public getQuestionByCompetenceNiveau(/*idCompetence : number ,*/ idNiveau:string) : Observable<Question[]>
+  {
+    const routeQuery=API_URL+"getQuestionCompetenceNiveau/"+idNiveau;
+    return this.http.get<Array<Question>>(routeQuery);
+  }
 }

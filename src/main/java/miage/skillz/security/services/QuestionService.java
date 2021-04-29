@@ -11,6 +11,7 @@ import miage.skillz.repository.QuestionRepository;
 import miage.skillz.repository.QuizRepository;
 import miage.skillz.repository.ReponseQuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -37,7 +38,6 @@ public class QuestionService {
     {
 
         System.out.println("Received question : "+ qImpl.toString());
-
         Question question = new Question (qImpl.getTheme(), qImpl.getLibelle(), qImpl.getPoids(), qImpl.getNiveau());
         Set<ReponseQuestion> reponseQuestions = new HashSet<>(qImpl.getReponsesQuestions());
         question.setQuestionCompetences(new HashSet<>());
@@ -235,5 +235,10 @@ public class QuestionService {
     public long getQuestionPoids(Long qId) {
 
         return this.questionRepository.findById(qId).get().getPoids();
+    }
+
+    public Set<Question> getQuestionByCompetenceNiveau(/*Long idCompetence,*/ String idNiveau)
+    {
+        return this.questionRepository.getQuestionByCompetenceNiveau(/*idCompetence,*/ idNiveau);
     }
 }

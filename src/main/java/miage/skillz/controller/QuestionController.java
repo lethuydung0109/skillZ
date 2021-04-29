@@ -67,4 +67,12 @@ public class QuestionController {
     {
         return questionService.getQuestionPoids(qId);
     }
+
+    @GetMapping(value = "/getQuestionCompetenceNiveau/{idNiveau}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Set<Question> getQuestionByCompetenceNiveau(@PathVariable String idNiveau)
+    {
+        return questionService.getQuestionByCompetenceNiveau(/*idCompetence,*/idNiveau);
+    }
+
+
 }

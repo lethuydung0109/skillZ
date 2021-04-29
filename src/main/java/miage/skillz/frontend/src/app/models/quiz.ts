@@ -11,13 +11,11 @@ export class Quiz {
     duree : number;
     questionsQuizz : Array<Question>;
     quizCompetences : Array<Competence>;
+    list_questionId : Array<number>;
+  //  quizCompetences : number
     stringCompetence : string;
     score : number;
 
-// à enlever
-  heure: number;
-  minute: number;
-  competence: number;
 
     constructor()
     {
@@ -29,13 +27,12 @@ export class Quiz {
         this.duree=0;
         this.questionsQuizz = [];
         this.quizCompetences = [];
+      // this.quizCompetences = 0;
         this.stringCompetence='';
         this.score=0;
+        this.list_questionId = [];
 
-        // à enlever
-      this.heure=0;
-      this.minute=0;
-      this.competence=0;
+
 
     }
 }

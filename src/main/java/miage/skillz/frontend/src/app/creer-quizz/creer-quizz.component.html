@@ -1,11 +1,11 @@
-<div class="col-md-12">
+<div class="col-md-12" style="padding-top:40px;">
   <div class="card card-container">
-    <h2> Ajouter un questionnaire </h2>
+    <h2> Créer un questionnaire </h2>
     <form  name="form" (ngSubmit)="f.form.valid && onSubmit()"
            #f="ngForm"
            novalidate>
       <div class="form-group">
-        <label for="description">Description</label>
+        <label for="description">Description *</label>
         <input
           id="description"
           type="text"
@@ -15,7 +15,7 @@
           minlength="3"
           maxlength="20"
           #description="ngModel"
-          [(ngModel)]="quizz.name"
+          [(ngModel)]="quiz.name"
         />
         <div class="alert-danger" *ngIf="description.errors && f.submitted">
           <div *ngIf="description.errors.required">La descirption est obligatoire</div>
@@ -32,7 +32,8 @@
           name="competence"
           required
           #competence="ngModel"
-          [(ngModel)]="quizz.competence"
+          [(ngModel)]="quiz.quizCompetences"
+          (change)="competenceChange(competence.value)"
         >
           <option value=""> Choisir une competence</option>
           <option *ngFor="let competence of list_competence"  [ngValue]="competence.id"> {{competence.nom_competence}}</option>
@@ -51,7 +52,9 @@
           name="niveau"
           required
           #niveau="ngModel"
-          [(ngModel)]="quizz.niveau"
+          [(ngModel)]="quiz.niveau"
+          (change)='onNiveauSelected(niveau.value)'
+          [disabled]="!showNiveau"
         >
           <option value=""> Choisir un niveau</option>
           <option value="1">1</option>
@@ -67,29 +70,16 @@
       </div>
 
       <div class="form-group">
-          <label>Duree</label>
+          <label>Duree (secondes)</label>
           <input
-            id="heure"
+            id="duree"
             type="number"
             class="form-control"
-            name="heure"
+            name="duree"
             required
-            #heure="ngModel"
-            [(ngModel)]="quizz.heure"
+            #duree="ngModel"
+            [(ngModel)]="quiz.duree"
           />
-          <label for="heure">Heure</label>
-          <input
-            id="minute"
-            type="number"
-            class="form-control"
-            name="minute"
-            required
-            minlength="3"
-            #minute="ngModel"
-            [(ngModel)]="quizz.minute"
-          />
-          <label for="minute">Minute</label>
-
           <!-- Validation heure minutes ...
           <div class="alert-danger" *ngIf="question.errors && f.submitted">
             <div *ngIf="question.errors.required">La question est obligatoire</div>
@@ -107,7 +97,7 @@
           name="seuil"
           required
           #seuil="ngModel"
-          [(ngModel)]="quizz.pourcentageValidation"
+          [(ngModel)]="quiz.pourcentageValidation"
         />
 
         <!-- Validation Seuil ...
@@ -117,11 +107,71 @@
          </div> -->
       </div>
 
-      <hr>
+      <hr style="border-width: 5px; background-color: black;">
+
+      <h3> Questions <button mat-raised-button color="primary" routerLink="/creer-question" >Créer une question</button>
+
+      </h3>
 
 
       <div class="form-group">
-          <button  (click)= "createQuizz()" type="submit" class="btn btn-success">Ajouter</button>
+        <label for="question">Question * </label>
+
+        <mat-select
+          id="question"
+          class="form-control"
+          name="question"
+          #question="ngModel"
+          [(ngModel)]="quiz.questionsQuizz"
+        >
+          <option value=""> Choisir une question</option>
+          <mat-option *ngFor="let question of list_question"  [value]="question.idQuestion"> {{question.libelle}}</mat-option>
+        </mat-select>
+        <label for="poids">Poids (%) * </label>
+        <input
+          id="poids"
+          type="number"
+          class="form-control"
+          name="poids"
+          required
+          min="0"
+          max="100"
+          #poids="ngModel"
+          [(ngModel)]="quiz.questionsQuizz"
+        />
+
+        <button (click)="ajouterQst(question.value)" class="btn btn-success" [disabled]="!question.valid ">Ajouter</button>
+
+      </div>
+
+      <hr style="border-width: 3px; background-color: black;">
+
+      <table class="table table-hover">
+        <thead>
+        <tr>
+          <th scope="col">Question</th>
+          <th scope="col">Poids</th>
+        </tr>
+        </thead>
+        <tbody *ngFor="let question of list_questionQuizz"  >
+        <tr>
+
+          <td> {{question}} </td>
+          <td> </td>
+          <td><button  mat-fab color="warn"><mat-icon>delete</mat-icon></button></td>
+
+        </tr>
+        </tbody>
+      </table>
+
+
+
+
+
+
+
+      <div class="form-group">
+          <button type="submit" class="btn btn-success" [disabled]="!f.valid">Ajouter</button>
       </div>
 
       <div class="alert alert-warning" *ngIf="f.submitted && isFailed">
