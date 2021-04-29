@@ -62,6 +62,12 @@ export class QuestionService {
     return this.http.get<Array<Question>>(routeQuery);
   }
 
+  public getAllQuestionsByUser() : Observable<Array<Question>>
+  {
+    const routeQuery=this.url+"/user/questions";
+    return this.http.get<Array<Question>>(routeQuery);
+  }
+
   public getQuestionCorrectResponse(qId : number) : Observable<Array<ResponseQuestion>>
   {
     const routeQuery=this.url+"/correctResponse/"+qId;

@@ -2,11 +2,15 @@ package miage.skillz.controller;
 
 import miage.skillz.entity.Question;
 import miage.skillz.entity.ReponseQuestion;
+import miage.skillz.entity.User;
 import miage.skillz.models.QuestionImpl;
-import miage.skillz.security.services.QuestionService;
+import miage.skillz.security.services.UserDetailsImpl;
+import miage.skillz.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,11 +23,16 @@ public class QuestionController {
 
     @Autowired
     private QuestionService questionService;
+    @Autowired
+    private UserController userController;
 
     @PostMapping(value = "/createQuestion",consumes = "application/json",produces = "application/json")
     public ResponseEntity<Question> createQuestion(@RequestBody QuestionImpl questionImpl)
     {
-        return  questionService.createQuestion(questionImpl);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        User currentUser = this.userController.findById(userDetails.getId());
+        return  questionService.createQuestion(questionImpl,currentUser);
     }
 
     @PutMapping(value = "/updateQuestion", consumes = "application/json",produces = "application/json")
@@ -42,6 +51,16 @@ public class QuestionController {
     public List<Question> getAllQuestions()
     {
         return  questionService.getAllQuestions();
+    }
+
+    @GetMapping(value = "/user/questions", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Set<Question> getAllQuizByUser()
+    {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        User currentUser = this.userController.findById(userDetails.getId());
+
+        return questionService.getAllQuestionsByUser(currentUser.getId());
     }
 
     @DeleteMapping(value = "/deleteQuestion/{qId}", produces = MediaType.APPLICATION_JSON_VALUE)

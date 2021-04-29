@@ -15,7 +15,7 @@
           minlength="3"
           maxlength="20"
           #description="ngModel"
-          [(ngModel)]="quizz.name"
+          [(ngModel)]="quiz.name"
         />
         <div class="alert-danger" *ngIf="description.errors && f.submitted">
           <div *ngIf="description.errors.required">La descirption est obligatoire</div>
@@ -32,7 +32,7 @@
           name="competence"
           required
           #competence="ngModel"
-          [(ngModel)]="quizz.competence"
+          [(ngModel)]="quiz.competence"
         >
           <option value=""> Choisir une competence</option>
           <option *ngFor="let competence of list_competence"  [ngValue]="competence.id"> {{competence.nom_competence}}</option>
@@ -51,7 +51,7 @@
           name="niveau"
           required
           #niveau="ngModel"
-          [(ngModel)]="quizz.niveau"
+          [(ngModel)]="quiz.niveau"
         >
           <option value=""> Choisir un niveau</option>
           <option value="1">1</option>
@@ -75,7 +75,7 @@
             name="heure"
             required
             #heure="ngModel"
-            [(ngModel)]="quizz.heure"
+            [(ngModel)]="quiz.heure"
           />
           <label for="heure">Heure</label>
           <input
@@ -86,7 +86,7 @@
             required
             minlength="3"
             #minute="ngModel"
-            [(ngModel)]="quizz.minute"
+            [(ngModel)]="quiz.minute"
           />
           <label for="minute">Minute</label>
 
@@ -107,7 +107,7 @@
           name="seuil"
           required
           #seuil="ngModel"
-          [(ngModel)]="quizz.pourcentageValidation"
+          [(ngModel)]="quiz.seuilValidation"
         />
 
         <!-- Validation Seuil ...
@@ -121,15 +121,15 @@
 
 
       <div class="form-group">
-          <button  (click)= "createQuizz()" type="submit" class="btn btn-success">Ajouter</button>
+          <button  (click)= "createQuiz()" type="submit" class="btn btn-success">Ajouter</button>
       </div>
 
       <div class="alert alert-warning" *ngIf="f.submitted && isFailed">
-          Creation de quizz echouee!<br />{{ errorMessage }}
+          Creation de quiz echouee!<br />{{ errorMessage }}
       </div>
 
       <div class="alert alert-success" *ngIf="isSuccessful">
-        Creation de quizz reussie
+        Creation de quiz reussie
       </div>
 
     </form>

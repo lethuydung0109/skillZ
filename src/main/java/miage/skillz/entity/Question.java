@@ -2,6 +2,7 @@ package miage.skillz.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,9 +26,9 @@ public class Question {
     @Builder.Default
     private long poids = 0;
 
-    /*@Enumerated(EnumType.STRING)
-    @Column(length = 20)*/
-    private String niveau;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="idNiveau")
+    private Niveau niveau;
 
     @Builder.Default
     @OneToMany(mappedBy="question",cascade = CascadeType.ALL)
@@ -45,7 +46,11 @@ public class Question {
             inverseJoinColumns = @JoinColumn(name = "idCompetence"))
     private Set<Competence> questionCompetences = new HashSet<>();
 
-    public Question(String theme, String libelle, long poids, String niveau) {
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idUser")
+    private User user;
+
+    public Question(String theme, String libelle, long poids, Niveau niveau) {
         this.theme = theme;
         this.libelle = libelle;
         this.poids = poids;
