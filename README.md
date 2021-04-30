@@ -8,7 +8,7 @@ Université Paris Nanterre
 
 ![Release](https://img.shields.io/github/v/release/lethuydung0109/skillZ)
 
-[![codecov](https://codecov.io/gh/riad-lazli/skillZ/branch/master/graph/badge.svg?token=S7DI2EY6NZ)](https://codecov.io/gh/riad-lazli/skillZ)
+[![codecov](https://codecov.io/gh/lethuydung0109/skillZ/branch/master/graph/badge.svg?token=WH0A4NP01M)](https://codecov.io/gh/lethuydung0109/skillZ)
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/3a53a12ce2a544b6a8f98d010b416d1d)](https://www.codacy.com/gh/lethuydung0109/skillZ/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=lethuydung0109/skillZ&amp;utm_campaign=Badge_Grade)
 ![Code Coverage with Coveralls](https://img.shields.io/coveralls/github/riad-lazli/skillZ)
