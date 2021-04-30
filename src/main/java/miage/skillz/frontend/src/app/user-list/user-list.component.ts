@@ -31,7 +31,7 @@ export class UserListComponent implements OnInit {
           // })
           this.users = users;
           console.log(users);
-          console.log(users[0].role);
+          console.log("role = " + users[0].role);
         },
         error => {
           console.log(error);
@@ -62,15 +62,20 @@ export class UserListComponent implements OnInit {
   }
 
   searchUsername(): void {
-    this.userService.findByUsername(this.username)
+    if(this.username != ""){
+      this.userService.findByUsername(this.username)
       .subscribe(
         data => {
           this.users = data;
-          console.log(data);
+          console.log(this.users);
         },
         error => {
           console.log(error);
         });
+    }else{
+      this.retrieveUsers();
+    }
+    
   }
 
 

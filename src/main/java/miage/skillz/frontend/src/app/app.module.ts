@@ -41,7 +41,13 @@ import { UserListComponent } from './user-list/user-list.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserQuestionAndQuiZComponent } from './user-question-and-quiz/user-question-and-quiz.component';
 import { MatTabsModule} from '@angular/material/tabs';
+<<<<<<< HEAD
 import { MatChipsModule } from '@angular/material/chips';
+=======
+import { recommendationListComponent } from './recommendation-list/recommendation-list.component';
+import { CreateRecommendationComponent } from './create-recommendation/create-recommendation.component';
+
+>>>>>>> 9a881f751c90b7b840e72b0300fac8ad107b81cf
 
 
 
@@ -68,7 +74,10 @@ import { MatChipsModule } from '@angular/material/chips';
         CreateUserComponent,
         UserListComponent,
         UserDetailsComponent,
-        UserQuestionAndQuiZComponent
+        UserQuestionAndQuiZComponent,
+        recommendationListComponent,
+        CreateRecommendationComponent,
+    
     ],
     imports: [
         BrowserModule,

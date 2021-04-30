@@ -19,6 +19,7 @@ import { UserListComponent } from './user-list/user-list.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserQuestionAndQuiZComponent } from './user-question-and-quiz/user-question-and-quiz.component';
+import { recommendationListComponent } from './recommendation-list/recommendation-list.component';
 
 
 
@@ -41,7 +42,11 @@ const routes: Routes = [
   { path: 'createUser', component: CreateUserComponent },
   { path: 'userQuestionsAndQuiz', component: UserQuestionAndQuiZComponent },
   { path: 'users/:id', component: UserDetailsComponent },
+<<<<<<< HEAD
   { path: 'participant/:idBagde', component: BoardParticipantComponent },
+=======
+  { path: 'recommendations', component: recommendationListComponent },
+>>>>>>> 9a881f751c90b7b840e72b0300fac8ad107b81cf
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
