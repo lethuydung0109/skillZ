@@ -25,6 +25,23 @@
       </div>
 
       <div class="form-group">
+        <label for="theme">Theme</label>
+        <select
+          id="theme"
+          class="form-control"
+          name="theme"
+          #theme="ngModel"
+          [(ngModel)]="quiz.theme"
+        >
+          <option value=""> Choisir un theme</option>
+        </select>
+
+        <div class="alert-danger" *ngIf="theme.errors && f.submitted">
+          <div *ngIf="theme.errors.required">Theme est obligatoire</div>
+        </div>
+      </div>
+
+      <div class="form-group">
         <label for="competence">Competence</label>
         <select
           id="competence"
@@ -32,7 +49,7 @@
           name="competence"
           required
           #competence="ngModel"
-          [(ngModel)]="quiz.quizCompetences"
+          [(ngModel)]="quiz.idCompetence"
           (change)="competenceChange(competence.value)"
         >
           <option value=""> Choisir une competence</option>
@@ -52,9 +69,9 @@
           name="niveau"
           required
           #niveau="ngModel"
-          [(ngModel)]="quiz.niveau"
+          [(ngModel)]="quiz.idNiveau"
           (change)='onNiveauSelected(niveau.value)'
-          [disabled]="!showNiveau"
+          [disabled]="showNiveau"
         >
           <option value=""> Choisir un niveau</option>
           <option value="1">1</option>
@@ -97,7 +114,7 @@
           name="seuil"
           required
           #seuil="ngModel"
-          [(ngModel)]="quiz.pourcentageValidation"
+          [(ngModel)]="quiz.seuilValidation"
         />
 
         <!-- Validation Seuil ...
@@ -109,7 +126,7 @@
 
       <hr style="border-width: 5px; background-color: black;">
 
-      <h3> Questions <button mat-raised-button color="primary" routerLink="/creer-question" >Créer une question</button>
+      <h3> Questions <button type="button" mat-raised-button color="primary" routerLink="/creer-question" >Créer une question</button>
 
       </h3>
 
@@ -122,11 +139,13 @@
           class="form-control"
           name="question"
           #question="ngModel"
-          [(ngModel)]="quiz.questionsQuizz"
+          [(ngModel)]="quiz.quizQuestions"
         >
           <option value=""> Choisir une question</option>
-          <mat-option *ngFor="let question of list_question"  [value]="question.idQuestion"> {{question.libelle}}</mat-option>
+          <mat-option *ngFor="let question of list_question"  [value]="question"> {{question.libelle}}</mat-option>
         </mat-select>
+
+        <!--
         <label for="poids">Poids (%) * </label>
         <input
           id="poids"
@@ -137,10 +156,11 @@
           min="0"
           max="100"
           #poids="ngModel"
-          [(ngModel)]="quiz.questionsQuizz"
+          [(ngModel)]="quiz.poids"
         />
+        -->
 
-        <button (click)="ajouterQst(question.value)" class="btn btn-success" [disabled]="!question.valid ">Ajouter</button>
+        <button type="button" (click)="ajouterQst(question.value)" class="btn btn-success" [disabled]="!question.valid ">Ajouter</button>
 
       </div>
 
@@ -150,15 +170,15 @@
         <thead>
         <tr>
           <th scope="col">Question</th>
-          <th scope="col">Poids</th>
+        <!--  <th scope="col">Poids</th> -->
         </tr>
         </thead>
-        <tbody *ngFor="let question of list_questionQuizz"  >
+        <tbody *ngFor="let question of list_questionQuiz"  >
         <tr>
 
-          <td> {{question}} </td>
-          <td> </td>
-          <td><button  mat-fab color="warn"><mat-icon>delete</mat-icon></button></td>
+          <td> {{question.libelle}} </td>
+       <!--   <td> {{question.poids}}</td>  -->
+          <td><button type="button" (click)="deleteQuestion(question)"  mat-fab color="warn"><mat-icon>delete</mat-icon></button></td>
 
         </tr>
         </tbody>

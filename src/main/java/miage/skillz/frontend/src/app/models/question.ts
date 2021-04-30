@@ -8,19 +8,17 @@ export class Question {
     idQuestion : number;
     libelle : string;
     theme : string;
-    niveau :  string;
+    //niveau :  string;
     poids :  number ;
     qst: string;
     reponsesQuestions : Array<ResponseQuestion> = [];
-    /*
-    poids :  number ;
-    niveau !:  number;
+
+    idNiveau !:  number;
     niveauName!: string;
-    */
-     */
+
     questionCompetences : Array<Competence>;
 
-    listQuizz : Array<Quiz>;
+   // listQuizz : Array<Quiz>;
 
     stringCompetence : string;
 
@@ -32,9 +30,9 @@ export class Question {
         this.theme='';
         this.libelle='';
         this.poids=0;
-        this.niveau=0;
+        this.idNiveau=0;
         this.questionCompetences =[];
-        this.listQuiz =[];
+      //  this.listQuiz =[];
         this.reponsesQuestions =[];
         this.stringCompetence='';
         this.qst='';

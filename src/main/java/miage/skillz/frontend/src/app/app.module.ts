@@ -92,7 +92,7 @@ import { MatTabsModule} from '@angular/material/tabs';
         MatButtonModule,
         MatListModule,
         MatSelectModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
         MatTabsModule
 ],
 providers: [authInterceptorProviders],

@@ -5,8 +5,8 @@ import {CompetenceService} from "../services/competence.service";
 import {Competence} from "../models/competence";
 import {Question} from "../models/question";
 import {ResponseQuestion} from "../models/response-question";
-import {NgModel} from "@angular/forms";
 import {MatCheckbox} from "@angular/material/checkbox";
+import {FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-creer-question',
@@ -22,7 +22,7 @@ export class CreerQuestionComponent implements OnInit {
   question = new Question();
   list_competence: Array<Competence> =[];
   list_reponses: Array<ResponseQuestion> =[];
-  rep = new ResponseQuestion();
+
   questionCompetences: Array<Competence> = [];
 
 
@@ -36,9 +36,12 @@ export class CreerQuestionComponent implements OnInit {
         listComptence.push(p);
       })
     });
-    console.log("projects :", listComptence)
+    console.log("liste competences :", listComptence)
     this.list_competence=listComptence;
   }
+
+
+
 
   onSubmit(): void {
     this.createQuestion();
@@ -49,6 +52,7 @@ export class CreerQuestionComponent implements OnInit {
 
   createQuestion(): void {
     this.question.reponsesQuestions = this.list_reponses;
+    console.log(this.list_reponses);
     this.questionService.saveQuestion(this.question).subscribe(data => {
       console.log(data);
     });
@@ -61,14 +65,19 @@ export class CreerQuestionComponent implements OnInit {
   }
 
   ajouterRepQst(reponse: string, correct: MatCheckbox) {
-    this.rep.libelle = reponse;
-    this.rep.isCorrect = correct.checked;
-    this.list_reponses.push(this.rep);
-    this.rep = new ResponseQuestion();
+    let rep = new ResponseQuestion();
+    rep.libelle = reponse;
+    rep.isCorrect = correct.checked;
+    this.list_reponses.push(rep);
   }
 
 
   deleteReponse(reponse: ResponseQuestion) {
     this.list_reponses.splice(this.list_reponses.indexOf(reponse),1);
+  }
+
+  getAllNiveau()
+  {
+
   }
 }

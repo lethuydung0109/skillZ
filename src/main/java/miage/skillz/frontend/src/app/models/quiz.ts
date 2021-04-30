@@ -4,36 +4,41 @@ import { Competence } from './competence';
 export class Quiz {
 
     idQuiz : number;
-    name : string;
-    niveau!: number;
-    niveauName!: string;
-    theme : string;
-    seuilValidation :  number;
     duree : number;
-    questionsQuiz : Array<Question>;
-    quizCompetence !: Competence;
-   // stringCompetence : string;
-    list_questionId : Array<number>;
+    name : string;
+    seuilValidation :  number;
+    theme : string;
+
+    idNiveau!: number;
+    niveauName!: string;
+
+    // id competence
+    //idCompetence !: number
+  quizCompetence !: Competence;
+
+  quizQuestions : Array<Question>;
+  quizQuestionsId : Array<number>;
+
+   // stringCompetence : string
     score : number;
 
+    idCompetence !: number;
 
     constructor()
     {
         this.idQuiz= 0;
         this.name='';
-        //this.niveau=;
+        this.idNiveau=0;
         this.theme='';
         this.seuilValidation=0;
         this.duree=0;
-        this.questionsQuiz = [];
+      this.quizQuestions = [];
+      this.quizQuestionsId = [];
        // this.stringCompetence='';
       //  this.quizCompetences = [];
       // this.quizCompetences = 0;
-        this.stringCompetence='';
+      //  this.stringCompetence='';
         this.score=0;
-        this.list_questionId = [];
-
-
 
     }
 }

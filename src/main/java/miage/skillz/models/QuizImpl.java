@@ -20,12 +20,12 @@ public class QuizImpl {
     private String theme;
     private Long idNiveau;
     private Long seuilValidation;
-    private long duree;
+    private Long duree;
     private Long idCompetence;
     @Builder.Default
     private String dateOfCreation= new SimpleDateFormat("dd-MM-yyyy").format(new Date());
     @Builder.Default
-    private Set<Long> quizQuestions = new HashSet<>();
+    private Set<Long> quizQuestionsId = new HashSet<>();
 
     public QuizImpl(String name, Long idNiveau, String theme, Long seuilValidation, long duree, Long idCompetence) {
         this.name = name;

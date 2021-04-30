@@ -29,9 +29,9 @@ export class DoQuizComponent implements OnInit {
 
   @ViewChild('chrono', { static: false }) chrono!: CountdownComponent;
 
-  
+
   constructor(private actRoute: ActivatedRoute, private quizService : QuizService, private modalService: NgbModal,
-              private http : HttpClient, private router : Router, private questionService : QuestionService) { 
+              private http : HttpClient, private router : Router, private questionService : QuestionService) {
     this.quizId = this.actRoute.snapshot.params.id;
     this.currentQuiz= new Quiz();
     this.isStart=false;
@@ -45,8 +45,8 @@ export class DoQuizComponent implements OnInit {
     this.quizService.getQuiz(this.quizId).subscribe(data => {
       console.log("quiz data : ", data)
       this.currentQuiz=data;
-      this.currentQuiz.niveauName=this.toStringNiveau(data.niveau);
-        console.log(" niveauName :", this.currentQuiz.niveauName);   
+      this.currentQuiz.niveauName=this.toStringNiveau(data.idNiveau);
+        console.log(" niveauName :", this.currentQuiz.niveauName);
       this.quizTime=data.duree;
     })
 
@@ -56,9 +56,9 @@ export class DoQuizComponent implements OnInit {
     })
   }
 
-  startQuiz() { 
+  startQuiz() {
     this.isStart=true;
-    this.chrono.resume(); 
+    this.chrono.resume();
   }
 
   isResponseChecked(response : ResponseQuestion, qId : number)
@@ -66,47 +66,47 @@ export class DoQuizComponent implements OnInit {
     //création de la liste des réponses sélectionnées par le user pour chaque question
     if(response.isSelected)
     {
-      if(this.userResponse.has(qId)) this.userResponse.get(qId)?.push(response)    
+      if(this.userResponse.has(qId)) this.userResponse.get(qId)?.push(response)
       else  this.userResponse.set(qId, new Array(response));
     }
-    
+
     console.log("Map : ", this.userResponse);
   }
 
   validQuizResponse(){
-    
-   
+
+
     let tab : Array<any> =[];
     let poidsTotal:number=0;
-    //Pour chaque question 
-    for (let entry of this.userResponse.entries()) {    
+    //Pour chaque question
+    for (let entry of this.userResponse.entries()) {
       //Vérifier que les questions sélectionnées sont les bonnes réponses
-      this.questionService.getQuestionCorrectResponse(entry[0]).subscribe(data => {   // on récupère la liste des réponses correctes de la question           
+      this.questionService.getQuestionCorrectResponse(entry[0]).subscribe(data => {   // on récupère la liste des réponses correctes de la question
         entry[1].forEach(selectedResponse  => { // on parcourt la liste des réponses sélectionnées pour la question
           data.forEach( correctResponse => { // on parcourt la liste des réponses correctes de la question
             if(selectedResponse.idReponse == correctResponse.idReponse)  {
               //tab.push(selectedResponse);
-              this.correctResponsesSelected.push(selectedResponse); 
+              this.correctResponsesSelected.push(selectedResponse);
             }
           })
         });
-        
+
         //this.correctResponsesSelected=tab; // liste des réponses sélectionnées et correctes pour la question
         //console.log(" this.correctResponsesSelected ", this.correctResponsesSelected)
-       
+
         //Calculer le score du user pour le quiz
         if(this.correctResponsesSelected.length == data.length) {
-          this.questionService.getQuestionPoids(entry[0]).subscribe(poids => {            
-            poidsTotal+=poids;     
-            console.log("qS : ", poidsTotal);           
-          });           
-          //this.saveScore(poidsTotal);                  
-        }   
-        this.quizScore=poidsTotal;      
-      });      
+          this.questionService.getQuestionPoids(entry[0]).subscribe(poids => {
+            poidsTotal+=poids;
+            console.log("qS : ", poidsTotal);
+          });
+          //this.saveScore(poidsTotal);
+        }
+        this.quizScore=poidsTotal;
+      });
     }
 
-    if(this.quizScore >= this.currentQuiz.seuilValidation) 
+    if(this.quizScore >= this.currentQuiz.seuilValidation)
       this.openValidationModal("Félicitaions !Vous avez réussi le test avec un score de : "+poidsTotal);
     else this.openValidationModal("Dommage ! Vous avez raté le test. Votre score est de "+poidsTotal);
   }
@@ -123,14 +123,14 @@ export class DoQuizComponent implements OnInit {
       this.isStart=false;
       c.stop;
       this.validQuizResponse();
-     
+
   }
 
 
-  
+
   saveScore(score : number)  {
     this.quizScore=score;
-    console.log(" score", this.quizScore);  
+    console.log(" score", this.quizScore);
   }
 
   public openValidationModal(message:string) : void {

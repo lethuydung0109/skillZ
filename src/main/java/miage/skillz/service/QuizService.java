@@ -43,7 +43,7 @@ public class QuizService {
 
         //Association question-quiz
         Set<Question> questions = new HashSet<>();
-        for (Long qId : quizImpl.getQuizQuestions()) {
+        for (Long qId : quizImpl.getQuizQuestionsId()) {
             questions.add(this.questionRepository.findById(qId).get());
         }
 
@@ -70,8 +70,8 @@ public class QuizService {
         quiz.setQuizQuestions(new HashSet<>());
         //quiz.setQuizCompetences(new HashSet<>());
 
-        System.out.println("quizImpl question : "+quizImpl.getQuizQuestions());
-        quizImpl.getQuizQuestions().forEach(qId -> {
+        System.out.println("quizImpl question : "+quizImpl.getQuizQuestionsId());
+        quizImpl.getQuizQuestionsId().forEach(qId -> {
             System.out.println("questionId : "+qId+" find : "+this.questionRepository.existsById(qId));
             quiz.getQuizQuestions().add(this.questionRepository.findById(qId).orElse(null));
         });

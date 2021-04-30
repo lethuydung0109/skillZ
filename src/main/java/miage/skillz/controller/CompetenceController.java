@@ -24,7 +24,7 @@ public class CompetenceController {
     //Get competence stats
     @GetMapping(value = "/competenceStats", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getCompetenceStats(){
-        List<Competence> allCompetences = service.getAllCompetence();
+        List<Competence> allCompetences = competenceService.getAllCompetence();
         int nbCompetences = allCompetences.size();
         return new  ResponseEntity <Integer>(nbCompetences, HttpStatus.OK);
     }

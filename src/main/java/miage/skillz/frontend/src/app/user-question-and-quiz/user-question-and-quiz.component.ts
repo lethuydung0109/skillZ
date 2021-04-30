@@ -20,7 +20,7 @@ export class UserQuestionAndQuiZComponent implements OnInit {
 
   displayedQuestionColumns: string[] = ['num','theme','libelle','niveauName','stringCompetence'];
   displayedQuizColumns: string[] = ['num','theme','name', 'niveauName', 'competence','duree'];
- 
+
 
   dataSourceQuestion!: MatTableDataSource<Question>;
   dataSourceQuiz!: MatTableDataSource<Quiz>;
@@ -35,9 +35,9 @@ export class UserQuestionAndQuiZComponent implements OnInit {
 
     let listQ : Array<Question> =[];
     this.questionService.getAllQuestionsByUser().subscribe(data => {
-      data.forEach(q => {     
+      data.forEach(q => {
         q.stringCompetence=this.quizCompetenceToString(q.questionCompetences);
-        q.niveauName=this.toStringNiveau(q.niveau);
+        q.niveauName=this.toStringNiveau(q.idNiveau);
         listQ.push(q);
       })
       this.dataSourceQuestion = new MatTableDataSource(listQ);
@@ -47,15 +47,15 @@ export class UserQuestionAndQuiZComponent implements OnInit {
 
     let listQuiz : Array<Quiz> =[];
     this.quizService.getAllQuizByUser().subscribe(data => {
-      data.forEach(q => {  
-        q.niveauName=this.toStringNiveau(q.niveau);
+      data.forEach(q => {
+        q.niveauName=this.toStringNiveau(q.idNiveau);
         listQuiz.push(q);
       })
       this.dataSourceQuiz = new MatTableDataSource(listQuiz);
     });
 
     this.myQuiz=listQuiz;
-    
+
     console.log("quiz : ",this.myQuiz);
   }
 

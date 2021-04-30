@@ -45,6 +45,12 @@ export class QuestionService {
     return this.http.get<Question>(routeQuery);
   }
 
+  public getLesQuestionsById(listQstId : Array<number>) : Observable<Set<Question>>
+  {
+    const routeQuery=this.url+"/lesQuestionById/"+listQstId;
+    return this.http.get<Set<Question>>(routeQuery);
+  }
+
   public getAllQuestions() : Observable<Array<Question>>
   {
     const routeQuery=this.url+"/allQuestions";
@@ -86,7 +92,7 @@ export class QuestionService {
     return this.http.get<number>(routeQuery);
   }
 
-  public getQuestionByCompetenceNiveau(/*idCompetence : number ,*/ idNiveau:string) : Observable<Question[]>
+  public getQuestionByCompetenceNiveau(/*idCompetence : number ,*/ idNiveau:number) : Observable<Question[]>
   {
     const routeQuery=API_URL+"getQuestionCompetenceNiveau/"+idNiveau;
     return this.http.get<Array<Question>>(routeQuery);
