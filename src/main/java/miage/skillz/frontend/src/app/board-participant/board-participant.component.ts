@@ -1,9 +1,10 @@
 import { UserTestService } from '../_services/auth/service/userTest.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { QuizService } from '../services/quiz.service';
+import { Component, OnInit } from '@angular/core';
+import { Badge } from '../models/badge';
+import { BadgeService } from '../services/badge.service';
+import { CompetenceService } from '../services/competence.service';
+import Utils from '../utils';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-board-participant',
@@ -13,18 +14,13 @@ import { QuizService } from '../services/quiz.service';
 export class BoardParticipantComponent implements OnInit {
   content?: string;
 
- 
-  public userResults : Array<any> =[];
-  displayedColumns: string[] = ['nomQuiz','result','score', 'date'];
+  public userBadges : Array<Badge> =[];
+  badgeCompetenceId : number;
 
-  dataSource!: MatTableDataSource<any>;
+  constructor(private actRoute: ActivatedRoute,private userService: UserTestService,private badgeService : BadgeService,
+                 private competenceService : CompetenceService) {
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-
-  constructor(private userService: UserTestService,private quizService : QuizService) {
-    this.dataSource = new MatTableDataSource(this.userResults);
-
+    this.badgeCompetenceId = this.actRoute.snapshot.params.idBagde;
   }
 
   ngOnInit(): void {
@@ -38,37 +34,21 @@ export class BoardParticipantComponent implements OnInit {
     );
 
     //A remplacer par todoquiz
-    /*this.quizService.getAllQuiz().subscribe(data => {
-      data.forEach(q => {
-        this.userResults.push(q);
-        console.log("userResults ", this.userResults);
+    this.badgeService.getAllBadgeByUser().subscribe(data => {
+      data.forEach(b => {
+        if(this.badgeCompetenceId != undefined){
+          this.competenceService.getCompetenceById(this.badgeCompetenceId).subscribe(
+            c => b.competenceName=c.nom_competence
+          );
+        }
+        else{
+          b.competenceName=b.competence?.nom_competence;
+        }
+        b.niveauName=Utils.toStringNiveau(b.niveau.niveauId)
+        this.userBadges.push(b);
+        console.log("userResults ", this.userBadges);
       })
-      this.dataSource = new MatTableDataSource(this.userResults);
-    });*/
-
-  
-
-    //this.userResults.push(quizResult);
-
-    //this.dataSource = new MatTableDataSource(this.userResults);
-    //console.log("quiz : ",this.userResults);
-
+    });
   }
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
-
-
 
 }

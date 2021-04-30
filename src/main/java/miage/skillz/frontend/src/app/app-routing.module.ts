@@ -43,6 +43,7 @@ const routes: Routes = [
   { path: 'createUser', component: CreateUserComponent },
   { path: 'userQuestionsAndQuiz', component: UserQuestionAndQuiZComponent },
   { path: 'users/:id', component: UserDetailsComponent },
+  { path: 'participant/:idBagde', component: BoardParticipantComponent },
   { path: 'recommendations', component: recommendationListComponent },
   { path: 'createRecommendation', component: CreateRecommendationComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }

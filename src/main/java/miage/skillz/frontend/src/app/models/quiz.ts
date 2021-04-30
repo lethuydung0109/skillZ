@@ -5,12 +5,13 @@ export class Quiz {
 
     idQuiz : number;
     name : string;
-    niveau!: number;
+    niveau!: any;
+    idNiveau!:number;
     niveauName!: string;
     theme : string;
     seuilValidation :  number;
     duree : number;
-    questionsQuiz : Array<Question>;
+    quizQuestions : Array<Question>;
     quizCompetence !: Competence;
    // stringCompetence : string;
     score : number;
@@ -28,7 +29,7 @@ export class Quiz {
         this.theme='';
         this.seuilValidation=0;
         this.duree=0;
-        this.questionsQuiz = [];
+        this.quizQuestions = [];
        // this.stringCompetence='';
         this.score=0;
 

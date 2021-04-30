@@ -8,6 +8,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Competence } from '../models/competence';
 import { TokenStorageService } from '../_services/auth/service/token-storage.service';
+import Utils from '../utils';
 
 @Component({
   selector: 'app-list-quiz',
@@ -48,7 +49,7 @@ export class ListQuizComponent implements OnInit,AfterViewInit  {
     let listQuiz : Array<Quiz> =[];
     this.quizService.getAllQuiz().subscribe(data => {
       data.forEach(q => {  
-        q.niveauName=this.toStringNiveau(q.niveau);
+        q.niveauName=Utils.toStringNiveau(q.niveau);
         console.log(" niveauName :", q.niveauName);    
         listQuiz.push(q);
       })
@@ -82,21 +83,4 @@ export class ListQuizComponent implements OnInit,AfterViewInit  {
     })
     return stringArray;
   }
-
-  toStringNiveau(niveau : number) : string
-  {
-    switch (niveau) {
-      case 1:
-        return "Debutant"
-      case 2:
-        return "PreIntermediaire"
-      case 3:
-        return "Intermediaire"
-      case 4:
-        return "Avance"
-      default:
-        return "Debutant"
-    }
-  }
-
 }

@@ -1,6 +1,6 @@
 <div class="container">
   <h2>Statistiques du participant</h2>
-  
+
   <table>
     <tr>
       <td>Nombre de badge</td>
@@ -15,5 +15,18 @@
   <a href="/liste-competence">Liste de compétences</a>
   <br>
   <a href="/recommendations">Mes recommandations</a>
- 
+
+  <hr>
+  <h2> Badges </h2><br>
+
+  <div>
+    <mat-chip-list aria-label="Fish selection" >
+      <mat-chip *ngFor="let badge of userBadges " color="primary" selected>
+        {{badge.competenceName}} | {{badge.niveauName}} | {{badge.dateValidation}}</mat-chip>
+    </mat-chip-list>
+  </div>
+
+
 </div>
+
+

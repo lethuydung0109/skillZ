@@ -34,17 +34,15 @@ public class QuizService {
     {
         System.out.println("Received quiz : "+ quizImpl.toString());
         Quiz quiz = new Quiz(quizImpl.getName(),
-                            niveauRepository.findById(quizImpl.getIdNiveau()).get(),
+                            niveauRepository.findById(quizImpl.getIdNiveau()).orElseThrow(),
                             quizImpl.getTheme(),quizImpl.getSeuilValidation(),quizImpl.getDuree(),
-                            quizImpl.getDateOfCreation(),competenceRepository.findById(quizImpl.getIdCompetence()).get());
+                            quizImpl.getDateOfCreation(),competenceRepository.findById(quizImpl.getIdCompetence()).orElseThrow());
         quiz.setQuizQuestions(new HashSet<>());
-        //quiz.setQuizCompetences(new HashSet<>());
-        //quiz.setUsers(new HashSet<>());
 
         //Association question-quiz
         Set<Question> questions = new HashSet<>();
-        for (Long qId : quizImpl.getQuizQuestions()) {
-            questions.add(this.questionRepository.findById(qId).get());
+        for (Long qId : quizImpl.getQuizQuestionsId()) {
+            questions.add(this.questionRepository.findById(qId).orElseThrow());
         }
 
         // Ajout de l'entity à la bdd
@@ -63,15 +61,15 @@ public class QuizService {
     {
         System.out.println("QuizImpl à modifier : "+quizImpl);
         Quiz quiz = new Quiz(quizImpl.getName(),
-                niveauRepository.findById(quizImpl.getIdNiveau()).get(),
+                niveauRepository.findById(quizImpl.getIdNiveau()).orElseThrow(),
                 quizImpl.getTheme(),quizImpl.getSeuilValidation(),quizImpl.getDuree(),
-                quizImpl.getDateOfCreation(),competenceRepository.findById(quizImpl.getIdCompetence()).get());
+                quizImpl.getDateOfCreation(),competenceRepository.findById(quizImpl.getIdCompetence()).orElseThrow());
         quiz.setIdQuiz(quizImpl.getIdQuiz());
         quiz.setQuizQuestions(new HashSet<>());
         //quiz.setQuizCompetences(new HashSet<>());
 
-        System.out.println("quizImpl question : "+quizImpl.getQuizQuestions());
-        quizImpl.getQuizQuestions().forEach(qId -> {
+        System.out.println("quizImpl question : "+quizImpl.getQuizQuestionsId());
+        quizImpl.getQuizQuestionsId().forEach(qId -> {
             System.out.println("questionId : "+qId+" find : "+this.questionRepository.existsById(qId));
             quiz.getQuizQuestions().add(this.questionRepository.findById(qId).orElse(null));
         });
@@ -96,9 +94,9 @@ public class QuizService {
     public void setQuizQuestions(Long quizId, Set<Question> questions)
     {
         Set<Question> putQuestions= new HashSet<>();
-        questions.forEach(q-> putQuestions.add(this.questionRepository.findById(q.getIdQuestion()).get()));
+        questions.forEach(q-> putQuestions.add(this.questionRepository.findById(q.getIdQuestion()).orElseThrow()));
 
-        Quiz putQuiz=this.quizRepository.findById(quizId).get();
+        Quiz putQuiz=this.quizRepository.findById(quizId).orElseThrow();
         putQuiz.setQuizQuestions(putQuestions);
 
         putQuestions.forEach(question -> {
@@ -113,10 +111,10 @@ public class QuizService {
     {
         Set<Competence> putCompetences= new HashSet<>();
         competences.forEach(c->{
-            putCompetences.add(this.competenceRepository.findById(c.getId()).get());
+            putCompetences.add(this.competenceRepository.findById(c.getId()).orElseThrow());
         });
 
-        Quiz putQuiz=this.quizRepository.findById(quizId).get();
+        Quiz putQuiz=this.quizRepository.findById(quizId).orElseThrow();
         putQuiz.setQuizCompetences(putCompetences);
 
         putCompetences.forEach(competence -> {
@@ -140,12 +138,12 @@ public class QuizService {
 
         return quizRepository.findAll()
                             .stream()
-                            .filter(quiz -> quiz.getUser().equals(userRepository.findById(userId).get()))
+                            .filter(quiz -> quiz.getUser().equals(userRepository.findById(userId).orElseThrow()))
                             .collect(Collectors.toSet());
     }
 
     public Set<Question> getQuizQuestions(Long quizId) {
-        return new HashSet<>(this.quizRepository.findById(quizId).get().getQuizQuestions());
+        return new HashSet<>(this.quizRepository.findById(quizId).orElseThrow().getQuizQuestions());
     }
 
     public boolean addQuestionToQuiz(Long quizId, Long questionId)
@@ -164,8 +162,8 @@ public class QuizService {
     }
 
     public void deleteQuestionFromQuiz(Long quizId, Long questionId) {
-        Question deleteQuestion = this.questionRepository.findById(questionId).get();
-        Quiz quiz = this.quizRepository.findById(questionId).get();
+        Question deleteQuestion = this.questionRepository.findById(questionId).orElseThrow();
+        Quiz quiz = this.quizRepository.findById(quizId).orElseThrow();
 
         quiz.getQuizQuestions().remove(deleteQuestion);
         deleteQuestion.getListQuiz().remove(quiz);
@@ -175,26 +173,26 @@ public class QuizService {
 
     public void deleteQuiz(Long quizId)
     {
-        Quiz deletedQuiz = this.quizRepository.findById(quizId).get();
+        Quiz deletedQuiz = this.quizRepository.findById(quizId).orElseThrow();
         if(this.quizRepository.existsById(quizId))
         {
             Set<Question> questions = deletedQuiz.getQuizQuestions();
            // Set<Competence> competences = deletedQuiz.getQuizCompetences();
             questions.forEach(question -> {
-                this.questionRepository.findById(question.getIdQuestion()).get().getListQuiz().remove(deletedQuiz);
+                this.questionRepository.findById(question.getIdQuestion()).orElseThrow().getListQuiz().remove(deletedQuiz);
                 this.questionRepository.saveAndFlush(question);
             });
 
 //            competences.forEach(competence -> {
-//                this.competenceRepository.findById(competence.getId()).get().getListQuiz().remove(deletedQuiz);
+//                this.competenceRepository.findById(competence.getId()).orElseThrow().getListQuiz().remove(deletedQuiz);
 //                this.competenceRepository.saveAndFlush(competence);
 //            });
 
             questions.clear();
             deletedQuiz.setNiveau(null);
-            this.competenceRepository.findById(deletedQuiz.getQuizCompetence().getId()).get().getListQuiz().remove(deletedQuiz);
+            this.competenceRepository.findById(deletedQuiz.getQuizCompetence().getId()).orElseThrow().getListQuiz().remove(deletedQuiz);
             deletedQuiz.setQuizCompetence(null);
-            this.userRepository.findById(deletedQuiz.getUser().getId()).get().getMyCreatedQuiz().remove(deletedQuiz);
+            this.userRepository.findById(deletedQuiz.getUser().getId()).orElseThrow().getMyCreatedQuiz().remove(deletedQuiz);
             deletedQuiz.setUser(null);
 
             this.quizRepository.saveAndFlush(deletedQuiz);
