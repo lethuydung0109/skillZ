@@ -42,11 +42,8 @@ const routes: Routes = [
   { path: 'createUser', component: CreateUserComponent },
   { path: 'userQuestionsAndQuiz', component: UserQuestionAndQuiZComponent },
   { path: 'users/:id', component: UserDetailsComponent },
-<<<<<<< HEAD
   { path: 'participant/:idBagde', component: BoardParticipantComponent },
-=======
   { path: 'recommendations', component: recommendationListComponent },
->>>>>>> 9a881f751c90b7b840e72b0300fac8ad107b81cf
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

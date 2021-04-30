@@ -37,7 +37,7 @@ public class QuestionService {
         System.out.println("Received question : "+ qImpl.toString());
 
         Question question = new Question (qImpl.getTheme(), qImpl.getLibelle(),
-                                          qImpl.getPoids(), niveauRepository.findById(qImpl.getIdNiveau()).get());
+                                          qImpl.getPoids(), niveauRepository.findById(qImpl.getIdNiveau()).orElseThrow());
         Set<ReponseQuestion> reponseQuestions = new HashSet<>(qImpl.getReponsesQuestions());
         question.setQuestionCompetences(new HashSet<>());
         question.setReponsesQuestions(new HashSet<>());
@@ -45,7 +45,7 @@ public class QuestionService {
         //Association competence-quiz
         Set<Competence> competences = new HashSet<>();
         for (Long cId : qImpl.getQuestionCompetences()) {
-            competences.add(this.competenceRepository.findById(cId).get());
+            competences.add(this.competenceRepository.findById(cId).orElseThrow());
         }
 
         // Ajout de l'entity à la bdd
@@ -75,7 +75,7 @@ public class QuestionService {
     {
         System.out.println("Received question : "+ qImpl.toString());
 
-        Question question = new Question (qImpl.getTheme(), qImpl.getLibelle(), qImpl.getPoids(), niveauRepository.findById(qImpl.getIdNiveau()).get());
+        Question question = new Question (qImpl.getTheme(), qImpl.getLibelle(), qImpl.getPoids(), niveauRepository.findById(qImpl.getIdNiveau()).orElseThrow());
         //Set<ReponseQuestion> reponseQuestions = new HashSet<>(qImpl.getReponsesQuestions());
         question.setIdQuestion(qImpl.getIdQuestion());
         question.setQuestionCompetences(new HashSet<>());
@@ -90,7 +90,7 @@ public class QuestionService {
         qImpl.getListQuiz().forEach(qId -> question.getListQuiz().add(this.quizRepository.findById(qId).orElse(null)));
 
         qImpl.getReponsesQuestions().forEach(rep -> {
-            rep.setQuestion(this.questionRepository.findById(qImpl.getIdQuestion()).get());
+            rep.setQuestion(this.questionRepository.findById(qImpl.getIdQuestion()).orElseThrow());
             ReponseQuestion repUdate = this.repQuestionRepository.saveAndFlush(rep);
             question.getReponsesQuestions().add(this.repQuestionRepository.findById(repUdate.getIdReponse()).orElse(null));
         });
@@ -115,7 +115,7 @@ public class QuestionService {
         Set<ReponseQuestion> putReponses= new HashSet<>();
         reponses.forEach(rep -> putReponses.add(this.repQuestionRepository.saveAndFlush(rep)));
 
-        Question putQuestion=this.questionRepository.findById(questionId).get();
+        Question putQuestion=this.questionRepository.findById(questionId).orElseThrow();
         putQuestion.setReponsesQuestions(putReponses);
 
         System.out.println("putReponses : "+putReponses);
@@ -130,9 +130,9 @@ public class QuestionService {
     public void setQuestionCompetences (Long questionId,Set<Competence> competences)
     {
         Set<Competence> putCompetences= new HashSet<>();
-        competences.forEach(c-> putCompetences.add(this.competenceRepository.findById(c.getId()).get()));
+        competences.forEach(c-> putCompetences.add(this.competenceRepository.findById(c.getId()).orElseThrow()));
 
-        Question putQuestion=this.questionRepository.findById(questionId).get();
+        Question putQuestion=this.questionRepository.findById(questionId).orElseThrow();
         putQuestion.setQuestionCompetences(putCompetences);
 
         putCompetences.forEach(competence -> {
@@ -146,9 +146,9 @@ public class QuestionService {
     public void setListQuiz (Long questionId,Set<Quiz> quizz)
     {
         Set<Quiz> putQuizz= new HashSet<>();
-        quizz.forEach(q-> putQuizz.add(this.quizRepository.findById(q.getIdQuiz()).get()));
+        quizz.forEach(q-> putQuizz.add(this.quizRepository.findById(q.getIdQuiz()).orElseThrow()));
 
-        Question putQuestion=this.questionRepository.findById(questionId).get();
+        Question putQuestion=this.questionRepository.findById(questionId).orElseThrow();
         putQuestion.setListQuiz(putQuizz);
 
         putQuizz.forEach(quiz -> {
@@ -173,25 +173,25 @@ public class QuestionService {
 
         return questionRepository.findAll()
                 .stream()
-                .filter(question -> question.getUser().equals(userRepository.findById(userId).get()))
+                .filter(question -> question.getUser().equals(userRepository.findById(userId).orElseThrow()))
                 .collect(Collectors.toSet());
     }
 
     public void deleteQuestion(Long qId)
     {
-        Question deletedQuestion = this.questionRepository.findById(qId).get();
+        Question deletedQuestion = this.questionRepository.findById(qId).orElseThrow();
         if(this.questionRepository.findById(qId).isPresent()) {
             Set<ReponseQuestion> reponses = deletedQuestion.getReponsesQuestions();
             Set<Competence> competences = deletedQuestion.getQuestionCompetences();
             Set<Quiz> quizz = deletedQuestion.getListQuiz();
 
             quizz.forEach(quiz -> {
-                this.quizRepository.findById(quiz.getIdQuiz()).get().getQuizQuestions().remove(deletedQuestion);
+                this.quizRepository.findById(quiz.getIdQuiz()).orElseThrow().getQuizQuestions().remove(deletedQuestion);
                 this.quizRepository.saveAndFlush(quiz);
             });
 
             competences.forEach(competence -> {
-                this.competenceRepository.findById(competence.getId()).get().getListQuiz().remove(deletedQuestion);
+                this.competenceRepository.findById(competence.getId()).orElseThrow().getListQuiz().remove(deletedQuestion);
                 this.competenceRepository.saveAndFlush(competence);
             });
 
@@ -210,7 +210,7 @@ public class QuestionService {
             this.repQuestionRepository.deleteAll(reponseWithQuestionNull);
 
             deletedQuestion.setNiveau(null);
-            this.userRepository.findById(deletedQuestion.getUser().getId()).get().getMyCreatedQuestion().remove(deletedQuestion);
+            this.userRepository.findById(deletedQuestion.getUser().getId()).orElseThrow().getMyCreatedQuestion().remove(deletedQuestion);
             deletedQuestion.setUser(null);
 
             this.questionRepository.deleteById(qId);
@@ -238,6 +238,6 @@ public class QuestionService {
 
     public long getQuestionPoids(Long qId) {
 
-        return this.questionRepository.findById(qId).get().getPoids();
+        return this.questionRepository.findById(qId).orElseThrow().getPoids();
     }
 }
