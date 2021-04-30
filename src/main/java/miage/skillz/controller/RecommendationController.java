@@ -44,11 +44,10 @@ public class RecommendationController {
 
         User writer = userService.findById(recommendationRequest.getWriterId());
         User receiver = userService.findById(recommendationRequest.getReceiverId());
-        log.info("writer =" + writer.getUsername());
-        log.info("receiver = " + receiver.getUsername());
         String content = recommendationRequest.getContent();
         String date = recommendationRequest.getDate();
-        DateFormat format = new SimpleDateFormat("dd-mm-yyyy");
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
         Recommendation recommendation = service.createRecommendation(new Recommendation(writer, receiver, content, format.parse(date)));
         RecommendationRequest returnRecommendation = new RecommendationRequest(
                 recommendation.getWriter().getId(),
@@ -56,15 +55,14 @@ public class RecommendationController {
                 recommendation.getContent(),
                 recommendation.getDate().toString()
         );
-        log.info("recommendation = " + recommendation.getContent());
-//        return ResponseEntity.ok(new MessageResponse("Recommendation registered successfully!"));
+
         return new ResponseEntity<RecommendationRequest>(returnRecommendation, HttpStatus.OK);
     }
 
     @GetMapping(value = "/recommendation/{receiverId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getRecommendationByReceiverId(@PathVariable ("receiverId") Long receiverId ){
         Set <Recommendation> recommendations = service.getRecommendationByReceiverId(receiverId);
-        DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Set<RecommendationResponse> listRecommendationResponse = new HashSet<>();
 
         for(Recommendation rec: recommendations){

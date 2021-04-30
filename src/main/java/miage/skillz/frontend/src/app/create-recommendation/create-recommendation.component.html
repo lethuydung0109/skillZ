@@ -1,54 +1,30 @@
-<!-- <div>
+<div>
     <div class="submit-form">
       <div *ngIf="!submitted">
+          <br>
         <div class="form-group">
-          <label for="username">Username</label>
-          <input
-            type="text"
-            class="form-control"
-            id="username"
-            required
-            [(ngModel)]="user.username"
-            name="username"
-          />
+          <label for="receiver">Receiver</label>
+          <select name="receiver_selector" 
+              id="receiver_selector" 
+              class = "form-control"
+              [(ngModel)]= "selectedReceiver">
+              <option *ngFor="let user of users" [ngValue]="user">
+                  {{user.username}}
+                </option>
+          </select>
         </div>
   
         <div class="form-group">
-          <label for="email">Email</label>
+          <label for="email">Content</label>
           <input
             class="form-control"
-            id="email"
+            id="content"
             required
-            [(ngModel)]="user.email"
+            [(ngModel)]="recommendation.content"
             name="email"
           />
         </div>
 
-
-        <div class="form-group">
-          <label for="role">Receiver</label>
-          <select name="receiver_selector" 
-              id="receiver_selector" 
-              class = "form-control"
-              [(ngModel)]= "recommendation.receiver">
-            <option selected="selected" value="participant">Participant</option>
-            <option value="concepteur">Concepteur</option>
-            <option value="admin">Admin</option>
-          </select>
-        </div> -->
-        
-
-          <!-- <div class="form-group">
-            <label for="password">Mot de passe</label>
-            <input
-              class="form-control"
-              id="password"
-              required
-              [(ngModel)]="user.password"
-              name="password"
-            />  
-          </div> 
-  
         <button (click)="saveRecommendation()" class="btn btn-success">Ajouter</button>
       </div>
   
@@ -57,4 +33,4 @@
         <button class="btn btn-success" (click)="newRecommendation()">Ajouter une autre</button>
       </div>
     </div>
-  </div> -->
+  </div>

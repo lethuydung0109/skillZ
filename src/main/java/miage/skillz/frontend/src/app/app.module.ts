@@ -43,6 +43,7 @@ import { UserQuestionAndQuiZComponent } from './user-question-and-quiz/user-ques
 import { MatTabsModule} from '@angular/material/tabs';
 import { recommendationListComponent } from './recommendation-list/recommendation-list.component';
 import { CreateRecommendationComponent } from './create-recommendation/create-recommendation.component';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -93,7 +94,7 @@ import { CreateRecommendationComponent } from './create-recommendation/create-re
         MatButtonModule,
         MatTabsModule
 ],
-providers: [authInterceptorProviders],
+providers: [authInterceptorProviders, DatePipe],
 bootstrap: [AppComponent],
 schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
