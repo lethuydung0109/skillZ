@@ -64,9 +64,9 @@
         </tbody>
       </table> 
 
-      <button class="m-3 btn btn-sm btn-danger" (click)="removeAllUsers()">
+      <!-- <button class="m-3 btn btn-sm btn-danger" (click)="removeAllUsers()">
         Sumprimer tous
-      </button>
+      </button> -->
     </div>
     <div class="col-md-6">
       <div *ngIf="currentUser">
@@ -78,6 +78,10 @@
         <div>
           <label><strong>Email:</strong></label>
           {{ currentUser.email }}
+        </div>
+        <div>
+          <label><strong>Role:</strong></label>
+          {{ currentUser.role }}
         </div>
         <a class="badge badge-warning" routerLink="/users/{{ currentUser.id }}">
           Modifier

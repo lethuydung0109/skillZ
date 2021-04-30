@@ -23,13 +23,18 @@ export class CreateUserComponent implements OnInit {
   ngOnInit(): void {
   }
   saveUser(): void {
+    let roles : string[] = [];
+    if(this.user.role)
+      roles.push(this.user.role);
+
     const data = {
       username: this.user.username,
       email: this.user.email,
-      role: this.user.role,
+      role: roles,
       password: this.user.password
     };
 
+    console.log(data)
     this.userService.create(data)
       .subscribe(
         response => {
