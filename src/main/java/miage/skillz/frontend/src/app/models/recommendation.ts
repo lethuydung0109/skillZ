@@ -1,13 +1,19 @@
 import { User } from "./user.model";
 
-export class recommendation {
-    id: string;
+export class Recommendation {
+  id?: number;
   
-  writer?: User;
+  writerId?: number;
 
-  receiver?: User;
+  writerName?: string;
+  
+  receiverId?: number;
+
+  receiverName?: string;
 
   content?: string;
+
+  date?: string;
 
   constructor() {
   }

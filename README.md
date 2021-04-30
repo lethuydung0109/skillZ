@@ -9,4 +9,3 @@ v1.0 : Mise en place du système de base
 - Créer/Modifier/Supprimer un questionnaire (en sélectionnant des questions disponibles dans la bibliothèque) -> Fait
 
 Les fonctionnalités prévus pour la v1.0 ont été implémentées dans le backend. Le frontend sera mis en place dans la v2
-

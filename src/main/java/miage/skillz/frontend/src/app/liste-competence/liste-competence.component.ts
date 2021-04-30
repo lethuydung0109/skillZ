@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {CompetenceService} from "../services/competence.service";
 import {Competence} from "../models/competence";
+import { TokenStorageService } from '../_services/auth/service/token-storage.service';
 
 
 @Component({
@@ -10,14 +11,20 @@ import {Competence} from "../models/competence";
   styleUrls: ['./liste-competence.component.scss']
 })
 export class ListeCompetenceComponent implements OnInit {
-
+  private roles: string[] = [];
+  isAdmin = false;
 
   list_competence: Array<Competence> =[];
 
 
-  constructor(private router: Router, private competenceService: CompetenceService) { }
+  constructor(private tokenStorageService: TokenStorageService, private router: Router, private competenceService: CompetenceService) { }
 
   ngOnInit(): void {
+    const user = this.tokenStorageService.getUser();
+    this.roles = user.roles;
+    console.log(this.roles[0]);
+    this.isAdmin = this.roles.includes('ROLE_ADMIN');
+    
     this.loadData();
   }
 
