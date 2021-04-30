@@ -45,9 +45,7 @@ export class CompetenceService {
 
   getCompetenceById(id_pere: number) : Observable<Competence> {
     return this.http.get<Competence>(API_URL  + 'competenceById/'+id_pere,httpOptions);
-
-
-}
+  }
 
   getStatsCompetence(): Observable<any> {
     return this.http.get(API_URL + 'competenceStats', { responseType: 'text' });

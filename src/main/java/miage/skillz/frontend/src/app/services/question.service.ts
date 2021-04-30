@@ -74,6 +74,12 @@ export class QuestionService {
     return this.http.get<Array<ResponseQuestion>>(routeQuery);
   }
 
+  public async getQuestionCorrectResponse2(qId : number) 
+  {
+    const routeQuery=this.url+"/correctResponse/"+qId;
+    return await this.http.get<Array<ResponseQuestion>>(routeQuery).toPromise();
+  }
+
   public deleteQuestion(questionId : number) : Observable<any>
   {
     const routeQuery=this.url+"/deleteQuestion/"+questionId;

@@ -41,6 +41,7 @@ const routes: Routes = [
   { path: 'createUser', component: CreateUserComponent },
   { path: 'userQuestionsAndQuiz', component: UserQuestionAndQuiZComponent },
   { path: 'users/:id', component: UserDetailsComponent },
+  { path: 'participant/:idBagde', component: BoardParticipantComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

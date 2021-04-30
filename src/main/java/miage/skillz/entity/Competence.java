@@ -30,7 +30,7 @@ public class Competence {
         // Nom de la compétence
         private String nom_competence;
 
-//        //Badges de la competence
+         //Badges de la competence
         @OneToMany( cascade = CascadeType.ALL, mappedBy="competence")
         @JsonIgnore
         Set<Badge> listBadges = new HashSet<>();

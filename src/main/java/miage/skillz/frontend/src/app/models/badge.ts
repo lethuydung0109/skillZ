@@ -1,5 +1,11 @@
+import { Competence } from './competence';
+
 export class Badge {
-    competenceId!:string;
+    competenceId!:number;
+    competence ?: Competence;
+    competenceName?:string;
     niveauName !:string;
-    dateValiation !:string;
+    niveau!:any;
+    niveauId!:number;
+    dateValidation !:string;
 }
