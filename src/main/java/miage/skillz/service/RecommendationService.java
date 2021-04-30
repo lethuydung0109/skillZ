@@ -9,6 +9,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class RecommendationService {
 
+    @Autowired
+    private RecommendationRepository repository;
+
+    public void createRecommendation(Recommendation recommendation) {
+        repository.save(recommendation);
+    }
+
 //    @Autowired
 //    private RecommendationRepository repository;
 //
