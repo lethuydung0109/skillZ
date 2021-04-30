@@ -1,32 +1,36 @@
 package miage.skillz.payload.request;
 
-import javax.validation.constraints.NotBlank;
+import lombok.*;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class BadgeRequest {
 
-    @NotBlank
-    private String competenceId;
+    private Long competenceId;
+    private Long niveauId;
 
-    @NotBlank
-    private String niveauName;
+    private String dateValidation = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
 
-    private String dateValiation = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
-
-    public String getCompetenceId() {
+    public Long getCompetenceId() {
         return competenceId;
     }
 
-    public void setCompetenceId(String competenceId) {
+    public void setCompetenceId(Long competenceId) {
         this.competenceId = competenceId;
     }
 
-    public String getNiveauName() {
-        return niveauName;
+    public Long getNiveauId() {
+        return niveauId;
     }
 
-    public void setNiveauName(String niveau) {
-        this.niveauName = niveau;
+    public void setNiveauId(Long niveauId) {
+        this.niveauId = niveauId;
     }
 }

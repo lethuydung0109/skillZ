@@ -43,7 +43,8 @@ dependencies {
 	testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
 	implementation 'org.hibernate.validator:hibernate-validator:6.1.2.Final'
 	implementation "io.springfox:springfox-boot-starter:3.0.0"
-	compile "io.springfox:springfox-swagger-ui:3.0.0"
+    compile("io.springfox:springfox-swagger2:3.0.0")
+    compile("io.springfox:springfox-swagger-ui:3.0.0")
 }
 
 repositories {
@@ -77,7 +78,7 @@ plantUml {
 // from https://stackoverflow.com/questions/13198358/how-to-get-project-version-in-custom-gradle-plugin
 // uses version in build.gradle file
 class VersionPlugin implements Plugin<Project> {
-    public void apply(Project project) {
+     void apply(Project project) {
         project.task('version') {
             project.gradle.projectsEvaluated {
                 println "$project.version"

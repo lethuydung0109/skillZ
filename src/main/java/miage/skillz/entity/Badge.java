@@ -24,14 +24,14 @@ public class Badge {
     private Competence competence;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="id_niveau")
+    @JoinColumn(name="niveauId")
     private Niveau niveau;
 
-    @ManyToMany(mappedBy = "badges")
-    @JsonIgnore
-    private Set<User> users = new HashSet<>();
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idUser")
+    private User user;
 
-    private String dateValiation;
+    private String dateValidation;
 
     public Badge() {
     }
@@ -60,20 +60,12 @@ public class Badge {
         this.niveau = niveau;
     }
 
-    public Set<User> getUsers() {
-        return users;
+    public String getDateValidation() {
+        return dateValidation;
     }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
-
-    public String getDateValiation() {
-        return dateValiation;
-    }
-
-    public void setDateValiation(String dateValiation) {
-        this.dateValiation = dateValiation;
+    public void setDateValidation(String dateValiation) {
+        this.dateValidation = dateValiation;
     }
 }
 

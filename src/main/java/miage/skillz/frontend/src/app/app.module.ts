@@ -44,6 +44,9 @@ import { UserListComponent } from './user-list/user-list.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserQuestionAndQuiZComponent } from './user-question-and-quiz/user-question-and-quiz.component';
 import { MatTabsModule} from '@angular/material/tabs';
+import { MatChipsModule } from '@angular/material/chips';
+import { recommendationListComponent } from './recommendation-list/recommendation-list.component';
+import { CreateRecommendationComponent } from './create-recommendation/create-recommendation.component';
 
 
 
@@ -70,7 +73,10 @@ import { MatTabsModule} from '@angular/material/tabs';
         CreateUserComponent,
         UserListComponent,
         UserDetailsComponent,
-        UserQuestionAndQuiZComponent
+        UserQuestionAndQuiZComponent,
+        recommendationListComponent,
+        CreateRecommendationComponent
+
     ],
     imports: [
         BrowserModule,
@@ -83,7 +89,6 @@ import { MatTabsModule} from '@angular/material/tabs';
         MatSortModule,
         BrowserAnimationsModule,
         MatPaginatorModule,
-        MatSortModule,
         MatFormFieldModule,
         MatInputModule,
         MatCheckboxModule,
@@ -93,7 +98,8 @@ import { MatTabsModule} from '@angular/material/tabs';
         MatListModule,
         MatSelectModule,
         ReactiveFormsModule,
-        MatTabsModule
+        MatTabsModule,
+        MatChipsModule
 ],
 providers: [authInterceptorProviders],
 bootstrap: [AppComponent],

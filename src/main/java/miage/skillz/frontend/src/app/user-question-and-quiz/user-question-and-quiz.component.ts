@@ -7,6 +7,7 @@ import { QuizService } from '../services/quiz.service';
 import { Competence } from '../models/competence';
 import { QuestionService } from '../services/question.service';
 import { Question } from '../models/question';
+import Utils from '../utils';
 
 @Component({
   selector: 'app-user-question-and-quiz',
@@ -18,8 +19,8 @@ export class UserQuestionAndQuiZComponent implements OnInit {
   myQuiz : Array<Quiz> =[];
   myQuestions: Array<Question>=[];
 
-  displayedQuestionColumns: string[] = ['num','theme','libelle','niveauName','stringCompetence'];
-  displayedQuizColumns: string[] = ['num','theme','name', 'niveauName', 'competence','duree'];
+  displayedQuestionColumns: string[] = ['num','theme','libelle','niveauName','stringCompetence','actions'];
+  displayedQuizColumns: string[] = ['num','theme','name', 'niveauName', 'competence','duree','actions'];
 
 
   dataSourceQuestion!: MatTableDataSource<Question>;
@@ -36,8 +37,8 @@ export class UserQuestionAndQuiZComponent implements OnInit {
     let listQ : Array<Question> =[];
     this.questionService.getAllQuestionsByUser().subscribe(data => {
       data.forEach(q => {
-        q.stringCompetence=this.quizCompetenceToString(q.questionCompetences);
-        q.niveauName=this.toStringNiveau(q.idNiveau);
+        q.stringCompetence=Utils.quizCompetenceToString(q.questionCompetences);
+        q.niveauName=Utils.toStringNiveau(q.niveau);
         listQ.push(q);
       })
       this.dataSourceQuestion = new MatTableDataSource(listQ);
@@ -48,7 +49,7 @@ export class UserQuestionAndQuiZComponent implements OnInit {
     let listQuiz : Array<Quiz> =[];
     this.quizService.getAllQuizByUser().subscribe(data => {
       data.forEach(q => {
-        q.niveauName=this.toStringNiveau(q.idNiveau);
+        q.niveauName=Utils.toStringNiveau(q.niveau);
         listQuiz.push(q);
       })
       this.dataSourceQuiz = new MatTableDataSource(listQuiz);
@@ -77,31 +78,12 @@ export class UserQuestionAndQuiZComponent implements OnInit {
     }
   }
 
-
-  quizCompetenceToString(competences : Array<Competence>) : string
-  {
-    let stringArray='';
-    competences.forEach(c => {
-      stringArray+=c.nom_competence+",";
-    })
-    return stringArray;
+  deleteQuestion(id: number) {
+    this.questionService.deleteQuestion(id).subscribe(data => {});
   }
 
-  toStringNiveau(niveau : number) : string
-  {
-    switch (niveau) {
-      case 1:
-        return "Debutant"
-      case 2:
-        return "PreIntermediaire"
-      case 3:
-        return "Intermediaire"
-      case 4:
-        return "Avance"
-      default:
-        return "Debutant"
-    }
+  deleteQuiz(id : number) {
+    this.quizService.deleteQuiz(id).subscribe(data => {});
   }
-
 
 }

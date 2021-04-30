@@ -4,27 +4,31 @@ import miage.skillz.entity.*;
 import miage.skillz.payload.reponse.MessageResponse;
 import miage.skillz.payload.reponse.StatsUserResponse;
 import miage.skillz.payload.request.SignupRequest;
+import miage.skillz.repository.BadgeRepository;
 import miage.skillz.service.CompetenceService;
 import miage.skillz.service.RecommendationService;
 import miage.skillz.service.RoleService;
 import miage.skillz.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping(value = "/api")
 public class UserController {
+    Logger logger =  LoggerFactory.getLogger(UserController.class);
+
     @Autowired
     private UserService service;
 
@@ -36,6 +40,8 @@ public class UserController {
 
     @Autowired
     private RecommendationService recommendationService;
+    @Autowired
+    private BadgeRepository badgeRepository;
 
     @Autowired
     PasswordEncoder encoder;
@@ -48,7 +54,7 @@ public class UserController {
         int nbUtilisateurs = allUsers.size();
 
         //Number of participants
-        ArrayList<User> participantsResponse = new ArrayList<User>();
+        ArrayList<User> participantsResponse = new ArrayList<>();
         for(User user : allUsers){
             for(Role role : user.getRoles()){
                 if(role.getName().toString() == ("ROLE_PARTICIPANT")){
@@ -60,10 +66,10 @@ public class UserController {
         int nbParticipants = participantsResponse.size();
 
         //Number of concepteurs
-        ArrayList<User> concepteursResponse = new ArrayList<User>();
+        ArrayList<User> concepteursResponse = new ArrayList<>();
         for(User user : allUsers){
             for(Role role : user.getRoles()){
-                if(role.getName().toString() == ("ROLE_CONCEPTEUR")){
+                if(role.getName().toString().equals("ROLE_CONCEPTEUR")){
                     // usersResponse[allUsers.get()] = new List<User>();
                     concepteursResponse.add(user) ;
                 }
@@ -100,7 +106,7 @@ public class UserController {
     public ResponseEntity<?> getAllConcepteurs(){
         List<User> allUsers = service.findAll();
 //        List<User> concepteursResponse = allUsers;
-        ArrayList<User> concepteursResponse = new ArrayList<User>();
+        ArrayList<User> concepteursResponse = new ArrayList<>();
         for(User user : allUsers){
             for(Role role : user.getRoles()){
                 if(role.getName().toString() == ("ROLE_CONCEPTEUR")){
@@ -162,9 +168,10 @@ public class UserController {
         }
 
         user.setRoles(roles);
-        service.saveUser(user);
+        User returnUser = service.saveUser(user);
 
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+//        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+        return new ResponseEntity<User>(returnUser, HttpStatus.OK);
     }
 
 
@@ -194,11 +201,11 @@ public class UserController {
         Competence competence = competenceService.getCompetenceById(competenceId);
 
         Set<Badge> badges = competence.getListBadges();
-        Set<User> listUsers = new HashSet<User>();
+        Set<User> listUsers = new HashSet<>();
         for (Badge badge: badges){
-            listUsers.addAll(badge.getUsers());
+            listUsers.add(badge.getUser());
         }
-        return new  ResponseEntity <Set <User> >(listUsers, HttpStatus.OK);
+        return new  ResponseEntity <>(listUsers, HttpStatus.OK);
     }
 
     @PostMapping(value = "/user/recommendation/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -214,15 +221,21 @@ public class UserController {
     public ResponseEntity<?> getAllRecommendations(@PathVariable ("userId") Long userId ){
         User user = service.findById(userId);
         Set<Recommendation> recommendations = user.getRecommendationsByOthers();
-        return new  ResponseEntity <Set <Recommendation> >(recommendations, HttpStatus.OK);
+        return new  ResponseEntity <>(recommendations, HttpStatus.OK);
     }
 
     @GetMapping(value = "/user/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getUserById(@PathVariable ("userId") Long userId ){
         User user = service.findById(userId);
-        return new  ResponseEntity <User> (user, HttpStatus.OK);
+        return new  ResponseEntity <> (user, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/user/name/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> findUserbyName(@PathVariable ("username") String userName ){
+        User user = service.findByUsername(userName).orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + userName));;
+        logger.info("User found = " + user.toString());
+        return new  ResponseEntity <User> (user, HttpStatus.OK);
+    }
 //    @DeleteMapping(value = "/user/recommendation/{recommendationId}", produces = MediaType.APPLICATION_JSON_VALUE)
 //    public ResponseEntity<?> deleteRecommendation(@PathVariable ("recommendationId") Long recommendationId){
 //        Recommendation recommendation = recommendationService.findRecommendationById(recommendationId);
