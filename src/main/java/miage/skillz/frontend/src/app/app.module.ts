@@ -41,9 +41,9 @@ import { UserListComponent } from './user-list/user-list.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserQuestionAndQuiZComponent } from './user-question-and-quiz/user-question-and-quiz.component';
 import { MatTabsModule} from '@angular/material/tabs';
+import { MatChipsModule } from '@angular/material/chips';
 import { recommendationListComponent } from './recommendation-list/recommendation-list.component';
 import { CreateRecommendationComponent } from './create-recommendation/create-recommendation.component';
-
 
 
 
@@ -72,7 +72,7 @@ import { CreateRecommendationComponent } from './create-recommendation/create-re
         UserDetailsComponent,
         UserQuestionAndQuiZComponent,
         recommendationListComponent,
-        CreateRecommendationComponent,
+        CreateRecommendationComponent
     
     ],
     imports: [
@@ -91,7 +91,8 @@ import { CreateRecommendationComponent } from './create-recommendation/create-re
         MatCheckboxModule,
         CountdownModule,
         MatButtonModule,
-        MatTabsModule
+        MatTabsModule,
+        MatChipsModule
 ],
 providers: [authInterceptorProviders],
 bootstrap: [AppComponent],

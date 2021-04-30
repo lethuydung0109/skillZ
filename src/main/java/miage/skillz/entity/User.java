@@ -43,10 +43,8 @@ public class User {
                 inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "users_badges",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "badge_id"))
+    @JsonIgnore
+    @OneToMany( cascade = CascadeType.ALL, mappedBy = "user")
     private Set<Badge> badges = new HashSet<>();
 
 //    @Builder.Default

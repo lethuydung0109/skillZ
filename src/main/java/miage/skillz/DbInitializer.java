@@ -40,9 +40,9 @@ public class DbInitializer implements CommandLineRunner {
         List<Competence> competences = competenceRepository.findAll();
 
         if(roles.isEmpty()){
+            roleRepository.save(new Role(ERole.ROLE_ADMIN));
             roleRepository.save(new Role(ERole.ROLE_CONCEPTEUR));
             roleRepository.save(new Role(ERole.ROLE_PARTICIPANT));
-            roleRepository.save(new Role(ERole.ROLE_ADMIN));
             System.out.println("--- Roles initialized");
         }
 
@@ -89,7 +89,7 @@ public class DbInitializer implements CommandLineRunner {
 
             Set<Role> newPRole = new HashSet<>();
             newPRole.add(participantRole);
-            participant.setRoles(newCRole);
+            participant.setRoles(newPRole);
 
             userRepository.save(admin);
             userRepository.save(concepteur);

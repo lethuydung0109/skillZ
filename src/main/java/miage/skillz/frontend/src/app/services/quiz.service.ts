@@ -80,7 +80,7 @@ export class QuizService {
 
   public deleteQuiz(quizId : number) : Observable<any>
   {
-    const routeQuery=this.url+"/deleteQuiz/"+quizId;
+    const routeQuery=this.url+"/deleteQuizById/"+quizId;
     return this.http.delete(routeQuery);
 
   }

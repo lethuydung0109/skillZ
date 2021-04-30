@@ -57,7 +57,7 @@ public class QuizController {
         return  quizService.getAllQuiz();
     }
 
-    @GetMapping(value = "/user/quizz", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/user/quiz", produces = MediaType.APPLICATION_JSON_VALUE)
     public Set<Quiz> getAllQuizByUser()
     {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
