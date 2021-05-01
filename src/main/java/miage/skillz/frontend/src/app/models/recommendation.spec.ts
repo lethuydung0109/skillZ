@@ -1,7 +1,7 @@
-import { recommendation } from './recommendation';
+import { Recommendation } from './recommendation';
 
 describe('recommendation', () => {
   it('should create an instance', () => {
-    expect(new recommendation()).toBeTruthy();
+    expect(new Recommendation()).toBeTruthy();
   });
 });

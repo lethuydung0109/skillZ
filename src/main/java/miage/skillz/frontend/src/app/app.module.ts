@@ -45,6 +45,7 @@ import { MatTabsModule} from '@angular/material/tabs';
 import { MatChipsModule } from '@angular/material/chips';
 import { recommendationListComponent } from './recommendation-list/recommendation-list.component';
 import { CreateRecommendationComponent } from './create-recommendation/create-recommendation.component';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -97,7 +98,7 @@ import { CreateRecommendationComponent } from './create-recommendation/create-re
         MatTabsModule,
         MatChipsModule
 ],
-providers: [authInterceptorProviders],
+providers: [authInterceptorProviders, DatePipe],
 bootstrap: [AppComponent],
 schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
