@@ -9,25 +9,28 @@
         <a href="/admin" class="nav-link"  routerLink="admin">Accueil</a>
       </li>
       <li class="nav-item" *ngIf="isAdmin">
-        <a href="/listUser" class="nav-link"  routerLink="users">Utilisateur</a>
+        <a href="/listUser" class="nav-link"  routerLink="users">Utilisateurs</a>
       </li>
-      <li class="nav-item" *ngIf="showModeratorBoard">
+      <li class="nav-item" *ngIf="isAdmin">
+        <a href="/listCompetence" class="nav-link"  routerLink="liste-competence">Compétences</a>
+      </li>
+      <li class="nav-item" *ngIf="isConcepteur">
         <a href="/concepteur" class="nav-link" routerLink="concepteur">Accueil</a>
       </li>
       <li class="nav-item">
         <a href="/participant" class="nav-link" *ngIf="isParticipant" routerLink="participant">Accueil</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" routerLink="/quizz">Quiz</a>
+      <li class="nav-item" *ngIf="isParticipant || isConcepteur">
+        <a class="nav-link" routerLink="/listQuiz">Questionnaires</a>
+      </li>
+      <li class="nav-item" *ngIf="isParticipant || isConcepteur">
+        <a *ngIf="isParticipant" href="/listrecommendation" class="nav-link" routerLink="/recommendations">Recommandation</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" routerLink="/questions">Questions</a>
+        <a class="nav-link" *ngIf="isConcepteur" routerLink="/listQuestions">Questions</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" routerLink="/doquizz">Do Quizz</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" routerLink="/" >Statistiques</a>
+        <a class="nav-link" *ngIf="isConcepteur" routerLink="/userQuestionsAndQuiz">Mes creations</a>
       </li>
     </ul>
 

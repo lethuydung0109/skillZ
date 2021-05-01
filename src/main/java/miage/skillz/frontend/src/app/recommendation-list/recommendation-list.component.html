@@ -1,0 +1,89 @@
+<div class="list row">
+    <div class="col-md-8">
+      <div><br></div>
+      <!-- <div class="input-group mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Rechecher par username"
+          [(ngModel)]="username"
+        />
+        <div class="input-group-append">
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            (click)="searchUsername()"
+          >
+            Rechercher
+          </button>
+        </div>
+      </div> -->
+      <div class="input-group-append">
+        <button routerLink="/createRecommendation" class="btnStatsAdd">  Ajouter une recommendation pour l'autre participant</button>
+      </div>
+      <div><br></div>
+    </div>
+
+
+    <div class="col-md-6">
+      <h4>Liste des recommandations</h4>
+      <!-- <ul class="list-group">
+        <li
+          class="list-group-item"
+          *ngFor="let user of users; let i = index"
+          [class.active]="i == currentIndex"
+          (click)="setActiveUser(user, i)"
+        >
+
+        </li>
+      </ul> -->
+
+     <table class="table table-hover">
+       <thead>
+       <tr>
+         <th scope="col">Auteur</th>
+         <th scope="col">Detail</th>
+          <th scope="col">Date de recommendation</th>
+         
+       </tr>
+       </thead>
+        <tbody *ngFor="let recommendation of recommendations; let i = index"
+        [class.active]="i == currentIndex"
+        (click)="setActiveRecommendation(recommendation, i)">
+        <tr>
+          <td>{{recommendation.writerName}}</td>
+          <td>{{recommendation.content}}</td>
+          <td>{{recommendation.date}}</td>
+          
+
+        </tr>
+        </tbody>
+      </table> 
+
+      <!-- <button class="m-3 btn btn-sm btn-danger" (click)="removeAllUsers()">
+        Sumprimer tous
+      </button> -->
+    </div>
+    <!-- <div class="col-md-6">
+      <div *ngIf="currentRecommendation">
+        <h4>Recommendation</h4>
+        <div>
+          <label><strong>Writer:</strong></label> 
+          {{ currentRecommendation.writerName }}
+        </div>
+        <div>
+          <label><strong>Date:</strong></label>
+          {{ currentRecommendation.date }}
+        </div>
+        
+        <a class="badge badge-warning" routerLink="/recommendations/{{ currentRecommendation.id }}">
+          Modifier
+        </a>
+      </div>
+  
+      <div *ngIf="!currentRecommendation">
+        <br />
+        <p>Choisissez une recommandation pour voir le détail...</p>
+      </div>
+    </div> -->
+  </div>

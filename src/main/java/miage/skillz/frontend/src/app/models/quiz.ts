@@ -3,15 +3,17 @@ import { Competence } from './competence';
 
 export class Quiz {
 
-    idQuizz : number;
+    idQuiz : number;
     name : string;
-    niveau: string;
+    niveau!: any;
+    idNiveau!:number;
+    niveauName!: string;
     theme : string;
-    pourcentageValidation :  number;
+    seuilValidation :  number;
     duree : number;
-    questionsQuizz : Array<Question>;
-    quizCompetences : Array<Competence>;
-    stringCompetence : string;
+    quizQuestions : Array<Question>;
+    quizCompetence !: Competence;
+   // stringCompetence : string;
     score : number;
 
 // à enlever
@@ -21,15 +23,14 @@ export class Quiz {
 
     constructor()
     {
-        this.idQuizz= 0;
+        this.idQuiz= 0;
         this.name='';
-        this.niveau='';
+        //this.niveau=;
         this.theme='';
-        this.pourcentageValidation=0;
+        this.seuilValidation=0;
         this.duree=0;
-        this.questionsQuizz = [];
-        this.quizCompetences = [];
-        this.stringCompetence='';
+        this.quizQuestions = [];
+       // this.stringCompetence='';
         this.score=0;
 
         // à enlever

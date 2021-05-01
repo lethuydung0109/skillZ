@@ -4,6 +4,7 @@ import miage.skillz.entity.*;
 import miage.skillz.enumeration.ENiveau;
 import miage.skillz.payload.reponse.MessageResponse;
 import miage.skillz.payload.request.BadgeRequest;
+import miage.skillz.security.services.UserDetailsImpl;
 import miage.skillz.service.BadgeService;
 import miage.skillz.service.CompetenceService;
 
@@ -13,11 +14,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Set;
 
 
 @RestController
@@ -30,47 +34,27 @@ public class BadgeController {
     private BadgeService service;
 
     @Autowired
-    private CompetenceService competenceService;
-
-    @Autowired
-    private NiveauService niveauService;
-
+    private UserController userController;
 
     //Get all badges
-    @GetMapping(value = "/badge", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/allBadges", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Badge> getAllBadges() { return service.getAllBadges(); }
+
+    @GetMapping(value = "/allBadgesByUser", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Set<Badge> getAllBadgesByUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        User currentUser = this.userController.findById(userDetails.getId());
+        return service.getAllBadgesByUser(currentUser.getId());
+    }
 
     //Create Badge
     @PostMapping(value = "/badge")
-    public ResponseEntity<?> createBadge(@Valid @RequestBody BadgeRequest badgeRequest) {
-        Competence competence = competenceService.getCompetenceById(Long.parseLong(badgeRequest.getCompetenceId()));
-        String niveau = badgeRequest.getNiveauName();
-        Niveau badgeNiveau  = new Niveau();
-        switch (niveau) {
-            case "Debutant":
-                badgeNiveau = niveauService.findByName(ENiveau.NIVEAU1)
-                        .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-
-                break;
-            case "PreIntermediaire":
-                badgeNiveau = niveauService.findByName(ENiveau.NIVEAU2)
-                        .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                break;
-            case "Intermediaire":
-                badgeNiveau = niveauService.findByName(ENiveau.NIVEAU3)
-                        .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                break;
-            default:
-                badgeNiveau = niveauService.findByName(ENiveau.NIVEAU4)
-                        .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-
-        }
-
-        Badge badge = new Badge();
-        badge.setCompetence(competence);
-        badge.setNiveau(badgeNiveau);
-        service.createBadge(badge);
-        return ResponseEntity.ok(new MessageResponse("Badge registered successfully!"));
+    public ResponseEntity<?> createBadge(@RequestBody BadgeRequest badgeRequest) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        User currentUser = this.userController.findById(userDetails.getId());
+        return service.createBadge(badgeRequest, currentUser);
     }
 
     //Delete Badge

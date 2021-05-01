@@ -1,0 +1,53 @@
+<div class="container-fluid">
+    <br>
+    <div class="row">
+        <h1>{{currentQuiz.name}}</h1>
+    </div>
+      
+    <br>
+    <div class="col">
+        <div class="row">
+            <div class="col-md-4"> Theme </div>
+            <div class="col-md-8"> {{currentQuiz.theme}} </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4"> Nom </div>
+            <div class="col-md-8"> {{currentQuiz.name}} </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4"> Compétence </div>
+            <div class="col-md-8"> {{currentQuiz.quizCompetence.nom_competence}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4"> Niveau </div>
+            <div class="col-md-8"> {{currentQuiz.niveauName}} </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4"> Pourcentage de validation </div>
+            <div class="col-md-8"> {{currentQuiz.seuilValidation}} </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4"> Duree </div>
+            <div class="col-md-8"> {{currentQuiz.duree}} secondes </div>
+        </div><br>
+
+        <div class="row">
+            <div class="col-md-4"> <button mat-raised-button (click)="startQuiz()"> Start </button> </div>
+            <div class="col-md-8"> <countdown #chrono [config]="{leftTime: quizTime, demand: true}" (event)="endQuiz($event)"></countdown> </div>                                    
+        </div>
+    </div>
+    <br>
+    
+    <ng-container *ngIf="isStart">
+        <h3> Questions </h3>
+        <div *ngFor="let q of questions; let i = index">
+            <h5> {{i+1}}-{{q.libelle}} </h5> <br>
+            <ul >
+                <li *ngFor="let rep of q.reponsesQuestions">
+                    <mat-checkbox class="ck-margin" [(ngModel)]="rep.isSelected" (ngModelChange)="isResponseChecked(rep, q.idQuestion)"> {{rep.libelle}} </mat-checkbox>
+                </li>
+            </ul>
+        </div>
+        <button mat-raised-button (click)="endQuizBeforeEndTime(chrono)"> Terminer </button>
+    </ng-container>
+</div>

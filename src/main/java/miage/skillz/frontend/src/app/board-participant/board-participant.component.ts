@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
 import { UserTestService } from '../_services/auth/service/userTest.service';
+import { Component, OnInit } from '@angular/core';
+import { Badge } from '../models/badge';
+import { BadgeService } from '../services/badge.service';
+import { CompetenceService } from '../services/competence.service';
+import Utils from '../utils';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-board-participant',
@@ -9,7 +14,14 @@ import { UserTestService } from '../_services/auth/service/userTest.service';
 export class BoardParticipantComponent implements OnInit {
   content?: string;
 
-  constructor(private userService: UserTestService) { }
+  public userBadges : Array<Badge> =[];
+  badgeCompetenceId : number;
+
+  constructor(private actRoute: ActivatedRoute,private userService: UserTestService,private badgeService : BadgeService,
+                 private competenceService : CompetenceService) {
+
+    this.badgeCompetenceId = this.actRoute.snapshot.params.idBagde;
+  }
 
   ngOnInit(): void {
     this.userService.getParticipantBoard().subscribe(
@@ -20,5 +32,23 @@ export class BoardParticipantComponent implements OnInit {
         this.content = JSON.parse(err.error).message;
       }
     );
+
+    //A remplacer par todoquiz
+    this.badgeService.getAllBadgeByUser().subscribe(data => {
+      data.forEach(b => {
+        if(this.badgeCompetenceId != undefined){
+          this.competenceService.getCompetenceById(this.badgeCompetenceId).subscribe(
+            c => b.competenceName=c.nom_competence
+          );
+        }
+        else{
+          b.competenceName=b.competence?.nom_competence;
+        }
+        b.niveauName=Utils.toStringNiveau(b.niveau.niveauId)
+        this.userBadges.push(b);
+        console.log("userResults ", this.userBadges);
+      })
+    });
   }
+
 }

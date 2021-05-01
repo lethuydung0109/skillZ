@@ -1,10 +1,8 @@
 package miage.skillz;
 
-import miage.skillz.entity.ERole;
-import miage.skillz.entity.Niveau;
-import miage.skillz.entity.Role;
-import miage.skillz.entity.User;
+import miage.skillz.entity.*;
 import miage.skillz.enumeration.ENiveau;
+import miage.skillz.repository.CompetenceRepository;
 import miage.skillz.repository.NiveauRepository;
 import miage.skillz.repository.RoleRepository;
 import miage.skillz.repository.UserRepository;
@@ -29,6 +27,8 @@ public class DbInitializer implements CommandLineRunner {
     PasswordEncoder encoder;
     @Autowired
     NiveauRepository niveauRepository;
+    @Autowired
+    CompetenceRepository competenceRepository;
 
 
     @Override
@@ -37,15 +37,14 @@ public class DbInitializer implements CommandLineRunner {
         List<Role> roles = roleRepository.findAll();
         List<User> users = userRepository.findAll();
         List<Niveau> niveaux = niveauRepository.findAll();
-
+        List<Competence> competences = competenceRepository.findAll();
 
         if(roles.isEmpty()){
+            roleRepository.save(new Role(ERole.ROLE_ADMIN));
             roleRepository.save(new Role(ERole.ROLE_CONCEPTEUR));
             roleRepository.save(new Role(ERole.ROLE_PARTICIPANT));
-            roleRepository.save(new Role(ERole.ROLE_ADMIN));
             System.out.println("--- Roles initialized");
         }
-
 
         if(niveaux.isEmpty()){
             niveauRepository.save(new Niveau(ENiveau.NIVEAU1));
@@ -55,25 +54,50 @@ public class DbInitializer implements CommandLineRunner {
             System.out.println("--- Niveaux initialized");
         }
 
-        if(users.isEmpty()){
-            User admin = new User(
-                    "admin", "admin@skillz.com",
-                    encoder.encode("adminskillz")
+        if(competences.isEmpty()) {
+            competenceRepository.save(new Competence("Programmation Web",0L));
+            competenceRepository.save(new Competence("Modelisation",0L));
+            System.out.println("--- Some competences initialized");
+        }
 
-            );
+        if(users.isEmpty()){
+
+            User admin = new User("admin", "admin@skillz.com", encoder.encode("adminskillz"));
+            User concepteur = new User ("concepteur","c.c@gmail.com", encoder.encode("concepteur"));
+            User participant = new User ("participant","p.p@gmail.com", encoder.encode("participant"));
+
+            Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
+                                            .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+
+            Role concepteurRole = roleRepository.findByName(ERole.ROLE_CONCEPTEUR)
+                                            .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+
+            Role participantRole = roleRepository.findByName(ERole.ROLE_PARTICIPANT)
+                                            .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+
+            System.out.println("Role = " + adminRole.toString());
+            System.out.println("Role = " + concepteurRole.toString());
+            System.out.println("Role = " + participantRole.toString());
 
             Set<Role> newRole = new HashSet<>();
-            Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-            System.out.println("Role = " + adminRole.toString());
             newRole.add(adminRole);
             admin.setRoles(newRole);
 
+            Set<Role> newCRole = new HashSet<>();
+            newCRole.add(concepteurRole);
+            concepteur.setRoles(newCRole);
+
+            Set<Role> newPRole = new HashSet<>();
+            newPRole.add(participantRole);
+            participant.setRoles(newPRole);
+
             userRepository.save(admin);
+            userRepository.save(concepteur);
+            userRepository.save(participant);
 
             System.out.println("--- Admin user initialized");
+            System.out.println("--- Concepteur user initialized");
+            System.out.println("--- Participant user initialized");
         }
-
-
     }
 }

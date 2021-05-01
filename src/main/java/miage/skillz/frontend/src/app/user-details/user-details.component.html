@@ -22,32 +22,11 @@
            name="email"
          />
         </div>
-  
-        <!-- <div class="form-group">
-          <label><strong>Status:</strong></label>
-          {{ currentUser.published ? "Published" : "Pending" }}
-        </div> -->
       </form>
-<!--   
-      <button
-        class="badge badge-primary mr-2"
-        *ngIf="currentUser.published"
-        (click)="updatePublished(false)"
-      >
-        UnPublish
-      </button>
-      <button
-        *ngIf="!currentUser.published"
-        class="badge badge-primary mr-2"
-        (click)="updatePublished(true)"
-      >
-        Publish
-      </button> -->
-  
       <button class="badge badge-danger mr-2" (click)="deleteUser()">
-        Delete
+        Suprimmer
       </button>
-  
+
       <button
         type="submit"
         class="badge badge-success mb-2"
@@ -57,7 +36,7 @@
       </button>
       <p>{{ message }}</p>
     </div>
-  
+
     <div *ngIf="!currentUser.id">
       <br />
       <p>Cannot access this User...</p>

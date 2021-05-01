@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { User } from '../models/user.model';
 
-const API_URL = 'http://localhost:8081/api/user';
+const API_URL = environment.api_url + '/user';
 
 @Injectable({
   providedIn: 'root'
@@ -43,7 +44,7 @@ export class UserService {
   }
 
   findByUsername(username: any): Observable<User[]> {
-    return this.http.get<User[]>(`${API_URL}?username=${username}`);
+    return this.http.get<User[]>(API_URL + '/name/' + username);
   }
 }
 

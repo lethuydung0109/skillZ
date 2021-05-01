@@ -2,6 +2,7 @@ package miage.skillz.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,7 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-//@CheckQuizz
+//@CheckQuiz
 public class Quiz {
 
     private static final long serialVersionUID = -2054386655979281969L;
@@ -23,12 +24,14 @@ public class Quiz {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idQuiz;
     private String name;
-    /*@Enumerated(EnumType.STRING)
-    @Column(length = 20)*/
-    private String niveau;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="idNiveau")
+    private Niveau niveau;
     private String theme;
-    private Long pourcentageValidation;
+    private Long seuilValidation;
     private long duree;
+    private String dateOfCreation;
 
     @JsonIgnore
     @Builder.Default
@@ -38,18 +41,27 @@ public class Quiz {
             inverseJoinColumns = @JoinColumn(name = "idQuestion"))
     private Set<Question> quizQuestions = new HashSet<>();
 
-    @Builder.Default
-    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
-    @JoinTable( name = "quiz_competences",
-            joinColumns = @JoinColumn(name = "idQuiz"),
-            inverseJoinColumns = @JoinColumn(name = "idCompetence"))
-    private Set<Competence> quizCompetences = new HashSet<>();
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idCompetence")
+    @ToString.Exclude
+    private Competence quizCompetence;
 
-    public Quiz(String name, String niveau, String theme, Long pourcentageValidation, long duree) {
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idUser")
+    private User user;
+
+//    @Builder.Default
+//    @JsonIgnore
+//    @ManyToMany(mappedBy = "myCreatedQuiz",fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+//    private Set<User> users = new HashSet<>();
+
+    public Quiz(String name, Niveau niveau, String theme, Long seuilValidation, long duree, String date, Competence competence) {
         this.name = name;
         this.niveau = niveau;
         this.theme = theme;
-        this.pourcentageValidation = pourcentageValidation;
+        this.seuilValidation = seuilValidation;
         this.duree = duree;
+        this.dateOfCreation=date;
+        this.quizCompetence=competence;
     }
 }

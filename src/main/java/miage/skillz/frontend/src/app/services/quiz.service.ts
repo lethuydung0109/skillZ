@@ -5,7 +5,7 @@ import { Quiz } from '../models/quiz';
 import { Question } from '../models/question';
 import { Observable } from 'rxjs';
 
-const API_URL = 'http://localhost:8081/api/';
+const API_URL = environment.api_url + '/';
 const httpOptions = {
   headers: new HttpHeaders(
     {
@@ -22,21 +22,21 @@ export class QuizService {
   constructor(private http : HttpClient) {
   }
 
-  saveQuizz(quizz: Quiz) : Observable<Quiz>{
+  saveQuiz(quiz: Quiz) : Observable<Quiz>{
 
     return this.http.post<Quiz>( API_URL + 'createQuiz/', {
-      name: quizz.name,
+      name: quiz.name,
     }, httpOptions);
 
   }
 
-  public createQuizz(quiz : Quiz) : Observable<Quiz>
-  {
-    const routeQuery=this.url+"/createQuizz";
-    console.log("Quiz", quiz)
+  // public createQuiz(quiz : Quiz) : Observable<Quiz>
+  // {
+  //   const routeQuery=this.url+"/createQuiz";
+  //   console.log("Quiz", quiz)
 
-    return this.http.post<Quiz>(routeQuery,quiz);
-  }
+  //   return this.http.post<Quiz>(routeQuery,quiz);
+  // }
 
   public updateQuiz(quiz : Quiz) : Observable<Quiz>
   {
@@ -58,31 +58,34 @@ export class QuizService {
     return this.http.get<Array<Quiz>>(routeQuery);
   }
 
+  public getAllQuizByUser() : Observable<Array<Quiz>>
+  {
+    const routeQuery=this.url+"/user/quiz";
+    return this.http.get<Array<Quiz>>(routeQuery);
+  }
+
   public getQuizQuestions(quizId : number) : Observable<Array<Question>>
   {
     const routeQuery=this.url+"/getQuizQuestions/"+quizId;
     return this.http.get<Array<Question>>(routeQuery);
   }
 
-  public addQuestionToQuizz(quizId :number, questionId : number) : Observable<boolean>
+  public addQuestionToQuiz(quizId :number, questionId : number) : Observable<boolean>
   {
-    const routeQuery=this.url+"/addQuestionToQuizz/"+quizId+"/"+questionId;
+    const routeQuery=this.url+"/addQuestionToQuiz/"+quizId+"/"+questionId;
     return this.http.get<boolean>(routeQuery);
   }
 
-  public deleteQuestionFromQuizz()
-  {
+  public deleteQuestionFromQuiz(){}
 
-  }
-
-  public deleteQuizz(quizId : number) : Observable<any>
+  public deleteQuiz(quizId : number) : Observable<any>
   {
-    const routeQuery=this.url+"/deleteQuiz/"+quizId;
+    const routeQuery=this.url+"/deleteQuizById/"+quizId;
     return this.http.delete(routeQuery);
 
   }
 
-  public deleteAllQuizz() : Observable<any> {
+  public deleteAllQuiz() : Observable<any> {
       const routeQuery=this.url+"/deleteAllQuiz";
       return this.http.delete(routeQuery);
   }

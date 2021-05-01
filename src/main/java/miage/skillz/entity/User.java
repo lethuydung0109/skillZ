@@ -1,5 +1,8 @@
 package miage.skillz.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -11,6 +14,11 @@ import java.util.Set;
 @Table(name = "users", uniqueConstraints = {
         @UniqueConstraint(columnNames = "username"),
         @UniqueConstraint(columnNames = "email")})
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@ToString
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,19 +43,32 @@ public class User {
                 inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "users_badges",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "badge_id"))
+    @JsonIgnore
+    @OneToMany( cascade = CascadeType.ALL, mappedBy = "user")
     private Set<Badge> badges = new HashSet<>();
+
+//    @Builder.Default
+//    @OneToMany(fetch =  FetchType.EAGER)
+//    @JoinTable(name = "user_quiz",
+//            joinColumns = @JoinColumn(name = "user_id"),
+//            inverseJoinColumns = @JoinColumn(name = "quiz_id"))
+//    private Set<Quiz> myCreatedQuiz = new HashSet<>();
+
+    @JsonIgnore
+    @OneToMany( cascade = CascadeType.ALL, mappedBy = "user")
+    Set<Quiz> myCreatedQuiz = new HashSet<>();
+
+    @JsonIgnore
+    @OneToMany( cascade = CascadeType.ALL, mappedBy = "user")
+    Set<Question> myCreatedQuestion = new HashSet<>();
 
     //List of recommendations for others
     @OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="writer")
-    Set<Recommendation> recommendationsForOthers = new HashSet<Recommendation>();
+    Set<Recommendation> recommendationsForOthers = new HashSet<>();
 
     //List of recommendations written by orthers
     @OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="receiver")
-    Set<Recommendation> recommendationsByOthers = new HashSet<Recommendation>();
+    Set<Recommendation> recommendationsByOthers = new HashSet<>();
 
     public User(){
 
