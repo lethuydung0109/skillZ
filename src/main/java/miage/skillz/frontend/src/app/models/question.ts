@@ -8,7 +8,7 @@ export class Question {
     idQuestion : number;
     libelle : string;
     theme : string;
-    //niveau :  string;
+    niveau !:  number;
     poids :  number ;
     qst: string;
     reponsesQuestions : Array<ResponseQuestion> = [];
@@ -36,6 +36,7 @@ export class Question {
         this.reponsesQuestions =[];
         this.stringCompetence='';
         this.qst='';
+
 
     }
 }

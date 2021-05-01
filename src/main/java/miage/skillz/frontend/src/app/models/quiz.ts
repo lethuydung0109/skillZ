@@ -13,8 +13,8 @@ export class Quiz {
     duree : number;
     quizQuestions : Array<Question>;
     quizCompetence !: Competence;
-   // stringCompetence : string;
-  quizQuestionsId : Array<number>;
+    // stringCompetence : string;
+    quizQuestionsId : Array<number>;
 
    // stringCompetence : string
     score : number;
