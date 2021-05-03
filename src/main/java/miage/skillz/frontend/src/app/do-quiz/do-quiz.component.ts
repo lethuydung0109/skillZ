@@ -34,9 +34,9 @@ export class DoQuizComponent implements OnInit {
   nbCorrectSelectedResponses:number=0;
 
   @ViewChild('chrono', { static: false }) chrono!: CountdownComponent;
-  
+
   constructor(private actRoute: ActivatedRoute, private quizService : QuizService, private modalService: NgbModal,
-              private badgeService : BadgeService, private questionService : QuestionService) { 
+              private badgeService : BadgeService, private questionService : QuestionService) {
     this.quizId = this.actRoute.snapshot.params.id;
     this.currentQuiz= new Quiz();
     this.isStart=false;
@@ -59,9 +59,9 @@ export class DoQuizComponent implements OnInit {
     })
   }
 
-  startQuiz() { 
+  startQuiz() {
     this.isStart=true;
-    this.chrono.resume(); 
+    this.chrono.resume();
   }
 
   isResponseChecked(response : ResponseQuestion, qId : number)
@@ -69,16 +69,16 @@ export class DoQuizComponent implements OnInit {
     //création de la liste des réponses sélectionnées par le user pour chaque question
     if(response.isSelected)
     {
-      if(this.userResponse.has(qId)) this.userResponse.get(qId)?.push(response)    
+      if(this.userResponse.has(qId)) this.userResponse.get(qId)?.push(response)
       else  this.userResponse.set(qId, new Array(response));
-    }    
+    }
   }
 
   async validQuizResponse(){
     console.log("User responses : ", this.userResponse);
     let poids=100/this.questions.length;
-    //Pour chaque question 
-    for (let entry of this.userResponse.entries()) {    
+    //Pour chaque question
+    for (let entry of this.userResponse.entries()) {
       //Vérifier que les questions sélectionnées sont les bonnes réponses
       //console.log("entry : ", entry[0])
       //console.log("entry[]: ", entry[1].length)
@@ -95,24 +95,24 @@ export class DoQuizComponent implements OnInit {
                                                 if(selectedResponse.idReponse == correctResponse.idReponse)  {
                                                   //this.nbCorrectResponses=data.length;
                                                   tab.push(selectedResponse);
-                                                  //this.nbCorrectSelectedResponses=this.nbCorrectSelectedResponses+this.correctResponsesSelected.length;            
+                                                  //this.nbCorrectSelectedResponses=this.nbCorrectSelectedResponses+this.correctResponsesSelected.length;
                                                 }
-                                              })                            
-                                            }); 
+                                              })
+                                            });
                                             return tab;
-                                          });  
+                                          });
 
       this.quizScore=this.quizScore+(poids/entry[1].length)*this.quizCorrectResponses.length;
       console.log("this.correctResponsesSelected : ", this.correctResponsesSelected,"this.quizCorrectResponses : ",this.quizCorrectResponses)
-    }  
-    //console.log("this.correctResponsesSelected : ", this.correctResponsesSelected, this.correctResponsesSelected.length) 
+    }
+    //console.log("this.correctResponsesSelected : ", this.correctResponsesSelected, this.correctResponsesSelected.length)
     console.log("poids question : ", poids);
     //this.quizScore=this.correctResponsesSelected.length*(100/this.questions.length);
-   
+
     //Création des bagdes
     console.log("score",this.quizScore)
-   
-    if(this.quizScore >= this.currentQuiz.seuilValidation) 
+
+    if(this.quizScore >= this.currentQuiz.seuilValidation)
     {
       let badge : Badge = new Badge();
       badge.competenceId=this.currentQuiz.quizCompetence.id;
@@ -120,7 +120,7 @@ export class DoQuizComponent implements OnInit {
       console.log("badge ", badge)
       this.badgeService.createBadge(badge).subscribe(data=> console.log("badge return",data));
       this.openValidationModal("Félicitaions !Vous avez réussi le test avec un score de : "+this.quizScore);
-    }      
+    }
     else this.openValidationModal("Dommage ! Vous avez raté le test. Votre score est de "+this.quizScore);
   }
 
@@ -135,7 +135,7 @@ export class DoQuizComponent implements OnInit {
     console.log(c)
     this.isStart=false;
     c.stop;
-    this.validQuizResponse();     
+    this.validQuizResponse();
   }
 
   public openValidationModal(message:string) : void {

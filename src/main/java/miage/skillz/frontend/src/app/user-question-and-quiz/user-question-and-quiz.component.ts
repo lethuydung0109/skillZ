@@ -21,7 +21,7 @@ export class UserQuestionAndQuiZComponent implements OnInit {
 
   displayedQuestionColumns: string[] = ['num','theme','libelle','niveauName','stringCompetence','actions'];
   displayedQuizColumns: string[] = ['num','theme','name', 'niveauName', 'competence','duree','actions'];
- 
+
 
   dataSourceQuestion!: MatTableDataSource<Question>;
   dataSourceQuiz!: MatTableDataSource<Quiz>;
@@ -36,7 +36,7 @@ export class UserQuestionAndQuiZComponent implements OnInit {
 
     let listQ : Array<Question> =[];
     this.questionService.getAllQuestionsByUser().subscribe(data => {
-      data.forEach(q => {     
+      data.forEach(q => {
         q.stringCompetence=Utils.quizCompetenceToString(q.questionCompetences);
         q.niveauName=Utils.toStringNiveau(q.niveau);
         listQ.push(q);
@@ -48,7 +48,7 @@ export class UserQuestionAndQuiZComponent implements OnInit {
 
     let listQuiz : Array<Quiz> =[];
     this.quizService.getAllQuizByUser().subscribe(data => {
-      data.forEach(q => {  
+      data.forEach(q => {
         q.niveauName=Utils.toStringNiveau(q.niveau);
         listQuiz.push(q);
       })
@@ -56,7 +56,7 @@ export class UserQuestionAndQuiZComponent implements OnInit {
     });
 
     this.myQuiz=listQuiz;
-    
+
     console.log("quiz : ",this.myQuiz);
   }
 
@@ -85,5 +85,5 @@ export class UserQuestionAndQuiZComponent implements OnInit {
   deleteQuiz(id : number) {
     this.quizService.deleteQuiz(id).subscribe(data => {});
   }
- 
+
 }

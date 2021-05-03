@@ -24,9 +24,7 @@ export class QuizService {
 
   saveQuiz(quiz: Quiz) : Observable<Quiz>{
 
-    return this.http.post<Quiz>( API_URL + 'createQuiz/', {
-      name: quiz.name,
-    }, httpOptions);
+    return this.http.post<Quiz>( API_URL + 'createQuiz/', quiz, httpOptions);
 
   }
 

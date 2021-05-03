@@ -6,19 +6,21 @@ import {Competence} from "./competence";
 export class Question {
 
     idQuestion : number;
-    theme : string;
     libelle : string;
-    poids :  number ;
+    theme : string;
     niveau !:  number;
-    niveauName!: string;
-    questionCompetences : Array<Competence>;
-    listQuiz : Array<Quiz>;
-    reponsesQuestions : Array<ResponseQuestion> = [];
-    stringCompetence : string;
+    poids :  number ;
     qst: string;
+    reponsesQuestions : Array<ResponseQuestion> = [];
 
-   // à modifier
-    competence: string;
+    idNiveau !:  number;
+    niveauName!: string;
+
+    questionCompetences : Array<Competence>;
+
+   // listQuizz : Array<Quiz>;
+
+    stringCompetence : string;
 
 
 
@@ -28,13 +30,13 @@ export class Question {
         this.theme='';
         this.libelle='';
         this.poids=0;
+        this.idNiveau=0;
         this.questionCompetences =[];
-        this.listQuiz =[];
+      //  this.listQuiz =[];
         this.reponsesQuestions =[];
         this.stringCompetence='';
         this.qst='';
 
-        // à modifier
-        this.competence='';
+
     }
 }

@@ -5,6 +5,7 @@ import miage.skillz.entity.*;
 import miage.skillz.models.QuestionImpl;
 import miage.skillz.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -231,6 +232,11 @@ public class QuestionService {
         return this.questionRepository.findById(qId).orElseThrow().getReponsesQuestions();
     }
 
+    public Set<Question> getLesQuestionById(Long[] qstId)
+    {
+        return this.questionRepository.findByInventoryIdIn(qstId);
+    }
+
     public Set<ReponseQuestion> getAllCorrectQuestionResponse(Long qId)
     {
             return this.getAllQuestionResponse(qId).stream().filter(ReponseQuestion::getIsCorrect).collect(Collectors.toSet());
@@ -239,5 +245,10 @@ public class QuestionService {
     public long getQuestionPoids(Long qId) {
 
         return this.questionRepository.findById(qId).orElseThrow().getPoids();
+    }
+
+    public Set<Question> getQuestionByCompetenceNiveau(/*Long idCompetence,*/ Long idNiveau)
+    {
+        return this.questionRepository.getQuestionByCompetenceNiveau(/*idCompetence,*/ idNiveau);
     }
 }

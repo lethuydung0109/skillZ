@@ -53,6 +53,12 @@ public class QuestionController {
         return  questionService.getAllQuestions();
     }
 
+    @GetMapping(value = "/lesQuestionById/{qstId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Set<Question> getLesQuestionById(@PathVariable Long[] qstId)
+    {
+        return  questionService.getLesQuestionById(qstId);
+    }
+
     @GetMapping(value = "/user/questions", produces = MediaType.APPLICATION_JSON_VALUE)
     public Set<Question> getAllQuizByUser()
     {
@@ -86,4 +92,12 @@ public class QuestionController {
     {
         return questionService.getQuestionPoids(qId);
     }
+
+    @GetMapping(value = "/getQuestionCompetenceNiveau/{idNiveau}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Set<Question> getQuestionByCompetenceNiveau(@PathVariable Long idNiveau)
+    {
+        return questionService.getQuestionByCompetenceNiveau(/*idCompetence,*/idNiveau);
+    }
+
+
 }

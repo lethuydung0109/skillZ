@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import { Question } from '../models/question';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -12,7 +12,7 @@ import Utils from '../utils';
   templateUrl: './questions.component.html',
   styleUrls: ['./questions.component.scss']
 })
-export class QuestionsComponent implements OnInit {
+export class QuestionsComponent implements OnInit, AfterViewInit{
 
   public listQuestions : Array<Question> =[];
   displayedColumns: string[] = ['num','theme','nom','niveau','competence'];
@@ -29,17 +29,18 @@ export class QuestionsComponent implements OnInit {
   ngOnInit(): void {
     let listQ : Array<Question> =[];
     this.questionService.getAllQuestions().subscribe(data => {
-      data.forEach(q => {     
+      console.log(data);
+      data.forEach(q => {
         q.stringCompetence=Utils.quizCompetenceToString(q.questionCompetences);
-        console.log(" stringCompetence :", q.stringCompetence);  
+     //   console.log(" stringCompetence :", q.stringCompetence);
         q.niveauName=Utils.toStringNiveau(q.niveau);
-        console.log(" niveauName :", q.niveauName);   
+      //  console.log(" niveauName :", q.niveauName);
         listQ.push(q);
       })
       this.dataSource = new MatTableDataSource(this.listQuestions);
     });
     this.listQuestions=listQ;
-    console.log("quiz : ",this.listQuestions);
+  //  console.log("quiz : ",this.listQuestions);
 
     console.log("datasource : ", this.dataSource.data);
 

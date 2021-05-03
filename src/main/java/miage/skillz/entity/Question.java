@@ -21,8 +21,8 @@ public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idQuestion;
-    private String theme;
     private String libelle;
+    private String theme;
     @Builder.Default
     private long poids = 0;
 
