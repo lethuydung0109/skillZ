@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CompetenceService } from '../services/competence.service';
+import { UserService } from '../services/user.service';
 import { UserTestService } from '../_services/auth/service/userTest.service';
 
 @Component({
@@ -8,13 +10,16 @@ import { UserTestService } from '../_services/auth/service/userTest.service';
 })
 export class BoardConcepteurComponent implements OnInit {
   content?: string;
+  nbCompetences = 0;
 
-  constructor(private userService: UserTestService) { }
+  constructor(private competenceService: CompetenceService) { }
 
   ngOnInit(): void {
-    this.userService.getConcepteurBoard().subscribe(
-      data => {
-        this.content = data;
+    this.competenceService.getStatsCompetence().subscribe(
+      data => {       
+        this.nbCompetences = data;
+        console.log(data);
+        console.log(this.nbCompetences);
       },
       err => {
         this.content = JSON.parse(err.error).message;

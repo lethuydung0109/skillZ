@@ -4,13 +4,40 @@ Riad LAZLI -
 
 == Introduction
 
-L'application SKILLZ consiste est une application web qui permet de valider et suivre les compétences des employés au sein d’une entreprise ou  des étudiants  au sein d’une université.
+SkillZ est une application de validation et suivi des compétences, elle permet d'évaluer de façon concrète le niveau de maitrise d'une compétence donnée.
 
-SkillZ permettra de s’assurer des compétences d’un candidat à  travers la création  de questionnaires personnalisées.
+En outre, elle permet d'un coté aux évaluateurs de créer des questionnaires, et de l'autre, aux des candidats de passer ces questionnaires et recevoir des badges de compétences.
 
-== Installation
+== Ecosystème
 
-== Mise en marche
+SkillZ utilise les technologies suivantes :
 
-* test
+Backend :
+- Java
+- Spring
+
+Frontend :
+- Angular
+- TypeScript
+- HTML CSS
+
+SGBD :
+- MySql
+
+Moteur de production :
+- Gradle
+
+== Installation et mise en marche
+
+Pour lancer le Banckend utilisez la commande : ./gradlew bootRun
+
+Pour lancer le Frontend utilisez la commande : ng serve
+
+Pour accéder à l'interface utilisateur, lancez le lien : localhost:4200/
+
+Api avec swagger-ui :  http://localhost:8081/swagger-ui/
+
+Remarque : il faut créer un schéma de base de données sous MySql avec le nom suivant : skillzdb
+
+
 

@@ -1,8 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,7 +22,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTreeModule } from "@angular/material/tree";
 import { MatTableModule } from "@angular/material/table";
 
-
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -33,9 +31,12 @@ import { QuestionsComponent } from './questions/questions.component';
 import { ListQuizComponent } from './list-quiz/list-quiz.component';
 import { DoQuizComponent } from './do-quiz/do-quiz.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 import { InfoModalComponent } from './info-modal/info-modal.component';
 import { CountdownModule } from 'ngx-countdown';
-import { MatButtonModule} from '@angular/material/button';
+import {MatButtonModule} from '@angular/material/button';
+import {MatListModule} from "@angular/material/list";
+import {MatSelectModule} from "@angular/material/select";
 import { CreateUserComponent } from './create-user/create-user.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
@@ -44,8 +45,8 @@ import { MatTabsModule} from '@angular/material/tabs';
 import { MatChipsModule } from '@angular/material/chips';
 import { recommendationListComponent } from './recommendation-list/recommendation-list.component';
 import { CreateRecommendationComponent } from './create-recommendation/create-recommendation.component';
-
-
+import { DatePipe } from '@angular/common';
+import { ModifierCompetenceComponent } from './modifier-competence/modifier-competence/modifier-competence.component';
 
 
 
@@ -72,8 +73,9 @@ import { CreateRecommendationComponent } from './create-recommendation/create-re
         UserDetailsComponent,
         UserQuestionAndQuiZComponent,
         recommendationListComponent,
-        CreateRecommendationComponent
-    
+        CreateRecommendationComponent,
+        ModifierCompetenceComponent
+
     ],
     imports: [
         BrowserModule,
@@ -90,11 +92,15 @@ import { CreateRecommendationComponent } from './create-recommendation/create-re
         MatInputModule,
         MatCheckboxModule,
         CountdownModule,
+        ScrollingModule,
         MatButtonModule,
+        MatListModule,
+        MatSelectModule,
+        ReactiveFormsModule,
         MatTabsModule,
         MatChipsModule
 ],
-providers: [authInterceptorProviders],
+providers: [authInterceptorProviders, DatePipe],
 bootstrap: [AppComponent],
 schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -48,9 +48,9 @@ export class ListQuizComponent implements OnInit,AfterViewInit  {
 
     let listQuiz : Array<Quiz> =[];
     this.quizService.getAllQuiz().subscribe(data => {
-      data.forEach(q => {  
+      data.forEach(q => {
         q.niveauName=Utils.toStringNiveau(q.niveau);
-        console.log(" niveauName :", q.niveauName);    
+        console.log(" niveauName :", q.niveauName);
         listQuiz.push(q);
       })
       this.dataSource = new MatTableDataSource(this.listQuiz);

@@ -1,6 +1,9 @@
 package miage.skillz.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "recommendations")
@@ -11,21 +14,26 @@ public class Recommendation {
 
     @ManyToOne
     @JoinColumn(name="id_writer")
+    @JsonIgnore
     private User writer=null;
 
     @ManyToOne
     @JoinColumn(name="id_receiver")
+    @JsonIgnore
     private User receiver=null;
 
-    private Long content;
+    private String content;
+
+    private Date date;
 
     public Recommendation() {
     }
 
-    public Recommendation(User writer, User receiver, Long content) {
+    public Recommendation(User writer, User receiver, String content, Date date) {
         this.writer = writer;
         this.receiver = receiver;
         this.content = content;
+        this.date = date;
     }
 
     public Long getId() {
@@ -52,11 +60,19 @@ public class Recommendation {
         this.receiver = receiver;
     }
 
-    public Long getContent() {
+    public String getContent() {
         return content;
     }
 
-    public void setContent(Long content) {
+    public void setContent(String content) {
         this.content = content;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

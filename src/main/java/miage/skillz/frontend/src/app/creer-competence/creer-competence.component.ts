@@ -30,7 +30,9 @@ export class CreerCompetenceComponent implements OnInit {
     this.list_competence_pere=listComptence;
   }
 
-  onSubmit(): void {}
+  onSubmit(): void {
+    this.createCompetence();
+  }
 
   createCompetence(): void {
     this.competenceService.saveCompetence(this.competence).subscribe(data =>
@@ -38,9 +40,6 @@ export class CreerCompetenceComponent implements OnInit {
       console.log(data);
   });
     this.router.navigate(['/liste-competence']);
-
-
-
   }
 
 
