@@ -35,7 +35,6 @@ public class Competence {
         @JsonIgnore
         Set<Badge> listBadges = new HashSet<>();
 
-
         // Mapping hibernate
         @JsonIgnore
         @ManyToMany(mappedBy = "questionCompetences",fetch = FetchType.LAZY)

@@ -38,7 +38,10 @@ public class QuestionController {
     @PutMapping(value = "/updateQuestion", consumes = "application/json",produces = "application/json")
     public ResponseEntity<Question> updateQuestion(@RequestBody QuestionImpl questionImpl)
     {
-        return  questionService.updateQuestion(questionImpl);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        User currentUser = this.userController.findById(userDetails.getId());
+        return  questionService.updateQuestion(questionImpl,currentUser);
     }
 
     @GetMapping(value = "/getQuestion/{qId}", produces = MediaType.APPLICATION_JSON_VALUE)
