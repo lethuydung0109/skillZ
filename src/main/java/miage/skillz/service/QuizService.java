@@ -57,16 +57,19 @@ public class QuizService {
         return  new ResponseEntity<>(this.quizRepository.saveAndFlush(createdQuiz), HttpStatus.OK);
     }
 
-    public ResponseEntity<Quiz> updateQuiz(QuizImpl quizImpl)
+    public ResponseEntity<Quiz> updateQuiz(QuizImpl quizImpl,User currentUser)
     {
         System.out.println("QuizImpl à modifier : "+quizImpl);
-        Quiz quiz = new Quiz(quizImpl.getName(),
-                niveauRepository.findById(quizImpl.getIdNiveau()).orElseThrow(),
-                quizImpl.getTheme(),quizImpl.getSeuilValidation(),quizImpl.getDuree(),
-                quizImpl.getDateOfCreation(),competenceRepository.findById(quizImpl.getIdCompetence()).orElseThrow());
+        Quiz quiz = this.quizRepository.findById(quizImpl.getIdQuiz()).orElseThrow();
+        quiz.setName(quizImpl.getName());
+        quiz.setNiveau(niveauRepository.findById(quizImpl.getIdNiveau()).orElseThrow());
+        quiz.setTheme(quizImpl.getTheme());
+        quiz.setSeuilValidation(quizImpl.getSeuilValidation());
+        quiz.setDuree(quizImpl.getDuree());
+        quiz.setDateOfCreation(quizImpl.getDateOfCreation());
+        quiz.setQuizCompetence(competenceRepository.findById(quizImpl.getIdCompetence()).orElseThrow());
         quiz.setIdQuiz(quizImpl.getIdQuiz());
         quiz.setQuizQuestions(new HashSet<>());
-        //quiz.setQuizCompetences(new HashSet<>());
 
         System.out.println("quizImpl question : "+quizImpl.getQuizQuestionsId());
         quizImpl.getQuizQuestionsId().forEach(qId -> {
@@ -74,21 +77,9 @@ public class QuizService {
             quiz.getQuizQuestions().add(this.questionRepository.findById(qId).orElse(null));
         });
 
-//        quizImpl.getQuizCompetence().forEach(cId -> {
-//            System.out.println("competenceId : "+cId+" find : "+this.competenceRepository.existsById(cId));
-//            quiz.getQuizCompetences().add(this.competenceRepository.findById(cId).orElse(null));
-//        });
+        this.setQuizQuestions(quizImpl.getIdQuiz(),quiz.getQuizQuestions());
 
-        Quiz quizUpdate = new Quiz();
-        if(this.quizRepository.findById(quizImpl.getIdQuiz()).isPresent())
-        {
-            this.setQuizQuestions(quizImpl.getIdQuiz(),quiz.getQuizQuestions());
-            //this.setQuizCompetences(quizImpl.getIdQuiz(),quiz.getQuizCompetences());
-            quizUpdate=this.quizRepository.save(quiz);
-        }
-        System.out.println("UpdateQuiz : "+quizUpdate);
-
-        return  new ResponseEntity<>(quizUpdate, HttpStatus.OK);
+        return  new ResponseEntity<>(quiz, HttpStatus.OK);
     }
 
     public void setQuizQuestions(Long quizId, Set<Question> questions)
@@ -106,24 +97,6 @@ public class QuizService {
 
         this.quizRepository.saveAndFlush(putQuiz);
     }
-
-  /*  public void setQuizCompetences (Long quizId,Set<Competence> competences)
-    {
-        Set<Competence> putCompetences= new HashSet<>();
-        competences.forEach(c->{
-            putCompetences.add(this.competenceRepository.findById(c.getId()).orElseThrow());
-        });
-
-        Quiz putQuiz=this.quizRepository.findById(quizId).orElseThrow();
-        putQuiz.setQuizCompetences(putCompetences);
-
-        putCompetences.forEach(competence -> {
-            competence.getListQuiz().add(putQuiz);
-            this.competenceRepository.saveAndFlush(competence);
-        });
-
-        this.quizRepository.saveAndFlush(putQuiz);
-    }*/
 
     public ResponseEntity<Quiz> getQuiz(Long quizId)
     {

@@ -19,6 +19,7 @@ public class Badge {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_competence")
     private Competence competence;
@@ -32,6 +33,16 @@ public class Badge {
     private User user;
 
     private String dateValidation;
+
+    private long quizScore;
+
+    public Badge(Competence competence, Niveau niveau, String dateValidation, long quizScore, User user) {
+        this.competence = competence;
+        this.niveau = niveau;
+        this.dateValidation = dateValidation;
+        this.quizScore = quizScore;
+        this.user = user;
+    }
 
     public Badge() {
     }
