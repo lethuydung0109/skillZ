@@ -36,8 +36,7 @@ public class QuestionService {
     {
         System.out.println("Received question : "+ qImpl.toString());
 
-        Question question = new Question (qImpl.getTheme(), qImpl.getLibelle(),
-                                          qImpl.getPoids(), niveauRepository.findById(qImpl.getIdNiveau()).orElseThrow());
+        Question question = new Question (qImpl.getTheme(), qImpl.getLibelle(),niveauRepository.findById(qImpl.getIdNiveau()).orElseThrow());
         Set<ReponseQuestion> reponseQuestions = new HashSet<>(qImpl.getReponsesQuestions());
         question.setQuestionCompetences(new HashSet<>());
         question.setReponsesQuestions(new HashSet<>());
@@ -165,6 +164,7 @@ public class QuestionService {
 
     public List<Question> getAllQuestions()
     {
+        System.out.println(" all questions : "+this.questionRepository.findAll());
         return this.questionRepository.findAll();
     }
 
@@ -240,10 +240,10 @@ public class QuestionService {
             return this.getAllQuestionResponse(qId).stream().filter(ReponseQuestion::getIsCorrect).collect(Collectors.toSet());
     }
 
-    public long getQuestionPoids(Long qId) {
-
-        return this.questionRepository.findById(qId).orElseThrow().getPoids();
-    }
+//    public long getQuestionPoids(Long qId) {
+//
+//        return this.questionRepository.findById(qId).orElseThrow().getPoids();
+//    }
 
     public Set<Question> getQuestionByCompetenceNiveau(/*Long idCompetence,*/ Long idNiveau)
     {

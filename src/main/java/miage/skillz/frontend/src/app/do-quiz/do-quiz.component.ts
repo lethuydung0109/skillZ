@@ -117,6 +117,7 @@ export class DoQuizComponent implements OnInit {
       let badge : Badge = new Badge();
       badge.competenceId=this.currentQuiz.quizCompetence.id;
       badge.niveauId=this.currentQuiz.idNiveau;
+      badge.quizScore=this.quizScore;
       console.log("badge ", badge)
       this.badgeService.createBadge(badge).subscribe(data=> console.log("badge return",data));
       this.openValidationModal("Félicitaions !Vous avez réussi le test avec un score de : "+this.quizScore);

@@ -4,7 +4,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { QuizService } from '../services/quiz.service';
-import { Competence } from '../models/competence';
 import { QuestionService } from '../services/question.service';
 import { Question } from '../models/question';
 import Utils from '../utils';

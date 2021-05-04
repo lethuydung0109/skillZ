@@ -34,6 +34,16 @@ public class Badge {
 
     private String dateValidation;
 
+    private long quizScore;
+
+    public Badge(Competence competence, Niveau niveau, String dateValidation, long quizScore, User user) {
+        this.competence = competence;
+        this.niveau = niveau;
+        this.dateValidation = dateValidation;
+        this.quizScore = quizScore;
+        this.user = user;
+    }
+
     public Badge() {
     }
 

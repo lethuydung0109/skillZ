@@ -23,8 +23,6 @@ public class Question {
     private Long idQuestion;
     private String libelle;
     private String theme;
-    @Builder.Default
-    private long poids = 0;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="idNiveau")
@@ -50,10 +48,9 @@ public class Question {
     @JoinColumn(name = "idUser")
     private User user;
 
-    public Question(String theme, String libelle, long poids, Niveau niveau) {
+    public Question(String theme, String libelle,Niveau niveau) {
         this.theme = theme;
         this.libelle = libelle;
-        this.poids = poids;
         this.niveau = niveau;
     }
 }

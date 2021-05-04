@@ -21,6 +21,7 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserQuestionAndQuiZComponent } from './user-question-and-quiz/user-question-and-quiz.component';
 import { recommendationListComponent } from './recommendation-list/recommendation-list.component';
 import { CreateRecommendationComponent } from './create-recommendation/create-recommendation.component';
+import { CreateAndShowPosteComponent } from './create-and-show-poste/create-and-show-poste.component';
 
 
 
@@ -46,6 +47,7 @@ const routes: Routes = [
   { path: 'participant/:idBagde', component: BoardParticipantComponent },
   { path: 'recommendations', component: recommendationListComponent },
   { path: 'createRecommendation', component: CreateRecommendationComponent },
+  { path: 'lesPostes', component: CreateAndShowPosteComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
