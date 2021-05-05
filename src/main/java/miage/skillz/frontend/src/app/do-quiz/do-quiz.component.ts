@@ -123,9 +123,11 @@ export class DoQuizComponent implements OnInit {
    
     //Création des bagdes
     console.log("score",this.quizScore)
+    this.quizScore=parseFloat(this.quizScore.toFixed(2));
 
     if(this.quizScore >= this.currentQuiz.seuilValidation)
     {
+      //this.quizScore.toFixed(2);
       let badge : Badge = new Badge();
       badge.competenceId=this.currentQuiz.quizCompetence.id;
       badge.niveauId=this.currentQuiz.idNiveau;
