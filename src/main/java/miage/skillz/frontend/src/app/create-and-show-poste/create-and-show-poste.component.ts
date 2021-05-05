@@ -44,24 +44,25 @@ export class CreateAndShowPosteComponent implements OnInit {
         this.competences.push(p);
       })
     });
-    console.log("liste competences :", this.competences)
+    //console.log("liste competences :", this.competences)
 
     //Get all postes
     let listPoste : Array<Poste> =[];
     this.posteService.getAllPostes().subscribe(data => {
       data.forEach(p=> {
         console.log("poste : ", p)
-        this.competenceService.getCompetenceById(p.competenceId).subscribe(data =>
-        {
-          p.competenceName=data.nom_competence;
-        })
+        p.competenceName=p.competence.nom_competence;
+        // this.competenceService.getCompetenceById(p.competenceId).subscribe(data =>
+        // {
+        //   p.competenceName=data.nom_competence;
+        // })
         p.niveauName=Utils.toStringNiveau(p.niveau.niveauId);
         listPoste.push(p);
       })
       this.dataSource = new MatTableDataSource(listPoste);
     });
     this.listPoste=listPoste;
-    //console.log("postes : ",this.listPoste);
+    console.log("postes : ",this.listPoste);
   }
 
   onSubmit(): void {
@@ -72,8 +73,8 @@ export class CreateAndShowPosteComponent implements OnInit {
   createPoste()
   {
     console.log("poste 1: ", this.poste);
-    //this.poste.competenceId=this.poste.competence?.id;
-    console.log("poste 2: ", this.poste);
+    this.poste.competenceId=this.poste.competence.id;
+    //console.log("poste 2: ", this.poste);
     this.posteService.createPoste(this.poste).subscribe(data => {
       console.log("created poste : ", data);
       this.listPoste.push(this.poste);

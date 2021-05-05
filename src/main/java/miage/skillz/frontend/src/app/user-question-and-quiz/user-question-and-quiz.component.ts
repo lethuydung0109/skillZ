@@ -15,11 +15,11 @@ import Utils from '../utils';
 })
 export class UserQuestionAndQuiZComponent implements OnInit {
 
-  myQuiz: Array<Quiz> = [];
-  myQuestions: Array<Question> = [];
+  myQuiz : Array<Quiz> =[];
+  myQuestions: Array<Question>=[];
 
-  displayedQuestionColumns: string[] = ['num', 'theme', 'libelle', 'niveauName', 'stringCompetence', 'actions'];
-  displayedQuizColumns: string[] = ['num', 'theme', 'name', 'niveauName', 'competence', 'duree', 'actions'];
+  displayedQuestionColumns: string[] = ['num','theme','libelle','niveauName','stringCompetence','actions'];
+  displayedQuizColumns: string[] = ['num','theme','name', 'niveauName', 'competence','duree','actions'];
 
 
   dataSourceQuestion!: MatTableDataSource<Question>;
@@ -28,32 +28,35 @@ export class UserQuestionAndQuiZComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private quizService: QuizService, private questionService: QuestionService) {
-  }
+  constructor(private quizService : QuizService,private questionService: QuestionService)
+  {}
 
   ngOnInit(): void {
-    let listQ: Array<Question> = [];
+
+    let listQ : Array<Question> =[];
     this.questionService.getAllQuestionsByUser().subscribe(data => {
       data.forEach(q => {
-        q.stringCompetence = Utils.quizCompetenceToString(q.questionCompetences);
-        q.niveauName = Utils.toStringNiveau(q.niveau);
+        q.stringCompetence=Utils.quizCompetenceToString(q.questionCompetences);
+        q.niveauName=Utils.toStringNiveau(q.niveau);
         listQ.push(q);
       })
       this.dataSourceQuestion = new MatTableDataSource(listQ);
     });
-    this.myQuestions = listQ;
-    console.log("questions : ", this.myQuestions);
+    this.myQuestions=listQ;
+    console.log("questions : ",this.myQuestions);
 
-    let listQuiz: Array<Quiz> = [];
+    let listQuiz : Array<Quiz> =[];
     this.quizService.getAllQuizByUser().subscribe(data => {
       data.forEach(q => {
-        q.niveauName = Utils.toStringNiveau(q.niveau);
+        q.niveauName=Utils.toStringNiveau(q.niveau);
         listQuiz.push(q);
       })
       this.dataSourceQuiz = new MatTableDataSource(listQuiz);
     });
-    this.myQuiz = listQuiz;
-    console.log("quiz : ", this.myQuiz);
+
+    this.myQuiz=listQuiz;
+
+    console.log("quiz : ",this.myQuiz);
   }
 
   applyFilter1(event: Event) {
@@ -75,16 +78,19 @@ export class UserQuestionAndQuiZComponent implements OnInit {
   }
 
   deleteQuestion(id: number) {
-    this.questionService.deleteQuestion(id).subscribe(data => {
-    });
-    location.reload();
+
+    this.questionService.getQuestion(id).subscribe(data => {
+      this.myQuestions.splice(this.myQuestions.indexOf(data),1);
+    })
+    this.questionService.deleteQuestion(id).subscribe(data => {});
+
   }
 
-  deleteQuiz(id: number) {
-    this.quizService.deleteQuiz(id).subscribe(data => {
-    });
-    location.reload();
+  deleteQuiz(id : number) {
+    this.quizService.getQuiz(id).subscribe(data => {
+      this.myQuiz.splice(this.myQuiz.indexOf(data),1);
+    })
+    this.quizService.deleteQuiz(id).subscribe(data => {});
   }
-
 
 }

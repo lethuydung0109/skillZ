@@ -50,6 +50,9 @@ import { ModifierCompetenceComponent } from './modifier-competence/modifier-comp
 import { ModifierQuestionComponent } from './modifier-question/modifier-question.component';
 import { ModifierQuizComponent } from './modifier-quiz/modifier-quiz.component';
 import { CreateAndShowPosteComponent } from './create-and-show-poste/create-and-show-poste.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+// import { ModifierCompetenceComponent } from './modifier-competence/modifier-competence/modifier-competence.component';
+
 
 
 @NgModule({
@@ -80,7 +83,6 @@ import { CreateAndShowPosteComponent } from './create-and-show-poste/create-and-
         ModifierQuestionComponent,
         ModifierQuizComponent,
         CreateAndShowPosteComponent
-
     ],
     imports: [
         BrowserModule,
@@ -103,7 +105,8 @@ import { CreateAndShowPosteComponent } from './create-and-show-poste/create-and-
         MatSelectModule,
         ReactiveFormsModule,
         MatTabsModule,
-        MatChipsModule
+        MatChipsModule,
+        MatTooltipModule
 ],
 providers: [authInterceptorProviders, DatePipe],
 bootstrap: [AppComponent],

@@ -21,7 +21,6 @@ public class Poste {
     private Long posteId;
     private String name;
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "competenceId")
     private Competence competence;

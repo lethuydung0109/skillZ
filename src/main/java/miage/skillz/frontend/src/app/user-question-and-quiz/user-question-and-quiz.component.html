@@ -45,7 +45,8 @@
                 <ng-container matColumnDef="actions">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
                     <td mat-cell *matCellDef="let row">
-                        <button type="button" (click)="deleteQuestion(row.idQuestion)" mat-icon-button color="warn"><mat-icon>delete</mat-icon>
+                        <button  (click)="deleteQuestion(row.idQuestion)" mat-icon-button color="warn" matTooltip="Rafraichissez la page après suppression">
+                            <mat-icon>delete</mat-icon>
                         </button>
 
                       <button type="button" mat-icon-button color="primary"> <a routerLink="/modifier-question/{{ row.idQuestion }}">
@@ -55,7 +56,6 @@
 
                     </td>
                 </ng-container>
-
 
                 <tr mat-header-row *matHeaderRowDef="displayedQuestionColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedQuestionColumns;"></tr>
@@ -71,7 +71,7 @@
 
   <h1>Mes questionnaires </h1>
     <div class="col-md-6">
-        <button mat-raised-button color="primary" routerLink="/creer-quiz">Créer quiz </button>
+        <button mat-raised-button color="primary" routerLink="/creer-quiz">Creer quiz </button>
     </div>
     <br>
 
@@ -90,12 +90,12 @@
                 </ng-container>
 
                 <ng-container matColumnDef="theme">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Thème </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Theme </th>
                     <td mat-cell *matCellDef="let row"> {{row.theme}}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Libelle </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom </th>
                     <td mat-cell *matCellDef="let row"> {{row.name}} </td>
                 </ng-container>
 
@@ -105,19 +105,20 @@
                 </ng-container>
 
                 <ng-container matColumnDef="competence">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Compétence </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Competence </th>
                     <td mat-cell *matCellDef="let row"> {{row.quizCompetence.nom_competence}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="duree">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Durée </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Duree </th>
                     <td mat-cell *matCellDef="let row"> {{row.duree}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="actions">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
                     <td mat-cell *matCellDef="let row">
-                        <button  (click)="deleteQuiz(row.idQuiz)" mat-icon-button color="warn"><mat-icon>delete</mat-icon>
+                        <button  (click)="deleteQuiz(row.idQuiz)" mat-icon-button color="warn" matTooltip="Rafraichissez la page après suppression">
+                            <mat-icon>delete</mat-icon>
                         </button>
 
                       <button type="button" mat-icon-button color="primary"> <a routerLink="/modifier-quiz/{{ row.idQuiz }}">

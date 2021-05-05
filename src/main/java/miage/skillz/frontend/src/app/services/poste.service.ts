@@ -21,7 +21,7 @@ export class PosteService {
     return this.http.post<Poste>(routeQuery,poste);
   }
 
-  public get(posteId : number) : Observable<Array<User>>
+  public getCandidates(posteId : number) : Observable<Array<User>>
   {
     const routeQuery=this.url+"/getCandidatesForThePost/"+posteId;
     return this.http.get<Array<User>>(routeQuery);
@@ -38,4 +38,5 @@ export class PosteService {
     const routeQuery=this.url+"/deletePoste/"+posteId;
     return this.http.delete(routeQuery);
   }
+
 }

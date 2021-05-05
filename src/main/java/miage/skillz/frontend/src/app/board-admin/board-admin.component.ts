@@ -9,11 +9,14 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./board-admin.component.css']
 })
 export class BoardAdminComponent implements OnInit {
-  content?: string;
+
   nbusers = 0;
   nbParticipants = 0;
   nbConcepteurs = 0;
   nbCompetences = 0;
+  content?: string;
+  editContent?: string;
+  submitted = false;
 
 
   constructor(private userService: UserService, private competenceService: CompetenceService) { }
@@ -43,5 +46,9 @@ export class BoardAdminComponent implements OnInit {
         this.content = JSON.parse(err.error).message;
       }
     );
-  }
+  //   savePublicContent(): void{
+  //     this.content = this.editContent;
+  //     this.submitted = true;
+  // }
+}
 }
