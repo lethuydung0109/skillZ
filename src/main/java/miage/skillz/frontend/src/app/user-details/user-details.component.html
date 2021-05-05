@@ -6,6 +6,7 @@
           <label for="username">Username</label>
           <input
             type="text"
+            readonly = "true"
             class="form-control"
             id="username"
             [(ngModel)]="currentUser.username"
@@ -16,6 +17,7 @@
           <label for="email">Email</label>
           <input
             type="text"
+            readonly
             class="form-control"
             id="email"
            [(ngModel)]="currentUser.email"
