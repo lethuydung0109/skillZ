@@ -17,8 +17,6 @@ public class QuestionImpl {
     private Long idQuestion;
     private String theme;
     private String libelle;
-    @Builder.Default
-    private long poids = 0;
     private Long idNiveau;
     @Builder.Default
     private Set<Long> questionCompetences = new HashSet<>();

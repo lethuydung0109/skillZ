@@ -15,8 +15,9 @@ public class BadgeRequest {
 
     private Long competenceId;
     private Long niveauId;
-
+    @Builder.Default
     private String dateValidation = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+    private long quizScore;
 
     public Long getCompetenceId() {
         return competenceId;

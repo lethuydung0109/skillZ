@@ -50,6 +50,7 @@ import { ModifierCompetenceComponent } from './modifier-competence/modifier-comp
 import { ModifierQuestionComponent } from './modifier-question/modifier-question.component';
 import { ModifierQuizComponent } from './modifier-quiz/modifier-quiz.component';
 
+import { CreateAndShowPosteComponent } from './create-and-show-poste/create-and-show-poste.component';
 
 
 @NgModule({

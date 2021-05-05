@@ -37,36 +37,35 @@ public class User {
     @Size(max = 120)
     private String password;
 
+    @Builder.Default
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "users_roles",
                 joinColumns = @JoinColumn(name = "user_id"),
                 inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
+    @Builder.Default
     @JsonIgnore
     @OneToMany( cascade = CascadeType.ALL, mappedBy = "user")
     private Set<Badge> badges = new HashSet<>();
 
-//    @Builder.Default
-//    @OneToMany(fetch =  FetchType.EAGER)
-//    @JoinTable(name = "user_quiz",
-//            joinColumns = @JoinColumn(name = "user_id"),
-//            inverseJoinColumns = @JoinColumn(name = "quiz_id"))
-//    private Set<Quiz> myCreatedQuiz = new HashSet<>();
-
+    @Builder.Default
     @JsonIgnore
     @OneToMany( cascade = CascadeType.ALL, mappedBy = "user")
     Set<Quiz> myCreatedQuiz = new HashSet<>();
 
+    @Builder.Default
     @JsonIgnore
     @OneToMany( cascade = CascadeType.ALL, mappedBy = "user")
     Set<Question> myCreatedQuestion = new HashSet<>();
 
     //List of recommendations for others
+    @Builder.Default
     @OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="writer")
     Set<Recommendation> recommendationsForOthers = new HashSet<>();
 
     //List of recommendations written by orthers
+    @Builder.Default
     @OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="receiver")
     Set<Recommendation> recommendationsByOthers = new HashSet<>();
 

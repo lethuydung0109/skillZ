@@ -24,6 +24,7 @@ import { CreateRecommendationComponent } from './create-recommendation/create-re
 import { ModifierCompetenceComponent } from './modifier-competence/modifier-competence.component';
 import {ModifierQuestionComponent} from "./modifier-question/modifier-question.component";
 import {ModifierQuizComponent} from "./modifier-quiz/modifier-quiz.component";
+import { CreateAndShowPosteComponent } from './create-and-show-poste/create-and-show-poste.component';
 
 
 
@@ -52,6 +53,7 @@ const routes: Routes = [
   { path: 'modifier-competence/:id', component: ModifierCompetenceComponent },
   { path: 'modifier-question/:idQuestion', component: ModifierQuestionComponent },
   { path: 'modifier-quiz/:idQuiz', component: ModifierQuizComponent },
+  { path: 'lesPostes', component: CreateAndShowPosteComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

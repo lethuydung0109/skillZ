@@ -8,4 +8,5 @@ export class Badge {
     niveau!:any;
     niveauId!:number;
     dateValidation !:string;
+    quizScore!:number;
 }

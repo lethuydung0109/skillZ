@@ -22,7 +22,7 @@
   <div>
     <mat-chip-list aria-label="Fish selection" >
       <mat-chip *ngFor="let badge of userBadges " color="primary" selected>
-        {{badge.competenceName}} | {{badge.niveauName}} | {{badge.dateValidation}}</mat-chip>
+        {{badge.competenceName}} | {{badge.niveauName}} | {{badge.quizScore}}% | {{badge.dateValidation}}</mat-chip>
     </mat-chip-list>
   </div>
 
