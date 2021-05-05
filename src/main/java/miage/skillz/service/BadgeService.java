@@ -73,7 +73,6 @@ public class BadgeService {
         repository.deleteById(badgeId);
     }
 
-
     public Set<Badge> getAllBadgesByUser(Long userId) {
         return badgeRepository.findAll()
                 .stream()

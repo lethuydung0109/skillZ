@@ -45,7 +45,8 @@
                 <ng-container matColumnDef="actions">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
                     <td mat-cell *matCellDef="let row"> 
-                        <button  (click)="deleteQuestion(row.idQuestion)" mat-icon-button color="warn"><mat-icon>delete</mat-icon>
+                        <button  (click)="deleteQuestion(row.idQuestion)" mat-icon-button color="warn" matTooltip="Rafraichissez la page après suppression">
+                            <mat-icon>delete</mat-icon>
                         </button>
                     </td>
                 </ng-container>
@@ -109,7 +110,8 @@
                 <ng-container matColumnDef="actions">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
                     <td mat-cell *matCellDef="let row"> 
-                        <button  (click)="deleteQuiz(row.idQuiz)" mat-icon-button color="warn"><mat-icon>delete</mat-icon>
+                        <button  (click)="deleteQuiz(row.idQuiz)" mat-icon-button color="warn" matTooltip="Rafraichissez la page après suppression">
+                            <mat-icon>delete</mat-icon>
                         </button>
                     </td>
                 </ng-container>

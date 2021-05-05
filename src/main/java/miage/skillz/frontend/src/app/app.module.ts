@@ -47,6 +47,8 @@ import { recommendationListComponent } from './recommendation-list/recommendatio
 import { CreateRecommendationComponent } from './create-recommendation/create-recommendation.component';
 import { DatePipe } from '@angular/common';
 import { CreateAndShowPosteComponent } from './create-and-show-poste/create-and-show-poste.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
 
 
 @NgModule({
@@ -75,7 +77,6 @@ import { CreateAndShowPosteComponent } from './create-and-show-poste/create-and-
         CreateRecommendationComponent,
         CreateAndShowPosteComponent
         //ModifierCompetenceComponent
-
     ],
     imports: [
         BrowserModule,
@@ -98,7 +99,8 @@ import { CreateAndShowPosteComponent } from './create-and-show-poste/create-and-
         MatSelectModule,
         ReactiveFormsModule,
         MatTabsModule,
-        MatChipsModule
+        MatChipsModule,
+        MatTooltipModule
 ],
 providers: [authInterceptorProviders, DatePipe],
 bootstrap: [AppComponent],

@@ -10,11 +10,11 @@ import java.util.Set;
 
 @Data
 @Builder
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(	name = "competence")
+@ToString(exclude = { "listBadges"})
 public class Competence {
 
         @Id
