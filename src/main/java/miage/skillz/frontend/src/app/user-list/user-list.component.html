@@ -15,14 +15,17 @@
     <div><br></div>
   </div><br>
 
-  <h4>Liste d'utilisateurs</h4><br>
+  <h4 *ngIf="!isCandidateView">Liste d'utilisateurs</h4><br>
+  <h4>Liste des candidats </h4><br>
 
   <div class="row">
     <table class="table table-hover">
       <thead>
         <tr>
           <th scope="col">Username</th>
-          <th scope="col">Email</th>  
+          <th scope="col">Email</th>
+          <th scope="col" *ngIf="isCandidateView">Niveau</th> 
+          <th scope="col" *ngIf="isCandidateView">Score</th>   
           <th scope="col" *ngIf="!isCandidateView">Actions</th>      
         </tr>
       </thead>
@@ -30,6 +33,8 @@
         <tr>
           <td>{{user.username}}</td>
           <td>{{user.email}}</td>
+          <td *ngIf="isCandidateView">{{user.niveauForQuiz}}</td>
+          <td *ngIf="isCandidateView">{{user.scoreForQuiz}}</td>
           <td *ngIf="!isCandidateView"><button type="button" mat-fab color="warn"><mat-icon>delete</mat-icon></button></td>
         </tr>
       </tbody>

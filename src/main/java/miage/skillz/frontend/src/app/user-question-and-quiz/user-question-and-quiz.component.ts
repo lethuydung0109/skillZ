@@ -7,6 +7,8 @@ import { QuizService } from '../services/quiz.service';
 import { QuestionService } from '../services/question.service';
 import { Question } from '../models/question';
 import Utils from '../utils';
+import { ResponseQuestion } from '../models/response-question';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-user-question-and-quiz',
@@ -17,19 +19,26 @@ export class UserQuestionAndQuiZComponent implements OnInit {
 
   myQuiz : Array<Quiz> =[];
   myQuestions: Array<Question>=[];
+  reponses: Array<ResponseQuestion>=[];
 
   displayedQuestionColumns: string[] = ['num','theme','libelle','niveauName','stringCompetence','actions'];
   displayedQuizColumns: string[] = ['num','theme','name', 'niveauName', 'competence','duree','actions'];
+  displayedReponseColumns: string[] = ['num','libelle','isCorrect'];
 
+  idQ!:number
+  showReponses : boolean = false;
 
   dataSourceQuestion!: MatTableDataSource<Question>;
   dataSourceQuiz!: MatTableDataSource<Quiz>;
+  dataSourceReponses!:MatTableDataSource<ResponseQuestion>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private quizService : QuizService,private questionService: QuestionService)
-  {}
+  constructor(private actRoute: ActivatedRoute,private quizService : QuizService,private questionService: QuestionService)
+  {
+    this.idQ = this.actRoute.snapshot.params.idQuestion;
+  }
 
   ngOnInit(): void {
 
@@ -53,10 +62,22 @@ export class UserQuestionAndQuiZComponent implements OnInit {
       })
       this.dataSourceQuiz = new MatTableDataSource(listQuiz);
     });
-
     this.myQuiz=listQuiz;
-
     console.log("quiz : ",this.myQuiz);
+
+    let listReponses : Array<ResponseQuestion> =[];
+    if(this.idQ != undefined)
+    {
+      this.showReponses=true;
+      this.questionService.getQuestionResponses(this.idQ).subscribe(data => {
+      data.forEach(r => {        
+        listReponses.push(r);
+      })
+      this.dataSourceReponses = new MatTableDataSource(listReponses);
+    });
+    }
+    this.reponses=listReponses;
+    console.log("reponses : ",this.reponses);
   }
 
   applyFilter1(event: Event) {
@@ -74,6 +95,15 @@ export class UserQuestionAndQuiZComponent implements OnInit {
 
     if (this.dataSourceQuiz.paginator) {
       this.dataSourceQuiz.paginator.firstPage();
+    }
+  }
+
+  applyFilter3(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSourceReponses.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSourceReponses.paginator) {
+      this.dataSourceReponses.paginator.firstPage();
     }
   }
 

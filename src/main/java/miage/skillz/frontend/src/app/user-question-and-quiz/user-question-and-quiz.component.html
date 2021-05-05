@@ -1,14 +1,15 @@
 <div class="container-fluid">
     <br>
-    <div class="row">
+    <div class="row" *ngIf="!showReponses">
         <h1>Mes questions et questionnaires</h1>
     </div><br>
         
-    <div class="col-md-6">
-        <button mat-raised-button color="warn" routerLink="/creer-question">Creer question</button>
+    <div class="col-md-6" *ngIf="!showReponses">
+        <button mat-raised-button color="warn" routerLink="/creer-question">Créer question</button>
     </div><br>
 
-    <div class="content-table">         
+    <!-- Tableau de  questions -->
+    <div class="content-table" *ngIf="!showReponses">         
         <mat-form-field>
             <mat-label>Filter</mat-label>
             <input matInput (keyup)="applyFilter1($event)" placeholder="Ex. java" #input>
@@ -19,7 +20,7 @@
 
                 <ng-container matColumnDef="num">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> N° </th>
-                    <td mat-cell *matCellDef="let row; let num = index;"> {{num+1}} </td>
+                    <td mat-cell *matCellDef="let row; let num = index;"><a [routerLink]="['/reponsesRequestion/', row.idQuestion]">  {{num+1}} </a></td>
                 </ng-container>
     
                 <ng-container matColumnDef="theme">
@@ -61,14 +62,15 @@
             <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
         </div>        
     </div>   
-    <br>
+    <br><br>
 
-    <div class="col-md-6">
-        <button mat-raised-button color="primary" routerLink="/creer-quiz">Creer quiz </button>
+    <!-- Tableau de  quiz -->
+    <div class="col-md-6" *ngIf="!showReponses">
+        <button mat-raised-button color="primary" routerLink="/creer-quiz">Créer quiz </button>
     </div>
     <br>
 
-    <div class="content-table" > 
+    <div class="content-table" *ngIf="!showReponses" > 
         <mat-form-field>
             <mat-label>Filter</mat-label>
             <input matInput (keyup)="applyFilter2($event)" placeholder="Ex. java" #inputQ>
@@ -124,8 +126,45 @@
                 </tr>
             </table>
             <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-        </div>
-        
-    </div>
+        </div>        
+    </div><br>
+
+    <!-- Tableau de  reponses questions -->
+    <h4 *ngIf="showReponses"> Reponses de la question </h4><br>
+    <button  *ngIf="showReponses" mat-raised-button routerLink="/userQuestionsAndQuiz">Retour</button> <br>
+    <div class="content-table" *ngIf="showReponses"> 
+        <mat-form-field>
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter2($event)" placeholder="Ex. java" #inputR>
+        </mat-form-field>
+        <br>
+        <div class="mat-elevation-z8">           
+            <table mat-table [dataSource]="dataSourceReponses" matSort>
+
+                <ng-container matColumnDef="num">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> N° </th>
+                    <td mat-cell *matCellDef="let row; let num = index;"> {{num+1}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="libelle">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Libelle </th>
+                    <td mat-cell *matCellDef="let row"> {{row.libelle}}</td>
+                </ng-container>
+                                                        
+                <ng-container matColumnDef="isCorrect">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Reponse Correcte  </th>
+                    <td mat-cell *matCellDef="let row"> {{row.isCorrect}} </td>
+                </ng-container>
+                                                                                                                
+                <tr mat-header-row *matHeaderRowDef="displayedReponseColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedReponseColumns;"></tr>
+
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No data matching the filter "{{inputR.value}}"</td>
+                </tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+        </div>        
+    </div><br>
 
 </div>

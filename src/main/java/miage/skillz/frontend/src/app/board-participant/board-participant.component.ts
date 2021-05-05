@@ -34,7 +34,7 @@ export class BoardParticipantComponent implements OnInit {
     );
 
     //A remplacer par todoquiz
-    this.badgeService.getAllBadgeByUser().subscribe(data => {
+    this.badgeService.getCurrentUserBadges().subscribe(data => {
       data.forEach(b => {
         if(this.badgeCompetenceId != undefined){
           b.competenceName=b.competence?.nom_competence;

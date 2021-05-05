@@ -117,7 +117,7 @@ export class DoQuizComponent implements OnInit {
 
       console.log(" result ", result);
       if(result.length==0) this.quizScore=0;
-      else this.quizScore=this.quizScore+(poids/entry[1].length)*this.quizCorrectResponses.length;
+      else this.quizScore=this.quizScore+(poids/entry[1].length)*result.length;
       console.log("this.correctResponsesSelected : ", this.correctResponsesSelected,"this.quizCorrectResponses : ",this.quizCorrectResponses)
     }
    

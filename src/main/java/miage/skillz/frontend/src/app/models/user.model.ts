@@ -9,4 +9,6 @@ export class User {
   password?: string;
   myCreatedQuiz?:Array<Quiz>;
   myCreatedQuestions?:Array<Question>;
+  scoreForQuiz ?: number;
+  niveauForQuiz ?: string;
 }

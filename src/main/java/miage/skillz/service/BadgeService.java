@@ -73,7 +73,7 @@ public class BadgeService {
         repository.deleteById(badgeId);
     }
 
-    public Set<Badge> getAllBadgesByUser(Long userId) {
+    public Set<Badge> getCurrentUserBadges(Long userId) {
         return badgeRepository.findAll()
                 .stream()
                 .filter(badge -> badge.getUser().equals(userRepository.findById(userId).orElseThrow()))
@@ -82,7 +82,7 @@ public class BadgeService {
 
     public List<Badge> findBadgeWithSameCompetence(Long userId,Long competenceId)
     {
-        return this.getAllBadgesByUser(userId).stream().filter(badge ->
+        return this.getCurrentUserBadges(userId).stream().filter(badge ->
             badge.getCompetence().getId() == competenceId
         ).collect(Collectors.toList());
     }

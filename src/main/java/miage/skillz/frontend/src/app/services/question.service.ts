@@ -30,7 +30,6 @@ export class QuestionService {
 
   }
 
-
   public updateQuestion(question : Question) : Observable<Question>
   {
     const routeQuery=this.url+"/updateQuestion";
@@ -63,9 +62,9 @@ export class QuestionService {
     return this.http.get<Array<Question>>(routeQuery);
   }
 
-  public getQuestionCorrectResponse(qId : number) : Observable<Array<ResponseQuestion>>
+  public getQuestionResponses(qId : number) : Observable<Array<ResponseQuestion>>
   {
-    const routeQuery=this.url+"/correctResponse/"+qId;
+    const routeQuery=this.url+"/questionReponses/"+qId;
     return this.http.get<Array<ResponseQuestion>>(routeQuery);
   }
 
