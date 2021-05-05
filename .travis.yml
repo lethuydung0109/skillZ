@@ -1,11 +1,6 @@
 language: java
 jdk:
  - openjdk11
-# addons:
-#   sonarqube:
-#     - organization: "miageskillz" # the key of the org you chose at step #3
-#     - token:
-#         secure: 916dcc70d496e1150df3fdae8751b758cdcd64df
 
 sudo: required
 dist: xenial
@@ -16,6 +11,8 @@ addons:
       - google-chrome
     packages:
       - google-chrome-stable
+  sonarcloud:
+    organization: "miageskillz"
 
 matrix:
   include:
