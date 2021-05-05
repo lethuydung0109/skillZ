@@ -28,7 +28,26 @@ export class ModifierQuizComponent implements OnInit {
   constructor(private quizService: QuizService, private route: ActivatedRoute,private competenceService : CompetenceService,private questionService : QuestionService) { }
 
   ngOnInit(): void {
-    this.getQuiz(this.route.snapshot.params.idQuiz);
+    this.quizService.getQuiz(this.route.snapshot.params.idQuiz).subscribe(
+      data =>
+      {
+        this.quiz.idQuiz = data.idQuiz;
+        this.quiz.theme = data.theme;
+        this.quiz.quizQuestions = data.quizQuestions;
+        this.quiz.quizQuestionsId = [];
+        this.quiz.quizCompetence = data.quizCompetence;
+        this.quiz.idCompetence = data.idCompetence;
+        this.quiz.idNiveau = data.idNiveau;
+        this.quiz.niveau = data.niveau;
+        this.quiz.duree = data.duree;
+        this.quiz.name = data.name;
+        this.quiz.niveauName = data.niveauName;
+        this.quiz.score = data.score;
+        this.quiz.seuilValidation = data.seuilValidation;
+      }
+    );
+
+    console.log("quiz init :" ,this.quiz);
     this.getListCompetence();
 
     this.quizService.getQuizQuestions(this.route.snapshot.params.idQuiz).subscribe(data => {
@@ -36,11 +55,6 @@ export class ModifierQuizComponent implements OnInit {
         this.list_questionQuiz.push(p);
       })
     });
-  }
-
-  getQuiz(idQuiz : number)
-  {
-    this.quizService.getQuiz(idQuiz).subscribe(data => this.quiz = data);
   }
 
   getListCompetence() : void
@@ -68,9 +82,6 @@ export class ModifierQuizComponent implements OnInit {
 
   ajouterQst(question: Question) {
     this.list_questionQuiz.push(question);
-    console.log("ceci est la list des questions à afficher : " + this.list_questionQuiz);
-    // this.questionService.getLesQuestionsById(this.list_questionQuiz).subscribe(data => {data.forEach(p => {this.list_qstQuiz.push(p)})})
-    // this.questionService.getQuestion(idQuestion).subscribe(data => {this.list_qstQuiz.push()})
   }
 
   deleteQuestion(question: Question) {
@@ -79,6 +90,12 @@ export class ModifierQuizComponent implements OnInit {
 
 
   onSubmit() {
-    this.quizService.updateQuiz(this.quiz);
+    this.quiz.quizQuestions = this.list_questionQuiz;
+    this.quiz.quizQuestions.forEach(
+      question => {
+          this.quiz.quizQuestionsId.push(question.idQuestion);
+      } );
+
+    this.quizService.updateQuiz(this.quiz).subscribe(data => console.log(data));
   }
 }

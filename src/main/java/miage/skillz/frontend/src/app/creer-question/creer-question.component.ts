@@ -40,15 +40,11 @@ export class CreerQuestionComponent implements OnInit {
     this.list_competence=listComptence;
   }
 
-
-
-
   onSubmit(): void {
     this.createQuestion();
     //Renvoi vers la liste des questions
     //this.router.navigate(['/liste-question']);
   }
-
 
   createQuestion(): void {
     this.question.reponsesQuestions = this.list_reponses;
@@ -56,6 +52,8 @@ export class CreerQuestionComponent implements OnInit {
     this.questionService.saveQuestion(this.question).subscribe(data => {
       console.log(data);
     });
+    //Renvoi vers la liste des questions
+    this.router.navigate(['/userQuestionsAndQuiz']);
 
   }
 
@@ -71,13 +69,8 @@ export class CreerQuestionComponent implements OnInit {
     this.list_reponses.push(rep);
   }
 
-
   deleteReponse(reponse: ResponseQuestion) {
     this.list_reponses.splice(this.list_reponses.indexOf(reponse),1);
   }
 
-  getAllNiveau()
-  {
-
-  }
 }

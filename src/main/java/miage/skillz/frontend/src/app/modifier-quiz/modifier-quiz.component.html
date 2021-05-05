@@ -25,16 +25,10 @@
       </div>
 
       <div class="form-group">
-        <label for="theme">Thème</label>
-        <select
-          id="theme"
-          class="form-control"
-          name="theme"
-          #theme="ngModel"
-          [(ngModel)]="quiz.theme"
-        >
-          <option value=""> Choisir un thème</option>
-        </select>
+        <label for="theme">Thème *</label>
+        <input id="theme" class="form-control" name="theme" #theme="ngModel" type="text" [(ngModel)]="quiz.theme"
+        />
+
 
         <div class="alert-danger" *ngIf="theme.errors && f.submitted">
           <div *ngIf="theme.errors.required">Theme est obligatoire</div>
@@ -127,8 +121,7 @@
 
       <hr style="border-width: 5px; background-color: black;">
 
-      <h3> Questions <button type="button" mat-raised-button color="primary" routerLink="/creer-question" >Créer une question</button>
-
+      <h3> Questions
       </h3>
 
 

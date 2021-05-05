@@ -74,6 +74,9 @@ export class CreerQuizComponent implements OnInit {
     this.quizService.saveQuiz(this.quiz).subscribe(data => {
       console.log(data);
     });
+
+    //Renvoi vers la liste des questions
+    this.router.navigate(['/userQuestionsAndQuiz']);
   }
 
   ajouterQst(question: Question) {

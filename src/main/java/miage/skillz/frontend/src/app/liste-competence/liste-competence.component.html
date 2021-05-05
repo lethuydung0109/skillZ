@@ -17,11 +17,12 @@
       <td>{{competence.nom_competence}}</td>
       <td>{{competence.nom_competence_pere}}</td>
 
-     <td><button type="button" *ngIf="isAdmin"> <a class="badge badge-warning" routerLink="/modifier-competence/{{competence.id}}">
-        Modifier
+     <td><button type="button" *ngIf="isAdmin" mat-icon-button color="primary"> <a routerLink="/modifier-competence/{{competence.id}}">
+       <mat-icon>edit</mat-icon>
       </a>  </button> </td>
 
-      <td> <button *ngIf="isAdmin" type="button" (click)="deleteCompetence(competence)"  mat-fab color="warn"><mat-icon>delete</mat-icon></button></td>
+
+      <td> <button *ngIf="isAdmin" type="button" (click)="deleteCompetence(competence)" mat-icon-button color="warn"><mat-icon>delete</mat-icon></button></td>
 
     </tr>
     </tbody>

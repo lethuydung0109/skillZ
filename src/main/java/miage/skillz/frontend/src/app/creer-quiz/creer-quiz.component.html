@@ -25,7 +25,7 @@
       </div>
 
       <div class="form-group">
-        <label for="theme">Theme</label>
+        <label for="theme">Thème</label>
         <input
           id="theme"
           class="form-control"
@@ -42,7 +42,7 @@
       </div>
 
       <div class="form-group">
-        <label for="competence">Competence</label>
+        <label for="competence">Compétence</label>
         <select
           id="competence"
           class="form-control"
@@ -74,11 +74,10 @@
           [disabled]="showNiveau"
         >
           <option value=""> Choisir un niveau</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
+          <option value="1">Débutant</option>
+          <option value="2">Pre-Intermediaire</option>
+          <option value="3">Intermediaire</option>
+          <option value="4">Avancé</option>
         </select>
 
         <div class="alert-danger" *ngIf="niveau.errors && f.submitted">
@@ -87,7 +86,7 @@
       </div>
 
       <div class="form-group">
-          <label>Duree (secondes)</label>
+          <label>Durée (secondes) *</label>
           <input
             id="duree"
             type="number"
@@ -106,7 +105,7 @@
 
 
       <div class="form-group">
-        <label for="seuil">Seuil de validation (%)</label>
+        <label for="seuil">Seuil de validation (%) *</label>
         <input
           id="seuil"
           type="number"
@@ -169,7 +168,7 @@
       <table class="table table-hover">
         <thead>
         <tr>
-          <th scope="col">Question</th>
+          <th scope="col">Liste des questions</th>
         <!--  <th scope="col">Poids</th> -->
         </tr>
         </thead>
@@ -183,12 +182,6 @@
         </tr>
         </tbody>
       </table>
-
-
-
-
-
-
 
       <div class="form-group">
           <button type="submit" class="btn btn-success" [disabled]="!f.valid">Créer</button>

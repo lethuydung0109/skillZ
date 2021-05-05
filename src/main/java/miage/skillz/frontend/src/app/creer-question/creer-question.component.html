@@ -76,11 +76,10 @@
           [(ngModel)]="question.idNiveau"
         >
           <option value=""> Choisir un niveau</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
+          <option value="1">Débutant</option>
+          <option value="2">Pre-Intermediaire</option>
+          <option value="3">Intermediaire</option>
+          <option value="4">Avancé</option>
         </select>
 
         <div class="alert-danger" *ngIf="niveau.errors && f.submitted">

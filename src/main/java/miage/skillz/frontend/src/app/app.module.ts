@@ -49,7 +49,6 @@ import { DatePipe } from '@angular/common';
 import { ModifierCompetenceComponent } from './modifier-competence/modifier-competence.component';
 import { ModifierQuestionComponent } from './modifier-question/modifier-question.component';
 import { ModifierQuizComponent } from './modifier-quiz/modifier-quiz.component';
-
 import { CreateAndShowPosteComponent } from './create-and-show-poste/create-and-show-poste.component';
 
 
@@ -79,7 +78,8 @@ import { CreateAndShowPosteComponent } from './create-and-show-poste/create-and-
         CreateRecommendationComponent,
         ModifierCompetenceComponent,
         ModifierQuestionComponent,
-        ModifierQuizComponent
+        ModifierQuizComponent,
+        CreateAndShowPosteComponent
 
     ],
     imports: [

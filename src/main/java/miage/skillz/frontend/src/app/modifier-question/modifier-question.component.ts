@@ -14,7 +14,7 @@ import {MatCheckbox} from "@angular/material/checkbox";
 })
 export class ModifierQuestionComponent implements OnInit {
 
- question : Question = new Question();
+  question : Question = new Question();
   isShow = false;
   isSuccessful = false;
   isFailed = false;
@@ -26,18 +26,29 @@ export class ModifierQuestionComponent implements OnInit {
   constructor(
     private questionService: QuestionService,
     private route: ActivatedRoute,
+    private router: Router,
     private competenceService : CompetenceService
   ) { }
 
   ngOnInit(): void {
-    this.getQuestion(this.route.snapshot.params.idQuestion);
+    this.questionService.getQuestion(this.route.snapshot.params.idQuestion).subscribe(data =>
+    {
+      this.question.idQuestion = data.idQuestion;
+      this.question.libelle = data.libelle;
+      this.question.theme = data.theme;
+      this.question.idNiveau = data.niveau.niveauId;
+      this.question.niveauName = data.niveauName;
+      this.question.reponsesQuestions = data.reponsesQuestions;
+      this.question.questionCompetences = data.questionCompetences;
+    }
+
+    );
     let listComptence: Array<Competence>=[];
     this.competenceService.getAllCompetence().subscribe(data => {
       data.forEach(p => {
         listComptence.push(p);
       })
     });
-    console.log("liste competences :", listComptence)
     this.list_competence=listComptence;
 
     this.questionService.getQuestionReponses(this.route.snapshot.params.idQuestion).subscribe(data =>
@@ -47,12 +58,9 @@ export class ModifierQuestionComponent implements OnInit {
   }
 
   onSubmit() {
-  this.questionService.updateQuestion(this.question);
-  }
-
-  getQuestion(idQuestion : number)
-  {
-  this.questionService.getQuestion(idQuestion).subscribe(data => this.question = data);
+    this.question.reponsesQuestions = this.list_reponses;
+    this.questionService.updateQuestion(this.question).subscribe(data => console.log(data));
+    this.router.navigate(['/userQuestionsAndQuiz']);
   }
 
 

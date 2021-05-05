@@ -34,9 +34,8 @@ export class QuestionService {
   public updateQuestion(question: Question) : Observable<Question>
   {
     const routeQuery=this.url+"/updateQuestion";
-    console.log("updateQuestion", question)
-
-    return this.http.put<Question>(routeQuery,Question);
+    console.log("updateQuestion", question);
+    return this.http.put<Question>(routeQuery,question);
   }
 
   public getQuestion(questionId : number) :  Observable<Question>
@@ -79,7 +78,6 @@ export class QuestionService {
   {
     const routeQuery=this.url+"/deleteQuestion/"+questionId;
     return this.http.delete(routeQuery);
-
   }
 
   public deleteAllQuestion() : Observable<any> {
