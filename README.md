@@ -1,7 +1,6 @@
 # skillZ
 
 Université Paris Nanterre 
-
 ©skillZ
 
 [![Build Status](https://www.travis-ci.com/lethuydung0109/skillZ.svg?branch=master)](https://www.travis-ci.com/lethuydung0109/skillZ)
