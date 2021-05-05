@@ -46,7 +46,9 @@ import { MatChipsModule } from '@angular/material/chips';
 import { recommendationListComponent } from './recommendation-list/recommendation-list.component';
 import { CreateRecommendationComponent } from './create-recommendation/create-recommendation.component';
 import { DatePipe } from '@angular/common';
-import { ModifierCompetenceComponent } from './modifier-competence/modifier-competence/modifier-competence.component';
+import { ModifierCompetenceComponent } from './modifier-competence/modifier-competence.component';
+import { ModifierQuestionComponent } from './modifier-question/modifier-question.component';
+import { ModifierQuizComponent } from './modifier-quiz/modifier-quiz.component';
 
 
 
@@ -74,7 +76,9 @@ import { ModifierCompetenceComponent } from './modifier-competence/modifier-comp
         UserQuestionAndQuiZComponent,
         recommendationListComponent,
         CreateRecommendationComponent,
-        ModifierCompetenceComponent
+        ModifierCompetenceComponent,
+        ModifierQuestionComponent,
+        ModifierQuizComponent
 
     ],
     imports: [

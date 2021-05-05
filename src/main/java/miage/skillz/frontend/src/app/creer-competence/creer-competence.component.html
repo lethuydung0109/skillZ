@@ -31,7 +31,7 @@
           class="form-control"
           name="competence_pere"
           #competence_pere="ngModel"
-          [(ngModel)]="competence.id_pere"
+          [(ngModel)]="competence.idPere"
         >
           <option [ngValue]=""> Choisir une option</option>
           <option *ngFor="let competence_pere of list_competence_pere"  [ngValue]="competence_pere.id"> {{competence_pere.nom_competence}}</option>

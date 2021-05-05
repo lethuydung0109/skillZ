@@ -5,7 +5,9 @@
            #f="ngForm"
            novalidate>
       <div class="form-group">
+
         <label for="titre">Libelle competence</label>
+
         <input
           id="titre"
           type="text"
@@ -31,9 +33,9 @@
           class="form-control"
           name="competence_pere"
           #competence_pere="ngModel"
-          [(ngModel)]="competence.id_pere"
+          [(ngModel)]="competence.idPere"
         >
-          <option [ngValue]=""> Choisir une option</option>
+          <option [ngValue]="competence.idPere"> {{competence.nom_competence_pere}}</option>
           <option *ngFor="let competence_pere of list_competence_pere"  [ngValue]="competence_pere.id"> {{competence_pere.nom_competence}}</option>
         </select>
 
@@ -46,7 +48,7 @@
 
 
       <div class="form-group">
-        <button type="submit" class="btn btn-success" [disabled]="!f.valid">Ajouter</button>
+        <button type="submit" class="btn btn-success" [disabled]="!f.valid">Modifier</button>
       </div>
 
       <div class="alert alert-warning" *ngIf="f.submitted && isFailed">

@@ -82,6 +82,7 @@ export class UserQuestionAndQuiZComponent implements OnInit {
     this.questionService.deleteQuestion(id).subscribe(data => {});
   }
 
+
   deleteQuiz(id : number) {
     this.quizService.deleteQuiz(id).subscribe(data => {});
   }
