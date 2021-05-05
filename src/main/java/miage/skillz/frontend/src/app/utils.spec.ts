@@ -1,4 +1,4 @@
-import { Utils } from './utils';
+import Utils from './utils';
 
 describe('Utils', () => {
   it('should create an instance', () => {

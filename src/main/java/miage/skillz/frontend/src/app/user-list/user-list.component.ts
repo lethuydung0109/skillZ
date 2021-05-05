@@ -46,13 +46,7 @@ export class UserListComponent implements OnInit {
     this.userService.getAll()
       .subscribe(
         users  => {
-          // users.forEach(function(user){
-          //   const parsedUser = JSON.parse(user);
-          // })
           this.users = users;
-          //this.listUser=users;
-          //console.log("listUser : ",this.users);
-          //console.log("role = " + users[0].role);
         },
         error => {
           console.log(error);
@@ -122,6 +116,21 @@ export class UserListComponent implements OnInit {
         });
     }else{
       this.retrieveUsers();
+    }
+    
+  }
+
+  deleteUser(id: number, indexRow: number): void{
+    this.userService.delete(id).subscribe(
+      data => {
+        console.log(data);
+      },
+        error => {
+          console.log(error);
+        }
+    );
+    if(this.users != null){
+      this.users.splice(indexRow);
     }
     
   }
