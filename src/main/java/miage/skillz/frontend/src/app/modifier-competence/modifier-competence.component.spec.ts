@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ModifierCompetenceComponent } from './modifier-competence.component';
+
 
 describe('ModifierCompetenceComponent', () => {
   let component: ModifierCompetenceComponent;
