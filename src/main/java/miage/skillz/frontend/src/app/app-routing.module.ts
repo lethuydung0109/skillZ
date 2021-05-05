@@ -48,6 +48,7 @@ const routes: Routes = [
   { path: 'recommendations', component: recommendationListComponent },
   { path: 'createRecommendation', component: CreateRecommendationComponent },
   { path: 'lesPostes', component: CreateAndShowPosteComponent },
+  { path: 'candidatsForPoste/:posteId', component: UserListComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

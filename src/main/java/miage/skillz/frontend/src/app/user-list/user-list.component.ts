@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { User } from '../models/user.model';
 import { UserService } from '../services/user.service';
+import { PosteService } from '../services/poste.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-user-list',
@@ -15,11 +17,26 @@ export class UserListComponent implements OnInit {
   currentIndex = -1;
   username = '';
 
- 
-  constructor(private userService: UserService) { }
+  posteId:number;
+  isCandidateView : boolean=false;
+
+  candidatesUser : User []=[];
+  listUser : User[]=[];
+
+  constructor(private userService: UserService,private actRoute: ActivatedRoute, private posteService : PosteService) {
+    this.posteId=this.actRoute.snapshot.params.posteId;
+  }
 
   ngOnInit(): void {
-    this.retrieveUsers();
+    
+    if(this.posteId!=undefined) {
+      console.log("posteId", this.posteId)
+      this.changeIsCandidateView() 
+      this.candidatesForThePoste();
+    }
+    else{
+      this.retrieveUsers();
+    }
   }
 
   retrieveUsers(): void {
@@ -30,12 +47,28 @@ export class UserListComponent implements OnInit {
           //   const parsedUser = JSON.parse(user);
           // })
           this.users = users;
-          console.log(users);
-          console.log("role = " + users[0].role);
+          //this.listUser=users;
+          //console.log("listUser : ",this.users);
+          //console.log("role = " + users[0].role);
         },
         error => {
           console.log(error);
         });
+  }
+
+  candidatesForThePoste()
+  {    
+    this.posteService.getCandidates(this.posteId).subscribe(data => {
+      this.users=[];
+      this.users=data;
+      //this.candidatesUser=data;
+      console.log("candidates : ",data);
+    })
+  }
+
+  changeIsCandidateView()
+  {
+    if (this.isCandidateView==false) this.isCandidateView=true;
   }
 
   refreshList(): void {

@@ -67,7 +67,7 @@ public class PosteService {
         badges.forEach(badge -> {
             candidates.add(badge.getUser());
         });
-        System.out.println("candidates : "+candidates.toString());
+        //System.out.println("candidates : "+candidates.toString());
 
         return candidates;
     }
