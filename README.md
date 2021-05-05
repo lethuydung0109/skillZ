@@ -1,7 +1,6 @@
 # skillZ
 
 Université Paris Nanterre 
-
 ©skillZ
 
 [![Build Status](https://www.travis-ci.com/lethuydung0109/skillZ.svg?branch=master)](https://www.travis-ci.com/lethuydung0109/skillZ)
@@ -59,12 +58,19 @@ Gradle
 Une fois que vous avez tout installé, vous pouvez vous connecter avec votre identifiant et mot de passe à l'adresse : 
 .../.../.../...
 
-### Vous etes un évaluateur 
+### Vous etes un administrateur 
 
-- Créer une question et des réponses associées
+  - Créer/modifier/supprimer des utilisateurs.
+  - Créer/modifier/supprimer des compétences.
+
+
+### Vous etes un évaluateur  
+
+- Créer une question et des réponses associées.
 - Créer un questionnaire avec une liste de questions, une durée, un seuil de validation. 
-### Vous etes un candidat 
 
-- 
+### Vous etes un participant
+
+- Passer un questionnaire et obtenir un badge de niveau associé si réussi.
 
 
