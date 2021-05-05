@@ -59,12 +59,19 @@ Gradle
 Une fois que vous avez tout installé, vous pouvez vous connecter avec votre identifiant et mot de passe à l'adresse : 
 .../.../.../...
 
-### Vous etes un évaluateur 
+## Vous etes un administrateur, vous pouvez : 
 
-- Créer une question et des réponses associées
+  - Créer/modifier/supprimer des utilisateurs.
+  - Créer/modifier/supprimer des compétences.
+
+
+### Vous etes un évaluateur, vous pouvez :  
+
+- Créer une question et des réponses associées.
 - Créer un questionnaire avec une liste de questions, une durée, un seuil de validation. 
-### Vous etes un candidat 
 
-- 
+### Vous etes un participant, vous pouvez : 
+
+- Passer un questionnaire et obtenir un badge de niveau associé si réussi.
 
 
