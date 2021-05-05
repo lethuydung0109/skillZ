@@ -53,6 +53,14 @@ public class QuestionController {
         return  questionService.getAllQuestions();
     }
 
+    @GetMapping(value = "/numberOfQuestions", produces = MediaType.APPLICATION_JSON_VALUE)
+    public  int getNbQuestions()
+    {
+        List<Question> questions = questionService.getAllQuestions();
+        int nbQuestions = questions.size();
+        return  nbQuestions;
+    }
+
     @GetMapping(value = "/lesQuestionById/{qstId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Set<Question> getLesQuestionById(@PathVariable Long[] qstId)
     {

@@ -57,6 +57,14 @@ public class QuizController {
         return  quizService.getAllQuiz();
     }
 
+    @GetMapping(value = "/numberOfQuiz", produces = MediaType.APPLICATION_JSON_VALUE)
+    public  int getNumberOfQuiz()
+    {
+        Set<Quiz> quizList = quizService.getAllQuiz();
+        int nbQuiz = quizList.size();
+        return  nbQuiz;
+    }
+
     @GetMapping(value = "/user/quiz", produces = MediaType.APPLICATION_JSON_VALUE)
     public Set<Quiz> getAllQuizByUser()
     {

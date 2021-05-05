@@ -1,6 +1,6 @@
 <div>
     <div *ngIf="currentUser.id" class="edit-form">
-      <h4>User</h4>
+      <h4>Information de l'utilisateur</h4>
       <form>
         <div class="form-group">
           <label for="username">Username</label>
@@ -22,6 +22,9 @@
            name="email"
          />
         </div>
+        <!-- <div>
+          <a href=""></a>
+        </div> -->
       </form>
       <button class="badge badge-danger mr-2" (click)="deleteUser()">
         Suprimmer
@@ -40,5 +43,43 @@
     <div *ngIf="!currentUser.id">
       <br />
       <p>Cannot access this User...</p>
+    </div>
+
+    <div class="col-md-6">
+      <h4>Liste des recommandations</h4>
+      <!-- <ul class="list-group">
+        <li
+          class="list-group-item"
+          *ngFor="let user of users; let i = index"
+          [class.active]="i == currentIndex"
+          (click)="setActiveUser(user, i)"
+        >
+
+        </li>
+      </ul> -->
+
+     <table class="table table-hover">
+       <thead>
+       <tr>
+         <th scope="col">Auteur</th>
+         <th scope="col">Detail</th>
+          <th scope="col">Date de recommendation</th>
+         
+       </tr>
+       </thead>
+        <tbody *ngFor="let recommendation of recommendations; let i = index"
+        [class.active]="i == currentIndex">
+        <tr>
+          <td>{{recommendation.writerName}}</td>
+          <td>{{recommendation.content}}</td>
+          <td>{{recommendation.date}}</td>
+          
+        </tr>
+        </tbody>
+      </table> 
+
+      <!-- <button class="m-3 btn btn-sm btn-danger" (click)="removeAllUsers()">
+        Sumprimer tous
+      </button> -->
     </div>
   </div>

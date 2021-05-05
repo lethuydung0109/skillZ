@@ -3,6 +3,7 @@ package miage.skillz.controller;
 import miage.skillz.entity.*;
 import miage.skillz.payload.reponse.MessageResponse;
 import miage.skillz.payload.reponse.StatsUserResponse;
+import miage.skillz.payload.reponse.UserResponse;
 import miage.skillz.payload.request.SignupRequest;
 import miage.skillz.repository.BadgeRepository;
 import miage.skillz.service.CompetenceService;
@@ -84,7 +85,23 @@ public class UserController {
     @GetMapping(value = "/user", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getAllUsers(){
         List<User> allUsers = service.findAll();
-        return new  ResponseEntity <List <User> >(allUsers, HttpStatus.OK);
+        List<UserResponse> allUserResponse = new ArrayList<>();
+        for (User user: allUsers){
+            if(!(user.getRoles().isEmpty())){
+                allUserResponse.add(new UserResponse(
+                        user.getId(),
+                        user.getUsername(),
+                        user.getEmail(),
+                        user.getRoles().iterator().next().getName().toString()));
+            }else{
+                allUserResponse.add(new UserResponse(
+                        user.getId(),
+                        user.getUsername(),
+                        user.getEmail(),
+                        ""));
+            }
+        }
+        return new  ResponseEntity <List <UserResponse> >(allUserResponse, HttpStatus.OK);
     }
 
     @GetMapping(value = "/user/participant", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -94,7 +111,6 @@ public class UserController {
         for(User user : allUsers){
             for(Role role : user.getRoles()){
                 if(role.getName().toString() == ("ROLE_PARTICIPANT")){
-                    // usersResponse[allUsers.get()] = new List<User>();
                     participantsResponse.add(user) ;
                 }
             }

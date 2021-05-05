@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Recommendation } from '../models/recommendation';
 import { User } from '../models/user.model';
+import { RecommendationService } from '../services/recommendation.service';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -17,15 +19,19 @@ export class UserDetailsComponent implements OnInit {
     password: '',
   };
   message = '';
+  currentIndex = -1;
+  recommendations?: Recommendation[];
 
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private recommendationService: RecommendationService) { }
 
   ngOnInit(): void {
     this.message = '';
     this.getUser(this.route.snapshot.params.id);
+    console.log(this.currentUser);
   }
 
   getUser(id: string): void {
@@ -38,6 +44,16 @@ export class UserDetailsComponent implements OnInit {
         error => {
           console.log(error);
         });
+    this.recommendationService.get(this.route.snapshot.params.id)
+    .subscribe(
+      recommendations  => {
+        this.recommendations = recommendations;
+        
+        // console.log("role = " + users[0].role);
+      },
+      error => {
+        console.log(error);
+      });
   }
   updateUser(): void {
     this.userService.update(this.currentUser.id, this.currentUser)
