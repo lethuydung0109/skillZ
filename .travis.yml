@@ -47,15 +47,15 @@ matrix:
 
 #Ajout le 30/04 : Codecov + jacocoTestReport
     - language: java
-        jdk: openjdk11
-        before_script:
-          - chmod +x gradlew
-        script:
-          - ./gradlew check jacocoTestReport coveralls sendCoverageToCodacy
-          - ./gradlew codeCoverageReport
-        after_success:
+      jdk: openjdk11
+      before_script:
+        - chmod +x gradlew
+      script:
+        - ./gradlew check jacocoTestReport coveralls sendCoverageToCodacy
+        - ./gradlew codeCoverageReport
+      after_success:
+        - bash <(curl -s https://codecov.io/bash)
+      test:
+        post:
+          - if [ -e ./gradlew ]; then ./gradlew jacocoTestReport;else gradle jacocoTestReport;fi
           - bash <(curl -s https://codecov.io/bash)
-        test:
-          post:
-            - if [ -e ./gradlew ]; then ./gradlew jacocoTestReport;else gradle jacocoTestReport;fi
-            - bash <(curl -s https://codecov.io/bash)
