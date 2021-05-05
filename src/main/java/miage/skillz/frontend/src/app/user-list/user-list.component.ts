@@ -43,13 +43,7 @@ export class UserListComponent implements OnInit {
     this.userService.getAll()
       .subscribe(
         users  => {
-          // users.forEach(function(user){
-          //   const parsedUser = JSON.parse(user);
-          // })
           this.users = users;
-          //this.listUser=users;
-          //console.log("listUser : ",this.users);
-          //console.log("role = " + users[0].role);
         },
         error => {
           console.log(error);

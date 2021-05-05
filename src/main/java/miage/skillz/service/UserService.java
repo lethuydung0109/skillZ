@@ -38,8 +38,8 @@ public class UserService {
     }
 
 
-    public Optional<User> findByUsername(String username) {
-        return userRepository.findByUsername(username);
+    public Optional<List<User>> findByUsernameContaining(String username) {
+        return userRepository.findByUsernameContaining(username);
     }
 
     public boolean existsByUsername(String username) {

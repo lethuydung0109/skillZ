@@ -6,6 +6,7 @@ import miage.skillz.payload.reponse.StatsUserResponse;
 import miage.skillz.payload.reponse.UserResponse;
 import miage.skillz.payload.request.SignupRequest;
 import miage.skillz.repository.BadgeRepository;
+import miage.skillz.repository.UserRepository;
 import miage.skillz.service.CompetenceService;
 import miage.skillz.service.RecommendationService;
 import miage.skillz.service.RoleService;
@@ -248,9 +249,29 @@ public class UserController {
 
     @GetMapping(value = "/user/name/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> findUserbyName(@PathVariable ("username") String userName ){
-        User user = service.findByUsername(userName).orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + userName));;
-        logger.info("User found = " + user.toString());
-        return new  ResponseEntity <User> (user, HttpStatus.OK);
+        List<User> users = service.findByUsernameContaining(userName).orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + userName));;
+        logger.info("Users found = " + users.toString());
+        List<UserResponse> listUserResponse = new ArrayList<>();
+        for(User user: users){
+            if(!user.getRoles().isEmpty()){
+                listUserResponse.add(new UserResponse(
+                        user.getId(),
+                        user.getUsername(),
+                        user.getEmail(),
+                        user.getRoles().iterator().next().getName().toString()
+                ));
+            }else{
+                listUserResponse.add(new UserResponse(
+                        user.getId(),
+                        user.getUsername(),
+                        user.getEmail(),
+                        ""
+                ));
+            }
+
+        }
+
+        return new  ResponseEntity <List<UserResponse>> (listUserResponse, HttpStatus.OK);
     }
 //    @DeleteMapping(value = "/user/recommendation/{recommendationId}", produces = MediaType.APPLICATION_JSON_VALUE)
 //    public ResponseEntity<?> deleteRecommendation(@PathVariable ("recommendationId") Long recommendationId){
