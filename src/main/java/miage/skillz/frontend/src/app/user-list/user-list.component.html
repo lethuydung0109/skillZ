@@ -36,7 +36,8 @@
           <td>{{user.email}}</td>
           <td>
             <button type="button" 
-                    mat-fab color="warn"><mat-icon>delete</mat-icon>
+                    mat-fab color="warn"
+                    (click)="deleteUser(user.id, i)"><mat-icon>delete</mat-icon>
             </button>
             
             <button type="button" 

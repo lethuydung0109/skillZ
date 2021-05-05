@@ -105,5 +105,20 @@ export class UserListComponent implements OnInit {
     
   }
 
+  deleteUser(id: number, indexRow: number): void{
+    this.userService.delete(id).subscribe(
+      data => {
+        console.log(data);
+      },
+        error => {
+          console.log(error);
+        }
+    );
+    if(this.users != null){
+      this.users.splice(indexRow);
+    }
+    
+  }
+
 
 }
