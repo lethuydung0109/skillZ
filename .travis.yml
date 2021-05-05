@@ -26,6 +26,14 @@ matrix:
           - stage: build java
             script:
               - ./gradlew clean build
+              - ./gradlew check jacocoTestReport coveralls sendCoverageToCodacy
+              - ./gradlew codeCoverageReport
+            after_success:
+              - bash <(curl -s https://codecov.io/bash)
+            test:
+              post:
+                - if [ -e ./gradlew ]; then ./gradlew jacocoTestReport;else gradle jacocoTestReport;fi
+                - bash <(curl -s https://codecov.io/bash)
           - stage: build docker image
             script:
               - echo "Build docker image"
@@ -46,15 +54,15 @@ matrix:
               - echo "Build docker image npm"
 
 #Ajout le 30/04 : Codecov + jacocoTestReport
-before_script:
-  - chmod +x gradlew
-script:
-  - ./gradlew check jacocoTestReport coveralls sendCoverageToCodacy
-  - ./gradlew codeCoverageReport
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
-
-test:
-  post:
-    - if [ -e ./gradlew ]; then ./gradlew jacocoTestReport;else gradle jacocoTestReport;fi
-    - bash <(curl -s https://codecov.io/bash)
+#before_script:
+#  - chmod +x gradlew
+#script:
+#  - ./gradlew check jacocoTestReport coveralls sendCoverageToCodacy
+#  - ./gradlew codeCoverageReport
+#after_success:
+#  - bash <(curl -s https://codecov.io/bash)
+#
+#test:
+#  post:
+#    - if [ -e ./gradlew ]; then ./gradlew jacocoTestReport;else gradle jacocoTestReport;fi
+#    - bash <(curl -s https://codecov.io/bash)
