@@ -34,16 +34,14 @@ public class QuestionService {
 
     public ResponseEntity<Question> createQuestion(QuestionImpl qImpl,User currentUser)
     {
-
         System.out.println("Received question : "+ qImpl.toString());
 
-        Question question = new Question (qImpl.getTheme(), qImpl.getLibelle(),
-                                          qImpl.getPoids(), niveauRepository.findById(qImpl.getIdNiveau()).orElseThrow());
+        Question question = new Question (qImpl.getTheme(), qImpl.getLibelle(),niveauRepository.findById(qImpl.getIdNiveau()).orElseThrow());
         Set<ReponseQuestion> reponseQuestions = new HashSet<>(qImpl.getReponsesQuestions());
         question.setQuestionCompetences(new HashSet<>());
         question.setReponsesQuestions(new HashSet<>());
 
-        //Association competence-quiz
+        //Association competence-question
         Set<Competence> competences = new HashSet<>();
         for (Long cId : qImpl.getQuestionCompetences()) {
             competences.add(this.competenceRepository.findById(cId).orElseThrow());
@@ -54,7 +52,6 @@ public class QuestionService {
         createdQuestion.getQuestionCompetences().addAll(competences);
 
         // Creation des reponses associées à la question
-
         Set<ReponseQuestion> createdRepQuestions = new HashSet<>();
         for (ReponseQuestion rep: reponseQuestions) {
             rep.setQuestion(createdQuestion);
@@ -72,89 +69,89 @@ public class QuestionService {
         return new ResponseEntity<>(this.questionRepository.saveAndFlush(createdQuestion), HttpStatus.OK);
     }
 
-    public ResponseEntity<Question> updateQuestion(QuestionImpl qImpl)
+    public ResponseEntity<Question> updateQuestion(QuestionImpl qImpl,User currentUser)
     {
         System.out.println("Received question : "+ qImpl.toString());
 
-        Question question = new Question (qImpl.getTheme(), qImpl.getLibelle(), qImpl.getPoids(), niveauRepository.findById(qImpl.getIdNiveau()).orElseThrow());
-        //Set<ReponseQuestion> reponseQuestions = new HashSet<>(qImpl.getReponsesQuestions());
-        question.setIdQuestion(qImpl.getIdQuestion());
+        Question question = this.questionRepository.findById(qImpl.getIdQuestion()).orElseThrow();
+        question.setTheme(qImpl.getTheme());
+        question.setLibelle(qImpl.getLibelle());
+        question.setNiveau(niveauRepository.findById(qImpl.getIdNiveau()).orElseThrow());
         question.setQuestionCompetences(new HashSet<>());
         question.setReponsesQuestions(new HashSet<>());
         question.setListQuiz(new HashSet<>());
 
-        qImpl.getQuestionCompetences().forEach(cId -> {
-            System.out.println("competenceId : "+cId+" find : "+this.competenceRepository.existsById(cId));
-            question.getQuestionCompetences().add(this.competenceRepository.findById(cId).orElse(null));
-        });
+        for (Long aLong : qImpl.getQuestionCompetences()) {
+            this.competenceRepository.findById(aLong).orElseThrow()
+                    .getListQuestions()
+                    .remove(this.competenceRepository.findById(aLong).orElseThrow());
+        }
+
+        //Association competence-question
+        Set<Competence> competences = new HashSet<>();
+        for (Long cId : qImpl.getQuestionCompetences()) {
+            competences.add(this.competenceRepository.findById(cId).orElseThrow());
+        }
+
+        question.getQuestionCompetences().addAll(competences);
+        //System.out.println("getQuestionCompetences : "+qImpl.getQuestionCompetences());
 
         qImpl.getListQuiz().forEach(qId -> question.getListQuiz().add(this.quizRepository.findById(qId).orElse(null)));
 
-        qImpl.getReponsesQuestions().forEach(rep -> {
-            rep.setQuestion(this.questionRepository.findById(qImpl.getIdQuestion()).orElseThrow());
-            ReponseQuestion repUdate = this.repQuestionRepository.saveAndFlush(rep);
-            question.getReponsesQuestions().add(this.repQuestionRepository.findById(repUdate.getIdReponse()).orElse(null));
-        });
+        question.setUser(currentUser);
+        currentUser.getMyCreatedQuestion().add(question);
 
-        System.out.println("reponse : "+question.getReponsesQuestions());
+        this.setListQuiz(question.getIdQuestion(),question.getListQuiz());
+        this.setReponsesQuestions(question.getIdQuestion(),qImpl.getReponsesQuestions());
 
-        //upadate competences
-        //Question questionUpdate = new Question();
-        if(this.questionRepository.findById(qImpl.getIdQuestion()).isPresent())
-        {
-            this.setQuestionCompetences(qImpl.getIdQuestion(),question.getQuestionCompetences());
-            this.setListQuiz(qImpl.getIdQuestion(),question.getListQuiz());
-            //this.setReponsesQuestions(qImpl.getIdQuestion(),question.getReponsesQuestions());
-            //questionUpdate=this.questionRepository.save(question);
-            return new ResponseEntity<>(this.questionRepository.saveAndFlush(question), HttpStatus.OK);
-        }
-        else return new ResponseEntity<>(this.questionRepository.saveAndFlush(question), HttpStatus.OK);
+        return new ResponseEntity<>(this.questionRepository.saveAndFlush(question), HttpStatus.OK);
     }
 
     public void setReponsesQuestions (Long questionId,Set<ReponseQuestion> reponses)
     {
         Set<ReponseQuestion> putReponses= new HashSet<>();
-        reponses.forEach(rep -> putReponses.add(this.repQuestionRepository.saveAndFlush(rep)));
+        reponses.forEach(rep -> {
+            rep.setQuestion(this.questionRepository.findById(questionId).orElseThrow());
+            ReponseQuestion repUpdate = this.repQuestionRepository.saveAndFlush(rep);
+            putReponses.add(repUpdate);
+        });
 
         Question putQuestion=this.questionRepository.findById(questionId).orElseThrow();
         putQuestion.setReponsesQuestions(putReponses);
 
-        System.out.println("putReponses : "+putReponses);
-//        putReponses.forEach(rep -> {
-//            rep.setQuestion(putQuestion);
-//            this.repQuestionRepository.saveAndFlush(rep);
-//        });
-
         this.questionRepository.saveAndFlush(putQuestion);
     }
 
-    public void setQuestionCompetences (Long questionId,Set<Competence> competences)
+    public void setQuestionCompetences (Long questionId,Set<Long> competences)
     {
-        Set<Competence> putCompetences= new HashSet<>();
-        competences.forEach(c-> putCompetences.add(this.competenceRepository.findById(c.getId()).orElseThrow()));
-
+        Set<Competence> putCompetences = new HashSet<>();
         Question putQuestion=this.questionRepository.findById(questionId).orElseThrow();
-        putQuestion.setQuestionCompetences(putCompetences);
+
+        competences.forEach(cId -> {
+            System.out.println("competenceId : "+cId+" find : "+this.competenceRepository.existsById(cId));
+            putCompetences.add(this.competenceRepository.findById(cId).orElse(null));
+        });
 
         putCompetences.forEach(competence -> {
-            competence.getListQuestions().add(putQuestion);
+            competence.getListQuestions().add(this.questionRepository.findById(questionId).orElseThrow());
             this.competenceRepository.saveAndFlush(competence);
         });
 
+        putQuestion.setQuestionCompetences(putCompetences);
         this.questionRepository.saveAndFlush(putQuestion);
     }
 
-    public void setListQuiz (Long questionId,Set<Quiz> quizz)
+    public void setListQuiz (Long questionId,Set<Quiz> quiz)
     {
         Set<Quiz> putQuizz= new HashSet<>();
-        quizz.forEach(q-> putQuizz.add(this.quizRepository.findById(q.getIdQuiz()).orElseThrow()));
+        quiz.forEach(q-> putQuizz.add(this.quizRepository.findById(q.getIdQuiz()).orElseThrow()));
 
         Question putQuestion=this.questionRepository.findById(questionId).orElseThrow();
         putQuestion.setListQuiz(putQuizz);
 
-        putQuizz.forEach(quiz -> {
-            quiz.getQuizQuestions().add(putQuestion);
-            this.quizRepository.saveAndFlush(quiz);
+        putQuizz.forEach(q -> {
+            q.getQuizQuestions().add(putQuestion);
+            this.quizRepository.saveAndFlush(q);
         });
 
         this.questionRepository.saveAndFlush(putQuestion);
@@ -167,6 +164,7 @@ public class QuestionService {
 
     public List<Question> getAllQuestions()
     {
+        System.out.println(" all questions : "+this.questionRepository.findAll());
         return this.questionRepository.findAll();
     }
 
@@ -242,10 +240,10 @@ public class QuestionService {
             return this.getAllQuestionResponse(qId).stream().filter(ReponseQuestion::getIsCorrect).collect(Collectors.toSet());
     }
 
-    public long getQuestionPoids(Long qId) {
-
-        return this.questionRepository.findById(qId).orElseThrow().getPoids();
-    }
+//    public long getQuestionPoids(Long qId) {
+//
+//        return this.questionRepository.findById(qId).orElseThrow().getPoids();
+//    }
 
     public Set<Question> getQuestionByCompetenceNiveau(/*Long idCompetence,*/ Long idNiveau)
     {

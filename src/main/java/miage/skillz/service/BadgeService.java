@@ -46,12 +46,14 @@ public class BadgeService {
             Badge newBadge = cloneBadge.get(0);
             newBadge.setNiveau(niveau);
             newBadge.setDateValidation(badgeRequest.getDateValidation());
+            newBadge.setQuizScore(badgeRequest.getQuizScore());
             return new ResponseEntity<>(repository.saveAndFlush(newBadge), HttpStatus.OK);
         } else {
             Badge badge = new Badge();
             badge.setCompetence(competence);
             badge.setNiveau(niveau);
             badge.setDateValidation(badgeRequest.getDateValidation());
+            badge.setQuizScore(badgeRequest.getQuizScore());
             Badge createdBadge = repository.save(badge);
 
             createdBadge.setUser(currentUser);
@@ -59,7 +61,6 @@ public class BadgeService {
 
             return new ResponseEntity<>(repository.saveAndFlush(createdBadge), HttpStatus.OK);
         }
-
     }
 
     //Get all badges
@@ -71,7 +72,6 @@ public class BadgeService {
     public void deleteBadge(Long badgeId) {
         repository.deleteById(badgeId);
     }
-
 
     public Set<Badge> getAllBadgesByUser(Long userId) {
         return badgeRepository.findAll()

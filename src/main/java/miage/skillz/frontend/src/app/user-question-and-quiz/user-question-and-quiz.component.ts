@@ -4,7 +4,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { QuizService } from '../services/quiz.service';
-import { Competence } from '../models/competence';
 import { QuestionService } from '../services/question.service';
 import { Question } from '../models/question';
 import Utils from '../utils';
@@ -79,10 +78,18 @@ export class UserQuestionAndQuiZComponent implements OnInit {
   }
 
   deleteQuestion(id: number) {
+
+    this.questionService.getQuestion(id).subscribe(data => {
+      this.myQuestions.splice(this.myQuestions.indexOf(data),1);
+    })
     this.questionService.deleteQuestion(id).subscribe(data => {});
+    
   }
 
   deleteQuiz(id : number) {
+    this.quizService.getQuiz(id).subscribe(data => {
+      this.myQuiz.splice(this.myQuiz.indexOf(data),1);
+    })
     this.quizService.deleteQuiz(id).subscribe(data => {});
   }
 

@@ -10,11 +10,11 @@ import java.util.Set;
 
 @Data
 @Builder
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(	name = "competence")
+@ToString(exclude = { "listBadges"})
 public class Competence {
 
         @Id
@@ -28,20 +28,33 @@ public class Competence {
         private String nom_competence;
 
         //Badges de la competence
+        @Builder.Default
         @OneToMany( cascade = CascadeType.ALL, mappedBy="competence")
         @JsonIgnore
         Set<Badge> listBadges = new HashSet<>();
 
-
         // Mapping hibernate
+        @Builder.Default
         @JsonIgnore
         @ManyToMany(mappedBy = "questionCompetences",fetch = FetchType.LAZY)
         Set<Question> listQuestions = new HashSet<>();
 
+        @Builder.Default
         @JsonIgnore
         @OneToMany( cascade = CascadeType.ALL, mappedBy = "quizCompetence")
         Set<Quiz> listQuiz = new HashSet<>();
 
+        @Builder.Default
+        @JsonIgnore
+        @OneToMany( cascade = CascadeType.ALL, mappedBy = "competence")
+        Set<Poste> listPostes = new HashSet<>();
+
+//        @Builder.Default
+//        @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
+//        @JoinTable( name = "postes_competences",
+//                joinColumns = @JoinColumn(name = "idPoste"),
+//                inverseJoinColumns = @JoinColumn(name = "idCompetence"))
+//        private Set<Poste> listPostes = new HashSet<>();
 
     // Constructeurs
     public Competence(long id) {

@@ -37,9 +37,7 @@ export class BoardParticipantComponent implements OnInit {
     this.badgeService.getAllBadgeByUser().subscribe(data => {
       data.forEach(b => {
         if(this.badgeCompetenceId != undefined){
-          this.competenceService.getCompetenceById(this.badgeCompetenceId).subscribe(
-            c => b.competenceName=c.nom_competence
-          );
+          b.competenceName=b.competence?.nom_competence;
         }
         else{
           b.competenceName=b.competence?.nom_competence;

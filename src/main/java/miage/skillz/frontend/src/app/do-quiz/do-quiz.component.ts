@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, EventEmitter } from '@angular/core';
 import { QuizService } from '../services/quiz.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Quiz } from '../models/quiz';
@@ -32,6 +32,7 @@ export class DoQuizComponent implements OnInit {
   quizTime !: number;
   nbCorrectResponses:number=0;
   nbCorrectSelectedResponses:number=0;
+  chronoEvent!:CountdownEvent;
 
   @ViewChild('chrono', { static: false }) chrono!: CountdownComponent;
 
@@ -67,21 +68,29 @@ export class DoQuizComponent implements OnInit {
   isResponseChecked(response : ResponseQuestion, qId : number)
   {
     //création de la liste des réponses sélectionnées par le user pour chaque question
-    if(response.isSelected)
+    if(response.isSelected) // sélectionnée et pas dans la liste
     {
       if(this.userResponse.has(qId)) this.userResponse.get(qId)?.push(response)
       else  this.userResponse.set(qId, new Array(response));
     }
+
+    for (let entry of this.userResponse.entries()){
+      entry[1].forEach(rep  => {
+        if(!rep.isSelected) {
+          entry[1].splice(entry[1].indexOf(rep),1);
+        }
+      })
+
+      if(entry[1].length ==0) this.userResponse.delete(entry[0]);
+    };
+    console.log("User responses : ", this.userResponse);
   }
 
   async validQuizResponse(){
-    console.log("User responses : ", this.userResponse);
+   // console.log("User responses : ", this.userResponse);
     let poids=100/this.questions.length;
     //Pour chaque question
-    for (let entry of this.userResponse.entries()) {
-      //Vérifier que les questions sélectionnées sont les bonnes réponses
-      //console.log("entry : ", entry[0])
-      //console.log("entry[]: ", entry[1].length)
+    for (let entry of this.userResponse.entries()) {    
       let tab: Array<ResponseQuestion>=[];
 
       this.quizCorrectResponses= await this.questionService.getQuestionCorrectResponse2(entry[0]).then((data)=>{return data});
@@ -102,13 +111,16 @@ export class DoQuizComponent implements OnInit {
                                             return tab;
                                           });
 
-      this.quizScore=this.quizScore+(poids/entry[1].length)*this.quizCorrectResponses.length;
+      let result = this.correctResponsesSelected.filter(rep => {
+         return tab = this.quizCorrectResponses.filter(r => rep.idReponse == r.idReponse);
+        })
+
+      console.log(" result ", result);
+      if(result.length==0) this.quizScore=0;
+      else this.quizScore=this.quizScore+(poids/entry[1].length)*this.quizCorrectResponses.length;
       console.log("this.correctResponsesSelected : ", this.correctResponsesSelected,"this.quizCorrectResponses : ",this.quizCorrectResponses)
     }
-    //console.log("this.correctResponsesSelected : ", this.correctResponsesSelected, this.correctResponsesSelected.length)
-    console.log("poids question : ", poids);
-    //this.quizScore=this.correctResponsesSelected.length*(100/this.questions.length);
-
+   
     //Création des bagdes
     console.log("score",this.quizScore)
 
@@ -117,6 +129,7 @@ export class DoQuizComponent implements OnInit {
       let badge : Badge = new Badge();
       badge.competenceId=this.currentQuiz.quizCompetence.id;
       badge.niveauId=this.currentQuiz.idNiveau;
+      badge.quizScore=this.quizScore;
       console.log("badge ", badge)
       this.badgeService.createBadge(badge).subscribe(data=> console.log("badge return",data));
       this.openValidationModal("Félicitaions !Vous avez réussi le test avec un score de : "+this.quizScore);
@@ -131,10 +144,9 @@ export class DoQuizComponent implements OnInit {
     }
   }
 
-  endQuizBeforeEndTime(c: CountdownComponent) {
+  endQuizBeforeEndTime(c: EventEmitter<CountdownEvent>) {
     console.log(c)
-    this.isStart=false;
-    c.stop;
+    c.isStopped=true;
     this.validQuizResponse();
   }
 

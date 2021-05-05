@@ -2,15 +2,14 @@ package miage.skillz;
 
 import miage.skillz.entity.*;
 import miage.skillz.enumeration.ENiveau;
-import miage.skillz.repository.CompetenceRepository;
-import miage.skillz.repository.NiveauRepository;
-import miage.skillz.repository.RoleRepository;
-import miage.skillz.repository.UserRepository;
+import miage.skillz.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -29,6 +28,8 @@ public class DbInitializer implements CommandLineRunner {
     NiveauRepository niveauRepository;
     @Autowired
     CompetenceRepository competenceRepository;
+    @Autowired
+    BadgeRepository badgeRepository;
 
 
     @Override
@@ -38,6 +39,7 @@ public class DbInitializer implements CommandLineRunner {
         List<User> users = userRepository.findAll();
         List<Niveau> niveaux = niveauRepository.findAll();
         List<Competence> competences = competenceRepository.findAll();
+        List<Badge> badges = badgeRepository.findAll();
 
         if(roles.isEmpty()){
             roleRepository.save(new Role(ERole.ROLE_ADMIN));
@@ -99,5 +101,20 @@ public class DbInitializer implements CommandLineRunner {
             System.out.println("--- Concepteur user initialized");
             System.out.println("--- Participant user initialized");
         }
+
+//        if(badges.isEmpty()) {
+//            badgeRepository.save(new Badge(competenceRepository.findById(1L).orElseThrow(),
+//                                            niveauRepository.findById(1L).orElseThrow(),
+//                                            new SimpleDateFormat("dd-MM-yyyy").format(new Date()),
+//                                            100,
+//                                            userRepository.findByUsername("participant").orElseThrow()));
+//
+//            badgeRepository.save(new Badge(competenceRepository.findById(2L).orElseThrow(),
+//                                            niveauRepository.findById(2L).orElseThrow(),
+//                                            new SimpleDateFormat("dd-MM-yyyy").format(new Date()),
+//                                            50,
+//                                            userRepository.findByUsername("participant").orElseThrow()));
+//            System.out.println("--- Badges for user participant initialized");
+//        }
     }
 }
