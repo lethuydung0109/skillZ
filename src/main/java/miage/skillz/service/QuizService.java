@@ -57,6 +57,14 @@ public class QuizService {
         return  new ResponseEntity<>(this.quizRepository.saveAndFlush(createdQuiz), HttpStatus.OK);
     }
 
+    public Set<Quiz> createListQuiz(Set<QuizImpl> listQuiz, User currentUser)
+    {
+        Set<Quiz> listCreatedQuiz = new HashSet<>();
+        listQuiz.forEach(qImpl -> listCreatedQuiz.add( this.createQuiz(qImpl,currentUser).getBody()));
+
+        return listCreatedQuiz;
+    }
+
     public ResponseEntity<Quiz> updateQuiz(QuizImpl quizImpl,User currentUser)
     {
         System.out.println("QuizImpl à modifier : "+quizImpl);

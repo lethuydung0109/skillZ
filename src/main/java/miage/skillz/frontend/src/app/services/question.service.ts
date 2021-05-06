@@ -30,8 +30,7 @@ export class QuestionService {
 
   }
 
-
-  public updateQuestion(question: Question) : Observable<Question>
+  public updateQuestion(question : Question) : Observable<Question>
   {
     const routeQuery=this.url+"/updateQuestion";
     console.log("updateQuestion", question);
@@ -67,7 +66,12 @@ export class QuestionService {
     const routeQuery=this.url+"/user/questions";
     return this.http.get<Array<Question>>(routeQuery);
   }
-  
+
+  public getQuestionResponses(qId : number) : Observable<Array<ResponseQuestion>>
+  {
+    const routeQuery=this.url+"/questionReponses/"+qId;
+    return this.http.get<Array<ResponseQuestion>>(routeQuery);
+  }
 
   public getQuestionCorrectResponse(qId : number) : Observable<Array<ResponseQuestion>>
   {
@@ -85,22 +89,12 @@ export class QuestionService {
   {
     const routeQuery=this.url+"/deleteQuestion/"+questionId;
     return this.http.delete(routeQuery);
+
   }
 
   public deleteAllQuestion() : Observable<any> {
       const routeQuery=this.url+"/deleteAllQuestions";
       return this.http.delete(routeQuery);
-  }
-
-  public getQuestionPoids(qId : number) : Observable<number>
-  {
-    // let score : number = 0;
-    // this.getQuestion(qId).subscribe(data => {
-    //   console.log("data : ", data)
-    //   score= data.poids;
-    // });
-    const routeQuery=this.url+"/getQuestionPoids/"+qId;
-    return this.http.get<number>(routeQuery);
   }
 
   public getQuestionByCompetenceNiveau(/*idCompetence : number ,*/ idNiveau:number) : Observable<Question[]>

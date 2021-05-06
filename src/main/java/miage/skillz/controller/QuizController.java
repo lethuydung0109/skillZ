@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiResponse;
 import miage.skillz.entity.Question;
 import miage.skillz.entity.Quiz;
 import miage.skillz.entity.User;
+import miage.skillz.models.QuestionImpl;
 import miage.skillz.models.QuizImpl;
 import miage.skillz.security.services.UserDetailsImpl;
 import miage.skillz.service.QuizService;
@@ -16,6 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -37,6 +39,14 @@ public class QuizController {
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         User currentUser = this.userController.findById(userDetails.getId());
         return  quizService.createQuiz(quizImpl,currentUser);
+    }
+
+    @PostMapping(value = "/createManyQuiz",consumes = "application/json",produces = "application/json")
+    public Set<Quiz> createListQuiz(@RequestBody Set<QuizImpl> listQuiz) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        User currentUser = this.userController.findById(userDetails.getId());
+        return  quizService.createListQuiz(listQuiz,currentUser);
     }
 
     @PutMapping(value = "/updateQuiz",consumes = "application/json",produces = "application/json")
@@ -64,8 +74,7 @@ public class QuizController {
     public  int getNumberOfQuiz()
     {
         Set<Quiz> quizList = quizService.getAllQuiz();
-        int nbQuiz = quizList.size();
-        return  nbQuiz;
+        return quizList.size();
     }
 
     @GetMapping(value = "/user/quiz", produces = MediaType.APPLICATION_JSON_VALUE)

@@ -89,6 +89,7 @@ export class DoQuizComponent implements OnInit {
   async validQuizResponse(){
    // console.log("User responses : ", this.userResponse);
     let poids=100/this.questions.length;
+    console.log(" poids ", poids);
     //Pour chaque question
     for (let entry of this.userResponse.entries()) {    
       let tab: Array<ResponseQuestion>=[];
@@ -113,19 +114,23 @@ export class DoQuizComponent implements OnInit {
 
       let result = this.correctResponsesSelected.filter(rep => {
          return tab = this.quizCorrectResponses.filter(r => rep.idReponse == r.idReponse);
-        })
-
-      console.log(" result ", result);
+      })
+      
       if(result.length==0) this.quizScore=0;
-      else this.quizScore=this.quizScore+(poids/entry[1].length)*this.quizCorrectResponses.length;
+      else {
+        console.log("q = ", this.quizScore,"+(",poids,"/",entry[1].length,")*",result.length)
+        this.quizScore=this.quizScore+(poids/entry[1].length)*result.length;
+      }
       console.log("this.correctResponsesSelected : ", this.correctResponsesSelected,"this.quizCorrectResponses : ",this.quizCorrectResponses)
     }
    
     //Création des bagdes
     console.log("score",this.quizScore)
+    //this.quizScore=parseFloat(this.quizScore.toFixed(2));
 
     if(this.quizScore >= this.currentQuiz.seuilValidation)
     {
+      //this.quizScore.toFixed(2);
       let badge : Badge = new Badge();
       badge.competenceId=this.currentQuiz.quizCompetence.id;
       badge.niveauId=this.currentQuiz.idNiveau;
