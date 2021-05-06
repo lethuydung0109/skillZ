@@ -47,7 +47,9 @@ En outre, elle permet d'un coté aux évaluateurs de créer des questionnaires, 
   - Pour accéder à l'interface utilisateur, lancez le lien : localhost:4200/
   - Api avec swagger-ui :  http://localhost:8081/swagger-ui/
 
-### En remote :  
+### En remote : 
+
+  - Connectez vous à l'adresse : 34.78.77.112:4200/home
 
 Remarque : il faut créer un schéma de base de données sous MySql avec le nom suivant : skillzdb
 
@@ -66,7 +68,7 @@ Moteur de production : Gradle
 
 ## Utilisation 
 
-Une fois que vous avez tout installé, vous pouvez vous connecter avec votre identifiant et mot de passe à l'adresse : 34.78.77.112:4200/login
+Une fois que vous avez tout installé, vous pouvez vous connecter avec votre identifiant et mot de passe, Si : 
 
 ### Vous etes un administrateur 
 
