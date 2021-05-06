@@ -1,4 +1,7 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { PublicContent } from '../models/public-content';
+import { PublicContentService } from '../services/public-content.service';
 import { TokenStorageService } from '../_services/auth/service/token-storage.service';
 import { UserTestService } from '../_services/auth/service/userTest.service';
 
@@ -15,44 +18,71 @@ export class HomeComponent implements OnInit {
   isLoggedIn = false;
   isAdmin = false;
   username?: string;
-  constructor(private userService: UserTestService, 
-    private tokenStorageService: TokenStorageService) { }
+
+  publicContent: PublicContent ={
+    id: 0,
+    content: '',
+    date:''
+  }
+
+  constructor(private userService: UserTestService,
+    private tokenStorageService: TokenStorageService, 
+    private publicContentService: PublicContentService,
+    private datePipe: DatePipe) { }
 
   ngOnInit(): void {
 
-    this.content = "Public content";
     this.isLoggedIn = !!this.tokenStorageService.getToken();
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
-      if(user != null){
+      if (user != null) {
         this.roles = user.roles;
-        if(this.roles != null){
+        if (this.roles != null) {
           this.isAdmin = this.roles.includes('ROLE_ADMIN');
-          console.log("Home: isAdmin = " + this.isAdmin);  
+          console.log("Home: isAdmin = " + this.isAdmin);
         }
         else {
-          console.log("Role is null"); 
+          console.log("Role is null");
         }
-        
+        this.username = user.username;
+        console.log("User name  = " + this.username);
+      }
+    }
 
-      this.username = user.username;
-      console.log("User name  = " + this.username);
-
-  }
-}
-
-    // this.userService.getPublicContent().subscribe(
-    //   data => {
-    //     this.content = data;
-    //   },
-    //   err => {
-    //     this.content = JSON.parse(err.error).message;
-    //   }
-    // );
+    this.publicContentService.getLatesPublicContent().subscribe(
+      data => {
+        this.content = data;
+      },
+      err => {
+        this.content = JSON.parse(err.error).message;
+      }
+    );
   }
 
-  savePublicContent(): void{
-    this.content = this.editContent;
-    this.submitted = true;
+  savePublicContent(): void {
+    this.publicContent.content = this.editContent;
+    this.publicContent.date = this.datePipe.transform(new Date(), 'yyyy-MM-dd')!
+
+    this.publicContentService.savePublicContent(this.publicContent)
+      .subscribe(
+        response => {
+        console.log(response);
+        this.submitted = true;
+      },
+      error => {
+        console.log(error);
+      });
+    
+      this.publicContentService.getLatesPublicContent().subscribe(
+        data => {
+          this.content = data;
+          this.submitted = true;
+        },
+        err => {
+          this.content = JSON.parse(err.error).message;
+        }
+      );
+      
+
   }
 }

@@ -36,14 +36,14 @@
           <td>{{user.email}}</td>
           <td>
             <button type="button" 
-                    mat-fab color="warn"
-                    (click)="deleteUser(user.id, i)"><mat-icon>delete</mat-icon>
-            </button>
-            
-            <button type="button" 
                     mat-fab color="primary" 
                     routerLink="/users/{{ user.id }}"><mat-icon>open_in_new</mat-icon>
             </button>
+            <button type="button" 
+                    mat-fab color="warn"
+                    (click)="deleteUser(user.id, i)"><mat-icon>delete</mat-icon>
+            </button>
+
           </td>
         </tr>
       </tbody>
