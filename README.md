@@ -15,13 +15,12 @@ Université Paris Nanterre
 
 ![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/riad-lazli/skillZ)
 
-[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=riad-lazli_skillZ&metric=bugs)](https://sonarcloud.io/dashboard?id=riad-lazli_skillZ)
-[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=riad-lazli_skillZ&metric=code_smells)](https://sonarcloud.io/dashboard?id=riad-lazli_skillZ)
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=riad-lazli_skillZ&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=riad-lazli_skillZ)
-[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=riad-lazli_skillZ&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=riad-lazli_skillZ)
-[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=riad-lazli_skillZ&metric=security_rating)](https://sonarcloud.io/dashboard?id=riad-lazli_skillZ)
-[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=riad-lazli_skillZ&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=riad-lazli_skillZ)
-[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/dashboard?id=riad-lazli_skillZ)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=lethuydung0109_skillZ&metric=bugs)](https://sonarcloud.io/dashboard?id=lethuydung0109_skillZ)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=lethuydung0109_skillZ&metric=code_smells)](https://sonarcloud.io/dashboard?id=lethuydung0109_skillZ)[![![Coverage](https://sonarcloud.io/api/project_badges/measure?project=lethuydung0109_skillZ&metric=coverage)](https://sonarcloud.io/dashboard?id=lethuydung0109_skillZ)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=lethuydung0109_skillZ&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=lethuydung0109_skillZ)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=lethuydung0109_skillZ&metric=security_rating)](https://sonarcloud.io/dashboard?id=lethuydung0109_skillZ)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=lethuydung0109_skillZ&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=lethuydung0109_skillZ)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=lethuydung0109_skillZ&metric=ncloc)](https://sonarcloud.io/dashboard?id=lethuydung0109_skillZ)
 
 ![License](https://img.shields.io/github/license/lethuydung0109/skillZ)
 
