@@ -1,28 +1,35 @@
-<div class="col-md-24" style="padding-top:40px;">
-  <div class="card card-container" >
+<div class="col-md-24" style="padding-top:40px;" xmlns="http://www.w3.org/1999/html">
 
 <h2> Liste des compétences </h2>
-<button *ngIf="isAdmin" routerLink="/creer-competence" class="btnStatsAdd">  Ajouter une compétence</button>
 
+  <br>
+<button *ngIf="isAdmin" routerLink="/creer-competence" mat-raised-button color="primary">  Ajouter une compétence</button>
+  <br>   <br>
 <div>
   <table class="table table-hover">
     <thead>
     <tr>
       <th scope="col">Libelle</th>
-      <th scope="col">Compétence racine</th>
+      <th scope="col">Compétence père</th>
+      <th scope="col">Actions</th>
     </tr>
     </thead>
     <tbody *ngFor="let competence of list_competence">
     <tr>
       <td>{{competence.nom_competence}}</td>
+
       <td>{{competence.nom_competence_pere}}</td>
 
-     <td><button type="button" *ngIf="isAdmin" mat-icon-button color="primary"> <a routerLink="/modifier-competence/{{competence.id}}">
-       <mat-icon>edit</mat-icon>
-      </a>  </button> </td>
+      <td>
+        <button *ngIf="isAdmin" type="button" (click)="deleteCompetence(competence)"
+                mat-fab color="warn"><mat-icon>delete</mat-icon></button>
+
+        <button type="button"  *ngIf="isAdmin"  routerLink="/modifier-competence/{{competence.id}}" mat-fab color="primary" >
+          <mat-icon>open_in_new</mat-icon>
+       </button>
 
 
-      <td> <button *ngIf="isAdmin" type="button" (click)="deleteCompetence(competence)" mat-icon-button color="warn"><mat-icon>delete</mat-icon></button></td>
+      </td>
 
     </tr>
     </tbody>
@@ -32,4 +39,3 @@
 </div>
 
   </div>
-</div>

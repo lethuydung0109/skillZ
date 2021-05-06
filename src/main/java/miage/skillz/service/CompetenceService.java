@@ -73,21 +73,6 @@ public class CompetenceService {
         return newList;
     }
 
-    public List<Competence> getTreeCompetences ()
-    {
-        List<Competence> listComp = this.getAllCompetence();
-        HashMap<String, Long> listCompetences = new HashMap<>();
-
-        for (Competence competence : listComp) {
-            long IdPere =  competence.getIdPere();
-            if(IdPere == 0){
-                listCompetences.put(competence.getNom_competence(), competence.getIdPere());
-            }
-        }
-
-
-        return listComp;
-    }
 
 
 
