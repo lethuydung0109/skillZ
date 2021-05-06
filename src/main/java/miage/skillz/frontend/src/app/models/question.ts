@@ -8,7 +8,7 @@ export class Question {
     idQuestion : number;
     libelle : string;
     theme : string;
-    niveau !:  number;
+    niveau !:  any;
     poids :  number ;
     qst: string;
     reponsesQuestions : Array<ResponseQuestion> = [];

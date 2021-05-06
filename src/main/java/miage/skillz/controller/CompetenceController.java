@@ -1,8 +1,6 @@
 package miage.skillz.controller;
 
 import miage.skillz.entity.Competence;
-import miage.skillz.entity.Role;
-import miage.skillz.entity.User;
 import miage.skillz.service.CompetenceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,11 +37,11 @@ public class CompetenceController {
     }
 
     // Modifier competence .. à completer
-    @PutMapping("/all")
-    @RequestMapping(value = "/updateCompetence", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
-    public Competence updateCompetence(@RequestBody Competence comp)
+   // @PutMapping("/all")
+    @PutMapping(value = "/updateCompetence", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Competence> updateCompetence(@RequestBody Competence competence)
     {
-        return competenceService.updateCompetence(comp);
+        return competenceService.updateCompetence(competence);
     }
 
     // Supprimer competence

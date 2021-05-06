@@ -31,12 +31,11 @@ export class QuestionService {
   }
 
 
-  public updateQuestion(question : Question) : Observable<Question>
+  public updateQuestion(question: Question) : Observable<Question>
   {
     const routeQuery=this.url+"/updateQuestion";
-    console.log("updateQuestion", question)
-
-    return this.http.put<Question>(routeQuery,Question);
+    console.log("updateQuestion", question);
+    return this.http.put<Question>(routeQuery,question);
   }
 
   public getQuestion(questionId : number) :  Observable<Question>
@@ -76,7 +75,7 @@ export class QuestionService {
     return this.http.get<Array<ResponseQuestion>>(routeQuery);
   }
 
-  public async getQuestionCorrectResponse2(qId : number) 
+  public async getQuestionCorrectResponse2(qId : number)
   {
     const routeQuery=this.url+"/correctResponse/"+qId;
     return await this.http.get<Array<ResponseQuestion>>(routeQuery).toPromise();
@@ -86,7 +85,6 @@ export class QuestionService {
   {
     const routeQuery=this.url+"/deleteQuestion/"+questionId;
     return this.http.delete(routeQuery);
-
   }
 
   public deleteAllQuestion() : Observable<any> {
@@ -109,5 +107,10 @@ export class QuestionService {
   {
     const routeQuery=API_URL+"getQuestionCompetenceNiveau/"+idNiveau;
     return this.http.get<Array<Question>>(routeQuery);
+  }
+
+  getQuestionReponses(idQuestion : number) {
+    const routeQuery=API_URL+"getQuestionReponses/"+idQuestion;
+    return this.http.get<Array<ResponseQuestion>>(routeQuery);
   }
 }
