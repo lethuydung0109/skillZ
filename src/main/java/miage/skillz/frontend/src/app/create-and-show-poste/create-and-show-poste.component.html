@@ -1,12 +1,9 @@
 <div class="container-fluid">
     <br>
-    <div class="row">
-        <h1>Les postes </h1>
-    </div><br>
-
+    <h2>Liste des postes </h2><br>
     <div class="col-md-6" *ngIf="isHiden">
         <button mat-raised-button color="warn" (click)="showCreationDiv()">Créer poste</button>
-    </div><br>
+    </div>
 
     <div class="row" *ngIf="!isHiden">
         <div class="card " style="text-align:left;">
@@ -67,8 +64,6 @@
             </div>
         </div>
     </div><br><br>
-
-    <h2>Liste des postes </h2><br>
 
     <mat-card>
         Cliquez sur l'identifiant d'un poste dans le tableau, afin d'accéder à la liste des candidats au poste.

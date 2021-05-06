@@ -59,6 +59,8 @@ public class DbInitializer implements CommandLineRunner {
         if(competences.isEmpty()) {
             competenceRepository.save(new Competence("Programmation Web",0L));
             competenceRepository.save(new Competence("Modelisation",0L));
+            competenceRepository.save(new Competence("Java",0L));
+            competenceRepository.save(new Competence("Machine Learning",0L));
             System.out.println("--- Some competences initialized");
         }
 
