@@ -32,6 +32,7 @@ export class UserQuestionAndQuiZComponent implements OnInit {
   dataSourceQuiz!: MatTableDataSource<Quiz>;
   dataSourceReponses!:MatTableDataSource<ResponseQuestion>;
 
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -70,7 +71,7 @@ export class UserQuestionAndQuiZComponent implements OnInit {
     {
       this.showReponses=true;
       this.questionService.getQuestionResponses(this.idQ).subscribe(data => {
-      data.forEach(r => {        
+      data.forEach(r => {
         listReponses.push(r);
       })
       this.dataSourceReponses = new MatTableDataSource(listReponses);
