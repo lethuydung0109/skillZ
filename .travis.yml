@@ -1,11 +1,6 @@
 language: java
 jdk:
  - openjdk11
-# addons:
-#   sonarqube:
-#     - organization: "miageskillz" # the key of the org you chose at step #3
-#     - token:
-#         secure: 916dcc70d496e1150df3fdae8751b758cdcd64df
 
 sudo: required
 dist: xenial
@@ -16,45 +11,39 @@ addons:
       - google-chrome
     packages:
       - google-chrome-stable
+  sonarcloud:
+    organization: "miageskillz"
 
 matrix:
   include:
     - language: java
       jdk: openjdk11
-      jobs:
-        include:
-          - stage: build java
-            script:
-              - ./gradlew clean build
-          - stage: build docker image
-            script:
-              - echo "Build docker image"
-
+      script:
+        - ./gradlew clean build
     - language: node_js
       node_js: stable
-      install:
+      services:
+        - docker
+        - xvfb
+      addons:
+      apt:
+        sources:
+          - google-chrome
+        packages:
+          - google-chrome-stable
+
+      before_script:
         - npm install
       before_install:
+        - export CHROME_BIN=chromium-browser
+        - export DISPLAY=:99.0
         - cd ./src/main/java/miage/skillz/frontend/
-      jobs:
-        include:
-          - stage: build npm
-            script:
-              - npm run build --prod --browsers=ChromeHeadlessNoSandbox
-          - stage: Build docker image
-            script:
-              - echo "Build docker image npm"
-
-#Ajout le 30/04 : Codecov + jacocoTestReport
-before_script:
-  - chmod +x gradlew
-script:
-  - ./gradlew check jacocoTestReport coveralls sendCoverageToCodacy
-  - ./gradlew codeCoverageReport
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
-
-test:
-  post:
-    - if [ -e ./gradlew ]; then ./gradlew jacocoTestReport;else gradle jacocoTestReport;fi
-    - bash <(curl -s https://codecov.io/bash)
+      script:
+        - npm run build --prod --browsers=ChromeHeadlessNoSandbox
+      after_success:
+        - if [ "$TRAVIS_BRANCH" == "master" ]; then
+          docker build -t skillz-front .;
+          docker tag skillz-front lethuydung0109/skillz-front;
+          docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+          docker push lethuydung0109/skillz-front;
+          fi

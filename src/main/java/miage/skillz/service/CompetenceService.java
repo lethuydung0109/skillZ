@@ -5,10 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
+
+import java.util.*;
 
 @Service
 public class CompetenceService {
@@ -24,11 +22,24 @@ public class CompetenceService {
         return new ResponseEntity<>(this.competenceRepository.saveAndFlush(comp), HttpStatus.OK);
     }
 
-    // Update competence .. à completer
-    public Competence updateCompetence(Competence comp)
+    // Modifier une competence
+    public ResponseEntity<Competence> updateCompetence(Competence comp)
     {
-        //log.info("Competence à modifier : " + comp);
-        return new Competence(comp.getId(), comp.getIdPere(), comp.getNom_competence());
+        System.out.println("Competence à modifier : " + comp);
+      Optional<Competence> comUpadate = this.competenceRepository.findById(comp.getId());
+      if(comUpadate.isPresent())
+      {
+          Competence com = comUpadate.get();
+          com.setNom_competence(comp.getNom_competence());
+          com.setIdPere(comp.getIdPere());
+          System.out.println("Competence trouvé!" + com);
+          return new ResponseEntity<>(this.competenceRepository.saveAndFlush(com),HttpStatus.OK);
+      }
+      else
+      {
+          System.out.println("Error competence pas trouvé!");
+          return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+      }
 
     }
 

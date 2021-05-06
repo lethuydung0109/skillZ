@@ -2,7 +2,7 @@ export class Competence {
 
   id: number;
   // tslint:disable-next-line:variable-name
-  id_pere: number;
+  idPere: number;
   // tslint:disable-next-line:variable-name
   nom_competence: string;
 
@@ -10,7 +10,7 @@ export class Competence {
 
   constructor() {
     this.id = 0;
-    this.id_pere = 0;
+    this.idPere = 0;
     this.nom_competence = '';
     this.nom_competence_pere = '';
 

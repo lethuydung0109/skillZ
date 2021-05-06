@@ -83,7 +83,7 @@ export class UserQuestionAndQuiZComponent implements OnInit {
       this.myQuestions.splice(this.myQuestions.indexOf(data),1);
     })
     this.questionService.deleteQuestion(id).subscribe(data => {});
-    
+
   }
 
   deleteQuiz(id : number) {

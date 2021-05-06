@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ModifierCompetenceComponent } from './modifier-competence.component';
 
+import { ModifierQuestionComponent } from './modifier-question.component';
 
-describe('ModifierCompetenceComponent', () => {
-  let component: ModifierCompetenceComponent;
-  let fixture: ComponentFixture<ModifierCompetenceComponent>;
+describe('ModifierQuestionComponent', () => {
+  let component: ModifierQuestionComponent;
+  let fixture: ComponentFixture<ModifierQuestionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ModifierCompetenceComponent ]
+      declarations: [ ModifierQuestionComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ModifierCompetenceComponent);
+    fixture = TestBed.createComponent(ModifierQuestionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

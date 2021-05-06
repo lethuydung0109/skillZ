@@ -1,7 +1,7 @@
 <div class="col-md-12" style="padding-top:40px;">
   <div class="card card-container" >
 
-    <h2> Créer une question </h2>
+    <h2> Modifier une question </h2>
     <form  name="form" (ngSubmit)="f.form.valid && onSubmit()"
            #f="ngForm"
            novalidate>
@@ -34,8 +34,8 @@
           name="theme"
           #theme="ngModel"
           [(ngModel)]="question.theme"
+          [placeholder]="question.theme"
         />
-
 
         <div class="alert-danger" *ngIf="theme.errors && f.submitted">
           <div *ngIf="theme.errors.required">Theme est obligatoire</div>
@@ -44,7 +44,6 @@
 
       <div class="form-group">
         <label for="competence">Compétence(s) * </label>
-      <!--  <button type="button" mat-raised-button color="primary" routerLink="/creer-competence" >Créer une compétence</button> -->
 
         <mat-select
           id="competence"
@@ -55,12 +54,12 @@
           #competence="ngModel"
           [(ngModel)]="question.questionCompetences"
         >
-          <option value=""> Choisir une compétence</option>
+          <option value="">Choisir une compétence</option>
           <mat-option *ngFor="let competence of list_competence"  [value]="competence.id"> {{competence.nom_competence}}</mat-option>
         </mat-select>
 
         <div class="alert-danger" *ngIf="competence.errors && f.submitted">
-          <div *ngIf="competence.errors.required">Compétence is required</div>
+          <div *ngIf="competence.errors.required">Competence is required</div>
         </div>
 
       </div>
@@ -115,8 +114,7 @@
           <thead>
           <tr>
             <th scope="col">Réponse</th>
-            <th scope="col">Option</th>
-            <th scope="col"></th>
+            <th scope="col">Correct</th>
           </tr>
           </thead>
           <tbody *ngFor="let reponse of list_reponses" >
@@ -130,7 +128,7 @@
       </div>
 
       <div *ngIf='isShow' class="form-inline">
-       <!-- <label for="reponses">Réponse</label>-->
+        <label for="reponses">Réponse</label>
         <input
           id="reponses"
           type="text"
@@ -150,7 +148,7 @@
       </div>
 
       <div class="form-group">
-        <button type="submit" class="btn btn-success" [disabled]="!f.valid">Créer</button>
+        <button type="submit" class="btn btn-success" [disabled]="!f.valid">Modifier</button>
       </div>
 
       <div class="alert alert-warning" *ngIf="f.submitted && isFailed">
@@ -162,7 +160,7 @@
       </div>
 
     </form>
-    </div>
+  </div>
 
 </div>
 
