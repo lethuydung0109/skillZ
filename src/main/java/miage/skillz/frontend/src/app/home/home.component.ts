@@ -49,9 +49,10 @@ export class HomeComponent implements OnInit {
       }
     }
 
-    this.publicContentService.getLatesPublicContent().subscribe(
+    this.publicContentService.getLatestPublicContent().subscribe(
       data => {
         this.content = data;
+        console.log(this.content);
       },
       err => {
         this.content = JSON.parse(err.error).message;
@@ -62,7 +63,7 @@ export class HomeComponent implements OnInit {
   savePublicContent(): void {
     
     this.publicContent.date = this.datePipe.transform(new Date(), 'yyyy-MM-dd')!
-
+    this.publicContent.content = this.editContent;
     this.publicContentService.savePublicContent(this.publicContent)
       .subscribe( 
         response => {

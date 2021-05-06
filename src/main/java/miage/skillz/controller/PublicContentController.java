@@ -34,6 +34,7 @@ public class PublicContentController{
     {
         List<PublicContent> publicContents = service.getPublicContentList();
         String latestPublicContent = publicContents.get(publicContents.size()-1).getContent();
+        log.info(latestPublicContent);
         return new ResponseEntity <String> (latestPublicContent, HttpStatus.OK);
     }
 
@@ -45,6 +46,7 @@ public class PublicContentController{
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
         PublicContent newPublicContent = new PublicContent(newContent, newDate);
+        log.info();
         service.savePublicContent(newPublicContent);
         log.info(newDate);
         return ResponseEntity.ok(new MessageResponse("Content updated successfully!"));

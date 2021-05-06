@@ -14,7 +14,7 @@ export class PublicContentService {
   constructor(private http: HttpClient) { }
 
   //Get public content
-  getLatesPublicContent(): Observable<any> {
+  getLatestPublicContent(): Observable<any> {
     return this.http.get(API_URL + '/publicContent', { responseType: 'text' });
   }
 
