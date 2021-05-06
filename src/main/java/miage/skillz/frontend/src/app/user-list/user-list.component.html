@@ -37,20 +37,21 @@
       (click)="setActiveUser(user, i)">
         <tr>
           <td>{{user.username}}</td>
+          <td>{{user.role}}</td>
           <td>{{user.email}}</td>
           <td *ngIf="isCandidateView">{{user.niveauForQuiz}}</td>
           <td *ngIf="isCandidateView">{{user.scoreForQuiz}}</td>
           <td *ngIf="!isCandidateView"><button type="button" mat-fab color="warn"><mat-icon>delete</mat-icon></button></td>
           <td>
             <button type="button"
+                    mat-fab color="primary"
+                    routerLink="/users/{{ user.id }}"><mat-icon>open_in_new</mat-icon>
+            </button>
+            <button type="button"
                     mat-fab color="warn"
                     (click)="deleteUser(user.id, i)"><mat-icon>delete</mat-icon>
             </button>
 
-            <button type="button"
-                    mat-fab color="primary"
-                    routerLink="/users/{{ user.id }}"><mat-icon>open_in_new</mat-icon>
-            </button>
           </td>
         </tr>
       </tbody>

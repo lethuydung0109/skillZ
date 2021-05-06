@@ -3,13 +3,13 @@
     <div class="row" *ngIf="!showReponses">
         <h1>Mes questions et questionnaires</h1>
     </div><br>
-        
+
     <div class="col-md-6" *ngIf="!showReponses">
         <button mat-raised-button color="warn" routerLink="/creer-question">Créer question</button>
     </div><br>
 
     <!-- Tableau de  questions -->
-    <div class="content-table" *ngIf="!showReponses">         
+    <div class="content-table" *ngIf="!showReponses">
         <mat-form-field>
             <mat-label>Filter</mat-label>
             <input matInput (keyup)="applyFilter1($event)" placeholder="Ex. java" #input>
@@ -22,61 +22,68 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> N° </th>
                     <td mat-cell *matCellDef="let row; let num = index;"><a [routerLink]="['/reponsesRequestion/', row.idQuestion]">  {{num+1}} </a></td>
                 </ng-container>
-    
+
                 <ng-container matColumnDef="theme">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Theme </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Thème </th>
                     <td mat-cell *matCellDef="let row"> {{row.theme}}</td>
                 </ng-container>
-    
+
                 <ng-container matColumnDef="libelle">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Libelle </th>
                     <td mat-cell *matCellDef="let row"> {{row.libelle}} </td>
                 </ng-container>
-    
+
                 <ng-container matColumnDef="niveauName">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Niveau </th>
                     <td mat-cell *matCellDef="let row"> {{row.niveauName}} </td>
                 </ng-container>
-            
+
                 <ng-container matColumnDef="stringCompetence">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Competence(s) </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Compétence(s) </th>
                     <td mat-cell *matCellDef="let row"> {{row.stringCompetence}} </td>
-                </ng-container> 
+                </ng-container>
 
                 <ng-container matColumnDef="actions">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
-                    <td mat-cell *matCellDef="let row"> 
+                    <td mat-cell *matCellDef="let row">
                         <button  (click)="deleteQuestion(row.idQuestion)" mat-icon-button color="warn" matTooltip="Rafraichissez la page après suppression">
                             <mat-icon>delete</mat-icon>
                         </button>
+
+                      <button type="button" mat-icon-button color="primary"> <a routerLink="/modifier-question/{{ row.idQuestion }}">
+                        <mat-icon>edit</mat-icon>
+                      </a>
+                      </button>
+
                     </td>
                 </ng-container>
-                                                            
+
                 <tr mat-header-row *matHeaderRowDef="displayedQuestionColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedQuestionColumns;"></tr>
-    
+
                 <tr class="mat-row" *matNoDataRow>
                     <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
                 </tr>
             </table>
             <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-        </div>        
-    </div>   
+        </div>
+    </div>
     <br><br>
 
     <!-- Tableau de  quiz -->
+    <h1>Mes questionnaires </h1>
     <div class="col-md-6" *ngIf="!showReponses">
         <button mat-raised-button color="primary" routerLink="/creer-quiz">Créer quiz </button>
     </div>
     <br>
 
-    <div class="content-table" *ngIf="!showReponses" > 
+    <div class="content-table" *ngIf="!showReponses" >
         <mat-form-field>
             <mat-label>Filter</mat-label>
             <input matInput (keyup)="applyFilter2($event)" placeholder="Ex. java" #inputQ>
         </mat-form-field>
         <br>
-        <div class="mat-elevation-z8">           
+        <div class="mat-elevation-z8">
             <table mat-table [dataSource]="dataSourceQuiz" matSort>
 
                 <ng-container matColumnDef="num">
@@ -85,7 +92,7 @@
                 </ng-container>
 
                 <ng-container matColumnDef="theme">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Theme </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Thème </th>
                     <td mat-cell *matCellDef="let row"> {{row.theme}}</td>
                 </ng-container>
 
@@ -98,26 +105,32 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Niveau </th>
                     <td mat-cell *matCellDef="let row"> {{row.niveauName}} </td>
                 </ng-container>
-                                                        
+
                 <ng-container matColumnDef="competence">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Competence </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Compétence </th>
                     <td mat-cell *matCellDef="let row"> {{row.quizCompetence.nom_competence}} </td>
                 </ng-container>
-                                                                    
+
                 <ng-container matColumnDef="duree">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Duree </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Durée </th>
                     <td mat-cell *matCellDef="let row"> {{row.duree}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="actions">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
-                    <td mat-cell *matCellDef="let row"> 
+                    <td mat-cell *matCellDef="let row">
                         <button  (click)="deleteQuiz(row.idQuiz)" mat-icon-button color="warn" matTooltip="Rafraichissez la page après suppression">
                             <mat-icon>delete</mat-icon>
                         </button>
+
+                      <button type="button" mat-icon-button color="primary"> <a routerLink="/modifier-quiz/{{ row.idQuiz }}">
+                        <mat-icon>edit</mat-icon>
+                      </a>
+                      </button>
+
                     </td>
                 </ng-container>
-                                            
+
                 <tr mat-header-row *matHeaderRowDef="displayedQuizColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedQuizColumns;"></tr>
 
@@ -126,19 +139,19 @@
                 </tr>
             </table>
             <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-        </div>        
+        </div>
     </div><br>
 
     <!-- Tableau de  reponses questions -->
     <h4 *ngIf="showReponses"> Reponses de la question </h4><br>
     <button  *ngIf="showReponses" mat-raised-button routerLink="/userQuestionsAndQuiz">Retour</button> <br>
-    <div class="content-table" *ngIf="showReponses"> 
+    <div class="content-table" *ngIf="showReponses">
         <mat-form-field>
             <mat-label>Filter</mat-label>
             <input matInput (keyup)="applyFilter2($event)" placeholder="Ex. java" #inputR>
         </mat-form-field>
         <br>
-        <div class="mat-elevation-z8">           
+        <div class="mat-elevation-z8">
             <table mat-table [dataSource]="dataSourceReponses" matSort>
 
                 <ng-container matColumnDef="num">
@@ -150,12 +163,12 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Libelle </th>
                     <td mat-cell *matCellDef="let row"> {{row.libelle}}</td>
                 </ng-container>
-                                                        
+
                 <ng-container matColumnDef="isCorrect">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Reponse Correcte  </th>
                     <td mat-cell *matCellDef="let row"> {{row.isCorrect}} </td>
                 </ng-container>
-                                                                                                                
+
                 <tr mat-header-row *matHeaderRowDef="displayedReponseColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedReponseColumns;"></tr>
 
@@ -164,7 +177,7 @@
                 </tr>
             </table>
             <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-        </div>        
+        </div>
     </div><br>
 
 </div>

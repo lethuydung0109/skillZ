@@ -2,7 +2,7 @@
     <div class="submit-form">
       <div *ngIf="!submitted">
         <div class="form-group">
-          <label for="username">Username</label>
+          <label for="username">Pseudo</label>
           <input
             type="text"
             class="form-control"
@@ -12,7 +12,7 @@
             name="username"
           />
         </div>
-  
+
         <div class="form-group">
           <label for="email">Email</label>
           <input
@@ -27,8 +27,8 @@
 
         <div class="form-group">
           <label for="role">Rôle</label>
-          <select name="role_selector" 
-              id="role_selector" 
+          <select name="role_selector"
+              id="role_selector"
               class = "form-control"
               [(ngModel)]= "user.role">
             <option selected="selected" value="participant">Participant</option>
@@ -36,7 +36,7 @@
             <option value="admin">Admin</option>
           </select>
         </div>
-        
+
 
           <div class="form-group">
             <label for="password">Mot de passe</label>
@@ -46,12 +46,12 @@
               required
               [(ngModel)]="user.password"
               name="password"
-            />  
+            />
           </div>
-  
-        <button (click)="saveUser()" class="btn btn-success">Ajouter</button>
+
+        <button (click)="saveUser()" class="btn btn-primary">Ajouter utilisateur</button>
       </div>
-  
+
       <div *ngIf="submitted">
         <h4>Utilisateur a été ajouté avec succès !</h4>
         <button class="btn btn-success" (click)="newUser()">Ajouter Utilisateur</button>

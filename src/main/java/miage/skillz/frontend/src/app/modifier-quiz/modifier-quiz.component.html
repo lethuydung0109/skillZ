@@ -1,6 +1,6 @@
 <div class="col-md-12" style="padding-top:40px;">
   <div class="card card-container">
-    <h2> Créer un questionnaire </h2>
+    <h2> Modifier un questionnaire </h2>
     <form  name="form" (ngSubmit)="f.form.valid && onSubmit()"
            #f="ngForm"
            novalidate>
@@ -25,14 +25,8 @@
       </div>
 
       <div class="form-group">
-        <label for="theme">Thème</label>
-        <input
-          id="theme"
-          class="form-control"
-          type="text"
-          name="theme"
-          #theme="ngModel"
-          [(ngModel)]="quiz.theme"
+        <label for="theme">Thème *</label>
+        <input id="theme" class="form-control" name="theme" #theme="ngModel" type="text" [(ngModel)]="quiz.theme"
         />
 
 
@@ -42,7 +36,7 @@
       </div>
 
       <div class="form-group">
-        <label for="competence">Compétence</label>
+        <label for="competence">Compétence *</label>
         <select
           id="competence"
           class="form-control"
@@ -52,17 +46,18 @@
           [(ngModel)]="quiz.idCompetence"
           (change)="competenceChange(competence.value)"
         >
-          <option value=""> Choisir une competence</option>
+          <option selected value=""> Choisir une compétence</option>
           <option *ngFor="let competence of list_competence"  [ngValue]="competence.id"> {{competence.nom_competence}}</option>
         </select>
 
+
         <div class="alert-danger" *ngIf="competence.errors && f.submitted">
-          <div *ngIf="competence.errors.required">La competence est obligatoire</div>
+          <div *ngIf="competence.errors.required">La compétence est obligatoire</div>
         </div>
       </div>
 
       <div class="form-group">
-        <label for="niveau">Niveau</label>
+        <label for="niveau">Niveau *</label>
         <select
           id="niveau"
           class="form-control"
@@ -74,10 +69,11 @@
           [disabled]="showNiveau"
         >
           <option value=""> Choisir un niveau</option>
-          <option value="1">Débutant</option>
-          <option value="2">Pre-Intermediaire</option>
-          <option value="3">Intermediaire</option>
-          <option value="4">Avancé</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
         </select>
 
         <div class="alert-danger" *ngIf="niveau.errors && f.submitted">
@@ -86,26 +82,26 @@
       </div>
 
       <div class="form-group">
-          <label>Durée (secondes) *</label>
-          <input
-            id="duree"
-            type="number"
-            class="form-control"
-            name="duree"
-            required
-            #duree="ngModel"
-            [(ngModel)]="quiz.duree"
-          />
-          <!-- Validation heure minutes ...
-          <div class="alert-danger" *ngIf="question.errors && f.submitted">
-            <div *ngIf="question.errors.required">La question est obligatoire</div>
-            <div *ngIf="question.errors.minlength">Question doit contenir au moins 3 caracteres </div>
-          </div> -->
+        <label>Durée (secondes) *</label>
+        <input
+          id="duree"
+          type="number"
+          class="form-control"
+          name="duree"
+          required
+          #duree="ngModel"
+          [(ngModel)]="quiz.duree"
+        />
+        <!-- Validation heure minutes ...
+        <div class="alert-danger" *ngIf="question.errors && f.submitted">
+          <div *ngIf="question.errors.required">La question est obligatoire</div>
+          <div *ngIf="question.errors.minlength">Question doit contenir au moins 3 caracteres </div>
+        </div> -->
       </div>
 
 
       <div class="form-group">
-        <label for="seuil">Seuil de validation (%) *</label>
+        <label for="seuil">Seuil de validation (%)</label>
         <input
           id="seuil"
           type="number"
@@ -125,13 +121,12 @@
 
       <hr style="border-width: 5px; background-color: black;">
 
-      <h3> Questions <button type="button" mat-raised-button color="primary" routerLink="/creer-question" >Créer une question</button>
-
+      <h3> Questions
       </h3>
 
 
       <div class="form-group">
-        <label for="question">Question * </label>
+        <label for="question">Ajouter une question * </label>
 
         <mat-select
           id="question"
@@ -169,26 +164,32 @@
         <thead>
         <tr>
           <th scope="col">Liste des questions</th>
-        <!--  <th scope="col">Poids</th> -->
+          <!--  <th scope="col">Poids</th> -->
         </tr>
         </thead>
         <tbody *ngFor="let question of list_questionQuiz"  >
         <tr>
 
           <td> {{question.libelle}} </td>
-       <!--   <td> {{question.poids}}</td>  -->
+          <!--   <td> {{question.poids}}</td>  -->
           <td><button type="button" (click)="deleteQuestion(question)"  mat-fab color="warn"><mat-icon>delete</mat-icon></button></td>
 
         </tr>
         </tbody>
       </table>
 
+
+
+
+
+
+
       <div class="form-group">
-          <button type="submit" class="btn btn-success" [disabled]="!f.valid">Créer</button>
+        <button type="submit" class="btn btn-success" [disabled]="!f.valid">Modifier</button>
       </div>
 
       <div class="alert alert-warning" *ngIf="f.submitted && isFailed">
-          Creation de quiz echouee!<br />{{ errorMessage }}
+        Creation de quiz echouee!<br />{{ errorMessage }}
       </div>
 
       <div class="alert alert-success" *ngIf="isSuccessful">

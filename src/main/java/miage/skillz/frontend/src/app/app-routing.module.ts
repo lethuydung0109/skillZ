@@ -21,6 +21,9 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserQuestionAndQuiZComponent } from './user-question-and-quiz/user-question-and-quiz.component';
 import { recommendationListComponent } from './recommendation-list/recommendation-list.component';
 import { CreateRecommendationComponent } from './create-recommendation/create-recommendation.component';
+import { ModifierCompetenceComponent } from './modifier-competence/modifier-competence.component';
+import {ModifierQuestionComponent} from "./modifier-question/modifier-question.component";
+import {ModifierQuizComponent} from "./modifier-quiz/modifier-quiz.component";
 import { CreateAndShowPosteComponent } from './create-and-show-poste/create-and-show-poste.component';
 
 
@@ -47,6 +50,9 @@ const routes: Routes = [
   { path: 'participant/:idBagde', component: BoardParticipantComponent },
   { path: 'recommendations', component: recommendationListComponent },
   { path: 'createRecommendation', component: CreateRecommendationComponent },
+  { path: 'modifier-competence/:id', component: ModifierCompetenceComponent },
+  { path: 'modifier-question/:idQuestion', component: ModifierQuestionComponent },
+  { path: 'modifier-quiz/:idQuiz', component: ModifierQuizComponent },
   { path: 'lesPostes', component: CreateAndShowPosteComponent },
   { path: 'candidatsForPoste/:posteId', component: UserListComponent },
   { path: 'reponsesRequestion/:idQuestion', component: UserQuestionAndQuiZComponent },

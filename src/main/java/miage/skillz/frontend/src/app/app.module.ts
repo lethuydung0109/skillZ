@@ -46,6 +46,9 @@ import { MatChipsModule } from '@angular/material/chips';
 import { recommendationListComponent } from './recommendation-list/recommendation-list.component';
 import { CreateRecommendationComponent } from './create-recommendation/create-recommendation.component';
 import { DatePipe } from '@angular/common';
+import { ModifierCompetenceComponent } from './modifier-competence/modifier-competence.component';
+import { ModifierQuestionComponent } from './modifier-question/modifier-question.component';
+import { ModifierQuizComponent } from './modifier-quiz/modifier-quiz.component';
 import { CreateAndShowPosteComponent } from './create-and-show-poste/create-and-show-poste.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 // import { ModifierCompetenceComponent } from './modifier-competence/modifier-competence/modifier-competence.component';
@@ -76,8 +79,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
         UserQuestionAndQuiZComponent,
         recommendationListComponent,
         CreateRecommendationComponent,
+        ModifierCompetenceComponent,
+        ModifierQuestionComponent,
+        ModifierQuizComponent,
         CreateAndShowPosteComponent
-        //ModifierCompetenceComponent
     ],
     imports: [
         BrowserModule,

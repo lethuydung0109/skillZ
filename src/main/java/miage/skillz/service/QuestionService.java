@@ -249,8 +249,15 @@ public class QuestionService {
             return this.getAllQuestionResponse(qId).stream().filter(ReponseQuestion::getIsCorrect).collect(Collectors.toSet());
     }
 
+//    public long getQuestionPoids(Long qId) {
+//
+//        return this.questionRepository.findById(qId).orElseThrow().getPoids();
+//    }
+
     public Set<Question> getQuestionByCompetenceNiveau(/*Long idCompetence,*/ Long idNiveau)
     {
         return this.questionRepository.getQuestionByCompetenceNiveau(/*idCompetence,*/ idNiveau);
     }
+
+
 }

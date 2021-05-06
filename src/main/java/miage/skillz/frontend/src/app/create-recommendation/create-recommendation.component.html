@@ -2,8 +2,9 @@
     <div class="submit-form">
       <div *ngIf="!submitted">
           <br>
-        <div class="form-group">
+        <div class="dropdown">
           <label for="receiver">Receiver</label>
+          
           <select name="receiver_selector" 
               id="receiver_selector" 
               class = "form-control"
@@ -15,22 +16,23 @@
         </div>
   
         <div class="form-group">
-          <label for="email">Content</label>
-          <input
-            class="form-control"
+          <label for="email">Contenu</label>
+          <textarea class="form-control"
             id="content"
+            rows="5"
             required
             [(ngModel)]="recommendation.content"
-            name="email"
-          />
+            name="email">
+            </textarea>
         </div>
 
-        <button (click)="saveRecommendation()" class="btn btn-success">Ajouter</button>
+        <button (click)="saveRecommendation()" class="btn btn-primary">Ajouter recommandation</button>
       </div>
   
       <div *ngIf="submitted">
-        <h4>Recommandation a été ajouté avec succès !</h4>
-        <button class="btn btn-success" (click)="newRecommendation()">Ajouter une autre</button>
+        <br>
+        <h6>Recommandation a été ajouté avec succès !</h6>
+        <a href="/recommendations" >Revenir vers la liste de recommandation</a>
       </div>
     </div>
   </div>

@@ -34,7 +34,7 @@ export class ListeCompetenceComponent implements OnInit {
     this.competenceService.getAllCompetence().subscribe(data => {
       data.forEach(p =>
       {
-        this.competenceService.getCompetenceById(p.id_pere).subscribe(comp_pere => {
+        this.competenceService.getCompetenceById(p.idPere).subscribe(comp_pere => {
           p.nom_competence_pere=comp_pere.nom_competence;
         });
         listComptence.push(p);
@@ -43,8 +43,9 @@ export class ListeCompetenceComponent implements OnInit {
     this.list_competence=listComptence;
   }
 
-  updateCompetence(id: number) {
-    this.router.navigate(['update-competence', id]);
+  updateCompetence(competence: Competence) {
+//    this.router.navigate(['modifier-competence',competence]);
+
   }
 
   deleteCompetence(competence: Competence) {

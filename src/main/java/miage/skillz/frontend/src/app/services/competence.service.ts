@@ -3,6 +3,7 @@ import {Competence} from '../models/competence';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import { environment } from 'src/environments/environment';
+import {Question} from "../models/question";
 
 const API_URL = environment.api_url + '/';
 
@@ -26,7 +27,7 @@ export class CompetenceService {
 
     return this.http.post<Competence>( API_URL + 'createCompetence/', {
       nom_competence: competence.nom_competence,
-      id_pere: competence.id_pere,
+      idPere: competence.idPere,
     }, httpOptions);
 
   }
@@ -35,6 +36,15 @@ export class CompetenceService {
     return this.http.get<Competence[]>(API_URL  + 'allCompetence/',httpOptions);
   }
 
+  public modifyCompetence(competence : Competence) : void
+  {
+    console.log(competence);
+  //this.http.put(API_URL + 'updateCompetence/'+ competence,httpOptions).subscribe(response => {
+   // console.log(response);});
+
+  const routeQuery=API_URL+"updateCompetence";
+  this.http.put<Competence>(routeQuery,competence).subscribe(response => {console.log(response);});;
+  }
 
 
   deleteCompetence(id: number) {

@@ -3,7 +3,7 @@
     <div class="row">
         <h1>Les postes </h1>
     </div><br>
-    
+
     <div class="col-md-6" *ngIf="isHiden">
         <button mat-raised-button color="warn" (click)="showCreationDiv()">Créer poste</button>
     </div><br>
@@ -25,56 +25,56 @@
                             <div *ngIf="namePoste.errors.maxlength">nom doit contenir au plus 50 caracteres </div>
                         </div>
                     </div>
-                
+
                     <div class="form-group">
                         <label for="competence">Competence * </label>
                         <mat-select id="competence" class="form-control" name="competence" required #competence="ngModel" [(ngModel)]="poste.competence">
                             <mat-option *ngFor="let competence of competences"  [value]="competence"> {{competence.nom_competence}}</mat-option>
                         </mat-select>
-                
+
                         <div class="alert-danger" *ngIf="competence.errors && f.submitted">
                             <div *ngIf="competence.errors.required">Competence is required</div>
                         </div>
                     </div>
-                
+
                     <div class="form-group">
                         <label for="niveau">Niveau Minimum*</label>
                         <select class="form-control" name="niveau" required #niveau="ngModel" [(ngModel)]="poste.niveauId" >
-                            <option *ngFor="let n of niveaux; let num = index;" value="{{num+1}}">{{n}}</option>                            
+                            <option *ngFor="let n of niveaux; let num = index;" value="{{num+1}}">{{n}}</option>
                         </select>
-                
+
                         <div class="alert-danger" *ngIf="niveau.errors && f.submitted">
                             <div *ngIf="niveau.errors.required">Niveau is required</div>
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="scoreMin">Score Minimal *</label>
                         <input type="number" class="form-control" name="scoreMin" required #scoreMin="ngModel" [(ngModel)]="poste.scoreMin"/>
                         <div class="alert-danger" *ngIf="scoreMin.errors && f.submitted">
-                            <div *ngIf="scoreMin.errors.required">Le score minimale est obligatoire</div>		 
+                            <div *ngIf="scoreMin.errors.required">Le score minimale est obligatoire</div>
                         </div>
                     </div>
-                        
+
                     <div class="form-group">
                         <button type="submit" class="btn btn-success" [disabled]="!f.valid">Créer</button>
                     </div>
-                
+
                     <div class="alert alert-warning" *ngIf="f.submitted && isFailed"> Creation du poste échoué!<br />{{ errorMessage }} </div>
                     <div class="alert alert-success" *ngIf="isSuccessful"> Creation du poste reussie </div>
-                
-                </form>                       
+
+                </form>
             </div>
         </div>
-    </div><br><br>	
+    </div><br><br>
 
     <h2>Liste des postes </h2><br>
 
-    <mat-card>        
+    <mat-card>
         Cliquez sur l'identifiant d'un poste dans le tableau, afin d'accéder à la liste des candidats au poste.
     </mat-card>
 
-    <div class="content-table">         
+    <div class="content-table">
         <mat-form-field>
             <mat-label>Filter</mat-label>
             <input matInput (keyup)="applyFilter($event)" placeholder="Ex. java" #input>
@@ -87,7 +87,7 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> N° </th>
                     <td mat-cell *matCellDef="let row; let num = index;"> <a [routerLink]="['/candidatsForPoste/', row.posteId]"> {{num+1}} </a></td>
                 </ng-container>
-    
+
                 <ng-container matColumnDef="name">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom </th>
                     <td mat-cell *matCellDef="let row"> {{row.name}} </td>
@@ -96,8 +96,8 @@
                 <ng-container matColumnDef="competence">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Competence </th>
                     <td mat-cell *matCellDef="let row"> {{row.competenceName}} </td>
-                </ng-container> 
-    
+                </ng-container>
+
                 <ng-container matColumnDef="niveauName">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Niveau Minimum </th>
                     <td mat-cell *matCellDef="let row"> {{row.niveauName}} </td>
@@ -107,25 +107,25 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Score Minimale </th>
                     <td mat-cell *matCellDef="let row"> {{row.scoreMin}} </td>
                 </ng-container>
-            
+
                 <ng-container matColumnDef="actions">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
-                    <td mat-cell *matCellDef="let row"> 
+                    <td mat-cell *matCellDef="let row">
                         <button  (click)="deletePoste(row.posteId)" mat-icon-button color="warn" matTooltip="Rafraichissez la page après suppression">
                             <mat-icon>delete</mat-icon>
                         </button>
                     </td>
                 </ng-container>
-                                                            
+
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    
+
                 <tr class="mat-row" *matNoDataRow>
                     <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
                 </tr>
             </table>
             <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-        </div>        
-    </div>   
+        </div>
+    </div>
     <br>
 </div>

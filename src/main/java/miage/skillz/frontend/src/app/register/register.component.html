@@ -1,10 +1,10 @@
-<div class="col-md-12">
-  <div class="card card-container">
-    <img
+<div class="col-md-8">
+  <br>
+    <!-- <img
       id="profile-img"
       src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
       class="profile-img-card"
-    />
+    /> -->
     <form
       *ngIf="!isSuccessful"
       name="form"
@@ -13,7 +13,7 @@
       novalidate
     >
       <div class="form-group">
-        <label for="username">Username</label>
+        <label for="username">Pseudo</label>
         <input
           type="text"
           class="form-control"
@@ -25,12 +25,12 @@
           #username="ngModel"
         />
         <div class="alert-danger" *ngIf="username.errors && f.submitted">
-          <div *ngIf="username.errors.required">Username is required</div>
+          <div *ngIf="username.errors.required">Pseudo est obligatoire!</div>
           <div *ngIf="username.errors.minlength">
-            Username must be at least 3 characters
+            Le pseudo doit comporter au moins 3 caractères!
           </div>
           <div *ngIf="username.errors.maxlength">
-            Username must be at most 20 characters
+            Le pseudo doit comporter au maximum 20 caractères!
           </div>
         </div>
       </div>
@@ -46,14 +46,14 @@
           #email="ngModel"
         />
         <div class="alert-danger" *ngIf="email.errors && f.submitted">
-          <div *ngIf="email.errors.required">Email is required</div>
+          <div *ngIf="email.errors.required">Email est obligatoire!</div>
           <div *ngIf="email.errors.email">
-            Email must be a valid email address
+            E-mail doit être une adresse e-mail valide
           </div>
         </div>
       </div>
       <div class="form-group">
-        <label for="password">Password</label>
+        <label for="password">Mot de passe</label>
         <input
           type="password"
           class="form-control"
@@ -64,14 +64,14 @@
           #password="ngModel"
         />
         <div class="alert-danger" *ngIf="password.errors && f.submitted">
-          <div *ngIf="password.errors.required">Password is required</div>
+          <div *ngIf="password.errors.required">Mot de passe est obligatoire!</div>
           <div *ngIf="password.errors.minlength">
-            Password must be at least 6 characters
+            Le mot de passe doit être au moins de 6 caractères
           </div>
         </div>
       </div>
       <div class="form-group">
-        <button class="btn btn-primary btn-block">Sign Up</button>
+        <button class="btn btn-primary">S'inscire</button>
       </div>
 
       <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
@@ -80,7 +80,7 @@
     </form>
 
     <div class="alert alert-success" *ngIf="isSuccessful">
-      Your registration is successful!
+      Bienvenue! Votre inscription est réussie!
     </div>
-  </div>
+
 </div>

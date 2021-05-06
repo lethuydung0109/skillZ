@@ -20,4 +20,5 @@ public interface QuestionRepository extends JpaRepository<Question,Long> {
 
     @Query(value="SELECT q FROM Question q WHERE q.idQuestion in :qstId")
     Set<Question> findByInventoryIdIn( @Param("qstId") Long[] qstId);
+
 }
