@@ -31,7 +31,7 @@ public class QuestionService {
     @Autowired
     private UserRepository userRepository;
 
-    public ResponseEntity<Question> createQuestion(QuestionImpl qImpl,User currentUser)
+    public Question createQuestion(QuestionImpl qImpl,User currentUser)
     {
         System.out.println("Received question : "+ qImpl.toString());
 
@@ -65,7 +65,17 @@ public class QuestionService {
 
         System.out.println("createdQuestion : "+createdQuestion.toString());
 
-        return new ResponseEntity<>(this.questionRepository.saveAndFlush(createdQuestion), HttpStatus.OK);
+        //return new ResponseEntity<>(this.questionRepository.saveAndFlush(createdQuestion), HttpStatus.OK);
+        return this.questionRepository.saveAndFlush(createdQuestion);
+    }
+
+    public Set<Question> createListQuestions(Set<QuestionImpl> listQuestions,User currentUser)
+    {
+        System.out.println("Questions : "+listQuestions.toString());
+        Set<Question> listCreatedQuestions = new HashSet<>();
+        listQuestions.forEach(qImpl -> listCreatedQuestions.add( this.createQuestion(qImpl,currentUser)));
+
+        return listCreatedQuestions;
     }
 
     public ResponseEntity<Question> updateQuestion(QuestionImpl qImpl,User currentUser)
@@ -243,11 +253,6 @@ public class QuestionService {
 //
 //        return this.questionRepository.findById(qId).orElseThrow().getPoids();
 //    }
-
-    public Set<ReponseQuestion> getQuestionReponses(long qId)
-    {
-        return this.questionRepository.findById(qId).orElseThrow().getReponsesQuestions();
-    }
 
     public Set<Question> getQuestionByCompetenceNiveau(/*Long idCompetence,*/ Long idNiveau)
     {

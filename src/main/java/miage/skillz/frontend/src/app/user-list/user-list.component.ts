@@ -5,6 +5,8 @@ import { User } from '../models/user.model';
 import { UserService } from '../services/user.service';
 import { PosteService } from '../services/poste.service';
 import { ActivatedRoute } from '@angular/router';
+import { BadgeService } from '../services/badge.service';
+import Utils from '../utils';
 
 @Component({
   selector: 'app-user-list',
@@ -23,7 +25,8 @@ export class UserListComponent implements OnInit {
   candidatesUser : User []=[];
   listUser : User[]=[];
 
-  constructor(private userService: UserService,private actRoute: ActivatedRoute, private posteService : PosteService) {
+  constructor(private userService: UserService,private actRoute: ActivatedRoute, private posteService : PosteService,
+                     private badgeService : BadgeService) {
     this.posteId=this.actRoute.snapshot.params.posteId;
   }
 
@@ -53,11 +56,23 @@ export class UserListComponent implements OnInit {
   candidatesForThePoste()
   {    
     this.posteService.getCandidates(this.posteId).subscribe(data => {
-      this.users=[];
-      this.users=data;
-      //this.candidatesUser=data;
-      console.log("candidates : ",data);
+      this.users=data;    
+      this.users?.forEach(user => {
+        console.log("user ", user)
+        this.badgeService.getAllBadgeByUserId(user.id).subscribe(data => {
+          console.log("data ", data)
+          data.forEach(b => {   
+            console.log("b",b) 
+            user.scoreForQuiz=b.quizScore;
+            user.niveauForQuiz=Utils.toStringNiveau(b.niveau.niveauId);
+          });
+        })
+      })  
     })
+
+    
+    
+    //console.log("users : ",this.users);
   }
 
   changeIsCandidateView()

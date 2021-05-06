@@ -1,5 +1,8 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { PublicContent } from '../models/public-content';
 import { CompetenceService } from '../services/competence.service';
+import { PublicContentService } from '../services/public-content.service';
 import { UserService } from '../services/user.service';
 
 
@@ -18,8 +21,15 @@ export class BoardAdminComponent implements OnInit {
   editContent?: string;
   submitted = false;
 
+  publicContent: PublicContent ={
+    id: 0,
+    content: '',
+    date:''
+  }
 
-  constructor(private userService: UserService, private competenceService: CompetenceService) { }
+
+  constructor(private userService: UserService, private competenceService: CompetenceService,
+    private publicContentService: PublicContentService, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
     this.userService.getStatsUser().subscribe(
@@ -46,9 +56,31 @@ export class BoardAdminComponent implements OnInit {
         this.content = JSON.parse(err.error).message;
       }
     );
-  //   savePublicContent(): void{
-  //     this.content = this.editContent;
-  //     this.submitted = true;
-  // }
+
+    this.publicContentService.getLatestPublicContent().subscribe(
+      data => {
+        this.content = data;
+        console.log(this.content);
+      },
+      err => {
+        this.content = JSON.parse(err.error).message;
+      }
+    );
+}
+savePublicContent(): void {
+    
+  this.publicContent.date = this.datePipe.transform(new Date(), 'yyyy-MM-dd')!
+  this.publicContent.content = this.editContent;
+  this.publicContentService.savePublicContent(this.publicContent)
+    .subscribe( 
+      response => {
+      console.log(response);
+      this.submitted = true;
+    },
+    error => {
+      console.log(error);
+    });
+
+  this.content = this.editContent;
 }
 }

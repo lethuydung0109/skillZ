@@ -1,28 +1,51 @@
-
 <div class="container">
-    <h2>Table de Statistiques</h2>
-    
-    <table>
-      <tr>
-        <td>Nombre d'users</td>
-        <td>{{nbusers}}</td>
-      </tr>
-      <tr>
-        <td>Nombre d'participants</td>
-        <td>{{nbParticipants}}</td>
-      </tr>
-      <tr>
-        <td>Nombre d'concepteurs</td>
-        <td>{{nbConcepteurs}}</td>
-      </tr>
-      <tr>
-        <td>Nombre d'competences</td>
-        <td>{{nbCompetences}}</td>
-      
-      </tr>
-      <a href="/liste-competence">Liste de compétences</a>
-    </table>
+  <br>
+  <h3>Table de Statistiques</h3>
 
-    
-   
+  <table>
+    <tr>
+      <td>Nombre d'users</td>
+      <td>{{nbusers}}</td>
+    </tr>
+    <tr>
+      <td>Nombre d'participants</td>
+      <td>{{nbParticipants}}</td>
+    </tr>
+    <tr>
+      <td>Nombre d'concepteurs</td>
+      <td>{{nbConcepteurs}}</td>
+    </tr>
+    <tr>
+      <td>Nombre d'competences</td>
+      <td>{{nbCompetences}}</td>
+
+    </tr>
+    <a href="/liste-competence">Liste de compétences</a>
+  </table>
+
+  <hr>
+  <h3> Contenu de la page public </h3>
+
+  <p>{{content}}</p>
+  <hr>
+  <div class="submit-form">
+    <div>
+      <div class="form-group">
+        <label for="title">Création/Modification du contenu public</label>
+        <textarea type="text" rows="5" class="form-control" placeholder="Saisir le contenu ici!" id="title" required
+          [(ngModel)]="editContent" name="title">
+          </textarea>
+      </div>
+
+      <button (click)="savePublicContent()" class="btn btn-primary">Créer le nouveau contenu</button>
+    </div>
+
+    <div *ngIf="submitted">
+      <br>
+      <h5>Contenu modifié!</h5>
+    </div>
+  </div>
+
+
+
 </div>

@@ -3,27 +3,28 @@
 
     <p>{{content}}</p>
 
-    <div class="submit-form">
+    <!-- <div class="submit-form">
       <div *ngIf="isAdmin">
         <div class="form-group">
-          <label for="title">Content</label>
-          <input
+          <label for="title">Contenu</label>
+          <textarea
             type="text"
+            rows="5"
             class="form-control"
             id="title"
             required
             [(ngModel)]="editContent"
-            name="title"
-          />
+            name="title">
+          </textarea>
         </div>
   
-        <button (click)="savePublicContent()" class="btn btn-success">Submit</button>
+        <button (click)="savePublicContent()" class="btn btn-primary">Créer le nouveau contenu</button>
       </div>
   
       <div *ngIf="submitted">
-        <h4>Content edited!</h4>
-        <!-- <button class="btn btn-success" (click)="newTutorial()">Add</button> -->
+        <br>
+        <h5>Contenu modifié!</h5>
       </div>
-    </div>
+    </div> -->
   </header>
 </div>

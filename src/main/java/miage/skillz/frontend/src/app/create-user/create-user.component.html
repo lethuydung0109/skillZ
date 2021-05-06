@@ -2,7 +2,7 @@
     <div class="submit-form">
       <div *ngIf="!submitted">
         <div class="form-group">
-          <label for="username">Username</label>
+          <label for="username">Pseudo</label>
           <input
             type="text"
             class="form-control"
@@ -49,7 +49,7 @@
             />
           </div>
 
-        <button (click)="saveUser()" class="btn btn-success">Ajouter</button>
+        <button (click)="saveUser()" class="btn btn-primary">Ajouter utilisateur</button>
       </div>
 
       <div *ngIf="submitted">

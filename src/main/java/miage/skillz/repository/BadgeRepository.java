@@ -15,4 +15,5 @@ public interface BadgeRepository extends JpaRepository<Badge, Long> {
     List<Badge> findByCompetenceAndNiveau(Competence competence, Niveau niveau);
     List<Badge> findByQuizScoreGreaterThanEqual(Long scoreMin);
     List<Badge> findByCompetenceAndNiveauAndQuizScoreGreaterThanEqual(Competence competence, Niveau niveau,Long scoreMin);
+    List<Badge> findByCompetenceAndQuizScoreGreaterThanEqual(Competence competence, Long scoreMin);
 }

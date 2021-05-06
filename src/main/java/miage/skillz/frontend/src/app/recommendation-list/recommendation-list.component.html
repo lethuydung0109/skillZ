@@ -1,43 +1,13 @@
-<div class="list row">
+<div class="container-fluid">
     <div class="col-md-8">
       <div><br></div>
-      <!-- <div class="input-group mb-3">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Rechecher par username"
-          [(ngModel)]="username"
-        />
-        <div class="input-group-append">
-          <button
-            class="btn btn-outline-secondary"
-            type="button"
-            (click)="searchUsername()"
-          >
-            Rechercher
-          </button>
-        </div>
-      </div> -->
       <div class="input-group-append">
-        <button routerLink="/createRecommendation" class="btnStatsAdd">  Ajouter une recommendation pour l'autre participant</button>
+        <button class="btn btn-primary" routerLink="/createRecommendation">  Ajouter une recommendation pour d'autre participant</button>
       </div>
       <div><br></div>
     </div>
-
-
-    <div class="col-md-6">
+    <div class="col-md-12">
       <h4>Liste des recommandations</h4>
-      <!-- <ul class="list-group">
-        <li
-          class="list-group-item"
-          *ngFor="let user of users; let i = index"
-          [class.active]="i == currentIndex"
-          (click)="setActiveUser(user, i)"
-        >
-
-        </li>
-      </ul> -->
-
      <table class="table table-hover">
        <thead>
        <tr>
@@ -47,6 +17,7 @@
          
        </tr>
        </thead>
+       
         <tbody *ngFor="let recommendation of recommendations; let i = index"
         [class.active]="i == currentIndex"
         (click)="setActiveRecommendation(recommendation, i)">
