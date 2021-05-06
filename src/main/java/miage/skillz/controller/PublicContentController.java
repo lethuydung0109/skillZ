@@ -46,7 +46,6 @@ public class PublicContentController{
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
         PublicContent newPublicContent = new PublicContent(newContent, newDate);
-        log.info();
         service.savePublicContent(newPublicContent);
         log.info(newDate);
         return ResponseEntity.ok(new MessageResponse("Content updated successfully!"));
