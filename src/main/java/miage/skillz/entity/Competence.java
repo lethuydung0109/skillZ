@@ -49,13 +49,6 @@ public class Competence {
         @OneToMany( cascade = CascadeType.ALL, mappedBy = "competence")
         Set<Poste> listPostes = new HashSet<>();
 
-//        @Builder.Default
-//        @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
-//        @JoinTable( name = "postes_competences",
-//                joinColumns = @JoinColumn(name = "idPoste"),
-//                inverseJoinColumns = @JoinColumn(name = "idCompetence"))
-//        private Set<Poste> listPostes = new HashSet<>();
-
     // Constructeurs
     public Competence(long id) {
         this.id = id;

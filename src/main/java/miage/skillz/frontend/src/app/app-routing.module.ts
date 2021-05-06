@@ -55,6 +55,7 @@ const routes: Routes = [
   { path: 'modifier-quiz/:idQuiz', component: ModifierQuizComponent },
   { path: 'lesPostes', component: CreateAndShowPosteComponent },
   { path: 'candidatsForPoste/:posteId', component: UserListComponent },
+  { path: 'reponsesRequestion/:idQuestion', component: UserQuestionAndQuiZComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

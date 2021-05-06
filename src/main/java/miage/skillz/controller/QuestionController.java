@@ -27,12 +27,20 @@ public class QuestionController {
     private UserController userController;
 
     @PostMapping(value = "/createQuestion",consumes = "application/json",produces = "application/json")
-    public ResponseEntity<Question> createQuestion(@RequestBody QuestionImpl questionImpl)
+    public Question createQuestion(@RequestBody QuestionImpl questionImpl)
     {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         User currentUser = this.userController.findById(userDetails.getId());
         return  questionService.createQuestion(questionImpl,currentUser);
+    }
+
+    @PostMapping(value = "/createManyQuestion",consumes = "application/json",produces = "application/json")
+    public Set<Question> createListQuestions(@RequestBody Set<QuestionImpl> listQuestions) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        User currentUser = this.userController.findById(userDetails.getId());
+        return  questionService.createListQuestions(listQuestions,currentUser);
     }
 
     @PutMapping(value = "/updateQuestion", consumes = "application/json",produces = "application/json")
@@ -60,8 +68,7 @@ public class QuestionController {
     public  int getNbQuestions()
     {
         List<Question> questions = questionService.getAllQuestions();
-        int nbQuestions = questions.size();
-        return  nbQuestions;
+        return questions.size();
     }
 
     @GetMapping(value = "/lesQuestionById/{qstId}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -98,19 +105,13 @@ public class QuestionController {
         return questionService.getAllCorrectQuestionResponse(qId);
     }
 
-    @GetMapping(value = "/getQuestionReponses/{qId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Set<ReponseQuestion> getQuestionReponses(@PathVariable Long qId)
+    @GetMapping(value = "/questionReponses/{qId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Set<ReponseQuestion> getAllQuestionResponse(@PathVariable Long qId)
     {
-        return questionService.getQuestionReponses(qId);
+        return questionService.getAllQuestionResponse(qId);
     }
 
-    /*
-    @GetMapping(value = "/getQuestionPoids/{qId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public long getQuestionPoids(@PathVariable Long qId)
-    {
-        return questionService.getQuestionPoids(qId);
-    }
-    */
+
     @GetMapping(value = "/getQuestionCompetenceNiveau/{idNiveau}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Set<Question> getQuestionByCompetenceNiveau(@PathVariable Long idNiveau)
     {

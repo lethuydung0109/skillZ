@@ -1,12 +1,9 @@
 <div class="container-fluid">
     <br>
-    <div class="row">
-        <h1>Les postes et Candidats </h1>
-    </div><br>
-
+    <h2>Liste des postes </h2><br>
     <div class="col-md-6" *ngIf="isHiden">
-        <button mat-raised-button color="warn" (click)="showCreationDiv()">Creer poste</button>
-    </div><br>
+        <button mat-raised-button color="warn" (click)="showCreationDiv()">Créer poste</button>
+    </div>
 
     <div class="row" *ngIf="!isHiden">
         <div class="card " style="text-align:left;">
@@ -38,7 +35,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="niveau">Niveau *</label>
+                        <label for="niveau">Niveau Minimum*</label>
                         <select class="form-control" name="niveau" required #niveau="ngModel" [(ngModel)]="poste.niveauId" >
                             <option *ngFor="let n of niveaux; let num = index;" value="{{num+1}}">{{n}}</option>
                         </select>
@@ -68,7 +65,9 @@
         </div>
     </div><br><br>
 
-    <h2>Liste des postes </h2><br>
+    <mat-card>
+        Cliquez sur l'identifiant d'un poste dans le tableau, afin d'accéder à la liste des candidats au poste.
+    </mat-card>
 
     <div class="content-table">
         <mat-form-field>
@@ -95,7 +94,7 @@
                 </ng-container>
 
                 <ng-container matColumnDef="niveauName">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Niveau </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Niveau Minimum </th>
                     <td mat-cell *matCellDef="let row"> {{row.niveauName}} </td>
                 </ng-container>
 

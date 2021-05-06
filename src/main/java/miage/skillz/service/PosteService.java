@@ -61,10 +61,22 @@ public class PosteService {
                                         poste.getNiveau(),
                                         poste.getScoreMin());
 
+        List<Badge> badgesCScore=this.badgeRepository
+                                .findByCompetenceAndQuizScoreGreaterThanEqual(
+                                        poste.getCompetence(),
+                                        poste.getScoreMin());
+
+        badgesCScore.forEach(badge -> {
+            if(badge.getNiveau().getNiveauId()< poste.getNiveau().getNiveauId())
+            {
+                badgesCScore.remove(badge);
+            }
+        });
+
         //System.out.println("badges"+badges.toString());
 
         Set<User> candidates = new HashSet<>();
-        badges.forEach(badge -> {
+        badgesCScore.forEach(badge -> {
             candidates.add(badge.getUser());
         });
         //System.out.println("candidates : "+candidates.toString());

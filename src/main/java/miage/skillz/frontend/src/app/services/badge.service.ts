@@ -20,9 +20,15 @@ export class BadgeService {
     return this.http.post<Badge>(routeQuery,badge);
   }
 
-  public getAllBadgeByUser() : Observable<Array<Badge>>
+  public getCurrentUserBadges() : Observable<Array<Badge>>
   {
-    const routeQuery=this.url+"/allBadgesByUser";
+    const routeQuery=this.url+"/allCurrentUserBadges";
+    return this.http.get<Array<Badge>>(routeQuery);
+  }
+
+  public getAllBadgeByUserId(userId : number) : Observable<Array<Badge>>
+  {
+    const routeQuery=this.url+"/userBadges/"+userId;
     return this.http.get<Array<Badge>>(routeQuery);
   }
 }

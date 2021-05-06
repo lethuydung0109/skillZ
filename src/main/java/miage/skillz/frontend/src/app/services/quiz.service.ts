@@ -58,7 +58,7 @@ export class QuizService {
 
   public getNumberOfQuiz() : Observable<any>
   {
-    const routeQuery=this.url+"//numberOfQuiz";
+    const routeQuery=this.url+"/numberOfQuiz";
     return this.http.get<any>(routeQuery);
   }
 

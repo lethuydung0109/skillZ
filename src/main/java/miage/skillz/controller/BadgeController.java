@@ -23,7 +23,6 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Set;
 
-
 @RestController
 @CrossOrigin
 @RequestMapping(value = "/api")
@@ -40,12 +39,17 @@ public class BadgeController {
     @GetMapping(value = "/allBadges", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Badge> getAllBadges() { return service.getAllBadges(); }
 
-    @GetMapping(value = "/allBadgesByUser", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Set<Badge> getAllBadgesByUser() {
+    @GetMapping(value = "/allCurrentUserBadges", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Set<Badge> getCurrentUserBadges() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         User currentUser = this.userController.findById(userDetails.getId());
-        return service.getAllBadgesByUser(currentUser.getId());
+        return service.getCurrentUserBadges(currentUser.getId());
+    }
+
+    @GetMapping(value = "/userBadges/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Set<Badge> getAllBadgeByUserId(@PathVariable Long userId) {
+        return service.getCurrentUserBadges(userId);
     }
 
     //Create Badge
