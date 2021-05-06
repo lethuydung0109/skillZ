@@ -23,6 +23,10 @@ export class UserService {
     return this.http.get<User[]>(API_URL);
   }
 
+  getParticipants(): Observable<User[]> {
+    return this.http.get<User[]>(API_URL +'/participant');
+  }
+
   get(id: any): Observable<User> {
     return this.http.get(`${API_URL}/${id}`);
   }

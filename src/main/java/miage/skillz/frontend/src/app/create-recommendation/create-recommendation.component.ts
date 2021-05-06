@@ -33,7 +33,7 @@ export class CreateRecommendationComponent implements OnInit {
     private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
-    this.userService.getAll().subscribe(data => {
+    this.userService.getParticipants().subscribe(data => {
       console.log(data); 
       this.users = data;
   }, error => {

@@ -60,11 +60,11 @@ export class HomeComponent implements OnInit {
   }
 
   savePublicContent(): void {
-    this.publicContent.content = this.editContent;
+    
     this.publicContent.date = this.datePipe.transform(new Date(), 'yyyy-MM-dd')!
 
     this.publicContentService.savePublicContent(this.publicContent)
-      .subscribe(
+      .subscribe( 
         response => {
         console.log(response);
         this.submitted = true;
@@ -72,17 +72,7 @@ export class HomeComponent implements OnInit {
       error => {
         console.log(error);
       });
-    
-      this.publicContentService.getLatesPublicContent().subscribe(
-        data => {
-          this.content = data;
-          this.submitted = true;
-        },
-        err => {
-          this.content = JSON.parse(err.error).message;
-        }
-      );
-      
 
+    this.content = this.editContent;
   }
 }

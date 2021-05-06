@@ -41,11 +41,12 @@ public class PublicContentController{
     public ResponseEntity<?>  updatePublicContent(@RequestBody PublicContent content)
     {
         String newContent = content.getContent();
-        String newDate = content.getDateModifier();
+        String newDate = content.getDate();
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
         PublicContent newPublicContent = new PublicContent(newContent, newDate);
         service.savePublicContent(newPublicContent);
+        log.info(newDate);
         return ResponseEntity.ok(new MessageResponse("Content updated successfully!"));
     }
 }

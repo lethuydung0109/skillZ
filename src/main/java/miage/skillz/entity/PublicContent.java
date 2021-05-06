@@ -20,14 +20,14 @@ public class PublicContent {
 
     private String content;
 
-    private String dateModifier;
+    private String date;
 
 
     public PublicContent() {
     }
 
-    public PublicContent(String content, String dateModifier) {
+    public PublicContent(String content, String date) {
         this.content = content;
-        this.dateModifier = dateModifier;
+        this.date = date;
     }
 }
