@@ -35,7 +35,11 @@ export class ListeCompetenceComponent implements OnInit {
       data.forEach(p =>
       {
         this.competenceService.getCompetenceById(p.idPere).subscribe(comp_pere => {
-          p.nom_competence_pere=comp_pere.nom_competence;
+          if(comp_pere != null)
+          {
+            p.nom_competence_pere=comp_pere.nom_competence;
+          }
+
         });
         listComptence.push(p);
       })
@@ -45,7 +49,6 @@ export class ListeCompetenceComponent implements OnInit {
 
   updateCompetence(competence: Competence) {
 //    this.router.navigate(['modifier-competence',competence]);
-
   }
 
   deleteCompetence(competence: Competence) {
@@ -57,7 +60,5 @@ export class ListeCompetenceComponent implements OnInit {
     );
     this.list_competence.splice(this.list_competence.indexOf(competence),1);
   }
-
-
 
 }

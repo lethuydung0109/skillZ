@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <br><br>
     <div class="row">
-      <h1>Questionnaires</h1>
+      <h1>Liste des questionnaires</h1>
     </div> <br>
     <mat-card *ngIf="isParticipant">
         Utilisez la barre de recherche pour chercher des questionnaires à faire selon un thème ou une/des compétence(s).
@@ -9,7 +9,7 @@
         Bonne chance !
     </mat-card>
     <br><br>
-   
+
     <div class="content-table">
         <mat-form-field>
             <mat-label>Filter</mat-label>
@@ -30,12 +30,12 @@
                 </ng-container>
 
                 <ng-container matColumnDef="theme">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Theme </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Thème </th>
                     <td mat-cell *matCellDef="let row"> {{row.theme}}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Libelle </th>
                     <td mat-cell *matCellDef="let row"> {{row.name}} </td>
                 </ng-container>
 
@@ -45,12 +45,12 @@
                 </ng-container>
 
                 <ng-container matColumnDef="competence">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Competence </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Compétence </th>
                     <td mat-cell *matCellDef="let row"> {{row.quizCompetence.nom_competence}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="duree">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Duree </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Durée </th>
                     <td mat-cell *matCellDef="let row"> {{row.duree}} </td>
                 </ng-container>
 

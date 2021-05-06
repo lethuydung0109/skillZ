@@ -2,7 +2,7 @@
     <br>
     <div class="row">
         <h1>Mes questions </h1>
-    </div><br>
+    </div>
 
     <div class="col-md-6">
         <button mat-raised-button color="warn" routerLink="/creer-question">Créer question</button>
@@ -61,7 +61,7 @@
                 <tr mat-row *matRowDef="let row; columns: displayedQuestionColumns;"></tr>
 
                 <tr class="mat-row" *matNoDataRow>
-                    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                    <td class="mat-cell" colspan="4">Aucune donnée correspondant au filtre "{{input.value}}"</td>
                 </tr>
             </table>
             <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
@@ -133,7 +133,7 @@
                 <tr mat-row *matRowDef="let row; columns: displayedQuizColumns;"></tr>
 
                 <tr class="mat-row" *matNoDataRow>
-                    <td class="mat-cell" colspan="4">No data matching the filter "{{inputQ.value}}"</td>
+                    <td class="mat-cell" colspan="4">Aucune donnée correspondant au filtre "{{inputQ.value}}"</td>
                 </tr>
             </table>
             <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
