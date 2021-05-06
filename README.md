@@ -41,22 +41,32 @@ En outre, elle permet d'un coté aux évaluateurs de créer des questionnaires, 
 
 ## Installation 
 
+### En local : 
+  - Pour lancer le Banckend utilisez la commande : ./gradlew bootRun
+  - Pour lancer le Frontend utilisez la commande : ng serve
+  - Pour accéder à l'interface utilisateur, lancez le lien : localhost:4200/
+  - Api avec swagger-ui :  http://localhost:8081/swagger-ui/
+
+### En remote :  
+
+Remarque : il faut créer un schéma de base de données sous MySql avec le nom suivant : skillzdb
+
 ## Technologies
 
 Ce projet utilise : 
 
-Java 
-Spring
-Angular 
-TypeScript
-HTML CSS
-Gradle
+SGBD : MySql
+
+Backend : Java , Spring
+
+Frontend : Angular, TypeScript, HTML, CSS
+
+Moteur de production : Gradle
 
 
 ## Utilisation 
 
-Une fois que vous avez tout installé, vous pouvez vous connecter avec votre identifiant et mot de passe à l'adresse : 
-.../.../.../...
+Une fois que vous avez tout installé, vous pouvez vous connecter avec votre identifiant et mot de passe à l'adresse : 34.78.77.112:4200/login
 
 ### Vous etes un administrateur 
 
@@ -68,9 +78,11 @@ Une fois que vous avez tout installé, vous pouvez vous connecter avec votre ide
 
 - Créer une question et des réponses associées.
 - Créer un questionnaire avec une liste de questions, une durée, un seuil de validation. 
+- Chercher une liste de candidats pour un poste donnée.
 
 ### Vous etes un participant
 
 - Passer un questionnaire et obtenir un badge de niveau associé si réussi.
+- Recommender un participant.
 
 
