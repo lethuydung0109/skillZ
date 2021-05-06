@@ -24,7 +24,7 @@ export class ListeCompetenceComponent implements OnInit {
     this.roles = user.roles;
     console.log(this.roles[0]);
     this.isAdmin = this.roles.includes('ROLE_ADMIN');
-    
+
     this.loadData();
   }
 
