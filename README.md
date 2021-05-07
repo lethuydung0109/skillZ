@@ -43,7 +43,7 @@ En outre, elle permet d'un coté aux évaluateurs de créer des questionnaires, 
 
 ### En remote : 
 
-  - Connectez vous à l'adresse : 34.78.77.112:4200/home
+  - Connectez vous à l'adresse : http:://34.78.77.112:4200/home
 
 Remarque : il faut créer un schéma de base de données sous MySql avec le nom suivant : skillzdb
 
