@@ -31,4 +31,10 @@ export class BadgeService {
     const routeQuery=this.url+"/userBadges/"+userId;
     return this.http.get<Array<Badge>>(routeQuery);
   }
+
+  public getNumberOfBadgeByUserId(userId : number) : Observable<any>
+  {
+    const routeQuery=this.url+"/userBadgesStat/"+userId;
+    return this.http.get<any>(routeQuery);
+  }
 }

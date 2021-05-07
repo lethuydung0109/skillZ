@@ -18,7 +18,7 @@ export class BoardParticipantComponent implements OnInit {
   badgeCompetenceId : number;
 
   constructor(private actRoute: ActivatedRoute,private userService: UserTestService,private badgeService : BadgeService,
-                 private competenceService : CompetenceService) {
+                 private competenceService: CompetenceService) {
 
     this.badgeCompetenceId = this.actRoute.snapshot.params.idBagde;
   }
@@ -47,6 +47,20 @@ export class BoardParticipantComponent implements OnInit {
         console.log("userResults ", this.userBadges);
       })
     });
+
+    // this.badgeService.getNumberOfBadgeByUserId().subscribe(data => {
+    //   data.forEach(b => {
+    //     if(this.badgeCompetenceId != undefined){
+    //       b.competenceName=b.competence?.nom_competence;
+    //     }
+    //     else{
+    //       b.competenceName=b.competence?.nom_competence;
+    //     }
+    //     b.niveauName=Utils.toStringNiveau(b.niveau.niveauId)
+    //     this.userBadges.push(b);
+    //     console.log("userResults ", this.userBadges);
+    //   })
+    // });
   }
 
 }

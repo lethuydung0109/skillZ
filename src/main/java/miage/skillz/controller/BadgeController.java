@@ -52,6 +52,13 @@ public class BadgeController {
         return service.getCurrentUserBadges(userId);
     }
 
+    @GetMapping(value = "/userBadgesStat/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public int getNumberOfBadgeByUserId(@PathVariable Long userId) {
+        Set<Badge> badges = service.getCurrentUserBadges(userId);
+        int nbBadges = badges.size();
+        return nbBadges;
+    }
+
     //Create Badge
     @PostMapping(value = "/badge")
     public ResponseEntity<?> createBadge(@RequestBody BadgeRequest badgeRequest) {
