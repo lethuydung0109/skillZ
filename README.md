@@ -23,7 +23,7 @@ Université Paris Nanterre
 
 SkillZ est une application de validation et suivi des compétences, elle permet d'évaluer de façon concrète le niveau de maitrise d'une compétence donnée.
 
-En outre, elle permet d'un coté aux évaluateurs de créer des questionnaires, et de l'autre, aux des candidats de passer ces questionnaires et recevoir des badges de compétences. 
+En outre, elle permet d'un coté aux évaluateurs de créer des questionnaires, et de l'autre, aux candidats de passer ces questionnaires et recevoir des badges de compétences. 
 
 ## Table des matières
 * [Installation](#Installation)
