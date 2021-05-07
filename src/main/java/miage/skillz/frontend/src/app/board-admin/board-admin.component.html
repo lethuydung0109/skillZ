@@ -4,15 +4,15 @@
 
   <table>
     <tr>
-      <td>Nombre d'users</td>
+      <td>Nombre d'utilisateurs</td>
       <td>{{nbusers}}</td>
     </tr>
     <tr>
-      <td>Nombre d'participants</td>
+      <td>Nombre de participants</td>
       <td>{{nbParticipants}}</td>
     </tr>
     <tr>
-      <td>Nombre d'concepteurs</td>
+      <td>Nombre de concepteurs</td>
       <td>{{nbConcepteurs}}</td>
     </tr>
     <tr>
@@ -31,13 +31,13 @@
   <div class="submit-form">
     <div>
       <div class="form-group">
-        <label for="title">Création/Modification du contenu public</label>
+        <label for="title">Créer du contenu public</label>
         <textarea type="text" rows="5" class="form-control" placeholder="Saisir le contenu ici!" id="title" required
           [(ngModel)]="editContent" name="title">
           </textarea>
       </div>
 
-      <button (click)="savePublicContent()" class="btn btn-primary">Créer le nouveau contenu</button>
+      <button (click)="savePublicContent()" class="btn btn-primary">Créer</button>
     </div>
 
     <div *ngIf="submitted">
