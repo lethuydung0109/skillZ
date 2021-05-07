@@ -27,6 +27,7 @@ En outre, elle permet d'un coté aux évaluateurs de créer des questionnaires, 
 
 ## Table des matières
 * [Installation](#Installation)
+* [Déploiement](#Installation)
 * [Technologies](#Technologies)
 * [Utilisation](#Utilisation)
 
@@ -44,7 +45,92 @@ En outre, elle permet d'un coté aux évaluateurs de créer des questionnaires, 
 
   - Connectez vous à l'adresse : http:://34.78.77.112:4200/home
 
-Remarque : il faut créer un schéma de base de données sous MySql avec le nom suivant : skillZ
+Remarque : il faut créer un schéma de base de données sous MySql avec le nom suivant : skillzdb
+
+## Déploiement : 
+Google Cloud VM : [Google Cloud VM](#google-cloud-vm)
+
+### Install Docker 
+
+### Install Java 
+
+### Install Gradle 
+```
+wget https://downloads.gradle-dn.com/distributions/gradle-7.0-bin.zip
+```
+```
+sudo unzip -d /opt/gradle gradle-7.0-bin.zip
+```
+
+https://linuxize.com/post/how-to-install-gradle-on-ubuntu-18-04/
+
+### Run Gradle
+
+- Modifier la connexion à la base de données dans `src/main/resources/application.properties`
+
+==\> `jdbc:mysql://34.78.77.112:3306/skillZ?useSSL=false`
+
+- Build gradle
+    `./gradlew clean build`
+    
+- Run program
+    `./gradlew bootRun`
+    or
+    `java -jar build/libs/*.jar`
+
+### Dockerization 
+#### MySQL
+
+`sudo docker pull mysql`
+
+```
+sudo docker run --name dbmysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=skillZ -p 3306:3306 --network="bridge" -d mysql 
+```
+
+- Config Firewall rules for ingress/egress connections with port TCP 3306
+
+#### Dockerfile
+##### 1. Backend
+
+```
+FROM openjdk:11-oracle
+ARG JAR_FILE=build/libs/*.jar
+COPY ${JAR_FILE} *.jar
+ENTRYPOINT ["java","-jar","/*.jar"]
+```
+
+##### 2. Front end
+
+```
+FROM nginx:1.19.10-alpine
+COPY default.conf /etc/nginx/conf.d/
+COPY dist/korector /usr/share/nginx/html
+COPY Staticfile /usr/share/nginx/html/korector
+```
+
+#### Buidl project - Créer un image Docker et lancer le container
+##### 1. Backend
+- Lancer le script build_app.sh.
+
+```
+./build_app.sh
+```
+
+##### 2. Frontend
+- En raison de la limitation de la VM GCP, nous devons créer une production locale, puis créer une image Docker et la pousser vers Docker Hub
+
+```
+./build_frontend.sh
+```
+
+- Run
+
+```
+sudo docker pull lethuydung0109/skillz-front
+sudo docker container stop -f skillz-front
+sudo docker container rm -f skillz-front
+sudo docker run --name skillz-front -d -p 4200:80 lethuydung0109/skillz-front
+```
 
 ## Technologies
 
@@ -58,6 +144,10 @@ Frontend : Angular, TypeScript, HTML, CSS
 
 Moteur de production : Gradle
 
+Déployer :
+  - Docker : Tous les composants, y compris le back-end, le front-end, base de données, pgAdmin, … sont contenus dans un container Docker 
+  - Nginx : Nginx est utilisé comme un serveur web pour héberger l’application Angular dans un container Docker
+  - mySQL Server : Pour le stockage de la base de données de mySQL
 
 ## Utilisation 
 
@@ -68,7 +158,9 @@ Une fois que vous avez tout installé, vous pouvez vous connecter avec votre ide
   - Créer/modifier/supprimer des utilisateurs.
   - Créer/modifier/supprimer des compétences.
 
-
+Connexion au compte admin :
+  - Pseudo : admin
+  - Mot de passe : adminskillz
 ### Vous êtes un évaluateur  
 
 - Créer une question et des réponses associées.
