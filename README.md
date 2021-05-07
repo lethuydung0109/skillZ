@@ -34,6 +34,7 @@ En outre, elle permet d'un coté aux évaluateurs de créer des questionnaires, 
 ## Installation 
 
 ### En local : 
+  - Clonez le projet avec la commande : git clone https://github.com/lethuydung0109/skillZ
   - Pour lancer le Banckend utilisez la commande : ./gradlew bootRun
   - Pour lancer le Frontend utilisez la commande : ng serve
   - Pour accéder à l'interface utilisateur, lancez le lien : localhost:4200/
@@ -43,7 +44,7 @@ En outre, elle permet d'un coté aux évaluateurs de créer des questionnaires, 
 
   - Connectez vous à l'adresse : http:://34.78.77.112:4200/home
 
-Remarque : il faut créer un schéma de base de données sous MySql avec le nom suivant : skillzdb
+Remarque : il faut créer un schéma de base de données sous MySql avec le nom suivant : skillZ
 
 ## Technologies
 
