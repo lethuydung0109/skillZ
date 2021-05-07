@@ -51,8 +51,6 @@ import { ModifierQuestionComponent } from './modifier-question/modifier-question
 import { ModifierQuizComponent } from './modifier-quiz/modifier-quiz.component';
 import { CreateAndShowPosteComponent } from './create-and-show-poste/create-and-show-poste.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
-// import { ModifierCompetenceComponent } from './modifier-competence/modifier-competence/modifier-competence.component';
-
 
 
 @NgModule({

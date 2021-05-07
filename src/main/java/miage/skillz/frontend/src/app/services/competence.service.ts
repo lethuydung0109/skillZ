@@ -60,4 +60,8 @@ export class CompetenceService {
   getStatsCompetence(): Observable<any> {
     return this.http.get(API_URL + 'competenceStats', { responseType: 'text' });
   }
+
+  public getCompetenceChildren(id : number) : Observable<Competence[]> {
+    return this.http.get<Competence[]>(API_URL  + 'getCompetenceChildren/'+id,httpOptions);
+  }
 }

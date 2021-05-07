@@ -33,7 +33,10 @@ export class ModifierCompetenceComponent implements OnInit {
     let listComptence: Array<Competence>=[];
     this.competenceService.getAllCompetence().subscribe(data => {
       data.forEach(p => {
-        listComptence.push(p);
+        if(p.id != this.competence.id )
+        {
+          listComptence.push(p);
+        }
       })
     });
     this.list_competence_pere=listComptence;
