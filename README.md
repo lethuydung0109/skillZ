@@ -63,19 +63,19 @@ Moteur de production : Gradle
 
 Une fois que vous avez tout installé, vous pouvez vous connecter avec votre identifiant et mot de passe, Si : 
 
-### Vous etes un administrateur 
+### Vous êtes un administrateur 
 
   - Créer/modifier/supprimer des utilisateurs.
   - Créer/modifier/supprimer des compétences.
 
 
-### Vous etes un évaluateur  
+### Vous êtes un évaluateur  
 
 - Créer une question et des réponses associées.
 - Créer un questionnaire avec une liste de questions, une durée, un seuil de validation. 
 - Chercher une liste de candidats pour un poste donnée.
 
-### Vous etes un participant
+### Vous êtes un participant
 
 - Passer un questionnaire et obtenir un badge de niveau associé si réussi.
 - Recommander un participant.
