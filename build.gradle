@@ -13,7 +13,7 @@ apply plugin: "com.cosminpolifronie.gradle.plantuml"
 apply plugin: VersionPlugin
 
 group = 'miage'
-version = '1.3.0-release'
+version = '1.4.0-release'
 sourceCompatibility = '11'
 
 dependencies {
