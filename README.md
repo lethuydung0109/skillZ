@@ -79,6 +79,6 @@ Une fois que vous avez tout installé, vous pouvez vous connecter avec votre ide
 ### Vous etes un participant
 
 - Passer un questionnaire et obtenir un badge de niveau associé si réussi.
-- Recommender un participant.
+- Recommander un participant.
 
 
